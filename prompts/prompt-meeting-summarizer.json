@@ -1,0 +1,18 @@
+{
+  "id": "prompt-meeting-summarizer",
+  "name": {
+    "en": "Meeting Summarizer"
+  },
+  "description": {
+    "en": "Meeting Summarizer - works best with transcripts"
+  },
+  "prompt": {
+    "en": "Summarize the content so that only results of the discussion are formed as bullet points and also list next steps with corresponding responsibilities.",
+    "de": "Fasse die Inhalte so zusammen, dass wirklich nur Ergebnisse der Diskussion als Stichpunkte gebildet werden und zudem noch Nächste Schritte aufgelistet werden mit entsprechenden Verantwortlichkeiten"
+  },
+  "icon": "clipboard",
+  "enabled": true,
+  "appId": "file-analysis",
+  "variables": [],
+  "category": "creative"
+}

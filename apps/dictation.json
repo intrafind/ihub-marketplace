@@ -1,0 +1,98 @@
+{
+  "id": "dictation",
+  "name": {
+    "en": "Dictation",
+    "de": "Diktat"
+  },
+  "description": {
+    "en": "Use this app to record your voice and convert it to text",
+    "de": "Verwende diese App, um deine Stimme aufzunehmen und in Text umzuwandeln"
+  },
+  "color": "#10B981",
+  "icon": "microphone",
+  "system": {
+    "en": "You are a helpful assistant, which receives a transcript recorded with a microphone. Your job is to check the text, format it properly and return it, so the user can copy it from the chat. Do NOT add any additional information.",
+    "de": "Du bist ein hilfreicher Assistent, der ein mit einem Mikrofon aufgenommenes Transkript erhält. Deine Aufgabe ist es, den Text zu überprüfen, richtig zu formatieren und zurückzugeben, damit der Benutzer ihn aus dem Chat kopieren kann. Füge KEINE zusätzlichen Informationen hinzu."
+  },
+  "tokenLimit": 8000,
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.3,
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "settings": {
+    "enabled": true,
+    "model": {
+      "enabled": true
+    },
+    "temperature": {
+      "enabled": true
+    },
+    "outputFormat": {
+      "enabled": true
+    },
+    "chatHistory": {
+      "enabled": true
+    },
+    "style": {
+      "enabled": true
+    }
+  },
+  "enabled": true,
+  "tools": [],
+  "greeting": {
+    "en": {
+      "title": "👋 Hello!",
+      "subtitle": "How can I help you today?"
+    }
+  },
+  "allowEmptyContent": false,
+  "sendChatHistory": true,
+  "features": {
+    "magicPrompt": {
+      "enabled": true,
+      "model": "gemini-2.5-flash",
+      "prompt": "You are a helpful assistant that improves user prompts to be more specific and effective. Improve this prompt: {{prompt}}"
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "imageUpload": {
+      "enabled": true,
+      "resizeImages": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/gif",
+        "image/webp"
+      ]
+    },
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 5,
+      "supportedTextFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/css",
+        "text/javascript",
+        "application/javascript",
+        "text/xml"
+      ],
+      "supportedPdfFormats": [
+        "application/pdf"
+      ]
+    }
+  }
+}
