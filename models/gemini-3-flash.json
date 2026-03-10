@@ -15,6 +15,7 @@
   "supportsTools": true,
   "supportsImageGeneration": false,
   "enabled": true,
+  "default": false,
   "thinking": {
     "enabled": true,
     "budget": -1,

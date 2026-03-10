@@ -1,6 +1,6 @@
 {
   "id": "claude-4-sonnet",
-  "modelId": "claude-sonnet-4-20250514",
+  "modelId": "claude-sonnet-4-6",
   "name": {
     "en": "Claude 4 Sonnet",
     "de": "Claude 4 Sonnet"
@@ -12,9 +12,7 @@
   "url": "https://api.anthropic.com/v1/messages",
   "provider": "anthropic",
   "tokenLimit": 64000,
-  "contextLength": 200000,
-  "maxOutputTokens": 32000,
   "supportsTools": true,
-  "supportsImages": true,
-  "enabled": true
+  "enabled": false,
+  "default": false
 }

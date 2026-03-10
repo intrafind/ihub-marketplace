@@ -1,9 +1,9 @@
 {
-  "id": "mistral-small",
-  "modelId": "mistral-small-latest",
+  "id": "mistral-large",
+  "modelId": "mistral-large-latest",
   "name": {
-    "en": "Mistral Small",
-    "de": "Mistral Small"
+    "en": "Mistral Large",
+    "de": "Mistral Large"
   },
   "description": {
     "en": "Mistral's fast model for general tasks",

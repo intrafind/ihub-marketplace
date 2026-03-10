@@ -13,5 +13,6 @@
   "provider": "google",
   "tokenLimit": 32768,
   "supportsTools": true,
-  "enabled": true
+  "enabled": true,
+  "default": true
 }
