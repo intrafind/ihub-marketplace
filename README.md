@@ -15,7 +15,9 @@ The official marketplace registry for [iHub Apps](https://github.com/intrafind/i
 
 ## Content Inventory
 
-### Apps (25)
+### Apps (94)
+
+#### General (25)
 
 | ID | Name | Category |
 |----|------|----------|
@@ -44,6 +46,84 @@ The official marketplace registry for [iHub Apps](https://github.com/intrafind/i
 | `ifinder-research-bot` | iFinder Research Bot | intrafind |
 | `ihub-support-bot` | iHub Support Bot | intrafind |
 | `iassistant-demo` | iAssistant Demo | intrafind |
+
+#### Department Assistants (69)
+
+Ready-to-use assistants for common tasks in data, engineering, finance, HR, security, leadership, legal, marketing, operations, product, PR, sales, and support. Each app ships with a structured system prompt (persona, task, context, format), two starter prompts, and a tuned temperature, in English and German.
+
+Apps marked with *file upload* work best when users upload their own reference material (guidelines, templates, schemas, past examples) into the chat; the greeting of each app says which documents help. Admins can alternatively connect that material permanently as a source.
+
+| ID | Name | Department | Category | Features |
+|----|------|------------|----------|----------|
+| `metrics-assistant` | Metrics Assistant | Data & Analytics | analysis | file upload |
+| `sql-query-assistant` | SQL Query Assistant | Data & Analytics | analysis | file upload |
+| `data-model-assistant` | Data Model Assistant | Data & Analytics | analysis | file upload |
+| `data-analysis-assistant` | Data Analysis Assistant | Data & Analytics | analysis | file upload |
+| `coding-assistant` | Coding Assistant | Engineering | coding | file upload, extended thinking |
+| `bug-analyzer` | Bug Analyzer | Engineering | coding | extended thinking |
+| `excel-formula-assistant` | Excel Formula Assistant | Finance | finance | — |
+| `board-report-assistant` | Board Report Assistant | Finance | finance | file upload |
+| `depreciation-assistant` | Depreciation Assistant | Finance | finance | file upload |
+| `job-description-writer` | Job Description Writer | HR | hr | file upload |
+| `interview-assistant` | Interview Assistant | HR | hr | file upload |
+| `onboarding-assistant` | Onboarding Assistant | HR | hr | file upload |
+| `intranet-writer` | Intranet Writer | HR | hr | file upload |
+| `course-designer` | Course Designer | HR | hr | file upload |
+| `training-plan-assistant` | Training Plan Assistant | HR | hr | file upload |
+| `security-awareness-trainer` | Security Awareness Trainer | InfoSec | security | file upload |
+| `incident-response-assistant` | Incident Response Assistant | InfoSec | security | file upload |
+| `policy-compliance-assistant` | Policy & Compliance Assistant | InfoSec | security | file upload |
+| `grc-assistant` | GRC Assistant | InfoSec | security | file upload |
+| `security-knowledge-assistant` | Security Knowledge Assistant | InfoSec | security | file upload |
+| `security-code-reviewer` | Security Code Reviewer | InfoSec | security | file upload, extended thinking |
+| `security-architecture-assistant` | Security Architecture Assistant | InfoSec | security | file upload |
+| `feedback-coach` | Feedback Coach | Leadership | leadership | — |
+| `goal-setting-coach` | Goal Setting Coach | Leadership | leadership | — |
+| `strategy-advisor` | Strategy Advisor | Leadership | leadership | file upload |
+| `one-on-one-coach` | 1:1 Coaching Assistant | Leadership | leadership | — |
+| `contract-qa-assistant` | Contract Q&A Assistant | Legal | legal | file upload |
+| `compliance-questionnaire-assistant` | Compliance Questionnaire Assistant | Legal | legal | file upload |
+| `legal-questions-assistant` | Legal Questions Assistant | Legal | legal | file upload |
+| `contract-analyst` | Contract Analyst | Legal | legal | file upload |
+| `linkedin-post-writer` | LinkedIn Post Writer | Marketing | marketing | file upload |
+| `update-announcement-writer` | Update Announcement Writer | Marketing | marketing | file upload |
+| `content-writer` | Content Writer | Marketing | marketing | file upload |
+| `cross-posting-assistant` | Cross-Posting Assistant | Marketing | marketing | file upload |
+| `seo-copywriter` | SEO Copywriter | Marketing | marketing | file upload |
+| `internationalization-assistant` | Internationalization Assistant | Marketing | marketing | file upload |
+| `competitive-positioning-assistant` | Competitive Positioning Assistant | Marketing | marketing | file upload |
+| `marketing-insights-analyst` | Marketing Insights Analyst | Marketing | marketing | file upload |
+| `workplace-safety-inspector` | Workplace Safety Inspector | Operations | operations | image upload |
+| `office-questions-assistant` | Office Questions Assistant | Operations | operations | file upload |
+| `workshop-designer` | Workshop Designer | Operations | operations | file upload |
+| `acronym-explainer` | Acronym Explainer | Operations | operations | file upload |
+| `language-coach` | Language Coach | Operations | operations | — |
+| `persona-simulator` | Persona Simulator | Product | product | file upload |
+| `feedback-analyzer` | Feedback Analyzer | Product | product | file upload |
+| `argument-strengthener` | Argument Strengthener | Product | product | — |
+| `prioritization-assistant` | Prioritization Assistant | Product | product | file upload |
+| `product-strategy-assistant` | Product Strategy Assistant | Product | product | file upload |
+| `writing-enhancer` | Writing Enhancer | Product | product | — |
+| `market-research-assistant` | Market Research Assistant | Product | product | web search, file upload |
+| `feature-definition-assistant` | Feature Definition Assistant | Product | product | file upload |
+| `press-inquiry-assistant` | Press Inquiry Assistant | Public Relations | communication | file upload |
+| `company-researcher` | Company Researcher | Sales | sales | web search |
+| `sales-outreach-writer` | Sales Outreach Writer | Sales | sales | file upload |
+| `case-study-writer` | Case Study Writer | Sales | sales | file upload |
+| `competitor-analyst` | Competitor Analyst | Sales | sales | web search, file upload |
+| `meddicc-assistant` | MEDDICC Assistant | Sales | sales | file upload |
+| `battlecard-assistant` | Battlecard Assistant | Sales | sales | file upload |
+| `rfp-assistant` | RFP Assistant | Sales | sales | file upload |
+| `reference-customer-finder` | Reference Customer Finder | Sales | sales | web search, file upload |
+| `support-answer-assistant` | Support Answer Assistant | Support | support | file upload |
+| `error-explainer` | Error Explainer | Support | support | file upload |
+| `support-trainer` | Support Trainer | Support | support | file upload |
+| `it-helpdesk-assistant` | IT Helpdesk Assistant | Support | support | file upload |
+| `prompt-engineering-coach` | Prompt Engineering Coach | Miscellaneous | utility | — |
+| `glossary-translator` | Glossary Translator | Miscellaneous | communication | file upload |
+| `text-assistant` | Text Assistant | Miscellaneous | writing | — |
+| `personal-coach` | Personal Coach | Miscellaneous | utility | — |
+| `ai-use-case-finder` | AI Use Case Finder | Miscellaneous | utility | — |
 
 ### Models (12)
 

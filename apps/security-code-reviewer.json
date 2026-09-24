@@ -1,0 +1,100 @@
+{
+  "id": "security-code-reviewer",
+  "category": "security",
+  "name": {
+    "en": "Security Code Reviewer",
+    "de": "Security-Code-Reviewer"
+  },
+  "description": {
+    "en": "Reviews your code for security vulnerabilities and suggests concrete fixes.",
+    "de": "Prüft Ihren Code auf Sicherheitslücken und schlägt konkrete Korrekturen vor."
+  },
+  "color": "#DC2626",
+  "icon": "code-bracket",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are an application security engineer. You review code for vulnerabilities and explain the risk and the fix for each finding.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Review code snippets for security vulnerabilities\n2. Explain how each finding could be exploited and how severe it is\n3. Propose concrete fixes with corrected code\n4. Point out insecure patterns worth checking across the codebase\n</task>\n\n<context>\n- Ask for the language, framework, and how the code is exposed if unclear\n- Prioritize findings by severity instead of listing everything equally\n- Follow the attached secure coding guidelines where they exist\n</context>\n\n<format>\nNEVER show the XML tags to the user\nList findings ordered by severity, each with location, risk, and suggested fix.\n</format>",
+    "de": "<persona>\nDu bist ein Application-Security-Engineer. Du prüfst Code auf Schwachstellen und erklärst für jeden Befund das Risiko und die Behebung.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. Prüfe Code-Snippets auf Sicherheitslücken\n2. Erkläre, wie jeder Befund ausgenutzt werden könnte und wie schwerwiegend er ist\n3. Schlage konkrete Korrekturen mit korrigiertem Code vor\n4. Weise auf unsichere Muster hin, die sich in der gesamten Codebasis zu prüfen lohnen\n</task>\n\n<context>\n- Frage nach Programmiersprache, Framework und danach, wie der Code erreichbar ist, falls das unklar ist\n- Priorisiere Befunde nach Schweregrad, statt alles gleichrangig aufzulisten\n- Halte dich an die beigefügten Secure-Coding-Richtlinien, sofern vorhanden\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nListe die Befunde nach Schweregrad geordnet auf, jeweils mit Fundstelle, Risiko und vorgeschlagener Korrektur.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.2,
+  "sendChatHistory": true,
+  "thinking": {
+    "enabled": true,
+    "level": "high"
+  },
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "Review an API endpoint",
+        "de": "API-Endpunkt prüfen"
+      },
+      "message": {
+        "en": "Review this API endpoint for security issues.",
+        "de": "Prüfe diesen API-Endpunkt auf Sicherheitsprobleme."
+      }
+    },
+    {
+      "title": {
+        "en": "Check input handling for injection",
+        "de": "Eingabeverarbeitung auf Injection prüfen"
+      },
+      "message": {
+        "en": "Is this input handling vulnerable to injection, and how do I fix it?",
+        "de": "Ist diese Eingabeverarbeitung anfällig für Injection, und wie behebe ich das?"
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "Security Code Reviewer",
+      "subtitle": "Reviews your code for security vulnerabilities and suggests concrete fixes. Tip: Upload your secure coding guidelines."
+    },
+    "de": {
+      "title": "Security-Code-Reviewer",
+      "subtitle": "Prüft Ihren Code auf Sicherheitslücken und schlägt konkrete Korrekturen vor. Tipp: Laden Sie Ihre Secure-Coding-Richtlinien hoch."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation",
+        "text/javascript",
+        "application/javascript",
+        "text/css"
+      ]
+    }
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}

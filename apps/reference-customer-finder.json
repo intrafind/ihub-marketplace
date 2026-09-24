@@ -1,0 +1,102 @@
+{
+  "id": "reference-customer-finder",
+  "category": "sales",
+  "name": {
+    "en": "Reference Customer Finder",
+    "de": "Referenzkunden-Finder"
+  },
+  "description": {
+    "en": "Finds matching reference customers for a prospect's industry.",
+    "de": "Findet passende Referenzkunden für die Branche eines Interessenten."
+  },
+  "color": "#16A34A",
+  "icon": "user-group",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are a sales research assistant. You match prospects with the most relevant reference customers.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Identify a prospect's industry from its name or URL\n2. Find matching reference customers in the attached customer list\n3. Explain why each reference fits, such as industry, size, or use case\n4. Suggest the strongest one or two references for a specific conversation\n</task>\n\n<context>\n- Only use reference customers from the attached list that are approved for external use\n- Prioritize similarity in industry and company size\n- Say when no good match exists instead of forcing a weak one\n</context>\n\n<format>\nNEVER show the XML tags to the user\nList matching references with a one-line reason each, strongest first.\n</format>",
+    "de": "<persona>\nDu bist ein Research-Assistent im Vertrieb. Du ordnest Interessenten die relevantesten Referenzkunden zu.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. Die Branche eines Interessenten anhand seines Namens oder seiner URL bestimmen\n2. Passende Referenzkunden in der angehängten Kundenliste finden\n3. Erklären, warum jede Referenz passt, etwa aufgrund von Branche, Größe oder Anwendungsfall\n4. Die ein bis zwei stärksten Referenzen für ein bestimmtes Gespräch vorschlagen\n</task>\n\n<context>\n- Verwende nur Referenzkunden aus der angehängten Liste, die für die externe Nutzung freigegeben sind\n- Priorisiere Ähnlichkeit bei Branche und Unternehmensgröße\n- Sag offen, wenn es keinen guten Treffer gibt, statt eine schwache Referenz zu erzwingen\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nListe passende Referenzen mit jeweils einer einzeiligen Begründung auf, die stärkste zuerst.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.2,
+  "sendChatHistory": true,
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "Match references to prospect",
+        "de": "Passende Referenzen finden"
+      },
+      "message": {
+        "en": "Which reference customers fit this prospect?",
+        "de": "Welche Referenzkunden passen zu diesem Interessenten?"
+      }
+    },
+    {
+      "title": {
+        "en": "Manufacturing references by size",
+        "de": "Fertigungsreferenzen nach Größe"
+      },
+      "message": {
+        "en": "Find references in manufacturing with a similar company size to this account.",
+        "de": "Finde Referenzen aus der Fertigungsindustrie mit einer ähnlichen Unternehmensgröße wie dieser Account."
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "Reference Customer Finder",
+      "subtitle": "Finds matching reference customers for a prospect's industry. Tip: Upload your list of approved reference customers with industry, size, and use case."
+    },
+    "de": {
+      "title": "Referenzkunden-Finder",
+      "subtitle": "Findet passende Referenzkunden für die Branche eines Interessenten. Tipp: Laden Sie Ihre Liste freigegebener Referenzkunden mit Branche, Größe und Anwendungsfall hoch."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation"
+      ]
+    }
+  },
+  "websearch": {
+    "enabled": true,
+    "provider": "auto",
+    "useNativeSearch": true,
+    "maxResults": 5,
+    "extractContent": true,
+    "contentMaxLength": 3000,
+    "enabledByDefault": true
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}

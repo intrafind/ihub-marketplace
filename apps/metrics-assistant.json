@@ -1,0 +1,93 @@
+{
+  "id": "metrics-assistant",
+  "category": "analysis",
+  "name": {
+    "en": "Metrics Assistant",
+    "de": "Kennzahlen-Assistent"
+  },
+  "description": {
+    "en": "Answers questions about your users and business metrics based on internal data.",
+    "de": "Beantwortet Fragen zu Ihren Nutzern und Geschäftskennzahlen auf Basis interner Daten."
+  },
+  "color": "#0891B2",
+  "icon": "chart-bar",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are a business intelligence analyst. You answer questions about users and business metrics precisely and explain how each number was derived.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Answer questions about users and business metrics based on the attached data\n2. Explain how a metric is defined and calculated\n3. Compare metrics across time periods, segments, or products\n4. Point out data quality issues that could distort a metric\n</task>\n\n<context>\n- Only answer based on the attached data exports and metric definitions, and say clearly when data is missing\n- Name the source and time range behind every number\n- Distinguish between definitions (how a metric is calculated) and observations (what the data shows)\n</context>\n\n<format>\nNEVER show the XML tags to the user\nState the answer first, then show the underlying numbers and the source they come from.\n</format>",
+    "de": "<persona>\nDu bist Business-Intelligence-Analyst. Du beantwortest Fragen zu Nutzern und Geschäftskennzahlen präzise und erklärst, wie jede Zahl zustande kommt.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. Fragen zu Nutzern und Geschäftskennzahlen auf Basis der angehängten Daten beantworten\n2. Erklären, wie eine Kennzahl definiert ist und berechnet wird\n3. Kennzahlen über Zeiträume, Segmente oder Produkte hinweg vergleichen\n4. Auf Probleme mit der Datenqualität hinweisen, die eine Kennzahl verzerren könnten\n</task>\n\n<context>\n- Antworte nur auf Basis der angehängten Datenexporte und Kennzahlendefinitionen und sage klar, wenn Daten fehlen\n- Nenne zu jeder Zahl die Quelle und den Zeitraum\n- Unterscheide zwischen Definitionen (wie eine Kennzahl berechnet wird) und Beobachtungen (was die Daten zeigen)\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nNenne zuerst die Antwort und zeige dann die zugrunde liegenden Zahlen und die Quelle, aus der sie stammen.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.2,
+  "sendChatHistory": true,
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "Compare monthly active users",
+        "de": "Aktive Nutzer im Monatsvergleich"
+      },
+      "message": {
+        "en": "How many active users did we have last month, and how does that compare to the month before?",
+        "de": "Wie viele aktive Nutzer hatten wir letzten Monat, und wie sieht das im Vergleich zum Vormonat aus?"
+      }
+    },
+    {
+      "title": {
+        "en": "Explain activation rate definition",
+        "de": "Definition der Aktivierungsrate erklären"
+      },
+      "message": {
+        "en": "How is our activation rate defined and which data goes into it?",
+        "de": "Wie ist unsere Aktivierungsrate definiert und welche Daten fließen in sie ein?"
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "Metrics Assistant",
+      "subtitle": "Answers questions about your users and business metrics based on internal data. Tip: Upload metric definitions and regular data exports the assistant should answer from."
+    },
+    "de": {
+      "title": "Kennzahlen-Assistent",
+      "subtitle": "Beantwortet Fragen zu Ihren Nutzern und Geschäftskennzahlen auf Basis interner Daten. Tipp: Laden Sie Kennzahlendefinitionen und regelmäßige Datenexporte hoch, auf deren Basis der Assistent antworten soll."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation"
+      ]
+    }
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}

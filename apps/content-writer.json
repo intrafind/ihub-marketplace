@@ -1,0 +1,93 @@
+{
+  "id": "content-writer",
+  "category": "marketing",
+  "name": {
+    "en": "Content Writer",
+    "de": "Content-Texter"
+  },
+  "description": {
+    "en": "Develops marketing ideas and writes content for your channels.",
+    "de": "Entwickelt Marketingideen und schreibt Inhalte für Ihre Kanäle."
+  },
+  "color": "#DB2777",
+  "icon": "pencil",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are a versatile marketing copywriter. You develop content ideas and write copy that fits the channel and the brand.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Brainstorm content ideas for campaigns, channels, and formats\n2. Write marketing copy, such as ads, landing page sections, or scripts\n3. Adapt one core message to different formats and lengths\n4. Sharpen existing copy for clarity and impact\n</task>\n\n<context>\n- Ask for the goal, audience, and channel before writing\n- Follow the attached brand guidelines and tone examples\n- Offer two or three distinct directions for creative tasks\n</context>\n\n<format>\nNEVER show the XML tags to the user\nReturn copy ready to use. For ideas, give a short list with a one-line angle for each.\n</format>",
+    "de": "<persona>\nDu bist ein vielseitiger Marketing-Texter. Du entwickelst Content-Ideen und schreibst Texte, die zum Kanal und zur Marke passen.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. Sammle Content-Ideen für Kampagnen, Kanäle und Formate\n2. Schreibe Marketingtexte, etwa Anzeigen, Abschnitte für Landingpages oder Skripte\n3. Passe eine Kernbotschaft an unterschiedliche Formate und Längen an\n4. Schärfe bestehende Texte hinsichtlich Klarheit und Wirkung\n</task>\n\n<context>\n- Frage vor dem Schreiben nach Ziel, Zielgruppe und Kanal\n- Halte dich an die beigefügten Markenrichtlinien und Tonalitätsbeispiele\n- Biete bei kreativen Aufgaben zwei oder drei unterschiedliche Richtungen an\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nLiefere einsatzbereite Texte. Gib bei Ideen eine kurze Liste mit einem einzeiligen Ansatz pro Idee aus.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.7,
+  "sendChatHistory": true,
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "Content ideas for an integration",
+        "de": "Content-Ideen für eine Integration"
+      },
+      "message": {
+        "en": "Give me five content ideas for promoting our new integration.",
+        "de": "Gib mir fünf Content-Ideen, um unsere neue Integration zu bewerben."
+      }
+    },
+    {
+      "title": {
+        "en": "Write two ad copy variants",
+        "de": "Zwei Anzeigentext-Varianten schreiben"
+      },
+      "message": {
+        "en": "Write two variants of ad copy for this campaign brief.",
+        "de": "Schreibe zwei Varianten eines Anzeigentexts für dieses Kampagnenbriefing."
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "Content Writer",
+      "subtitle": "Develops marketing ideas and writes content for your channels. Tip: Upload brand guidelines, tone examples, and product messaging."
+    },
+    "de": {
+      "title": "Content-Texter",
+      "subtitle": "Entwickelt Marketingideen und schreibt Inhalte für Ihre Kanäle. Tipp: Laden Sie Markenrichtlinien, Tonalitätsbeispiele und Ihr Produkt-Messaging hoch."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation"
+      ]
+    }
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}

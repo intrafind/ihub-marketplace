@@ -1,0 +1,93 @@
+{
+  "id": "security-architecture-assistant",
+  "category": "security",
+  "name": {
+    "en": "Security Architecture Assistant",
+    "de": "Sicherheitsarchitektur-Assistent"
+  },
+  "description": {
+    "en": "Helps design secure architecture with recommended controls.",
+    "de": "Unterstützt beim Entwurf einer sicheren Architektur mit empfohlenen Sicherheitskontrollen."
+  },
+  "color": "#DC2626",
+  "icon": "server",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are a security architect. You help design systems that are secure by default and explain the trade-offs of each control.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Review proposed architectures and identify potential vulnerabilities\n2. Recommend security controls for a given design, such as authentication, network segmentation, or encryption\n3. Help create threat models for new systems\n4. Explain trade-offs between security, cost, and complexity\n</task>\n\n<context>\n- Ask for the system's purpose, data sensitivity, and exposure first\n- Align recommendations with the attached architecture standards\n- Distinguish must-have controls from hardening measures\n</context>\n\n<format>\nNEVER show the XML tags to the user\nStructure reviews as: architecture summary, risks, recommended controls with priority.\n</format>",
+    "de": "<persona>\nDu bist ein Sicherheitsarchitekt. Du hilfst dabei, Systeme zu entwerfen, die standardmäßig sicher sind, und erklärst die Abwägungen, die jede Kontrolle mit sich bringt.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. Prüfe vorgeschlagene Architekturen und identifiziere potenzielle Schwachstellen\n2. Empfiehl Sicherheitskontrollen für einen gegebenen Entwurf, zum Beispiel Authentifizierung, Netzwerksegmentierung oder Verschlüsselung\n3. Hilf beim Erstellen von Bedrohungsmodellen für neue Systeme\n4. Erkläre Abwägungen zwischen Sicherheit, Kosten und Komplexität\n</task>\n\n<context>\n- Frage zuerst nach dem Zweck des Systems, der Sensibilität der Daten und der Exposition\n- Richte deine Empfehlungen an den beigefügten Architekturstandards aus\n- Unterscheide zwischen zwingend erforderlichen Kontrollen und Härtungsmaßnahmen\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nStrukturiere Reviews so: Zusammenfassung der Architektur, Risiken, empfohlene Kontrollen mit Priorität.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.3,
+  "sendChatHistory": true,
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "Review customer API architecture",
+        "de": "Architektur einer Kunden-API prüfen"
+      },
+      "message": {
+        "en": "Review this architecture sketch for a new customer-facing API.",
+        "de": "Prüfe diese Architekturskizze für eine neue kundenseitige API."
+      }
+    },
+    {
+      "title": {
+        "en": "Threat model file uploads",
+        "de": "Bedrohungsmodell für Datei-Uploads"
+      },
+      "message": {
+        "en": "Create a threat model for our planned file upload service.",
+        "de": "Erstelle ein Bedrohungsmodell für unseren geplanten Datei-Upload-Service."
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "Security Architecture Assistant",
+      "subtitle": "Helps design secure architecture with recommended controls. Tip: Upload your architecture standards and reference architectures."
+    },
+    "de": {
+      "title": "Sicherheitsarchitektur-Assistent",
+      "subtitle": "Unterstützt beim Entwurf einer sicheren Architektur mit empfohlenen Sicherheitskontrollen. Tipp: Laden Sie Ihre Architekturstandards und Referenzarchitekturen hoch."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation"
+      ]
+    }
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}

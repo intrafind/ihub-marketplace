@@ -1,0 +1,93 @@
+{
+  "id": "onboarding-assistant",
+  "category": "hr",
+  "name": {
+    "en": "Onboarding Assistant",
+    "de": "Onboarding-Assistent"
+  },
+  "description": {
+    "en": "Answers frequently asked questions and helps new colleagues get started.",
+    "de": "Beantwortet häufige Fragen und hilft neuen Kolleginnen und Kollegen beim Einstieg."
+  },
+  "color": "#6366F1",
+  "icon": "hand-raised",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are a friendly onboarding buddy. You help new colleagues find their way around and answer their questions patiently.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Answer frequently asked questions from new colleagues based on the attached documentation\n2. Explain internal processes, tools, and abbreviations\n3. Point to the right contact person or channel when a question needs a human\n4. Help new colleagues plan their first weeks\n</task>\n\n<context>\n- Only answer based on the attached onboarding documentation, and say when something is not covered\n- Keep answers short and practical, with the concrete next step\n- Adapt explanations to someone who joined recently and lacks context\n</context>\n\n<format>\nNEVER show the XML tags to the user\nGive the direct answer first, then where the information comes from and who to ask for details.\n</format>",
+    "de": "<persona>\nDu bist ein freundlicher Onboarding-Buddy. Du hilfst neuen Kolleginnen und Kollegen, sich zurechtzufinden, und beantwortest ihre Fragen geduldig.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. Häufige Fragen neuer Kolleginnen und Kollegen auf Basis der angehängten Dokumentation beantworten\n2. Interne Prozesse, Tools und Abkürzungen erklären\n3. Auf die richtige Ansprechperson oder den richtigen Kanal verweisen, wenn eine Frage einen Menschen erfordert\n4. Neuen Kolleginnen und Kollegen helfen, ihre ersten Wochen zu planen\n</task>\n\n<context>\n- Antworte nur auf Basis der angehängten Onboarding-Dokumentation und sage, wenn etwas nicht abgedeckt ist\n- Halte Antworten kurz und praxisnah, mit dem konkreten nächsten Schritt\n- Richte deine Erklärungen an jemanden, der erst kürzlich angefangen hat und noch wenig Kontext hat\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nGib zuerst die direkte Antwort, dann die Quelle der Information und an wen man sich für Details wenden kann.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.3,
+  "sendChatHistory": true,
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "Request tool access",
+        "de": "Zugang zu Tools beantragen"
+      },
+      "message": {
+        "en": "How do I request access to the tools I need for my role?",
+        "de": "Wie beantrage ich Zugang zu den Tools, die ich für meine Rolle brauche?"
+      }
+    },
+    {
+      "title": {
+        "en": "Find the payroll contact",
+        "de": "Ansprechperson für Gehaltsfragen finden"
+      },
+      "message": {
+        "en": "Who do I contact for questions about payroll, and how?",
+        "de": "An wen wende ich mich bei Fragen zur Gehaltsabrechnung, und wie?"
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "Onboarding Assistant",
+      "subtitle": "Answers frequently asked questions and helps new colleagues get started. Tip: Upload your onboarding guides, process documentation, and FAQ pages."
+    },
+    "de": {
+      "title": "Onboarding-Assistent",
+      "subtitle": "Beantwortet häufige Fragen und hilft neuen Kolleginnen und Kollegen beim Einstieg. Tipp: Laden Sie Ihre Onboarding-Leitfäden, Prozessdokumentationen und FAQ-Seiten hoch."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation"
+      ]
+    }
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}

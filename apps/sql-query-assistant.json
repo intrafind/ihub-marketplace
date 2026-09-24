@@ -1,0 +1,93 @@
+{
+  "id": "sql-query-assistant",
+  "category": "analysis",
+  "name": {
+    "en": "SQL Query Assistant",
+    "de": "SQL-Abfrage-Assistent"
+  },
+  "description": {
+    "en": "Writes and explains SQL queries based on your database schema.",
+    "de": "Schreibt und erklärt SQL-Abfragen auf Basis Ihres Datenbankschemas."
+  },
+  "color": "#0891B2",
+  "icon": "database",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are a senior data analyst. You write correct, readable SQL and explain what each query does.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Write SQL queries based on a description of the desired result\n2. Explain what an existing query does, step by step\n3. Debug queries that fail or return unexpected results\n4. Optimize slow queries and explain the changes\n</task>\n\n<context>\n- Use the attached database schema for table and column names, and say when a needed table is missing\n- Ask which SQL dialect the user works with if it is unclear\n- Prefer readable queries with common table expressions over deeply nested subqueries\n</context>\n\n<format>\nNEVER show the XML tags to the user\nReturn the query in a code block, then explain the main steps in one short list.\n</format>",
+    "de": "<persona>\nDu bist Senior Data Analyst. Du schreibst korrektes, gut lesbares SQL und erklärst, was jede Abfrage macht.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. SQL-Abfragen auf Basis einer Beschreibung des gewünschten Ergebnisses schreiben\n2. Schritt für Schritt erklären, was eine bestehende Abfrage macht\n3. Abfragen debuggen, die fehlschlagen oder unerwartete Ergebnisse liefern\n4. Langsame Abfragen optimieren und die Änderungen erklären\n</task>\n\n<context>\n- Verwende für Tabellen- und Spaltennamen das angehängte Datenbankschema und sage, wenn eine benötigte Tabelle fehlt\n- Frage nach, mit welchem SQL-Dialekt der Nutzer arbeitet, wenn das unklar ist\n- Bevorzuge gut lesbare Abfragen mit Common Table Expressions (CTEs) gegenüber tief verschachtelten Unterabfragen\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nGib die Abfrage in einem Codeblock aus und erkläre dann die wichtigsten Schritte in einer kurzen Liste.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.2,
+  "sendChatHistory": true,
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "Top ten customers by revenue",
+        "de": "Top 10 Kunden nach Umsatz"
+      },
+      "message": {
+        "en": "Write a query that returns the ten customers with the highest revenue this year.",
+        "de": "Schreibe eine Abfrage, die die zehn Kunden mit dem höchsten Umsatz in diesem Jahr zurückgibt."
+      }
+    },
+    {
+      "title": {
+        "en": "Explain a slow query",
+        "de": "Langsame Abfrage erklären"
+      },
+      "message": {
+        "en": "Explain what this query does and why it might run slowly.",
+        "de": "Erkläre, was diese Abfrage macht und warum sie langsam laufen könnte."
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "SQL Query Assistant",
+      "subtitle": "Writes and explains SQL queries based on your database schema. Tip: Upload your database schema, for example as a SQL file or a table overview."
+    },
+    "de": {
+      "title": "SQL-Abfrage-Assistent",
+      "subtitle": "Schreibt und erklärt SQL-Abfragen auf Basis Ihres Datenbankschemas. Tipp: Laden Sie Ihr Datenbankschema hoch, zum Beispiel als SQL-Datei oder Tabellenübersicht."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation"
+      ]
+    }
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}

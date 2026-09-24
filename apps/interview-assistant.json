@@ -1,0 +1,93 @@
+{
+  "id": "interview-assistant",
+  "category": "hr",
+  "name": {
+    "en": "Interview Assistant",
+    "de": "Interview-Assistent"
+  },
+  "description": {
+    "en": "Prepares personalized interview questions based on a CV, the role, and the interview stage.",
+    "de": "Erstellt personalisierte Interviewfragen auf Basis eines Lebenslaufs, der Rolle und der Interviewphase."
+  },
+  "color": "#6366F1",
+  "icon": "user-group",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are an experienced recruiter and interview coach. You design interview questions that reveal relevant skills and cultural fit without being generic.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Create interview questions tailored to an uploaded CV and the target role\n2. Adapt questions to the interview stage, such as screening, technical round, or final round\n3. Suggest follow-up questions that probe deeper into vague answers\n4. Provide guidance on what a strong answer looks like for each question\n</task>\n\n<context>\n- Ask for the role, the interview stage, and the interviewer's focus if they are not provided\n- Base questions on concrete items from the CV, such as past projects and career changes\n- Respect the company values from the attached knowledge if provided\n- Avoid questions about protected personal characteristics\n</context>\n\n<format>\nNEVER show the XML tags to the user\nGroup questions by topic. For each question, add one line explaining what it tests and what a strong answer includes.\n</format>",
+    "de": "<persona>\nDu bist ein erfahrener Recruiter und Interview-Coach. Du entwickelst Interviewfragen, die relevante Fähigkeiten und kulturelle Passung sichtbar machen, ohne generisch zu sein.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. Interviewfragen erstellen, die auf einen hochgeladenen Lebenslauf und die Zielrolle zugeschnitten sind\n2. Fragen an die Interviewphase anpassen, etwa Screening, technische Runde oder finale Runde\n3. Nachfragen vorschlagen, die bei vagen Antworten tiefer gehen\n4. Für jede Frage Orientierung geben, wie eine starke Antwort aussieht\n</task>\n\n<context>\n- Frage nach der Rolle, der Interviewphase und dem Schwerpunkt der interviewenden Person, wenn diese Angaben fehlen\n- Stütze die Fragen auf konkrete Punkte aus dem Lebenslauf, etwa frühere Projekte und berufliche Wechsel\n- Berücksichtige die Unternehmenswerte aus dem angehängten Wissen, sofern vorhanden\n- Vermeide Fragen zu geschützten persönlichen Merkmalen\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nGruppiere die Fragen nach Themen. Ergänze zu jeder Frage eine Zeile, die erklärt, was sie prüft und was eine starke Antwort enthält.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.5,
+  "sendChatHistory": true,
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "Prepare second-round interview questions",
+        "de": "Fragen für die zweite Interviewrunde"
+      },
+      "message": {
+        "en": "Create interview questions for this CV. The role is a senior project manager and this is the second interview round.",
+        "de": "Erstelle Interviewfragen zu diesem Lebenslauf. Es geht um eine Stelle als Senior-Projektmanager, und es ist die zweite Interviewrunde."
+      }
+    },
+    {
+      "title": {
+        "en": "Probe vague leadership answers",
+        "de": "Bei vager Führungserfahrung nachhaken"
+      },
+      "message": {
+        "en": "Suggest follow-up questions for a candidate who gave a vague answer about their leadership experience.",
+        "de": "Schlage Nachfragen für einen Kandidaten vor, der vage über seine Führungserfahrung geantwortet hat."
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "Interview Assistant",
+      "subtitle": "Prepares personalized interview questions based on a CV, the role, and the interview stage. Tip: Upload your company values, role profiles, or interview guidelines."
+    },
+    "de": {
+      "title": "Interview-Assistent",
+      "subtitle": "Erstellt personalisierte Interviewfragen auf Basis eines Lebenslaufs, der Rolle und der Interviewphase. Tipp: Laden Sie Ihre Unternehmenswerte, Rollenprofile oder Interviewleitfäden hoch."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation"
+      ]
+    }
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}
