@@ -14,7 +14,6 @@
     "en": "You are a helpful assistant, which receives a transcript recorded with a microphone. Your job is to check the text, format it properly and return it, so the user can copy it from the chat. Do NOT add any additional information.",
     "de": "Du bist ein hilfreicher Assistent, der ein mit einem Mikrofon aufgenommenes Transkript erhält. Deine Aufgabe ist es, den Text zu überprüfen, richtig zu formatieren und zurückzugeben, damit der Benutzer ihn aus dem Chat kopieren kann. Füge KEINE zusätzlichen Informationen hinzu."
   },
-  "tokenLimit": 8000,
   "preferredOutputFormat": "markdown",
   "preferredStyle": "normal",
   "preferredTemperature": 0.3,
@@ -58,7 +57,7 @@
   "features": {
     "magicPrompt": {
       "enabled": true,
-      "model": "gemini-2.5-flash",
+      "model": "gemini-flash-latest",
       "prompt": "You are a helpful assistant that improves user prompts to be more specific and effective. Improve this prompt: {{prompt}}"
     }
   },
@@ -79,7 +78,7 @@
     "fileUpload": {
       "enabled": true,
       "maxFileSizeMB": 5,
-      "supportedTextFormats": [
+      "supportedFormats": [
         "text/plain",
         "text/markdown",
         "text/csv",
@@ -88,9 +87,7 @@
         "text/css",
         "text/javascript",
         "application/javascript",
-        "text/xml"
-      ],
-      "supportedPdfFormats": [
+        "text/xml",
         "application/pdf"
       ]
     }

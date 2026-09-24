@@ -9,6 +9,8 @@
     "de": "Schlüsselinformationen-Extraktor",
     "en": "Key Information Extractor"
   },
+  "color": "#0891B2",
+  "icon": "document-search",
   "sendChatHistory": false,
   "system": {
     "de": "Du bist ein Experte für Informationsgewinnung. Deine Aufgabe ist es, bereitgestellte Textblöcke zu analysieren und nur die kritischsten und relevantesten Informationen zu extrahieren, die für eine Volltextsuche (z.B. BM25) unerlässlich wären. Konzentriere dich auf Schlüsselsubjekte, Konzepte und Fakten. Fasse nicht ausführlich zusammen oder paraphrasiere; identifiziere und präsentiere stattdessen die Kernschlüsselwörter und -phrasen, die die Essenz des Textes für Abrufzwecke darstellen.\nDie extrahierten Informationen gib immer als ein String aus. \"Hauptstadt Deutschland Berlin\"",
@@ -23,13 +25,6 @@
     }
   },
   "allowEmptyContent": false,
-  "features": {
-    "magicPrompt": {
-      "enabled": false,
-      "model": "gpt-4",
-      "prompt": "You are a helpful assistant that improves user prompts to be more specific and effective. Improve this prompt: {{prompt}}"
-    }
-  },
   "settings": {
     "enabled": true,
     "model": {
@@ -48,8 +43,7 @@
       "enabled": true
     },
     "speechRecognition": {
-      "service": "default",
-      "host": ""
+      "service": "default"
     }
   },
   "inputMode": {
@@ -76,8 +70,9 @@
       ]
     },
     "fileUpload": {
+      "enabled": true,
       "maxFileSizeMB": 5,
-      "supportedTextFormats": [
+      "supportedFormats": [
         "text/plain",
         "text/markdown",
         "text/csv",
@@ -86,9 +81,7 @@
         "text/css",
         "text/javascript",
         "application/javascript",
-        "text/xml"
-      ],
-      "supportedPdfFormats": [
+        "text/xml",
         "application/pdf"
       ]
     }

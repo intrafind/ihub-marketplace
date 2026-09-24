@@ -15,9 +15,9 @@ The official marketplace registry for [iHub Apps](https://github.com/intrafind/i
 
 ## Content Inventory
 
-### Apps (94)
+### Apps (90)
 
-#### General (25)
+#### General (21)
 
 | ID | Name | Category |
 |----|------|----------|
@@ -41,11 +41,7 @@ The official marketplace registry for [iHub Apps](https://github.com/intrafind/i
 | `dictation` | Dictation | utility |
 | `note-assistant` | Note Assistant | writing |
 | `app-generator` | App Generator | utility |
-| `ifinder-document-explorer` | iFinder Document Explorer | intrafind |
-| `ifinder-document-actions` | iFinder Document Actions | intrafind |
-| `ifinder-research-bot` | iFinder Research Bot | intrafind |
 | `ihub-support-bot` | iHub Support Bot | intrafind |
-| `iassistant-demo` | iAssistant Demo | intrafind |
 
 #### Department Assistants (69)
 
@@ -125,22 +121,31 @@ Apps marked with *file upload* work best when users upload their own reference m
 | `personal-coach` | Personal Coach | Miscellaneous | utility | — |
 | `ai-use-case-finder` | AI Use Case Finder | Miscellaneous | utility | — |
 
-### Models (12)
+### Models (19)
+
+Model configurations mirror the defaults shipped with the current iHub Apps release. Gemini models start at Gemini 3; iHub no longer supports Gemini 2.x.
 
 | ID | Name | Provider |
 |----|------|----------|
-| `gpt-4.1` | GPT-4.1 | OpenAI |
 | `gpt-5` | GPT-5 | OpenAI (Responses API) |
-| `claude-4-sonnet` | Claude 4 Sonnet | Anthropic |
-| `claude-4-opus` | Claude 4 Opus | Anthropic |
-| `gemini-2.5-flash` | Gemini 2.5 Flash | Google |
-| `gemini-2.5-pro` | Gemini 2.5 Pro | Google |
-| `gemini-3-flash` | Gemini 3.0 Flash | Google |
-| `gemini-3-pro` | Gemini 3.0 Pro | Google |
+| `gpt-4.1` | GPT-4.1 | OpenAI |
+| `claude-fable-5-1` | Claude Fable 5.1 | Anthropic |
+| `claude-opus-5` | Claude Opus 5 | Anthropic |
+| `claude-sonnet-5` | Claude Sonnet 5 | Anthropic |
+| `claude-haiku-4-5` | Claude Haiku 4.5 | Anthropic |
+| `gemini-flash-latest` | Gemini Flash (latest) | Google |
+| `gemini-flash-lite-latest` | Gemini Flash Lite (latest) | Google |
+| `gemini-3.8-flash` | Gemini 3.8 Flash | Google |
+| `gemini-3.5-flash-lite` | Gemini 3.5 Flash Lite | Google |
+| `gemini-3.1-pro` | Gemini 3.1 Pro | Google |
+| `mistral-large` | Mistral Large | Mistral AI |
+| `mistral-medium` | Mistral Medium | Mistral AI |
 | `mistral-small` | Mistral Small | Mistral AI |
-| `dall-e-3` | DALL-E 3 | OpenAI |
-| `gemini-2.5-flash-image` | Gemini 2.5 Flash Image | Google |
-| `gemini-3-pro-image` | Gemini 3 Pro Image | Google |
+| `gemini-3-pro-image` | Nano Banana Pro (Gemini 3 Pro Image) | Google |
+| `gemini-3.1-flash-image` | Nano Banana 2 (Gemini 3.1 Flash Image) | Google |
+| `gemini-3.1-flash-lite-image` | Nano Banana 2 Lite (Gemini 3.1 Flash Lite Image) | Google |
+| `gemini-3.5-transcribe` | Gemini 3.5 Transcribe | Google (transcription) |
+| `gemini-3.5-transcribe-live` | Gemini 3.5 Transcribe Live | Google (transcription) |
 
 > **Note:** Model configurations include API endpoints but no API keys. Configure your API keys via environment variables in your iHub Apps instance.
 
@@ -223,8 +228,8 @@ To add new content to this marketplace:
 
 ### Content Guidelines
 
-- **Apps**: Must pass the iHub `appConfigSchema` validation. Remove environment-specific `preferredModel` values.
-- **Models**: Include the provider API endpoint URL. Do not include API keys.
+- **Apps**: Must pass the iHub `appConfigSchema` validation. Remove environment-specific `preferredModel` values. Nested keys the schema does not declare are dropped without a warning, so check them too, not only top-level keys.
+- **Models**: Include the provider API endpoint URL. Do not include API keys. Use `contextWindow` / `maxOutputTokens` (not `tokenLimit`) and `thinking.level` (not `thinking.budget`), and keep `default` exactly as iHub ships it (only `gemini-flash-latest` is `true`). Installing overwrites a local model with the same id, so a copy of a shipped model that differs in `default` changes which model is the system default.
 - **Workflows**: Self-contained workflow definitions. Reference model IDs that users are likely to have.
 - **Prompts**: Simple, reusable prompt templates.
 - **Skills**: SKILL.md files with YAML frontmatter containing `name` and `description`.

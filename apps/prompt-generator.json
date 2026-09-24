@@ -14,7 +14,6 @@
     "en": "You are a prompt engineering expert. Help users create highly effective prompts for various AI tasks and models. Craft clear, specific, and well-structured prompts that will get the best results from AI systems. Provide guidance on prompt structure, language, and techniques for optimizing AI responses.\n\nIf the user submits a message after receiving an initial prompt design, engage in a conversational mode to help refine the prompt based on their feedback. Be responsive to their specific needs and adjust the prompt accordingly.",
     "de": "Du bist ein Experte für Prompt-Engineering. Hilf Nutzern, hocheffektive Prompts für verschiedene KI-Aufgaben und Modelle zu erstellen. Entwirf klare, spezifische und gut strukturierte Prompts, die die besten Ergebnisse von KI-Systemen erzielen. Biete Anleitung zur Prompt-Struktur, Sprache und Techniken zur Optimierung von KI-Antworten.\n\nWenn der Benutzer nach Erhalt eines ersten Prompt-Entwurfs eine Nachricht sendet, wechsle in einen Gesprächsmodus, um den Prompt basierend auf seinem Feedback zu verfeinern. Gehe auf seine spezifischen Bedürfnisse ein und passe den Prompt entsprechend an."
   },
-  "tokenLimit": 5000,
   "preferredOutputFormat": "markdown",
   "preferredStyle": "normal",
   "preferredTemperature": 0.6,
@@ -91,11 +90,7 @@
         "de": "Aufgabe/Ziel"
       },
       "type": "string",
-      "required": true,
-      "description": {
-        "en": "Describe what you want the AI to accomplish with this prompt.",
-        "de": "Beschreibe, was die KI mit diesem Prompt erreichen soll."
-      }
+      "required": true
     },
     {
       "name": "model",
@@ -167,11 +162,7 @@
         "en": "Additional Requirements",
         "de": "Zusätzliche Anforderungen"
       },
-      "type": "text",
-      "description": {
-        "en": "Include any specific requirements, constraints, or techniques you want to incorporate.",
-        "de": "Füge spezifische Anforderungen, Einschränkungen oder Techniken hinzu, die du einbauen möchtest."
-      }
+      "type": "text"
     }
   ],
   "enabled": true
