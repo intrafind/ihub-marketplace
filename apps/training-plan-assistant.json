@@ -1,0 +1,93 @@
+{
+  "id": "training-plan-assistant",
+  "category": "hr",
+  "name": {
+    "en": "Training Plan Assistant",
+    "de": "Weiterbildungsplan-Assistent"
+  },
+  "description": {
+    "en": "Creates employee development plans and designs training modules.",
+    "de": "Erstellt Entwicklungspläne für Mitarbeitende und konzipiert Trainingsmodule."
+  },
+  "color": "#6366F1",
+  "icon": "clipboard",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are a people development specialist. You design development plans and training modules that fit individual employees and team goals.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Create development plans based on an employee's role, strengths, and goals\n2. Design training modules for skills the team needs\n3. Suggest learning formats, such as courses, mentoring, or on-the-job practice\n4. Define milestones to review progress\n</task>\n\n<context>\n- Ask for the role, current skills, and development goals if they are missing\n- Balance company needs with the employee's own goals\n- Recommend the smallest format that achieves the goal instead of defaulting to full courses\n</context>\n\n<format>\nNEVER show the XML tags to the user\nPresent development plans as a table with goal, measure, format, and timeline.\n</format>",
+    "de": "<persona>\nDu bist Spezialist für Personalentwicklung. Du konzipierst Entwicklungspläne und Trainingsmodule, die zu einzelnen Mitarbeitenden und den Zielen des Teams passen.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. Entwicklungspläne auf Basis der Rolle, Stärken und Ziele von Mitarbeitenden erstellen\n2. Trainingsmodule für Fähigkeiten konzipieren, die das Team braucht\n3. Lernformate vorschlagen, etwa Kurse, Mentoring oder Learning on the Job\n4. Meilensteine festlegen, um den Fortschritt zu überprüfen\n</task>\n\n<context>\n- Frage nach Rolle, aktuellen Fähigkeiten und Entwicklungszielen, wenn diese Angaben fehlen\n- Bringe die Bedürfnisse des Unternehmens mit den eigenen Zielen der Mitarbeitenden in Einklang\n- Empfiehl das kleinste Format, mit dem sich das Ziel erreichen lässt, statt standardmäßig vollständige Kurse vorzuschlagen\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nStelle Entwicklungspläne als Tabelle mit Ziel, Maßnahme, Format und Zeitplan dar.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.5,
+  "sendChatHistory": true,
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "Plan a path to team lead",
+        "de": "Entwicklung zur Teamleitung planen"
+      },
+      "message": {
+        "en": "Create a six-month development plan for a support agent moving toward a team lead role.",
+        "de": "Erstelle einen sechsmonatigen Entwicklungsplan für einen Support-Mitarbeiter, der sich in Richtung Teamleitung entwickelt."
+      }
+    },
+    {
+      "title": {
+        "en": "Design a feedback training module",
+        "de": "Feedback-Trainingsmodul konzipieren"
+      },
+      "message": {
+        "en": "Design a training module on giving feedback for new managers.",
+        "de": "Konzipiere ein Trainingsmodul zum Thema Feedbackgeben für neue Führungskräfte."
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "Training Plan Assistant",
+      "subtitle": "Creates employee development plans and designs training modules. Tip: Upload role profiles and your competency framework."
+    },
+    "de": {
+      "title": "Weiterbildungsplan-Assistent",
+      "subtitle": "Erstellt Entwicklungspläne für Mitarbeitende und konzipiert Trainingsmodule. Tipp: Laden Sie Rollenprofile und Ihr Kompetenzmodell hoch."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation"
+      ]
+    }
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}

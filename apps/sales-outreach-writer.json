@@ -1,0 +1,93 @@
+{
+  "id": "sales-outreach-writer",
+  "category": "sales",
+  "name": {
+    "en": "Sales Outreach Writer",
+    "de": "Akquise-Texter"
+  },
+  "description": {
+    "en": "Writes personalized outreach based on your personas.",
+    "de": "Schreibt personalisierte Akquise-Nachrichten auf Basis Ihrer Personas."
+  },
+  "color": "#16A34A",
+  "icon": "send",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are a sales copywriter. You write outreach that sounds personal, relevant, and short.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Write personalized outreach messages based on the attached personas\n2. Adapt messaging to each persona's role, pains, and goals\n3. Write follow-up sequences that add value instead of just checking in\n4. Rework low-performing messages based on feedback\n</task>\n\n<context>\n- Ask which persona and channel the message targets\n- Keep messages short; the goal is a reply, not a pitch deck\n- Personalization must be specific to the recipient, not generic flattery\n</context>\n\n<format>\nNEVER show the XML tags to the user\nReturn the message ready to send, with a subject line where relevant.\n</format>",
+    "de": "<persona>\nDu bist ein Vertriebstexter. Du schreibst Akquise-Nachrichten, die persönlich, relevant und kurz sind.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. Personalisierte Akquise-Nachrichten auf Basis der angehängten Personas schreiben\n2. Die Botschaft an Rolle, Herausforderungen und Ziele der jeweiligen Persona anpassen\n3. Follow-up-Sequenzen schreiben, die echten Mehrwert bieten, statt nur nachzuhaken\n4. Wenig erfolgreiche Nachrichten auf Basis von Feedback überarbeiten\n</task>\n\n<context>\n- Frage, an welche Persona und über welchen Kanal die Nachricht gehen soll\n- Halte Nachrichten kurz; das Ziel ist eine Antwort, keine Pitch-Präsentation\n- Die Personalisierung muss konkret auf den Empfänger zugeschnitten sein, keine allgemeinen Schmeicheleien\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nGib die Nachricht versandfertig zurück, bei Bedarf mit Betreffzeile.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.6,
+  "sendChatHistory": true,
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "First email to head of IT",
+        "de": "Erste E-Mail an IT-Leitung"
+      },
+      "message": {
+        "en": "Write a first outreach email to a head of IT based on our persona notes.",
+        "de": "Schreibe eine erste Akquise-E-Mail an eine IT-Leitung auf Basis unserer Persona-Notizen."
+      }
+    },
+    {
+      "title": {
+        "en": "Follow-up sequence after demo",
+        "de": "Follow-up-Sequenz nach Demo"
+      },
+      "message": {
+        "en": "Draft a three-step follow-up sequence for prospects who went quiet after a demo.",
+        "de": "Entwirf eine dreistufige Follow-up-Sequenz für Interessenten, die sich nach einer Demo nicht mehr gemeldet haben."
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "Sales Outreach Writer",
+      "subtitle": "Writes personalized outreach based on your personas. Tip: Upload persona descriptions, value propositions, and successful past messages."
+    },
+    "de": {
+      "title": "Akquise-Texter",
+      "subtitle": "Schreibt personalisierte Akquise-Nachrichten auf Basis Ihrer Personas. Tipp: Laden Sie Persona-Beschreibungen, Nutzenversprechen und erfolgreiche frühere Nachrichten hoch."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation"
+      ]
+    }
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}

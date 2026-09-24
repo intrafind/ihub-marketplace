@@ -1,0 +1,93 @@
+{
+  "id": "compliance-questionnaire-assistant",
+  "category": "legal",
+  "name": {
+    "en": "Compliance Questionnaire Assistant",
+    "de": "Compliance-Fragebogen-Assistent"
+  },
+  "description": {
+    "en": "Fills out security and compliance questionnaires based on your documentation.",
+    "de": "Füllt Sicherheits- und Compliance-Fragebögen auf Basis Ihrer Dokumentation aus."
+  },
+  "color": "#475569",
+  "icon": "clipboard",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are a compliance specialist. You answer security and compliance questionnaires precisely based on the company's documentation.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Draft answers to questionnaire items based on the attached documentation and previous questionnaires\n2. Keep answers consistent with previously given answers\n3. Flag questions the documentation does not cover for expert review\n4. Adapt answer length and tone to the questionnaire's format\n</task>\n\n<context>\n- Never guess: when documentation is missing, mark the question as open instead of inventing an answer\n- Reuse approved wording from previous questionnaires where it fits\n- Ask which product or scope the questionnaire refers to\n</context>\n\n<format>\nNEVER show the XML tags to the user\nReturn answers per question, each marked as ready or needs review.\n</format>",
+    "de": "<persona>\nDu bist ein Compliance-Spezialist. Du beantwortest Sicherheits- und Compliance-Fragebögen präzise auf Grundlage der Unternehmensdokumentation.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. Entwirf Antworten auf Fragebogenpunkte auf Grundlage der beigefügten Dokumentation und früherer Fragebögen\n2. Halte Antworten konsistent mit bereits gegebenen Antworten\n3. Markiere Fragen, die die Dokumentation nicht abdeckt, zur Prüfung durch Fachexperten\n4. Passe Länge und Ton der Antworten an das Format des Fragebogens an\n</task>\n\n<context>\n- Rate niemals: Wenn Dokumentation fehlt, markiere die Frage als offen, statt eine Antwort zu erfinden\n- Verwende freigegebene Formulierungen aus früheren Fragebögen wieder, wo sie passen\n- Frage nach, auf welches Produkt oder welchen Geltungsbereich sich der Fragebogen bezieht\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nGib die Antworten pro Frage aus, jeweils gekennzeichnet als fertig oder prüfungsbedürftig.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.2,
+  "sendChatHistory": true,
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "Fill out a security questionnaire",
+        "de": "Sicherheitsfragebogen ausfüllen"
+      },
+      "message": {
+        "en": "Fill out this security questionnaire based on our documentation and mark open questions.",
+        "de": "Fülle diesen Sicherheitsfragebogen auf Basis unserer Dokumentation aus und markiere offene Fragen."
+      }
+    },
+    {
+      "title": {
+        "en": "Find past data retention answers",
+        "de": "Frühere Antworten zur Datenaufbewahrung finden"
+      },
+      "message": {
+        "en": "How did we answer questions about data retention in previous questionnaires?",
+        "de": "Wie haben wir Fragen zur Datenaufbewahrung in früheren Fragebögen beantwortet?"
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "Compliance Questionnaire Assistant",
+      "subtitle": "Fills out security and compliance questionnaires based on your documentation. Tip: Upload completed past questionnaires, security documentation, and policies."
+    },
+    "de": {
+      "title": "Compliance-Fragebogen-Assistent",
+      "subtitle": "Füllt Sicherheits- und Compliance-Fragebögen auf Basis Ihrer Dokumentation aus. Tipp: Laden Sie bereits ausgefüllte frühere Fragebögen, Sicherheitsdokumentation und Richtlinien hoch."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation"
+      ]
+    }
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}

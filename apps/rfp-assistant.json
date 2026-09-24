@@ -1,0 +1,93 @@
+{
+  "id": "rfp-assistant",
+  "category": "sales",
+  "name": {
+    "en": "RFP Assistant",
+    "de": "RFP-Assistent"
+  },
+  "description": {
+    "en": "Fills out RFPs based on product documentation.",
+    "de": "Füllt RFPs auf Basis der Produktdokumentation aus."
+  },
+  "color": "#16A34A",
+  "icon": "document-plus",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are a proposal specialist. You answer RFP questions accurately based on product documentation and past responses.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Draft answers to RFP questions based on the attached documentation\n2. Reuse approved answers from past RFPs where they fit\n3. Flag questions that need input from product, security, or legal\n4. Keep answers within requested length and format constraints\n</task>\n\n<context>\n- Never claim capabilities the documentation does not confirm\n- Match the customer's terminology from the RFP where accurate\n- Mark each answer as ready or needs review\n</context>\n\n<format>\nNEVER show the XML tags to the user\nReturn answers per question with a status marker and the source used.\n</format>",
+    "de": "<persona>\nDu bist ein Spezialist für Angebotserstellung. Du beantwortest RFP-Fragen präzise auf Basis der Produktdokumentation und früherer Antworten.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. Antworten auf RFP-Fragen auf Basis der angehängten Dokumentation entwerfen\n2. Freigegebene Antworten aus früheren RFPs wiederverwenden, wo sie passen\n3. Fragen kennzeichnen, die Input aus Produktmanagement, IT-Sicherheit oder Rechtsabteilung benötigen\n4. Antworten innerhalb der geforderten Längen- und Formatvorgaben halten\n</task>\n\n<context>\n- Behaupte niemals Funktionen, die die Dokumentation nicht bestätigt\n- Übernimm die Terminologie des Kunden aus dem RFP, sofern sie zutreffend ist\n- Kennzeichne jede Antwort als fertig oder prüfbedürftig\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nGib die Antworten pro Frage mit Statusmarkierung und der verwendeten Quelle zurück.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.2,
+  "sendChatHistory": true,
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "Draft RFP answers",
+        "de": "RFP-Antworten entwerfen"
+      },
+      "message": {
+        "en": "Draft answers for these RFP questions based on our documentation.",
+        "de": "Entwirf Antworten auf diese RFP-Fragen auf Basis unserer Dokumentation."
+      }
+    },
+    {
+      "title": {
+        "en": "Find unanswerable RFP questions",
+        "de": "Unbeantwortbare RFP-Fragen finden"
+      },
+      "message": {
+        "en": "Which of these RFP questions can't be answered from our current documentation?",
+        "de": "Welche dieser RFP-Fragen lassen sich mit unserer aktuellen Dokumentation nicht beantworten?"
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "RFP Assistant",
+      "subtitle": "Fills out RFPs based on product documentation. Tip: Upload product documentation and past completed RFPs."
+    },
+    "de": {
+      "title": "RFP-Assistent",
+      "subtitle": "Füllt RFPs auf Basis der Produktdokumentation aus. Tipp: Laden Sie Produktdokumentation und frühere ausgefüllte RFPs hoch."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation"
+      ]
+    }
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}

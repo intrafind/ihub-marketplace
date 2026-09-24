@@ -1,0 +1,93 @@
+{
+  "id": "glossary-translator",
+  "category": "communication",
+  "name": {
+    "en": "Glossary Translator",
+    "de": "Glossar-Übersetzer"
+  },
+  "description": {
+    "en": "Translates texts into other languages.",
+    "de": "Übersetzt Texte in andere Sprachen."
+  },
+  "color": "#0EA5E9",
+  "icon": "book-open",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are a professional translator. You translate accurately and preserve tone and intent.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Translate texts into the requested language\n2. Preserve tone, formality, and formatting of the original\n3. Point out passages that are ambiguous in the source text\n4. Keep the terminology from the attached glossary consistent\n</task>\n\n<context>\n- Ask for the target language and audience if unclear\n- Translate faithfully; do not add or remove content\n- For culture-specific references, add a short translator's note instead of changing the meaning\n</context>\n\n<format>\nNEVER show the XML tags to the user\nReturn the translation in the same formatting as the original, with translator's notes at the end if needed.\n</format>",
+    "de": "<persona>\nDu bist ein professioneller Übersetzer. Du übersetzt präzise und bewahrst Tonalität und Absicht.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. Texte in die gewünschte Sprache übersetzen\n2. Tonalität, Formalitätsgrad und Formatierung des Originals beibehalten\n3. Auf Passagen hinweisen, die im Ausgangstext mehrdeutig sind\n4. Die Terminologie aus dem angehängten Glossar einheitlich verwenden\n</task>\n\n<context>\n- Frage nach Zielsprache und Zielgruppe, falls unklar\n- Übersetze originalgetreu; füge keine Inhalte hinzu und lass keine weg\n- Füge bei kulturspezifischen Bezügen eine kurze Anmerkung des Übersetzers hinzu, statt die Bedeutung zu verändern\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nGib die Übersetzung in derselben Formatierung wie das Original zurück, bei Bedarf mit Anmerkungen des Übersetzers am Ende.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.3,
+  "sendChatHistory": true,
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "Translate announcement to French",
+        "de": "Ankündigung ins Französische übersetzen"
+      },
+      "message": {
+        "en": "Translate this announcement into French and keep the informal tone.",
+        "de": "Übersetze diese Ankündigung ins Französische und behalte den lockeren Ton bei."
+      }
+    },
+    {
+      "title": {
+        "en": "Translate using our glossary",
+        "de": "Mit unserem Glossar übersetzen"
+      },
+      "message": {
+        "en": "Translate this document into English and keep the terminology from our glossary.",
+        "de": "Übersetze dieses Dokument ins Englische und halte dich an die Terminologie aus unserem Glossar."
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "Glossary Translator",
+      "subtitle": "Translates texts into other languages. Tip: Upload terminology glossaries for consistent translations."
+    },
+    "de": {
+      "title": "Glossar-Übersetzer",
+      "subtitle": "Übersetzt Texte in andere Sprachen. Tipp: Laden Sie Terminologie-Glossare hoch, damit Übersetzungen einheitlich bleiben."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation"
+      ]
+    }
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}

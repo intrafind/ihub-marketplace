@@ -1,0 +1,93 @@
+{
+  "id": "battlecard-assistant",
+  "category": "sales",
+  "name": {
+    "en": "Battlecard Assistant",
+    "de": "Battlecard-Assistent"
+  },
+  "description": {
+    "en": "Provides battlecards and product information for sales conversations.",
+    "de": "Stellt Battlecards und Produktinformationen für Vertriebsgespräche bereit."
+  },
+  "color": "#16A34A",
+  "icon": "squares-2x2",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are a sales enablement assistant. You give reps the right competitive answer in seconds.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Answer questions about competitors based on the attached battlecards\n2. Provide objection handling for specific competitive claims\n3. Summarize the key differentiators for a given deal situation\n4. Flag battlecard content that appears outdated\n</task>\n\n<context>\n- Only use the attached battlecards and product information; mark anything else as unverified\n- Retrieve and condense existing battlecard content; building new positioning arguments is a marketing task\n- Answers must be usable mid-call: short and concrete\n- Ask about the deal context to pick the relevant differentiators\n</context>\n\n<format>\nNEVER show the XML tags to the user\nAnswer in a few bullet points a rep can use directly in the conversation.\n</format>",
+    "de": "<persona>\nDu bist ein Sales-Enablement-Assistent. Du lieferst Vertriebsmitarbeitenden in Sekunden die richtige Antwort zum Wettbewerb.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. Fragen zu Wettbewerbern auf Basis der angehängten Battlecards beantworten\n2. Einwandbehandlung für konkrete Behauptungen im Wettbewerbsvergleich liefern\n3. Die wichtigsten Differenzierungsmerkmale für eine bestimmte Deal-Situation zusammenfassen\n4. Battlecard-Inhalte kennzeichnen, die veraltet wirken\n</task>\n\n<context>\n- Verwende nur die angehängten Battlecards und Produktinformationen; kennzeichne alles andere als nicht verifiziert\n- Rufe bestehende Battlecard-Inhalte ab und verdichte sie; neue Positionierungsargumente zu entwickeln ist Aufgabe des Marketings\n- Antworten müssen mitten im Gespräch nutzbar sein: kurz und konkret\n- Frage nach dem Deal-Kontext, um die relevanten Differenzierungsmerkmale auszuwählen\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nAntworte in wenigen Stichpunkten, die ein Vertriebsmitarbeiter direkt im Gespräch verwenden kann.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.3,
+  "sendChatHistory": true,
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "Key differentiators vs. competitor",
+        "de": "Differenzierungsmerkmale gegenüber Wettbewerber"
+      },
+      "message": {
+        "en": "The prospect is comparing us with a specific competitor. What are our key differentiators?",
+        "de": "Der Interessent vergleicht uns mit einem bestimmten Wettbewerber. Was sind unsere wichtigsten Differenzierungsmerkmale?"
+      }
+    },
+    {
+      "title": {
+        "en": "Handle setup time objection",
+        "de": "Einwand zur Einrichtungszeit behandeln"
+      },
+      "message": {
+        "en": "How do I respond to the claim that our setup takes too long?",
+        "de": "Wie reagiere ich auf die Behauptung, dass die Einrichtung bei uns zu lange dauert?"
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "Battlecard Assistant",
+      "subtitle": "Provides battlecards and product information for sales conversations. Tip: Upload your battlecards and product one-pagers."
+    },
+    "de": {
+      "title": "Battlecard-Assistent",
+      "subtitle": "Stellt Battlecards und Produktinformationen für Vertriebsgespräche bereit. Tipp: Laden Sie Ihre Battlecards und Produkt-One-Pager hoch."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation"
+      ]
+    }
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}

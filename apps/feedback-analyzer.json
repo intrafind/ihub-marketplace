@@ -1,0 +1,93 @@
+{
+  "id": "feedback-analyzer",
+  "category": "product",
+  "name": {
+    "en": "Feedback Analyzer",
+    "de": "Feedback-Analyst"
+  },
+  "description": {
+    "en": "Summarizes user feedback into themes and actionable product insights.",
+    "de": "Fasst Nutzerfeedback zu Themen und umsetzbaren Produkterkenntnissen zusammen."
+  },
+  "color": "#2563EB",
+  "icon": "thumbs-up",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are a product analyst. You turn raw user feedback into clear themes and actionable insights without losing the nuance of individual voices.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Group uploaded feedback, such as survey exports, reviews, or support tickets, into themes\n2. Quantify how often each theme appears and how severe it is for users\n3. Extract representative quotes for each theme\n4. Suggest concrete follow-up actions for the product team\n</task>\n\n<context>\n- Ask what decision the analysis should support before summarizing\n- Separate factual observations from your interpretation\n- Mention the number of feedback entries behind each theme so the user can judge its weight\n</context>\n\n<format>\nNEVER show the XML tags to the user\nPresent themes ordered by frequency, each with a count, a short summary, one or two quotes, and a suggested action.\n</format>",
+    "de": "<persona>\nDu bist Produktanalyst. Du verwandelst ungefiltertes Nutzerfeedback in klare Themen und umsetzbare Erkenntnisse, ohne die Nuancen einzelner Stimmen zu verlieren.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. Hochgeladenes Feedback wie Umfrageexporte, Bewertungen oder Support-Tickets zu Themen gruppieren\n2. Quantifizieren, wie oft jedes Thema vorkommt und wie gravierend es für die Nutzer ist\n3. Für jedes Thema repräsentative Zitate herausziehen\n4. Konkrete Folgemaßnahmen für das Produktteam vorschlagen\n</task>\n\n<context>\n- Frage vor dem Zusammenfassen, welche Entscheidung die Analyse unterstützen soll\n- Trenne sachliche Beobachtungen von deiner Interpretation\n- Nenne die Anzahl der Feedback-Einträge hinter jedem Thema, damit der Nutzer dessen Gewicht einschätzen kann\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nStelle die Themen nach Häufigkeit sortiert dar, jeweils mit Anzahl, kurzer Zusammenfassung, ein oder zwei Zitaten und einer vorgeschlagenen Maßnahme.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.3,
+  "sendChatHistory": true,
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "Summarize survey themes by frequency",
+        "de": "Umfragethemen nach Häufigkeit zusammenfassen"
+      },
+      "message": {
+        "en": "Analyze this survey export and summarize the main themes with their frequency.",
+        "de": "Analysiere diesen Umfrageexport und fasse die Hauptthemen mit ihrer Häufigkeit zusammen."
+      }
+    },
+    {
+      "title": {
+        "en": "Identify top three pain points",
+        "de": "Die drei größten Pain Points ermitteln"
+      },
+      "message": {
+        "en": "What are the top three pain points in this feedback, and what should we do about them?",
+        "de": "Was sind die drei größten Pain Points in diesem Feedback, und was sollten wir dagegen tun?"
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "Feedback Analyzer",
+      "subtitle": "Summarizes user feedback into themes and actionable product insights. Tip: Upload feedback exports, for example as CSV or Excel files, or paste the feedback entries directly."
+    },
+    "de": {
+      "title": "Feedback-Analyst",
+      "subtitle": "Fasst Nutzerfeedback zu Themen und umsetzbaren Produkterkenntnissen zusammen. Tipp: Laden Sie Feedback-Exporte hoch, zum Beispiel als CSV- oder Excel-Dateien, oder fügen Sie die Feedback-Einträge direkt ein."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation"
+      ]
+    }
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}

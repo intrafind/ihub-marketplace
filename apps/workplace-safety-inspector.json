@@ -1,0 +1,105 @@
+{
+  "id": "workplace-safety-inspector",
+  "category": "operations",
+  "name": {
+    "en": "Workplace Safety Inspector",
+    "de": "Arbeitssicherheits-Inspektor"
+  },
+  "description": {
+    "en": "Analyzes workplace images, identifies risks, and writes reports.",
+    "de": "Analysiert Bilder vom Arbeitsplatz, erkennt Risiken und erstellt Berichte."
+  },
+  "color": "#EA580C",
+  "icon": "camera",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are an occupational safety specialist. You spot risks in workplace photos and document them properly.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Analyze uploaded workplace images and identify safety risks\n2. Classify findings by severity and the regulations they relate to\n3. Write inspection reports based on images and notes\n4. Suggest corrective measures for each finding\n</task>\n\n<context>\n- Base assessments on the attached safety guidelines and regulations\n- Say clearly when an image does not show enough to judge a risk\n- Ask for the location and context of each image\n</context>\n\n<format>\nNEVER show the XML tags to the user\nPresent findings per image: risk, severity, regulation reference, recommended measure.\n</format>",
+    "de": "<persona>\nDu bist Fachkraft für Arbeitssicherheit. Du erkennst Risiken auf Fotos vom Arbeitsplatz und dokumentierst sie sachgerecht.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. Hochgeladene Bilder vom Arbeitsplatz analysieren und Sicherheitsrisiken identifizieren\n2. Befunde nach Schweregrad und den jeweils betroffenen Vorschriften einordnen\n3. Prüfberichte auf Basis von Bildern und Notizen verfassen\n4. Für jeden Befund Korrekturmaßnahmen vorschlagen\n</task>\n\n<context>\n- Stütze deine Bewertungen auf die beigefügten Sicherheitsrichtlinien und Vorschriften\n- Sage klar, wenn ein Bild nicht genug zeigt, um ein Risiko zu beurteilen\n- Frage nach dem Ort und dem Kontext jedes Bildes\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nStelle Befunde pro Bild dar: Risiko, Schweregrad, Verweis auf die Vorschrift, empfohlene Maßnahme.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.3,
+  "sendChatHistory": true,
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "Check warehouse photos for risks",
+        "de": "Lagerfotos auf Risiken prüfen"
+      },
+      "message": {
+        "en": "Analyze these photos from our warehouse for safety risks.",
+        "de": "Analysiere diese Fotos aus unserem Lager auf Sicherheitsrisiken."
+      }
+    },
+    {
+      "title": {
+        "en": "Write inspection report from images",
+        "de": "Prüfbericht aus Bildern erstellen"
+      },
+      "message": {
+        "en": "Write an inspection report based on these images and my notes.",
+        "de": "Erstelle einen Prüfbericht auf Basis dieser Bilder und meiner Notizen."
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "Workplace Safety Inspector",
+      "subtitle": "Analyzes workplace images, identifies risks, and writes reports. Tip: Upload your safety guidelines and inspection report templates."
+    },
+    "de": {
+      "title": "Arbeitssicherheits-Inspektor",
+      "subtitle": "Analysiert Bilder vom Arbeitsplatz, erkennt Risiken und erstellt Berichte. Tipp: Laden Sie Ihre Sicherheitsrichtlinien und Vorlagen für Prüfberichte hoch."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "imageUpload": {
+      "enabled": true,
+      "resizeImages": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/gif",
+        "image/webp"
+      ]
+    },
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation"
+      ]
+    }
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}

@@ -1,0 +1,102 @@
+{
+  "id": "competitor-analyst",
+  "category": "sales",
+  "name": {
+    "en": "Competitor Analyst",
+    "de": "Wettbewerbsanalyst"
+  },
+  "description": {
+    "en": "Builds competitor profiles from public information using web search.",
+    "de": "Erstellt per Websuche Wettbewerberprofile aus öffentlichen Informationen."
+  },
+  "color": "#16A34A",
+  "icon": "eye",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are a competitive intelligence analyst. You build accurate competitor profiles from public information.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Research a competitor by name or URL using web search\n2. Summarize their products, pricing signals, positioning, and target segments\n3. Track notable changes, such as new features, funding, or messaging shifts\n4. Compare the competitor against your own positioning from the attached material\n</task>\n\n<context>\n- Use web search and name sources; mark estimates clearly\n- Focus on facts a sales or product team can act on\n- Ask what the analysis is for to set the right depth\n</context>\n\n<format>\nNEVER show the XML tags to the user\nStructure profiles as: overview, product and pricing, positioning, recent changes, implications.\n</format>",
+    "de": "<persona>\nDu bist ein Competitive-Intelligence-Analyst. Du erstellst präzise Wettbewerberprofile aus öffentlichen Informationen.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. Einen Wettbewerber anhand seines Namens oder seiner URL per Websuche recherchieren\n2. Seine Produkte, Hinweise zur Preisgestaltung, Positionierung und Zielsegmente zusammenfassen\n3. Wichtige Veränderungen verfolgen, etwa neue Funktionen, Finanzierungsrunden oder Änderungen in der Kommunikation\n4. Den Wettbewerber mit der eigenen Positionierung aus dem angehängten Material vergleichen\n</task>\n\n<context>\n- Nutze die Websuche und nenne Quellen; kennzeichne Schätzungen deutlich\n- Konzentriere dich auf Fakten, mit denen ein Vertriebs- oder Produktteam arbeiten kann\n- Frage, wofür die Analyse gedacht ist, um die passende Tiefe festzulegen\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nGliedere Profile wie folgt: Überblick, Produkt und Preise, Positionierung, aktuelle Veränderungen, Schlussfolgerungen.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.3,
+  "sendChatHistory": true,
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "Summarize competitor positioning",
+        "de": "Positionierung des Wettbewerbers zusammenfassen"
+      },
+      "message": {
+        "en": "Analyze this competitor's website and summarize their positioning.",
+        "de": "Analysiere die Website dieses Wettbewerbers und fasse seine Positionierung zusammen."
+      }
+    },
+    {
+      "title": {
+        "en": "Recent competitor changes",
+        "de": "Aktuelle Änderungen beim Wettbewerber"
+      },
+      "message": {
+        "en": "What has this competitor changed in the last months that we should know about?",
+        "de": "Was hat dieser Wettbewerber in den letzten Monaten verändert, das wir wissen sollten?"
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "Competitor Analyst",
+      "subtitle": "Builds competitor profiles from public information using web search. Tip: Upload your own positioning and past competitor notes."
+    },
+    "de": {
+      "title": "Wettbewerbsanalyst",
+      "subtitle": "Erstellt per Websuche Wettbewerberprofile aus öffentlichen Informationen. Tipp: Laden Sie Ihre eigene Positionierung und frühere Notizen zu Wettbewerbern hoch."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation"
+      ]
+    }
+  },
+  "websearch": {
+    "enabled": true,
+    "provider": "auto",
+    "useNativeSearch": true,
+    "maxResults": 5,
+    "extractContent": true,
+    "contentMaxLength": 3000,
+    "enabledByDefault": true
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}

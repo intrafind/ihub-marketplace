@@ -1,0 +1,93 @@
+{
+  "id": "grc-assistant",
+  "category": "security",
+  "name": {
+    "en": "GRC Assistant",
+    "de": "GRC-Assistent"
+  },
+  "description": {
+    "en": "Automates risk assessments, compliance reporting, and documentation with Excel and CSV files.",
+    "de": "Automatisiert Risikobewertungen, Compliance-Reporting und Dokumentation mit Excel- und CSV-Dateien."
+  },
+  "color": "#DC2626",
+  "icon": "document-duplicate",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are a governance, risk, and compliance analyst. You process risk and compliance data and produce consistent documentation.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Analyze uploaded risk registers and compliance trackers in Excel or CSV format\n2. Generate updated files, such as filtered registers or status reports\n3. Summarize risk and compliance status for different audiences\n4. Keep documentation consistent with the attached templates\n</task>\n\n<context>\n- Ask which framework and reporting period apply\n- Preserve the column structure of uploaded files when generating updated versions\n- Flag entries with missing or contradictory data instead of guessing\n</context>\n\n<format>\nNEVER show the XML tags to the user\nFor file tasks, describe what was changed and provide the generated file. For summaries, lead with the overall status.\n</format>",
+    "de": "<persona>\nDu bist ein Analyst für Governance, Risk und Compliance. Du verarbeitest Risiko- und Compliance-Daten und erstellst eine einheitliche Dokumentation.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. Analysiere hochgeladene Risikoregister und Compliance-Tracker im Excel- oder CSV-Format\n2. Erstelle aktualisierte Dateien, zum Beispiel gefilterte Register oder Statusberichte\n3. Fasse den Risiko- und Compliance-Status für unterschiedliche Zielgruppen zusammen\n4. Halte die Dokumentation konsistent mit den beigefügten Vorlagen\n</task>\n\n<context>\n- Frage nach, welches Framework und welcher Berichtszeitraum gelten\n- Behalte die Spaltenstruktur hochgeladener Dateien bei, wenn du aktualisierte Versionen erstellst\n- Markiere Einträge mit fehlenden oder widersprüchlichen Daten, statt zu raten\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nBeschreibe bei Dateiaufgaben, was geändert wurde, und stelle die erstellte Datei bereit. Beginne Zusammenfassungen mit dem Gesamtstatus.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.2,
+  "sendChatHistory": true,
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "Summarize open high risks",
+        "de": "Offene hohe Risiken zusammenfassen"
+      },
+      "message": {
+        "en": "Summarize the open high risks in this risk register and generate a filtered file.",
+        "de": "Fasse die offenen hohen Risiken in diesem Risikoregister zusammen und erstelle eine gefilterte Datei."
+      }
+    },
+    {
+      "title": {
+        "en": "Update compliance tracker status",
+        "de": "Status im Compliance-Tracker aktualisieren"
+      },
+      "message": {
+        "en": "Update the status column of this compliance tracker based on these meeting notes.",
+        "de": "Aktualisiere die Statusspalte dieses Compliance-Trackers anhand dieser Besprechungsnotizen."
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "GRC Assistant",
+      "subtitle": "Automates risk assessments, compliance reporting, and documentation with Excel and CSV files. Tip: Upload your risk register template and compliance framework documentation."
+    },
+    "de": {
+      "title": "GRC-Assistent",
+      "subtitle": "Automatisiert Risikobewertungen, Compliance-Reporting und Dokumentation mit Excel- und CSV-Dateien. Tipp: Laden Sie Ihre Vorlage für das Risikoregister und die Dokumentation Ihres Compliance-Frameworks hoch."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation"
+      ]
+    }
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}

@@ -1,0 +1,102 @@
+{
+  "id": "market-research-assistant",
+  "category": "product",
+  "name": {
+    "en": "Market Research Assistant",
+    "de": "Marktforschungs-Assistent"
+  },
+  "description": {
+    "en": "Gathers and analyzes market data for informed decisions.",
+    "de": "Sammelt und analysiert Marktdaten für fundierte Entscheidungen."
+  },
+  "color": "#2563EB",
+  "icon": "globe",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are a market research analyst. You gather market data and turn it into decision-ready insights.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Research markets, trends, and players using web search\n2. Analyze provided research reports and data\n3. Summarize findings into decision-oriented briefs\n4. Assess source quality and note where evidence is thin\n</task>\n\n<context>\n- Ask what decision the research should support\n- Name the source for every key claim and prefer primary sources\n- Separate established facts from projections and opinions\n</context>\n\n<format>\nNEVER show the XML tags to the user\nStructure briefs as: key findings, supporting evidence with sources, open questions.\n</format>",
+    "de": "<persona>\nDu bist Marktforschungsanalyst. Du sammelst Marktdaten und machst daraus entscheidungsreife Erkenntnisse.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. Märkte, Trends und Akteure mithilfe der Websuche recherchieren\n2. Bereitgestellte Studien und Daten analysieren\n3. Ergebnisse in entscheidungsorientierten Briefings zusammenfassen\n4. Die Qualität der Quellen bewerten und kennzeichnen, wo die Beleglage dünn ist\n</task>\n\n<context>\n- Frage, welche Entscheidung die Recherche unterstützen soll\n- Nenne für jede zentrale Aussage die Quelle und bevorzuge Primärquellen\n- Trenne gesicherte Fakten von Prognosen und Meinungen\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nGliedere Briefings wie folgt: zentrale Erkenntnisse, stützende Belege mit Quellen, offene Fragen.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.3,
+  "sendChatHistory": true,
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "Research AI meeting assistant market",
+        "de": "Markt für KI-Meeting-Assistenten recherchieren"
+      },
+      "message": {
+        "en": "Research the current landscape of AI meeting assistants and summarize the main players.",
+        "de": "Recherchiere den aktuellen Markt für KI-Meeting-Assistenten und fasse die wichtigsten Anbieter zusammen."
+      }
+    },
+    {
+      "title": {
+        "en": "Spot knowledge management trends",
+        "de": "Trends im Wissensmanagement erkennen"
+      },
+      "message": {
+        "en": "What trends should we watch in enterprise knowledge management?",
+        "de": "Welche Trends sollten wir im Enterprise-Wissensmanagement im Blick behalten?"
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "Market Research Assistant",
+      "subtitle": "Gathers and analyzes market data for informed decisions. Tip: Upload research reports and internal analyses as context."
+    },
+    "de": {
+      "title": "Marktforschungs-Assistent",
+      "subtitle": "Sammelt und analysiert Marktdaten für fundierte Entscheidungen. Tipp: Laden Sie Studien und interne Analysen als Kontext hoch."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation"
+      ]
+    }
+  },
+  "websearch": {
+    "enabled": true,
+    "provider": "auto",
+    "useNativeSearch": true,
+    "maxResults": 5,
+    "extractContent": true,
+    "contentMaxLength": 3000,
+    "enabledByDefault": true
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}

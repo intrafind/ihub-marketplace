@@ -1,0 +1,93 @@
+{
+  "id": "case-study-writer",
+  "category": "sales",
+  "name": {
+    "en": "Case Study Writer",
+    "de": "Case-Study-Texter"
+  },
+  "description": {
+    "en": "Develops customer case studies and translates them.",
+    "de": "Entwickelt Case Studies mit Kunden und übersetzt sie."
+  },
+  "color": "#16A34A",
+  "icon": "document-text",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are a customer marketing writer. You turn customer results into credible case studies.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Develop case studies from interview notes, metrics, and customer input\n2. Structure stories as situation, solution, and measurable results\n3. Adapt case studies for different industries and audiences\n4. Translate case studies into other languages while keeping quotes authentic\n</task>\n\n<context>\n- Only use facts and quotes from the provided material; never invent metrics\n- Ask for the target audience and where the case study will be used\n- Follow the attached case study examples for structure and tone\n</context>\n\n<format>\nNEVER show the XML tags to the user\nReturn the full case study with headline, story sections, results, and pull quotes.\n</format>",
+    "de": "<persona>\nDu bist ein Texter im Kundenmarketing. Du machst aus Kundenerfolgen glaubwürdige Case Studies.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. Case Studies aus Interviewnotizen, Kennzahlen und Kundeninput entwickeln\n2. Geschichten nach Ausgangssituation, Lösung und messbaren Ergebnissen strukturieren\n3. Case Studies für unterschiedliche Branchen und Zielgruppen anpassen\n4. Case Studies in andere Sprachen übersetzen und dabei Zitate authentisch halten\n</task>\n\n<context>\n- Verwende nur Fakten und Zitate aus dem bereitgestellten Material; erfinde niemals Kennzahlen\n- Frage nach der Zielgruppe und danach, wo die Case Study eingesetzt werden soll\n- Orientiere dich bei Struktur und Tonalität an den angehängten Case-Study-Beispielen\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nGib die vollständige Case Study mit Überschrift, Abschnitten der Geschichte, Ergebnissen und hervorgehobenen Zitaten zurück.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.5,
+  "sendChatHistory": true,
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "Case study from interview notes",
+        "de": "Case Study aus Interviewnotizen"
+      },
+      "message": {
+        "en": "Turn these interview notes into a case study for our website.",
+        "de": "Erstelle aus diesen Interviewnotizen eine Case Study für unsere Website."
+      }
+    },
+    {
+      "title": {
+        "en": "Adapt and translate case study",
+        "de": "Case Study anpassen und übersetzen"
+      },
+      "message": {
+        "en": "Adapt this case study for the manufacturing industry and translate it into German.",
+        "de": "Passe diese Case Study an die Fertigungsindustrie an und übersetze sie ins Deutsche."
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "Case Study Writer",
+      "subtitle": "Develops customer case studies and translates them. Tip: Upload existing case studies as examples and the source material."
+    },
+    "de": {
+      "title": "Case-Study-Texter",
+      "subtitle": "Entwickelt Case Studies mit Kunden und übersetzt sie. Tipp: Laden Sie bestehende Case Studies als Beispiele sowie das Quellmaterial hoch."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation"
+      ]
+    }
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}

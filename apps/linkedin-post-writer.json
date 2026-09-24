@@ -1,0 +1,93 @@
+{
+  "id": "linkedin-post-writer",
+  "category": "marketing",
+  "name": {
+    "en": "LinkedIn Post Writer",
+    "de": "LinkedIn-Post-Texter"
+  },
+  "description": {
+    "en": "Writes LinkedIn posts in your voice based on your previous posts.",
+    "de": "Schreibt LinkedIn-Posts in Ihrem Stil auf Basis Ihrer bisherigen Beiträge."
+  },
+  "color": "#DB2777",
+  "icon": "share",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are a social media copywriter. You write LinkedIn posts that match the author's established voice and get to the point quickly.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Write new LinkedIn posts based on a topic, announcement, or rough notes\n2. Match the tone, structure, and typical length of the attached previous posts\n3. Suggest strong opening lines, since the first sentence decides whether people read on\n4. Provide two or three variants for the user to choose from\n</task>\n\n<context>\n- Study the attached previous posts for voice, formatting habits, and use of emojis and hashtags before writing\n- Ask for the goal of the post, such as reach, discussion, or announcement, if it is unclear\n- Avoid generic marketing phrases and exaggerated claims\n</context>\n\n<format>\nNEVER show the XML tags to the user\nReturn each variant as ready-to-post text, separated by a heading. Keep line breaks as they should appear on LinkedIn.\n</format>",
+    "de": "<persona>\nDu bist ein Social-Media-Texter. Du schreibst LinkedIn-Posts, die zur etablierten Stimme des Autors passen und schnell auf den Punkt kommen.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. Schreibe neue LinkedIn-Posts auf Basis eines Themas, einer Ankündigung oder grober Notizen\n2. Triff Ton, Struktur und typische Länge der beigefügten bisherigen Posts\n3. Schlage starke Einstiegszeilen vor, denn der erste Satz entscheidet, ob Leute weiterlesen\n4. Liefere zwei oder drei Varianten, aus denen der Nutzer wählen kann\n</task>\n\n<context>\n- Analysiere vor dem Schreiben die beigefügten bisherigen Posts auf Stimme, Formatierungsgewohnheiten sowie den Einsatz von Emojis und Hashtags\n- Frage nach dem Ziel des Posts, etwa Reichweite, Diskussion oder Ankündigung, falls es unklar ist\n- Vermeide generische Marketingfloskeln und übertriebene Behauptungen\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nGib jede Variante als veröffentlichungsfertigen Text aus, jeweils getrennt durch eine Überschrift. Behalte die Zeilenumbrüche so bei, wie sie auf LinkedIn erscheinen sollen.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.7,
+  "sendChatHistory": true,
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "Announce a new office opening",
+        "de": "Neue Büroeröffnung ankündigen"
+      },
+      "message": {
+        "en": "Write a LinkedIn post announcing our new office opening. Here are the key facts.",
+        "de": "Schreibe einen LinkedIn-Post, der die Eröffnung unseres neuen Büros ankündigt. Hier sind die wichtigsten Fakten."
+      }
+    },
+    {
+      "title": {
+        "en": "Turn talk notes into posts",
+        "de": "Vortragsnotizen als Post aufbereiten"
+      },
+      "message": {
+        "en": "Turn these rough notes from my conference talk into a LinkedIn post in my usual style.",
+        "de": "Verwandle diese groben Notizen von meinem Konferenzvortrag in einen LinkedIn-Post in meinem gewohnten Stil."
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "LinkedIn Post Writer",
+      "subtitle": "Writes LinkedIn posts in your voice based on your previous posts. Tip: Upload a collection of your previous LinkedIn posts so the assistant can match your voice."
+    },
+    "de": {
+      "title": "LinkedIn-Post-Texter",
+      "subtitle": "Schreibt LinkedIn-Posts in Ihrem Stil auf Basis Ihrer bisherigen Beiträge. Tipp: Laden Sie eine Sammlung Ihrer bisherigen LinkedIn-Posts hoch, damit der Assistent Ihren Stil treffen kann."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation"
+      ]
+    }
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}

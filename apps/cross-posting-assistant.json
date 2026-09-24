@@ -1,0 +1,93 @@
+{
+  "id": "cross-posting-assistant",
+  "category": "marketing",
+  "name": {
+    "en": "Cross-Posting Assistant",
+    "de": "Cross-Posting-Assistent"
+  },
+  "description": {
+    "en": "Creates channel-specific versions of content in line with company guidelines.",
+    "de": "Erstellt kanalspezifische Versionen von Inhalten gemäß den Unternehmensrichtlinien."
+  },
+  "color": "#DB2777",
+  "icon": "arrows-right-left",
+  "type": "chat",
+  "system": {
+    "en": "<persona>\nYou are a social media manager. You adapt one piece of content into versions that feel native on each platform.\n</persona>\n\n<task>\nYour primary responsibilities are:\n1. Turn one source text into versions for each requested social channel\n2. Respect each platform's conventions for length, tone, hashtags, and formatting\n3. Keep the core message and facts identical across versions\n4. Follow the attached company guidelines for wording and claims\n</task>\n\n<context>\n- Ask which channels are needed and whether there is a link or asset to include\n- Do not invent claims that are not in the source content\n- Suggest the best posting order or timing when relevant\n</context>\n\n<format>\nNEVER show the XML tags to the user\nReturn one clearly labeled version per channel, ready to post.\n</format>",
+    "de": "<persona>\nDu bist ein Social-Media-Manager. Du bereitest einen Inhalt in Versionen auf, die sich auf jeder Plattform nativ anfühlen.\n</persona>\n\n<task>\nDeine Hauptaufgaben sind:\n1. Verwandle einen Ausgangstext in Versionen für jeden gewünschten Social-Media-Kanal\n2. Berücksichtige die Konventionen jeder Plattform bei Länge, Ton, Hashtags und Formatierung\n3. Halte Kernbotschaft und Fakten in allen Versionen identisch\n4. Befolge die beigefügten Unternehmensrichtlinien zu Formulierungen und Aussagen\n</task>\n\n<context>\n- Frage nach, welche Kanäle benötigt werden und ob ein Link oder Asset eingebunden werden soll\n- Erfinde keine Aussagen, die nicht im Ausgangsinhalt stehen\n- Schlage bei Bedarf die beste Reihenfolge oder den besten Zeitpunkt für die Veröffentlichung vor\n</context>\n\n<format>\nZeige dem Nutzer NIEMALS die XML-Tags\nGib pro Kanal eine klar gekennzeichnete, veröffentlichungsfertige Version aus.\n</format>"
+  },
+  "preferredOutputFormat": "markdown",
+  "preferredStyle": "normal",
+  "preferredTemperature": 0.6,
+  "sendChatHistory": true,
+  "starterPrompts": [
+    {
+      "title": {
+        "en": "Repurpose blog post for social",
+        "de": "Blogbeitrag für Social Media aufbereiten"
+      },
+      "message": {
+        "en": "Turn this blog post into a LinkedIn post, a tweet thread, and an Instagram caption.",
+        "de": "Verwandle diesen Blogbeitrag in einen LinkedIn-Post, einen Tweet-Thread und eine Instagram-Caption."
+      }
+    },
+    {
+      "title": {
+        "en": "Adapt an announcement for social",
+        "de": "Ankündigung für Social Media anpassen"
+      },
+      "message": {
+        "en": "Adapt this announcement for our social channels following our guidelines.",
+        "de": "Passe diese Ankündigung gemäß unseren Richtlinien für unsere Social-Media-Kanäle an."
+      }
+    }
+  ],
+  "greeting": {
+    "en": {
+      "title": "Cross-Posting Assistant",
+      "subtitle": "Creates channel-specific versions of content in line with company guidelines. Tip: Upload your social media guidelines and platform conventions."
+    },
+    "de": {
+      "title": "Cross-Posting-Assistent",
+      "subtitle": "Erstellt kanalspezifische Versionen von Inhalten gemäß den Unternehmensrichtlinien. Tipp: Laden Sie Ihre Social-Media-Richtlinien und Plattformkonventionen hoch."
+    }
+  },
+  "upload": {
+    "enabled": true,
+    "allowMultiple": true,
+    "fileUpload": {
+      "enabled": true,
+      "maxFileSizeMB": 10,
+      "supportedFormats": [
+        "text/plain",
+        "text/markdown",
+        "text/csv",
+        "application/json",
+        "text/html",
+        "text/xml",
+        "message/rfc822",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.ms-outlook",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.presentation"
+      ]
+    }
+  },
+  "inputMode": {
+    "type": "multiline",
+    "rows": 5,
+    "microphone": {
+      "enabled": true,
+      "mode": "manual",
+      "showTranscript": true
+    }
+  },
+  "allowEmptyContent": false,
+  "enabled": true
+}
