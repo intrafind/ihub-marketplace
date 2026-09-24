@@ -11,8 +11,11 @@
   },
   "url": "https://api.openai.com/v1/chat/completions",
   "provider": "openai",
-  "tokenLimit": 8192,
+  "contextWindow": 1047576,
+  "maxOutputTokens": 32768,
   "supportsTools": true,
+  "supportsVision": true,
   "supportsImages": true,
-  "enabled": true
+  "enabled": true,
+  "default": false
 }

@@ -13,7 +13,7 @@
   "config": {
     "maxExecutionTime": 60000,
     "maxIterations": 5,
-    "defaultModelId": "gemini-3.0-flash"
+    "defaultModelId": "gemini-flash-latest"
   },
   "sources": ["documentation", "faq"],
   "allowedGroups": [],
@@ -60,7 +60,7 @@
     },
     {
       "id": "classify-question",
-      "type": "agent",
+      "type": "prompt",
       "name": {
         "en": "Classify Question",
         "de": "Frage klassifizieren"
@@ -93,7 +93,7 @@
     },
     {
       "id": "generate-answer",
-      "type": "agent",
+      "type": "prompt",
       "name": {
         "en": "Generate Answer",
         "de": "Antwort generieren"
