@@ -138,3 +138,6 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Marketplace website build output (scripts/build-site.sh)
+_site/

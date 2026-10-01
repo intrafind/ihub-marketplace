@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>iHub Marketplace</title>
+    <meta
+      name="description"
+      content="Browse the official iHub Apps marketplace: ready-made AI apps, model configurations, prompts, skills, and workflows by IntraFind."
+    />
+    <meta name="theme-color" content="#003557" />
+    <meta property="og:title" content="iHub Marketplace" />
+    <meta
+      property="og:description"
+      content="Ready-made AI apps, models, prompts, skills, and workflows for iHub Apps."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="assets/ihub-logo.svg" />
+    <link rel="preload" href="assets/fonts/Inter-roman.var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="assets/styles.css" />
+    <script>
+      // Apply the stored theme before first paint to avoid a light flash in dark mode
+      (function () {
+        try {
+          var theme = localStorage.getItem('ihub-marketplace-theme');
+          var dark = theme ? theme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (dark) document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="nav.skip">Skip to content</a>
+
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="./" aria-label="iHub Marketplace">
+          <img src="assets/ihub-logo.svg" alt="" width="36" height="30" />
+          <span class="brand-text">
+            <span class="brand-title"><span class="font-light">iHub</span><span class="font-extrabold"> Marketplace</span></span>
+            <span class="brand-tagline" data-i18n="brand.tagline">by IntraFind</span>
+          </span>
+        </a>
+
+        <button
+          type="button"
+          class="icon-btn menu-toggle"
+          id="menu-toggle"
+          aria-expanded="false"
+          aria-controls="topnav"
+          data-i18n-aria-label="nav.menu"
+          aria-label="Menu"
+        >
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+        </button>
+
+        <nav class="topnav" id="topnav" data-i18n-aria-label="nav.main" aria-label="Main navigation">
+          <a href="#browse" data-i18n="nav.browse">Browse</a>
+          <a href="#getting-started" data-i18n="nav.gettingStarted">Getting started</a>
+          <a href="https://github.com/intrafind/ihub-apps" target="_blank" rel="noopener noreferrer">iHub Apps</a>
+          <a href="https://intrafind.com/" target="_blank" rel="noopener noreferrer">IntraFind</a>
+          <a href="https://github.com/intrafind/ihub-marketplace" target="_blank" rel="noopener noreferrer" class="nav-github">
+            <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub
+          </a>
+          <span class="topnav-tools">
+            <button type="button" class="pill-btn" id="lang-toggle" data-i18n-aria-label="nav.language" aria-label="Language">DE</button>
+            <button type="button" class="icon-btn" id="theme-toggle" data-i18n-aria-label="nav.theme" aria-label="Toggle dark mode">
+              <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+              <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><path d="M12 1.5v2.5M12 20v2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M1.5 12H4M20 12h2.5M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+          </span>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow" data-i18n="hero.eyebrow">Official iHub Marketplace</p>
+            <h1 data-i18n="hero.title">Ready-made AI content for iHub Apps</h1>
+            <p class="lead" data-i18n="hero.lead">
+              Browse the apps, model configurations, prompts, skills, and workflows of the official IntraFind
+              registry, then install them from your iHub admin panel with one click.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#browse" data-i18n="hero.browse">Browse the catalog</a>
+              <a class="btn btn-secondary" href="#getting-started" data-i18n="hero.start">Getting started</a>
+            </div>
+          </div>
+          <div class="hero-card">
+            <p class="hero-card-label" data-i18n="hero.registryLabel">Registry URL</p>
+            <div class="copy-field">
+              <code id="registry-url">https://raw.githubusercontent.com/intrafind/ihub-marketplace/main/catalog.json</code>
+              <button type="button" class="copy-btn" data-copy-target="registry-url" data-i18n="common.copy">Copy</button>
+            </div>
+            <p class="hero-card-hint" data-i18n="hero.registryHint">
+              Preconfigured in current iHub releases as “iHub Official Marketplace”.
+            </p>
+            <div class="stats" id="stats"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="browse" class="section">
+        <div class="container">
+          <div class="page-header">
+            <div>
+              <h2 data-i18n="browse.title">Marketplace</h2>
+              <p class="muted" data-i18n="browse.subtitle">Discover content you can install into iHub</p>
+            </div>
+            <button type="button" class="btn btn-outline" id="ihub-connect">
+              <span id="ihub-connect-label" data-i18n="ihub.connect">Connect your iHub</span>
+            </button>
+          </div>
+
+          <div class="type-tabs" id="type-tabs" role="group" data-i18n-aria-label="browse.typeFilter" aria-label="Filter by type"></div>
+
+          <div class="filter-bar">
+            <label class="sr-only" for="search" data-i18n="browse.search">Search items...</label>
+            <input type="search" id="search" class="input grow" placeholder="Search items..." data-i18n-placeholder="browse.search" autocomplete="off" />
+            <label class="sr-only" for="category" data-i18n="browse.category">Category</label>
+            <select id="category" class="input">
+              <option value="" data-i18n="browse.allCategories">All Categories</option>
+            </select>
+            <label class="sr-only" for="sort" data-i18n="browse.sort">Sort</label>
+            <select id="sort" class="input">
+              <option value="" data-i18n="browse.sortDefault">Catalog order</option>
+              <option value="name" data-i18n="browse.sortName">Name (A–Z)</option>
+            </select>
+          </div>
+
+          <p class="result-count muted" id="result-count" aria-live="polite"></p>
+
+          <div id="loading" class="loading"><div class="spinner" role="status"><span class="sr-only" data-i18n="common.loading">Loading…</span></div></div>
+          <div id="error" class="empty-state" hidden></div>
+          <div id="empty" class="empty-state" hidden>
+            <p data-i18n="browse.noResults">No items found. Try adjusting your filters.</p>
+          </div>
+          <div id="grid" class="grid"></div>
+          <nav class="pagination" id="pagination" data-i18n-aria-label="browse.pagination" aria-label="Pagination" hidden>
+            <button type="button" class="page-btn" id="page-prev" data-i18n-aria-label="browse.prev" aria-label="Previous page">&#x2190;</button>
+            <span id="page-info"></span>
+            <button type="button" class="page-btn" id="page-next" data-i18n-aria-label="browse.next" aria-label="Next page">&#x2192;</button>
+          </nav>
+        </div>
+      </section>
+
+      <section id="getting-started" class="section section-alt">
+        <div class="container">
+          <div class="section-heading">
+            <h2 data-i18n="start.title">Getting started</h2>
+            <p class="muted" data-i18n="start.subtitle">From zero to your first installed app in three steps.</p>
+          </div>
+
+          <ol class="steps">
+            <li class="step">
+              <span class="step-number">1</span>
+              <h3 data-i18n="start.step1.title">Run iHub Apps</h3>
+              <p data-i18n="start.step1.text">
+                Install iHub with the one-line installer, run the Docker image, or download a standalone binary. iHub
+                configures itself on first start.
+              </p>
+              <div class="code-block">
+                <code id="install-cmd">curl -fsSL https://raw.githubusercontent.com/intrafind/ihub-apps/main/install.sh | sh</code>
+                <button type="button" class="copy-btn" data-copy-target="install-cmd" data-i18n="common.copy">Copy</button>
+              </div>
+              <div class="code-block">
+                <code id="docker-cmd">docker run -d -p 3000:3000 -v $(pwd)/contents:/app/contents ghcr.io/intrafind/ihub-apps:latest</code>
+                <button type="button" class="copy-btn" data-copy-target="docker-cmd" data-i18n="common.copy">Copy</button>
+              </div>
+              <p class="step-links">
+                <a href="https://github.com/intrafind/ihub-apps/blob/main/docs/GETTING_STARTED.md" target="_blank" rel="noopener noreferrer" data-i18n="start.step1.guide">Getting started guide</a>
+                <a href="https://github.com/intrafind/ihub-apps/blob/main/docs/INSTALLATION.md" target="_blank" rel="noopener noreferrer" data-i18n="start.step1.install">Installation options</a>
+                <a href="https://github.com/intrafind/ihub-apps/releases" target="_blank" rel="noopener noreferrer" data-i18n="start.step1.releases">Releases</a>
+              </p>
+            </li>
+            <li class="step">
+              <span class="step-number">2</span>
+              <h3 data-i18n="start.step2.title">Open the marketplace</h3>
+              <p data-i18n-html="start.step2.text">
+                Open <strong>http://localhost:3000</strong>, sign in as an administrator, and go to
+                <strong>Admin → Marketplace</strong>. The <em>iHub Official Marketplace</em> registry is already
+                configured.
+              </p>
+              <p class="muted small" data-i18n-html="start.step2.hint">
+                Registry missing on an older install? Choose <strong>Manage Registries → Add Registry</strong> and paste
+                the registry URL above.
+              </p>
+            </li>
+            <li class="step">
+              <span class="step-number">3</span>
+              <h3 data-i18n="start.step3.title">Install content</h3>
+              <p data-i18n="start.step3.text">
+                Pick an item and click Install. Apps, prompts, skills, and workflows are ready right away; models need an
+                API key for their provider, set in Admin → Models or as an environment variable.
+              </p>
+              <p class="muted small" data-i18n="start.step3.hint">
+                Tip: connect your iHub on this page and every item gets a button that opens it in your iHub admin panel.
+              </p>
+            </li>
+          </ol>
+
+          <div class="contribute">
+            <div>
+              <h3 data-i18n="contribute.title">Share your own content</h3>
+              <p class="muted" data-i18n="contribute.text">
+                Built an app or a skill your team loves? Add it to the catalog with a pull request.
+              </p>
+            </div>
+            <a class="btn btn-secondary" href="https://github.com/intrafind/ihub-marketplace#contributing" target="_blank" rel="noopener noreferrer" data-i18n="contribute.cta">Contribute on GitHub</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <p class="powered">
+            Powered by IntraFind –
+            <a href="https://intrafind.com/" target="_blank" rel="noopener noreferrer">https://intrafind.com/</a>
+          </p>
+          <p class="muted small">
+            © <span id="year">2026</span> IntraFind Software AG ·
+            <a href="https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" data-i18n="footer.license">BSD 3-Clause License with Mandatory Attribution</a>
+          </p>
+        </div>
+        <nav class="footer-links" data-i18n-aria-label="footer.navigation" aria-label="Footer navigation">
+          <a href="https://github.com/intrafind/ihub-apps" target="_blank" rel="noopener noreferrer">iHub Apps</a>
+          <a href="https://github.com/intrafind/ihub-apps/blob/main/docs/GETTING_STARTED.md" target="_blank" rel="noopener noreferrer" data-i18n="nav.gettingStarted">Getting started</a>
+          <a href="https://intrafind.com/" target="_blank" rel="noopener noreferrer">IntraFind</a>
+          <a href="https://github.com/intrafind/ihub-marketplace" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="catalog.json">catalog.json</a>
+        </nav>
+      </div>
+    </footer>
+
+    <!-- Item detail slide-in panel, mirrors the iHub admin marketplace drawer -->
+    <div class="drawer" id="drawer" hidden>
+      <div class="drawer-backdrop" data-close-drawer></div>
+      <aside class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title" tabindex="-1">
+        <div class="drawer-header">
+          <div class="drawer-heading">
+            <div class="badge-row" id="drawer-badges"></div>
+            <h2 id="drawer-title"></h2>
+            <p class="muted small" id="drawer-author"></p>
+          </div>
+          <button type="button" class="close-btn" data-close-drawer data-i18n-aria-label="common.close" aria-label="Close">&#x2715;</button>
+        </div>
+        <div class="drawer-actions" id="drawer-actions"></div>
+        <div class="drawer-tabs" role="tablist">
+          <button type="button" class="drawer-tab" role="tab" data-tab="overview" data-i18n="detail.overview">Overview</button>
+          <button type="button" class="drawer-tab" role="tab" data-tab="content" data-i18n="detail.content">Content</button>
+        </div>
+        <div class="drawer-body" id="drawer-body"></div>
+      </aside>
+    </div>
+
+    <!-- Connect-your-iHub dialog -->
+    <dialog class="modal" id="ihub-dialog" aria-labelledby="ihub-dialog-title">
+      <form method="dialog" id="ihub-form">
+        <h2 id="ihub-dialog-title" data-i18n="ihub.title">Connect your iHub</h2>
+        <p class="muted small" data-i18n="ihub.text">
+          Enter the address of your iHub instance. Items then get an “Open in iHub” button that takes you straight to
+          the item in Admin → Marketplace. The address is stored only in this browser.
+        </p>
+        <label for="ihub-url" class="field-label" data-i18n="ihub.label">iHub URL</label>
+        <input type="url" id="ihub-url" class="input" placeholder="https://ihub.example.com" />
+        <p class="field-error" id="ihub-error" hidden data-i18n="ihub.invalid">Enter a full URL starting with http:// or https://</p>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-link" id="ihub-clear" data-i18n="ihub.clear">Disconnect</button>
+          <span class="spacer"></span>
+          <button type="button" class="btn btn-secondary" id="ihub-cancel" data-i18n="common.cancel">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="ihub-save" data-i18n="common.save">Save</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+    <script src="assets/vendor/marked.umd.js" defer></script>
+    <script src="assets/vendor/purify.min.js" defer></script>
+    <script src="assets/i18n.js" defer></script>
+    <script src="assets/app.js" defer></script>
+  </body>
+</html>
