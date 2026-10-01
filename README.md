@@ -2,7 +2,11 @@
 
 The official marketplace registry for [iHub Apps](https://github.com/intrafind/ihub-apps) — a curated collection of AI-powered apps, language model configurations, workflows, prompts, and skills ready to install into your iHub instance.
 
+**Browse the catalog online: [intrafind.github.io/ihub-marketplace](https://intrafind.github.io/ihub-marketplace/)**
+
 ## Adding This Registry to iHub Apps
+
+Current iHub Apps releases ship with this registry preconfigured as **iHub Official Marketplace**, so you can go straight to **Admin → Marketplace → Browse**. To add it manually (for example on an older install):
 
 1. Open your iHub Apps instance and navigate to **Admin → Marketplace → Registries**
 2. Click **Add Registry**
@@ -291,8 +295,27 @@ ihub-marketplace/
 ├── models/                         # Model configuration templates
 ├── workflows/                      # Workflow definition files
 ├── prompts/                        # Prompt template files
-└── skills/                         # Skill packages, one folder per skill with a SKILL.md
+├── skills/                         # Skill packages, one folder per skill with a SKILL.md
+├── site/                           # Marketplace website (GitHub Pages)
+├── scripts/build-site.sh           # Assembles the website with the catalog and content
+└── .github/workflows/pages.yml     # Builds on every PR, deploys main to GitHub Pages
 ```
+
+## Website
+
+The marketplace website at [intrafind.github.io/ihub-marketplace](https://intrafind.github.io/ihub-marketplace/) lets anyone browse the catalog without an iHub instance. It looks like the marketplace in the iHub admin panel: type tabs, search, category filter, item cards, and a detail panel with the item's description and its full content (app JSON, rendered `SKILL.md`, …). It also has a getting-started guide and links to iHub Apps, IntraFind, and this repository. Visitors can enter the address of their own iHub, and every item then gets an **Open in iHub** button that opens it in **Admin → Marketplace**.
+
+The site is plain HTML, CSS, and JavaScript with no build step. It reads `catalog.json` at runtime, so new catalog entries show up on the next deployment without touching `site/`. UI strings live in `site/assets/i18n.js` (English and German).
+
+Preview it locally:
+
+```bash
+./scripts/build-site.sh        # writes _site/ and checks that every catalog path exists
+python3 -m http.server 8080 --directory _site
+# open http://localhost:8080
+```
+
+The **Marketplace Website** workflow builds the site on every pull request (failing if `catalog.json` references a missing file) and deploys `main` to GitHub Pages. GitHub Pages must be enabled once under **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 
 ## Catalog Format
 
@@ -321,7 +344,8 @@ To add new content to this marketplace:
 2. Add your content file in the appropriate directory (`apps/`, `models/`, `workflows/`, `prompts/`, or `skills/`)
 3. Add an entry to `catalog.json` following the existing format
 4. Ensure all JSON files are valid and conform to iHub schemas
-5. Submit a pull request
+5. Run `./scripts/build-site.sh` to check that the catalog entry points at an existing file
+6. Submit a pull request
 
 ### Content Guidelines
 
@@ -333,10 +357,14 @@ To add new content to this marketplace:
 
 ## License
 
-This repository is licensed under the [BSD-3-Clause License](LICENSE).
+This repository is licensed under the [BSD 3-Clause License with Mandatory Attribution](LICENSE), the same license as [iHub Apps](https://github.com/intrafind/ihub-apps). Products, services, and derivative works must display **"Powered by IntraFind – https://intrafind.com/"**; commercial use carries additional attribution requirements. See [LICENSE](LICENSE) and [NOTICE](NOTICE) for the full terms.
 
 Content items may have their own licenses as specified in the `license` field of each catalog entry.
 
+The website bundles third-party components under their own licenses: [Inter](site/assets/fonts/Inter-LICENSE.txt) (SIL Open Font License 1.1), [marked](site/assets/vendor/marked.LICENSE.md) (MIT), and [DOMPurify](site/assets/vendor/dompurify.LICENSE) (Apache-2.0 or MPL-2.0).
+
 ---
 
-Maintained by [IntraFind Software AG](https://www.intrafind.de)
+Powered by IntraFind – https://intrafind.com/
+
+Maintained by [IntraFind Software AG](https://intrafind.com/)
