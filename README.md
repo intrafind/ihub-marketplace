@@ -170,7 +170,9 @@ Model configurations mirror the defaults shipped with the current iHub Apps rele
 | `faq-question` | Ask FAQ | Answer FAQ questions |
 | `app-generator` | App Generator | Generate iHub app configs |
 
-### Skills (5)
+### Skills (98)
+
+#### General (5)
 
 | ID | Name | Description |
 |----|------|-------------|
@@ -179,6 +181,106 @@ Model configurations mirror the defaults shipped with the current iHub Apps rele
 | `technical-documentation` | Technical Documentation | Write API docs, guides, and READMEs |
 | `data-storytelling` | Data Storytelling | Turn data into compelling narratives |
 | `email-campaign-creator` | Email Campaign Creator | Create complete email campaigns |
+
+#### Department Skills (93)
+
+Task-focused skills for legal, compliance, finance, security, HR, sales, customer success, support, IT operations, operations, marketing, product, design and UX research, engineering, data, and personal productivity. Each skill is a `SKILL.md` with a step-by-step method, reference frameworks, output templates, and guardrails. Skills that work with company data expect it to come from the user, uploaded documents, or connected tools and sources, never from model memory. Legal, finance, and HR skills carry a reminder that their output needs review by a qualified professional.
+
+| ID | Name | Department | Category |
+|----|------|------------|----------|
+| `contract-playbook-review` | Contract Playbook Review | Legal | legal |
+| `nda-intake-triage` | NDA Intake Triage | Legal | legal |
+| `signing-readiness-check` | Signing Readiness Check | Legal | legal |
+| `legal-inquiry-responder` | Legal Inquiry Responder | Legal | legal |
+| `legal-risk-matrix` | Legal Risk Matrix | Legal | legal |
+| `legal-meeting-briefing` | Legal Meeting Briefing | Legal | legal |
+| `eu-regulation-navigator` | EU Regulation Navigator | Compliance | compliance |
+| `gdpr-operations-playbook` | GDPR Operations Playbook | Compliance | compliance |
+| `compliance-gap-tracker` | Compliance Gap Tracker | Compliance | compliance |
+| `budget-variance-explainer` | Budget Variance Explainer | Finance | finance |
+| `financial-statements-assembler` | Financial Statements Assembler | Finance | finance |
+| `month-end-close-coordinator` | Month-End Close Coordinator | Finance | finance |
+| `department-budget-builder` | Department Budget Builder | Finance | finance |
+| `journal-entry-builder` | Journal Entry Builder | Finance | finance |
+| `ledger-reconciliation-helper` | Ledger Reconciliation Helper | Finance | finance |
+| `invoice-match-checker` | Invoice Match Checker | Finance | finance |
+| `sox-control-tester` | SOX Control Tester | Finance | finance |
+| `vendor-due-diligence` | Vendor Due Diligence | InfoSec | security |
+| `change-threat-modeler` | Change Threat Modeler | InfoSec | security |
+| `structured-interview-designer` | Structured Interview Designer | HR | hr |
+| `pay-equity-reviewer` | Pay & Equity Reviewer | HR | hr |
+| `development-plan-designer` | Development Plan Designer | HR | hr |
+| `new-hire-onboarding-designer` | New Hire Onboarding Designer | HR | hr |
+| `role-profile-architect` | Role Profile Architect | HR | hr |
+| `performance-calibration-guide` | Performance & Calibration Guide | HR | hr |
+| `account-intelligence-brief` | Account Intelligence Brief | Sales | sales |
+| `prospect-outreach-composer` | Prospect Outreach Composer | Sales | sales |
+| `sales-call-briefing` | Sales Call Briefing | Sales | sales |
+| `call-recap-and-follow-up` | Call Recap & Follow-Up | Sales | sales |
+| `buying-committee-mapper` | Buying Committee Mapper | Sales | sales |
+| `pipeline-health-check` | Pipeline Health Check | Sales | sales |
+| `revenue-forecast-modeler` | Revenue Forecast Modeler | Sales | sales |
+| `competitive-battlecard-builder` | Competitive Battlecard Builder | Sales | sales |
+| `deal-collateral-crafter` | Deal Collateral Crafter | Sales | sales |
+| `customer-onboarding-roadmap` | Customer Onboarding Roadmap | Customer Success | support |
+| `joint-success-plan` | Joint Success Plan | Customer Success | support |
+| `customer-health-monitor` | Customer Health Monitor | Customer Success | support |
+| `business-review-composer` | Business Review Composer | Customer Success | sales |
+| `renewal-readiness-brief` | Renewal Readiness Brief | Customer Success | sales |
+| `escalation-brief-builder` | Escalation Brief Builder | Customer Success | support |
+| `kcs-article-writer` | KCS Article Writer | Support | support |
+| `incident-command-guide` | Incident Command Guide | IT Operations | operations |
+| `itil-change-request-writer` | ITIL Change Request Writer | IT Operations | operations |
+| `it-knowledge-documenter` | IT Knowledge Documenter | IT Operations | operations |
+| `operational-risk-register` | Operational Risk Register | Operations | operations |
+| `process-improvement-analyst` | Process Improvement Analyst | Operations | operations |
+| `process-playbook-writer` | Process Playbook Writer | Operations | operations |
+| `sop-and-runbook-author` | SOP & Runbook Author | Operations | operations |
+| `capacity-demand-planner` | Capacity & Demand Planner | Operations | operations |
+| `change-adoption-planner` | Change Adoption Planner | Operations | leadership |
+| `campaign-blueprint` | Campaign Blueprint | Marketing | marketing |
+| `marketing-first-draft` | Marketing First Draft | Marketing | marketing |
+| `drip-sequence-designer` | Drip Sequence Designer | Marketing | marketing |
+| `brand-voice-framework` | Brand Voice Framework | Marketing | marketing |
+| `seo-health-audit` | SEO Health Audit | Marketing | marketing |
+| `campaign-measurement-lab` | Campaign Measurement Lab | Marketing | marketing |
+| `product-thinking-partner` | Product Thinking Partner | Product | product |
+| `competitive-landscape-brief` | Competitive Landscape Brief | Product | product |
+| `prd-builder` | PRD Builder | Product | product |
+| `roadmap-prioritization-studio` | Roadmap Prioritization Studio | Product | product |
+| `sprint-scope-planner` | Sprint Scope Planner | Product | product |
+| `product-metrics-diagnostics` | Product Metrics Diagnostics | Product | product |
+| `product-update-communicator` | Product Update Communicator | Product | product |
+| `research-study-planner` | Research Study Planner | Design & UX Research | product |
+| `ux-research-synthesizer` | UX Research Synthesizer | Design & UX Research | product |
+| `product-research-synthesizer` | Product Research Synthesizer | Design & UX Research | product |
+| `usability-heuristics-review` | Usability Heuristics Review | Design & UX Research | product |
+| `wcag-accessibility-audit` | WCAG Accessibility Audit | Design & UX Research | product |
+| `interface-microcopy-writer` | Interface Microcopy Writer | Design & UX Research | product |
+| `design-system-steward` | Design System Steward | Design & UX Research | product |
+| `design-dev-handoff-spec` | Design-to-Dev Handoff Spec | Design & UX Research | product |
+| `architecture-decision-guide` | Architecture Decision Guide | Engineering | coding |
+| `root-cause-debugger` | Root Cause Debugger | Engineering | coding |
+| `pull-request-reviewer` | Pull Request Reviewer | Engineering | coding |
+| `test-strategy-architect` | Test Strategy Architect | Engineering | coding |
+| `tech-debt-prioritizer` | Tech Debt Prioritizer | Engineering | coding |
+| `release-readiness-checklist` | Release Readiness Checklist | Engineering | coding |
+| `blameless-postmortem-facilitator` | Blameless Postmortem Facilitator | Engineering | operations |
+| `developer-docs-author` | Developer Docs Author | Engineering | coding |
+| `dataset-profiler` | Dataset Profiler | Data & Analytics | analysis |
+| `data-cleaning-workbench` | Data Cleaning Workbench | Data & Analytics | analysis |
+| `business-question-to-sql` | Business Question to SQL | Data & Analytics | analysis |
+| `statistical-methods-advisor` | Statistical Methods Advisor | Data & Analytics | analysis |
+| `analysis-qa-reviewer` | Analysis QA Reviewer | Data & Analytics | analysis |
+| `html-dashboard-maker` | HTML Dashboard Maker | Data & Analytics | analysis |
+| `unified-knowledge-search` | Unified Knowledge Search | Productivity | productivity |
+| `multi-source-answer-synthesizer` | Multi-Source Answer Synthesizer | Productivity | productivity |
+| `meeting-readiness-pack` | Meeting Readiness Pack | Productivity | productivity |
+| `standup-update-writer` | Standup Update Writer | Productivity | productivity |
+| `weekly-planning-review` | Weekly Planning Review | Productivity | productivity |
+| `cross-team-status-report` | Cross-Team Status Report | Productivity | productivity |
+| `activity-roundup` | Activity Roundup | Productivity | productivity |
+| `personal-context-keeper` | Personal Context Keeper | Productivity | productivity |
 
 ## Repository Structure
 
@@ -189,12 +291,7 @@ ihub-marketplace/
 ├── models/                         # Model configuration templates
 ├── workflows/                      # Workflow definition files
 ├── prompts/                        # Prompt template files
-└── skills/                         # Skill packages (SKILL.md files)
-    ├── seo-content-optimizer/
-    ├── business-proposal-writer/
-    ├── technical-documentation/
-    ├── data-storytelling/
-    └── email-campaign-creator/
+└── skills/                         # Skill packages, one folder per skill with a SKILL.md
 ```
 
 ## Catalog Format
