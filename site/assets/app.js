@@ -146,6 +146,13 @@
     return path ? GITHUB_BLOB + path : `https://github.com/${REPO}`;
   }
 
+  /** The license name, linked to its text when the catalog entry has an http(s) licenseUrl */
+  function licenseHtml(item) {
+    const name = escapeHtml(item.license);
+    if (!/^https?:\/\//i.test(item.licenseUrl || '')) return name;
+    return `<a href="${escapeHtml(item.licenseUrl)}" target="_blank" rel="noopener noreferrer">${name}</a>`;
+  }
+
   function ihubLink(item) {
     if (!state.ihubUrl) return '';
     // iHub's admin marketplace keeps its filters in the URL; its search
@@ -531,7 +538,7 @@
       rows.push(metaRow(t('detail.category'), escapeHtml(categoryLabel(item.category))));
     if (item.version) rows.push(metaRow(t('detail.version'), escapeHtml(item.version)));
     if (item.author) rows.push(metaRow(t('detail.author'), escapeHtml(item.author)));
-    if (item.license) rows.push(metaRow(t('detail.license'), escapeHtml(item.license)));
+    if (item.license) rows.push(metaRow(t('detail.license'), licenseHtml(item)));
     rows.push(
       metaRow(
         t('detail.source'),

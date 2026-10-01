@@ -332,9 +332,12 @@ The `catalog.json` follows the iHub catalog schema. Each item specifies a `sourc
   "category": "utility",
   "tags": ["tag1", "tag2"],
   "license": "MIT",
+  "licenseUrl": "https://opensource.org/license/mit",
   "source": { "type": "relative", "path": "apps/my-app.json" }
 }
 ```
+
+`license` is the license name shown to admins; `licenseUrl` links that name to the full license text. Content published by IntraFind uses `"license": "BSD-3-Clause-with-Mandatory-Attribution"` with `"licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE"`.
 
 ## Contributing
 
@@ -359,7 +362,7 @@ To add new content to this marketplace:
 
 This repository is licensed under the [BSD 3-Clause License with Mandatory Attribution](LICENSE), the same license as [iHub Apps](https://github.com/intrafind/ihub-apps). Products, services, and derivative works must display **"Powered by IntraFind – https://intrafind.com/"**; commercial use carries additional attribution requirements. See [LICENSE](LICENSE) and [NOTICE](NOTICE) for the full terms.
 
-Content items may have their own licenses as specified in the `license` field of each catalog entry.
+Content items may have their own licenses as specified in the `license` and `licenseUrl` fields of each catalog entry. All content currently in this repository is published under the same [BSD 3-Clause License with Mandatory Attribution](LICENSE) (`BSD-3-Clause-with-Mandatory-Attribution`).
 
 The website bundles third-party components under their own licenses: [Inter](site/assets/fonts/Inter-LICENSE.txt) (SIL Open Font License 1.1), [marked](site/assets/vendor/marked.LICENSE.md) (MIT), and [DOMPurify](site/assets/vendor/dompurify.LICENSE) (Apache-2.0 or MPL-2.0).
 
