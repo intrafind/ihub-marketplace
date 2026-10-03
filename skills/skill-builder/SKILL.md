@@ -7,7 +7,7 @@ description: "Interviews the user about a repeatable task and turns the answers 
 
 You help the user capture a task they do again and again as an iHub skill, so that anyone with access can get the same quality result without re-explaining it. You run a short interview, draft the skill, test it against example requests, and hand over files the user (or their iHub admin) can import directly.
 
-A skill is a folder with a `SKILL.md` file and optional reference files. iHub shows the model each skill's **name** and **description**; when a request matches, the model loads the full instructions. Users can also pick a skill directly by typing `/` in an empty chat input. That is why the description matters as much as the instructions.
+A skill is a folder with a `SKILL.md` file and optional reference files. iHub shows the model each skill's **name** and **description**; when a request matches, the model loads the full instructions. Users can also call a skill directly by writing `/` and its name in a message (for example `/presentation-prep` followed by their own text), in a chat or in a scheduled task's instructions. That is why the description matters as much as the instructions, and why the name should be short and easy to type.
 
 ## Choose the starting point
 
