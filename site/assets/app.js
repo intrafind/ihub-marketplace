@@ -141,9 +141,30 @@
     return path ? new URL(path, state.contentBase).href : '';
   }
 
+  // Matches raw.githubusercontent.com/<owner>/<repo>/<ref>/<path> of an external source
+  const RAW_GITHUB = /^https:\/\/raw\.githubusercontent\.com\/([^/]+)\/([^/]+)\/([^/]+)\/(.+)$/;
+
+  /** Where to view the item on GitHub: this repository, or the external repository it comes from */
   function githubUrl(item) {
     const path = sourcePath(item);
-    return path ? GITHUB_BLOB + path : `https://github.com/${REPO}`;
+    if (path) return GITHUB_BLOB + path;
+    const raw = item.source?.type === 'url' && RAW_GITHUB.exec(item.source.url);
+    if (raw) return `https://github.com/${raw[1]}/${raw[2]}/blob/${raw[3]}/${raw[4]}`;
+    return item.source?.type === 'url' ? item.source.url : `https://github.com/${REPO}`;
+  }
+
+  /** Base URLs that relative links and images in a skill's Markdown resolve against */
+  function documentBases(item) {
+    const raw = item.source?.type === 'url' && RAW_GITHUB.exec(item.source.url);
+    if (raw) {
+      const folder = raw[4].replace(/[^/]*$/, '');
+      return {
+        links: `https://github.com/${raw[1]}/${raw[2]}/blob/${raw[3]}/${folder}`,
+        images: `https://raw.githubusercontent.com/${raw[1]}/${raw[2]}/${raw[3]}/${folder}`
+      };
+    }
+    const folder = (sourcePath(item) || '').replace(/[^/]*$/, '');
+    return { links: GITHUB_BLOB + folder, images: RAW_BASE + folder };
   }
 
   /** The license name, linked to its text when the catalog entry has an http(s) licenseUrl */
@@ -597,24 +618,35 @@
     if (!match) return { data: [], body: text };
     const data = [];
     let parent = '';
-    match[1].split(/\r?\n/).forEach(line => {
-      const entry = /^(\s*)([\w.-]+):\s*(.*)$/.exec(line);
-      if (!entry) return;
+    const lines = match[1].split(/\r?\n/);
+    const indentOf = line => /^\s*/.exec(line)[0].length;
+    for (let i = 0; i < lines.length; i++) {
+      const entry = /^(\s*)([\w.-]+):\s*(.*)$/.exec(lines[i]);
+      if (!entry) continue;
       const [, indent, key, rawValue] = entry;
       if (!indent) parent = '';
-      if (!rawValue) {
-        parent = key;
-        return;
-      }
       let value = rawValue.trim();
-      if (
+      if (/^[>|][+-]?$/.test(value)) {
+        // Block scalar (`description: >-` and similar): take the more-indented lines below
+        const block = [];
+        while (
+          i + 1 < lines.length &&
+          (!lines[i + 1].trim() || indentOf(lines[i + 1]) > indent.length)
+        ) {
+          block.push(lines[++i].trim());
+        }
+        value = value[0] === '>' ? block.join(' ').replace(/\s+/g, ' ').trim() : block.join('\n').trim();
+      } else if (!value) {
+        parent = key;
+        continue;
+      } else if (
         (value.startsWith('"') && value.endsWith('"')) ||
         (value.startsWith("'") && value.endsWith("'"))
       ) {
         value = value.slice(1, -1).replace(/\\"/g, '"');
       }
       data.push([indent && parent ? `${parent}.${key}` : key, value]);
-    });
+    }
     return { data, body: text.slice(match[0].length) };
   }
 
@@ -634,10 +666,10 @@
     // Resolve relative links and images against the skill's folder
     const container = document.createElement('div');
     container.innerHTML = html;
-    const folder = (sourcePath(item) || '').replace(/[^/]*$/, '');
+    const bases = documentBases(item);
     container.querySelectorAll('a[href]').forEach(link => {
       const href = link.getAttribute('href');
-      if (!/^([a-z]+:|#|\/\/)/i.test(href)) link.setAttribute('href', GITHUB_BLOB + folder + href);
+      if (!/^([a-z]+:|#|\/\/)/i.test(href)) link.setAttribute('href', bases.links + href);
       if (!href.startsWith('#')) {
         link.setAttribute('target', '_blank');
         link.setAttribute('rel', 'noopener noreferrer');
@@ -645,7 +677,7 @@
     });
     container.querySelectorAll('img[src]').forEach(img => {
       const src = img.getAttribute('src');
-      if (!/^([a-z]+:|\/\/)/i.test(src)) img.setAttribute('src', RAW_BASE + folder + src);
+      if (!/^([a-z]+:|\/\/)/i.test(src)) img.setAttribute('src', bases.images + src);
     });
 
     return `${table}<div class="prose">${container.innerHTML}</div>`;

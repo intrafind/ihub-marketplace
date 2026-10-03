@@ -186,6 +186,23 @@ Model configurations mirror the defaults shipped with the current iHub Apps rele
 | `data-storytelling` | Data Storytelling | Turn data into compelling narratives |
 | `email-campaign-creator` | Email Campaign Creator | Create complete email campaigns |
 
+#### Everyday Skills (8)
+
+Personal productivity skills for tasks almost everyone repeats: writing in your own voice, preparing a talk, getting several viewpoints, and keeping up with email. They are written to be combined: for example, `match-my-writing-style` decides the wording while `executive-email-drafter` or `newsletter-composer` decides the content. `newsletter-composer` and `inbox-triage` also describe how to behave when they run unattended as a scheduled task. Users can pick any of them by typing `/` in an empty chat input of an app that has the skill assigned.
+
+| ID | Name | Category | Combines well with |
+|----|------|----------|--------------------|
+| `match-my-writing-style` | Match My Writing Style | writing | any writing skill |
+| `presentation-prep` | Presentation Prep | communication | `perspective-panel`, `meeting-readiness-pack` |
+| `perspective-panel` | Perspective Panel | analysis | `presentation-prep`, `product-thinking-partner` |
+| `newsletter-composer` | Newsletter Composer | communication | `brand-voice-framework`, `activity-roundup` |
+| `vendor-evaluator` | Vendor Evaluator | business | `vendor-due-diligence` |
+| `executive-email-drafter` | Executive Email Drafter | communication | `match-my-writing-style` |
+| `inbox-triage` | Inbox Triage | productivity | `executive-email-drafter` |
+| `skill-builder` | Skill Builder | utility | — |
+
+`skill-builder` interviews the user about a task they repeat and produces a `SKILL.md` that passes iHub's validation, along with the import steps. It also converts existing prompts, Gemini Gems, and custom GPT instructions into skills.
+
 #### Department Skills (93)
 
 Task-focused skills for legal, compliance, finance, security, HR, sales, customer success, support, IT operations, operations, marketing, product, design and UX research, engineering, data, and personal productivity. Each skill is a `SKILL.md` with a step-by-step method, reference frameworks, output templates, and guardrails. Skills that work with company data expect it to come from the user, uploaded documents, or connected tools and sources, never from model memory. Legal, finance, and HR skills carry a reminder that their output needs review by a qualified professional.
