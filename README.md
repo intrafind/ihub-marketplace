@@ -174,7 +174,7 @@ Model configurations mirror the defaults shipped with the current iHub Apps rele
 | `faq-question` | Ask FAQ | Answer FAQ questions |
 | `app-generator` | App Generator | Generate iHub app configs |
 
-### Skills (98)
+### Skills (195)
 
 #### General (5)
 
@@ -185,6 +185,123 @@ Model configurations mirror the defaults shipped with the current iHub Apps rele
 | `technical-documentation` | Technical Documentation | Write API docs, guides, and READMEs |
 | `data-storytelling` | Data Storytelling | Turn data into compelling narratives |
 | `email-campaign-creator` | Email Campaign Creator | Create complete email campaigns |
+
+#### Everyday Skills (8)
+
+Personal productivity skills for tasks almost everyone repeats: writing in your own voice, preparing a talk, getting several viewpoints, and keeping up with email. They are written to be combined: for example, `match-my-writing-style` decides the wording while `executive-email-drafter` or `newsletter-composer` decides the content. `newsletter-composer` and `inbox-triage` also describe how to behave when they run unattended as a scheduled task. Users can pick any of them by typing `/` in an empty chat input of an app that has the skill assigned.
+
+| ID | Name | Category | Combines well with |
+|----|------|----------|--------------------|
+| `match-my-writing-style` | Match My Writing Style | writing | any writing skill |
+| `presentation-prep` | Presentation Prep | communication | `perspective-panel`, `meeting-readiness-pack` |
+| `perspective-panel` | Perspective Panel | analysis | `presentation-prep`, `product-thinking-partner` |
+| `newsletter-composer` | Newsletter Composer | communication | `brand-voice-framework`, `activity-roundup` |
+| `vendor-evaluator` | Vendor Evaluator | business | `vendor-due-diligence` |
+| `executive-email-drafter` | Executive Email Drafter | communication | `match-my-writing-style` |
+| `inbox-triage` | Inbox Triage | productivity | `executive-email-drafter` |
+| `skill-builder` | Skill Builder | utility | — |
+
+`skill-builder` interviews the user about a task they repeat and produces a `SKILL.md` that passes iHub's validation, along with the import steps. It also converts existing prompts, Gemini Gems, and custom GPT instructions into skills.
+
+#### Google Skills (89)
+
+Open-source skills published by Google under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) in [google/skills](https://github.com/google/skills) and [google-gemini/gemini-skills](https://github.com/google-gemini/gemini-skills): Google Cloud architecture and Well-Architected reviews, BigQuery, GKE, Cloud Run, databases, alerting, Gemini API and Genkit development, and Google Mobile Ads SDKs.
+
+- **Not copied into this repository.** Each entry is a `url` source that points at a fixed commit of Google's repository, so what admins install is exactly what was reviewed. iHub fetches the `SKILL.md` and the reference files listed in `companions` straight from GitHub.
+- **Chosen for chat use.** Google wrote these skills for coding agents that can run commands. Only the 89 skills whose value is guidance, design, review, or generating queries and configuration are listed. In iHub, the model hands the user the commands to run instead of running them. Skills that mainly drive `gcloud`, MCP servers, or scripts are left out (37 partly usable, 26 not usable), as are skills that only load other skills.
+- **Updating.** To pick up Google's changes, review the diff between the pinned commit and the new one, then replace the commit hash in the entries' `url` and `licenseUrl`.
+
+| ID | Name | Category | Repository |
+|----|------|----------|------------|
+| `gemini-api-dev` | Gemini API Development | coding | google-gemini/gemini-skills |
+| `gemini-live-api-dev` | Gemini Live API Development | coding | google-gemini/gemini-skills |
+| `google-mobile-ads-banner` | Mobile Ads Banner Integration | coding | google/skills |
+| `google-mobile-ads-get-started` | Mobile Ads SDK Setup | coding | google/skills |
+| `google-mobile-ads-interstitial` | Mobile Ads Interstitial Integration | coding | google/skills |
+| `google-mobile-ads-rewarded` | Mobile Ads Rewarded Integration | coding | google/skills |
+| `ima-dai-sdk` | IMA DAI SDK Integration | coding | google/skills |
+| `ima-sdk-client-side` | IMA Client-Side Ads | coding | google/skills |
+| `google-analytics-data-api-basics` | GA Data API Reports | analysis | google/skills |
+| `agent-platform-migrate-from-ai-studio` | AI Studio to Agent Platform | coding | google/skills |
+| `alloydb-basics` | AlloyDB Basics | operations | google/skills |
+| `bigquery-ai-ml` | BigQuery AI & ML SQL | analysis | google/skills |
+| `bigquery-basics` | BigQuery Basics | analysis | google/skills |
+| `bigquery-bigframes` | BigQuery DataFrames | analysis | google/skills |
+| `bigquery-observability` | BigQuery Observability Queries | analysis | google/skills |
+| `bigquery-optimization` | BigQuery Optimization | analysis | google/skills |
+| `bigquery-troubleshooting` | BigQuery Troubleshooting | analysis | google/skills |
+| `bigtable-basics` | Bigtable Basics | coding | google/skills |
+| `cloud-build-basics` | Cloud Build Basics | operations | google/skills |
+| `cloud-databases-onboarding` | Cloud Database Selection | operations | google/skills |
+| `cloud-logging-query-generation` | Logging Query Generator | operations | google/skills |
+| `cloud-run-alert-configuration` | Cloud Run Alerting | operations | google/skills |
+| `cloud-run-basics` | Cloud Run Basics | operations | google/skills |
+| `cloud-sql-basics` | Cloud SQL Basics | operations | google/skills |
+| `developing-genkit-dart` | Genkit for Dart | coding | google/skills |
+| `developing-genkit-go` | Genkit for Go | coding | google/skills |
+| `developing-genkit-js` | Genkit for TypeScript | coding | google/skills |
+| `developing-genkit-python` | Genkit for Python | coding | google/skills |
+| `gemini-agents-api` | Gemini Managed Agents API | coding | google/skills |
+| `gemini-api` | Gemini API on Agent Platform | coding | google/skills |
+| `gemini-interactions-api` | Gemini Interactions API | coding | google/skills |
+| `gke-ai-troubleshooting-handle-disruption-gpu-tpu` | GKE GPU/TPU Disruptions | operations | google/skills |
+| `gke-ai-troubleshooting-tpu-metrics-monitoring` | GKE TPU Metrics Monitoring | operations | google/skills |
+| `gke-ai-troubleshooting-tpu-vbar-oom` | GKE TPU v6e VBAR OOM | operations | google/skills |
+| `gke-alert-configuration` | GKE Alerting Policies | operations | google/skills |
+| `gke-app-onboarding` | GKE App Onboarding | operations | google/skills |
+| `gke-backup-dr` | GKE Backup & DR | operations | google/skills |
+| `gke-basics` | GKE Basics | operations | google/skills |
+| `gke-batch-hpc` | GKE Batch & HPC | operations | google/skills |
+| `gke-cluster-autoscaler` | GKE Cluster Autoscaler | operations | google/skills |
+| `gke-cluster-creation` | GKE Cluster Creation | operations | google/skills |
+| `gke-compute-classes` | GKE ComputeClasses | operations | google/skills |
+| `gke-cost-analysis` | GKE Cost Analysis | analysis | google/skills |
+| `gke-cost-optimization` | GKE Cost Optimization | operations | google/skills |
+| `gke-golden-path` | GKE Golden Path | operations | google/skills |
+| `gke-inference` | GKE AI Inference | operations | google/skills |
+| `gke-manifest-generation` | GKE Manifest Generator | operations | google/skills |
+| `gke-multitenancy` | GKE Multi-Tenancy | operations | google/skills |
+| `gke-networking` | GKE Networking | operations | google/skills |
+| `gke-node-notready` | GKE Node NotReady | operations | google/skills |
+| `gke-observability` | GKE Observability | operations | google/skills |
+| `gke-platform-security` | GKE Platform Security | security | google/skills |
+| `gke-reliability` | GKE Reliability | operations | google/skills |
+| `gke-service-networking` | GKE Service Networking | operations | google/skills |
+| `gke-storage` | GKE Storage | operations | google/skills |
+| `gke-storage-troubleshooting` | GKE Storage Troubleshooting | operations | google/skills |
+| `gke-upgrades` | GKE Upgrade Planning | operations | google/skills |
+| `gke-workload-identity` | GKE Workload Identity | security | google/skills |
+| `gke-workload-scaling` | GKE Workload Scaling | operations | google/skills |
+| `gke-workload-scaling-troubleshooting` | GKE HPA Troubleshooting | operations | google/skills |
+| `gke-workload-security` | GKE Workload Security | security | google/skills |
+| `gke-workload-troubleshooting` | GKE Workload Troubleshooting | operations | google/skills |
+| `google-cloud-global-frontend-configuration` | Global Load Balancer Design | operations | google/skills |
+| `google-cloud-recipe-auth` | Google Cloud Authentication | security | google/skills |
+| `google-cloud-slo-alert-configuration` | SLO Alert Wizard | operations | google/skills |
+| `google-cloud-solution-agentic-ai-bidirectional-streaming` | Live Multimodal Agent Design | operations | google/skills |
+| `google-cloud-solution-agentic-ai-borderless-data-lakehouse` | Borderless Data Lakehouse Design | analysis | google/skills |
+| `google-cloud-solution-agentic-ai-data-science-workflow` | Agentic Data Science Design | analysis | google/skills |
+| `google-cloud-solution-agentic-analytics-spark-knowledge-catalog` | Governed Agentic Analytics Design | analysis | google/skills |
+| `google-cloud-solution-architecture` | Cloud Solution Architect | operations | google/skills |
+| `google-cloud-solution-build-deploy-agents` | AI Agent Solution Design | operations | google/skills |
+| `google-cloud-solution-guided-gke-ai-migration` | GKE AI Migration Guide | operations | google/skills |
+| `google-cloud-solution-hybrid-search-alloydb` | AlloyDB Hybrid Search Design | operations | google/skills |
+| `google-cloud-solution-multi-agent-security` | Agent Gateway Security Design | security | google/skills |
+| `google-cloud-solution-n-tier-serverless-web-app` | Secure Serverless N-Tier App | operations | google/skills |
+| `google-cloud-solution-rag-enterprise-search-gke-sqldb` | RAG Enterprise Search Design | operations | google/skills |
+| `google-cloud-storage-basics` | Cloud Storage Basics | operations | google/skills |
+| `google-cloud-storage-bucket-architect` | Cloud Storage Bucket Architect | operations | google/skills |
+| `google-cloud-storage-fuse` | Cloud Storage FUSE | operations | google/skills |
+| `google-cloud-waf-cost-optimization` | WAF Cost Optimization | operations | google/skills |
+| `google-cloud-waf-operational-excellence` | WAF Operational Excellence | operations | google/skills |
+| `google-cloud-waf-performance-optimization` | WAF Performance Optimization | operations | google/skills |
+| `google-cloud-waf-reliability` | WAF Reliability | operations | google/skills |
+| `google-cloud-waf-security` | WAF Security | security | google/skills |
+| `google-cloud-waf-sustainability` | WAF Sustainability | operations | google/skills |
+| `managed-airflow-dag-authoring` | Airflow DAG Authoring | coding | google/skills |
+| `managed-airflow-migrations` | Airflow DAG Migration | coding | google/skills |
+| `spanner-basics` | Spanner Basics | coding | google/skills |
+| `dpop-adoption` | OAuth DPoP Adoption | security | google/skills |
 
 #### Department Skills (93)
 
@@ -339,6 +456,23 @@ The `catalog.json` follows the iHub catalog schema. Each item specifies a `sourc
 
 `license` is the license name shown to admins; `licenseUrl` links that name to the full license text. Content published by IntraFind uses `"license": "BSD-3-Clause-with-Mandatory-Attribution"` with `"licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE"`.
 
+Skills published elsewhere use a `url` source that points at a fixed commit, with `companions` listing the skill's other files (relative to the folder of `SKILL.md`) so iHub installs them too. Companion files must be text, since iHub stores them as UTF-8:
+
+```json
+{
+  "type": "skill",
+  "name": "bigquery-basics",
+  "author": "Google LLC",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://github.com/google/skills/blob/<commit>/LICENSE",
+  "source": {
+    "type": "url",
+    "url": "https://raw.githubusercontent.com/google/skills/<commit>/skills/cloud/bigquery-basics/SKILL.md",
+    "companions": ["references/cli-usage.md", "references/client-library-usage.md"]
+  }
+}
+```
+
 ## Contributing
 
 To add new content to this marketplace:
@@ -356,7 +490,7 @@ To add new content to this marketplace:
 - **Models**: Include the provider API endpoint URL. Do not include API keys. Use `contextWindow` / `maxOutputTokens` (not `tokenLimit`) and `thinking.level` (not `thinking.budget`), and keep `default` exactly as iHub ships it (only `gemini-flash-latest` is `true`). Installing overwrites a local model with the same id, so a copy of a shipped model that differs in `default` changes which model is the system default.
 - **Workflows**: Self-contained workflow definitions. Reference model IDs that users are likely to have.
 - **Prompts**: Simple, reusable prompt templates.
-- **Skills**: SKILL.md files with YAML frontmatter containing `name` and `description`.
+- **Skills**: SKILL.md files with YAML frontmatter containing `name` (lowercase letters, digits, and hyphens, matching the folder name, at most 64 characters) and `description` (at most 1024 characters, saying what the skill does and when to use it). iHub does not run scripts, so a skill must work through instructions, reference files, and the tools an app provides. Third-party skills are listed only when their license allows redistribution, with `author`, `license`, and `licenseUrl` set to the original.
 
 ## License
 
