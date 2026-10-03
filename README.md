@@ -174,7 +174,7 @@ Model configurations mirror the defaults shipped with the current iHub Apps rele
 | `faq-question` | Ask FAQ | Answer FAQ questions |
 | `app-generator` | App Generator | Generate iHub app configs |
 
-### Skills (98)
+### Skills (106)
 
 #### General (5)
 
