@@ -4,18 +4,48 @@ The official marketplace registry for [iHub Apps](https://github.com/intrafind/i
 
 **Browse the catalog online: [intrafind.github.io/ihub-marketplace](https://intrafind.github.io/ihub-marketplace/)**
 
-## Adding This Registry to iHub Apps
+![The marketplace website with the registry URL, item counts and the catalog](docs/screenshots/website.png)
 
-Current iHub Apps releases ship with this registry preconfigured as **iHub Official Marketplace**, so you can go straight to **Admin → Marketplace → Browse**. To add it manually (for example on an older install):
+## Using This Registry in iHub Apps
 
-1. Open your iHub Apps instance and navigate to **Admin → Marketplace → Registries**
-2. Click **Add Registry**
-3. Enter the catalog URL:
+Current iHub Apps releases ship with this registry preconfigured as **iHub Official Marketplace**.
+
+1. **Switch the marketplace on.** It is a preview feature: open **Admin → Features** and turn on
+   **Marketplace**.
+
+   ![Admin → Features with the Marketplace preview feature](docs/screenshots/admin-features.png)
+
+2. **Browse.** Open **Admin → Marketplace**. The tabs filter by type (Apps, Models, Prompts,
+   Skills, Workflows); search, registry and status filters narrow the list. Each card shows whether
+   an item is available, **Installed**, or a **Local copy** — an item with the same id that
+   already exists on your instance, such as an app iHub ships with.
+
+   ![Admin → Marketplace in iHub Apps](docs/screenshots/admin-marketplace.png)
+
+3. **Install.** Click a card for its description, tags, registry and license, and a preview of its
+   content; **Install** adds it to your instance. Installed items can later be updated when this
+   catalog has a newer version, uninstalled, or detached to maintain them by hand.
+
+   ![Item details with Install, description, tags and license](docs/screenshots/admin-marketplace-detail.png)
+
+If the list is empty, press **Refresh** on the registry under **Manage Registries** — the catalog
+is fetched from GitHub, so iHub needs outbound HTTPS access (or a configured proxy).
+
+### Adding the registry manually
+
+On an older install without the preconfigured registry:
+
+1. Open **Admin → Marketplace → Manage Registries** and click **Add Registry**
+2. Enter a name and ID, and the catalog URL:
    ```
    https://raw.githubusercontent.com/intrafind/ihub-marketplace/main/catalog.json
    ```
-4. Click **Save**
-5. Browse and install content from **Admin → Marketplace → Browse**
+3. Click **Test Connection**, then **Save**
+4. Browse and install content from **Admin → Marketplace**
+
+![Admin → Marketplace → Manage Registries](docs/screenshots/admin-marketplace-registries.png)
+
+The full guide is in the iHub documentation: [Marketplace](https://github.com/intrafind/ihub-apps/blob/main/docs/marketplace.md).
 
 ## Content Inventory
 
@@ -151,7 +181,7 @@ Model configurations mirror the defaults shipped with the current iHub Apps rele
 | `gemini-3.5-transcribe` | Gemini 3.5 Transcribe | Google (transcription) |
 | `gemini-3.5-transcribe-live` | Gemini 3.5 Transcribe Live | Google (transcription) |
 
-> **Note:** Model configurations include API endpoints but no API keys. Configure your API keys via environment variables in your iHub Apps instance.
+> **Note:** Model configurations include API endpoints but no API keys. An installed model uses the API key of its provider — set it under **Admin → Providers** or as an environment variable (e.g. `GOOGLE_API_KEY`) in your iHub Apps instance. A model that replaces an existing one keeps that one's API key.
 
 ### Workflows (6)
 
@@ -297,6 +327,7 @@ ihub-marketplace/
 ├── prompts/                        # Prompt template files
 ├── skills/                         # Skill packages, one folder per skill with a SKILL.md
 ├── site/                           # Marketplace website (GitHub Pages)
+├── docs/screenshots/               # Screenshots used in this README
 ├── scripts/build-site.sh           # Assembles the website with the catalog and content
 └── .github/workflows/pages.yml     # Builds on every PR, deploys main to GitHub Pages
 ```
