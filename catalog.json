@@ -69,6 +69,20 @@
     },
     {
       "type": "app",
+      "name": "babelfish",
+      "displayName": { "en": "Babelfish", "de": "Babelfisch" },
+      "description": { "en": "Interpreter for a conversation between two people: each says something, it appears in the other person’s language", "de": "Dolmetscher für ein Gespräch zwischen zwei Personen: Jede sagt etwas, es erscheint in der Sprache der anderen Person" },
+      "version": "1.0.0",
+      "author": "IntraFind Software AG",
+      "category": "communication",
+      "tags": ["translation", "interpreter", "conversation", "speech", "multilingual"],
+      "icon": "chat-bubble-left-right",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": { "type": "relative", "path": "apps/babelfish.json" }
+    },
+    {
+      "type": "app",
       "name": "summarizer",
       "displayName": { "en": "Summarizer", "de": "Zusammenfassung" },
       "description": { "en": "Summarize long texts, documents, and articles into concise summaries", "de": "Lange Texte, Dokumente und Artikel in prägnante Zusammenfassungen kürzen" },

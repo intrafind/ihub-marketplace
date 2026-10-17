@@ -49,15 +49,16 @@ The full guide is in the iHub documentation: [Marketplace](https://github.com/in
 
 ## Content Inventory
 
-### Apps (90)
+### Apps (91)
 
-#### General (21)
+#### General (22)
 
 | ID | Name | Category |
 |----|------|----------|
 | `chat` | Chat | utility |
 | `email-composer` | Email Composer | communication |
 | `translator` | Translator | communication |
+| `babelfish` | Babelfish | communication |
 | `summarizer` | Summarizer | analysis |
 | `deep-researcher` | Deep Researcher | analysis |
 | `image-generator` | Image Generator | creative |
