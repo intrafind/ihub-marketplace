@@ -17,7 +17,7 @@
   },
   "preferredOutputFormat": "markdown",
   "preferredStyle": "formal",
-  "preferredTemperature": 0.4,
+  "preferredTemperature": 0.7,
   "prompt": {
     "en": "Create a {{document_type}} for {{role}} {{additional_context}}.\n\n{{content}}",
     "de": "Erstelle ein {{document_type}} für {{role}} {{additional_context}}.\n\n{{content}}"

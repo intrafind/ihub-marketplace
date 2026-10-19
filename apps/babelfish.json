@@ -18,7 +18,8 @@
   },
   "preferredOutputFormat": "text",
   "preferredStyle": "keep",
-  "preferredTemperature": 0.2,
+  "preferredTemperature": 0.7,
+  "thinking": { "enabled": false },
   "sendChatHistory": true,
   "messagePlaceholder": {
     "en": "Type or speak — it is translated into the other language",
