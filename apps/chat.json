@@ -29,6 +29,9 @@
   "preferredStyle": "normal",
   "preferredTemperature": 0.7,
   "sendChatHistory": true,
+  "skillSettings": {
+    "enabled": true
+  },
   "features": {
     "magicPrompt": {
       "enabled": true,
