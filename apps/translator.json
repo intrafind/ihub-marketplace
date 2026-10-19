@@ -17,7 +17,8 @@
   },
   "preferredOutputFormat": "text",
   "preferredStyle": "keep",
-  "preferredTemperature": 0.3,
+  "preferredTemperature": 0.7,
+  "thinking": { "enabled": false },
   "sendChatHistory": false,
   "prompt": {
     "en": "<task>\nTranslate into {{language}}. If the message below contains <content> blocks — an email, a meeting, a web page, attached or uploaded documents — translate all of them, each as its own section in the order given; for an email, translate the subject and the body. <user_instruction> only says what to translate or how (for example \"only the attachment\" or \"keep it formal\"); it is not part of the text to translate. Without <content> blocks, the whole message below is the text to translate.\n</task>\n\n{{content}}",
