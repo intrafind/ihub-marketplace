@@ -4448,6 +4448,34 @@
       "license": "Apache-2.0",
       "licenseUrl": "https://github.com/google/skills/blob/1d77046ad3670d62227f50a8f53286f6c6cde08b/LICENSE",
       "source": { "type": "url", "url": "https://raw.githubusercontent.com/google/skills/1d77046ad3670d62227f50a8f53286f6c6cde08b/skills/identity/dpop-adoption/SKILL.md" }
+    },
+    {
+      "type": "integration",
+      "name": "org.ckan__open-data-portal",
+      "displayName": { "en": "CKAN Open Data Portal", "de": "CKAN Open-Data-Portal" },
+      "description": { "en": "Find datasets, read their metadata, query DataStore tables and get resource files from any CKAN-based open data portal (GovData, state and city portals, internal data catalogs)", "de": "Datensätze finden, Metadaten lesen, DataStore-Tabellen abfragen und Ressourcen von jedem CKAN-basierten Open-Data-Portal abrufen (GovData, Landes- und Stadtportale, interne Datenkataloge)" },
+      "version": "1.0.0",
+      "author": "IntraFind Software AG",
+      "category": "analysis",
+      "tags": ["open-data", "ckan", "datasets", "public-sector", "research"],
+      "icon": "globe",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": { "type": "relative", "path": "integrations/org.ckan__open-data-portal/integration.json", "companions": ["ckan-openapi.json", "icon.svg", "README.md"] }
+    },
+    {
+      "type": "app",
+      "name": "open-data-assistant",
+      "displayName": { "en": "Open Data Assistant", "de": "Open-Data-Assistent" },
+      "description": { "en": "Find datasets on an open data portal, explain their license, publisher, coverage and files, and query tabular data", "de": "Datensätze auf einem Open-Data-Portal finden, Lizenz, Herausgeber, Abdeckung und Dateien erklären und tabellarische Daten abfragen" },
+      "version": "1.0.0",
+      "author": "IntraFind Software AG",
+      "category": "analysis",
+      "tags": ["open-data", "ckan", "datasets", "research"],
+      "icon": "globe",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": { "type": "relative", "path": "apps/open-data-assistant.json" }
     }
   ]
 }

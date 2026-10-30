@@ -17,7 +17,7 @@ mkdir -p "$OUT"
 
 cp -R "$ROOT/site/." "$OUT/"
 cp "$ROOT/catalog.json" "$ROOT/LICENSE" "$ROOT/NOTICE" "$OUT/"
-for dir in apps models prompts skills workflows; do
+for dir in apps models prompts skills workflows integrations; do
   cp -R "$ROOT/$dir" "$OUT/$dir"
 done
 touch "$OUT/.nojekyll"

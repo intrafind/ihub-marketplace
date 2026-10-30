@@ -49,7 +49,7 @@ The full guide is in the iHub documentation: [Marketplace](https://github.com/in
 
 ## Content Inventory
 
-### Apps (91)
+### Apps (92)
 
 #### General (22)
 
@@ -434,6 +434,14 @@ Task-focused skills for legal, compliance, finance, security, HR, sales, custome
 | `activity-roundup` | Activity Roundup | Productivity | productivity |
 | `personal-context-keeper` | Personal Context Keeper | Productivity | productivity |
 
+### Integrations (1)
+
+Installable integrations (iHub 5.7+): a definition folder with the actions an app's model may call, the settings the admin fills in at install time and, for the `openapi` protocol, the trimmed API document. Install under **Admin → Marketplace → Integrations**, then set it up under **Admin → Integrations → Installed** and bind it to an app.
+
+| ID | Name | Protocol | Description |
+|----|------|----------|-------------|
+| `org.ckan__open-data-portal` | CKAN Open Data Portal | openapi | Search datasets, read metadata, query DataStore tables and fetch resources of any CKAN portal (GovData, state and city portals, internal catalogs). Ships with the **Open Data Assistant** app. |
+
 ## Repository Structure
 
 ```
@@ -444,6 +452,7 @@ ihub-marketplace/
 ├── workflows/                      # Workflow definition files
 ├── prompts/                        # Prompt template files
 ├── skills/                         # Skill packages, one folder per skill with a SKILL.md
+├── integrations/                   # Integration definitions, one folder per definition with an integration.json
 ├── site/                           # Marketplace website (GitHub Pages)
 ├── docs/screenshots/               # Screenshots used in this README
 ├── scripts/build-site.sh           # Assembles the website with the catalog and content
@@ -510,7 +519,7 @@ Skills published elsewhere use a `url` source that points at a fixed commit, wit
 To add new content to this marketplace:
 
 1. Fork this repository
-2. Add your content file in the appropriate directory (`apps/`, `models/`, `workflows/`, `prompts/`, or `skills/`)
+2. Add your content file in the appropriate directory (`apps/`, `models/`, `workflows/`, `prompts/`, `skills/`, or `integrations/<definition folder>/`)
 3. Add an entry to `catalog.json` following the existing format
 4. Ensure all JSON files are valid and conform to iHub schemas
 5. Run `./scripts/build-site.sh` to check that the catalog entry points at an existing file

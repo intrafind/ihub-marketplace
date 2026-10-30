@@ -16,7 +16,7 @@
   const GITHUB_BLOB = `https://github.com/${REPO}/blob/${BRANCH}/`;
   const RAW_BASE = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/`;
   const REGISTRY_NAME = 'iHub Official Marketplace';
-  const TYPES = ['all', 'app', 'model', 'prompt', 'skill', 'workflow'];
+  const TYPES = ['all', 'app', 'model', 'prompt', 'skill', 'workflow', 'integration'];
   const PAGE_SIZE = 24;
   const STORAGE = {
     theme: 'ihub-marketplace-theme',
