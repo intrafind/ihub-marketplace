@@ -30,7 +30,33 @@ const { execFileSync } = require('node:child_process');
 const ROOT = path.resolve(__dirname, '..');
 const CATALOG = path.join(ROOT, 'catalog.json');
 const INTEGRATIONS_DIR = path.join(ROOT, 'integrations');
-const NOTE_CATEGORIES = ['features', 'fixes', 'breaking'];
+const NOTE_CATEGORIES = new Set(['features', 'fixes', 'breaking']);
+
+/**
+ * The git binary by absolute path (javascript:S4036): a bare `git` would be
+ * looked up through PATH, which a writeable directory could hijack. Git is
+ * optional here: without it the comparison with the main branch is skipped.
+ */
+const GIT =
+  process.platform === 'win32'
+    ? 'git'
+    : ['/usr/bin/git', '/usr/local/bin/git', '/opt/homebrew/bin/git'].find(candidate =>
+        fs.existsSync(candidate)
+      ) || null;
+
+/** Run git with fixed arguments; null when git is unavailable or the command fails. */
+function git(args) {
+  if (!GIT) return null;
+  try {
+    return execFileSync(GIT, args, {
+      cwd: ROOT,
+      shell: false,
+      stdio: ['ignore', 'pipe', 'ignore']
+    }).toString('utf8');
+  } catch {
+    return null;
+  }
+}
 
 const errors = [];
 const fail = message => errors.push(message);
@@ -40,8 +66,8 @@ const fail = message => errors.push(message);
 
 const VERSION = /^\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$/;
 const PARTIAL = String.raw`v?(\d+|x|X|\*)(\.(\d+|x|X|\*))?(\.(\d+|x|X|\*))?(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?`;
-const COMPARATOR = new RegExp(`^(\\^|~|>=|<=|>|<|=)?${PARTIAL}$`);
-const HYPHEN = new RegExp(`^${PARTIAL}\\s+-\\s+${PARTIAL}$`);
+const COMPARATOR = new RegExp(String.raw`^(\^|~|>=|<=|>|<|=)?${PARTIAL}$`);
+const HYPHEN = new RegExp(String.raw`^${PARTIAL}\s+-\s+${PARTIAL}$`);
 
 /** Whether `range` is a semver range as `semver.validRange` would accept it (the common grammar). */
 function isValidRange(range) {
@@ -97,50 +123,17 @@ for (const item of items) {
 // integration definitions
 
 function gitShow(ref, file) {
-  try {
-    return execFileSync('git', ['show', `${ref}:${file}`], {
-      cwd: ROOT,
-      stdio: ['ignore', 'pipe', 'ignore']
-    }).toString('utf8');
-  } catch {
-    return null;
-  }
+  return git(['show', `${ref}:${file}`]);
 }
 
 function gitRef() {
-  for (const ref of ['origin/main', 'main']) {
-    try {
-      execFileSync('git', ['rev-parse', '--verify', '--quiet', ref], {
-        cwd: ROOT,
-        stdio: 'ignore'
-      });
-      return ref;
-    } catch {
-      // try the next one
-    }
-  }
-  return null;
+  return ['origin/main', 'main'].find(ref => git(['rev-parse', '--verify', '--quiet', ref]) !== null) || null;
 }
 
 function folderChangedSince(ref, folder) {
-  try {
-    const out = execFileSync('git', ['diff', '--name-only', ref, '--', `integrations/${folder}`], {
-      cwd: ROOT,
-      stdio: ['ignore', 'pipe', 'ignore']
-    })
-      .toString('utf8')
-      .trim();
-    const untracked = execFileSync(
-      'git',
-      ['ls-files', '--others', '--exclude-standard', '--', `integrations/${folder}`],
-      { cwd: ROOT, stdio: ['ignore', 'pipe', 'ignore'] }
-    )
-      .toString('utf8')
-      .trim();
-    return Boolean(out || untracked);
-  } catch {
-    return false;
-  }
+  const changed = git(['diff', '--name-only', ref, '--', `integrations/${folder}`]);
+  const untracked = git(['ls-files', '--others', '--exclude-standard', '--', `integrations/${folder}`]);
+  return Boolean((changed || '').trim() || (untracked || '').trim());
 }
 
 const baseRef = gitRef();
@@ -195,7 +188,7 @@ for (const folder of folders) {
           fail(`${where}: releases are listed newest first, each version once`);
         }
         for (const [category, rel] of Object.entries(release.notes || {})) {
-          if (!NOTE_CATEGORIES.includes(category)) fail(`${where}: unknown note category "${category}"`);
+          if (!NOTE_CATEGORIES.has(category)) fail(`${where}: unknown note category "${category}"`);
           if (typeof rel !== 'string' || !/\.md$/i.test(rel) || rel.startsWith('/') || rel.split('/').includes('..')) {
             fail(`${where}: notes.${category} must be a relative Markdown path inside the folder: ${rel}`);
             continue;
@@ -233,6 +226,7 @@ for (const folder of folders) {
 try {
   execFileSync(process.execPath, [path.join(__dirname, 'sync-integrations.js'), '--check'], {
     cwd: ROOT,
+    shell: false,
     stdio: ['ignore', 'pipe', 'pipe']
   });
 } catch (error) {

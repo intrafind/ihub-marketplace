@@ -130,7 +130,8 @@ function inlineJson(value) {
   if (Array.isArray(value)) return `[${value.map(inlineJson).join(', ')}]`;
   const entries = Object.entries(value);
   if (entries.length === 0) return '{}';
-  return `{ ${entries.map(([k, v]) => `${JSON.stringify(k)}: ${inlineJson(v)}`).join(', ')} }`;
+  const pairs = entries.map(([k, v]) => `${JSON.stringify(k)}: ${inlineJson(v)}`);
+  return `{ ${pairs.join(', ')} }`;
 }
 
 function formatItem(item, indent) {
@@ -209,7 +210,9 @@ function main() {
     return;
   }
   let out = text;
-  for (const r of replacements.sort((a, b) => b.start - a.start)) {
+  // Rewrite from the end, so earlier offsets stay valid.
+  const fromTheEnd = replacements.toSorted((a, b) => b.start - a.start);
+  for (const r of fromTheEnd) {
     out = out.slice(0, r.start) + r.formatted + out.slice(r.end);
   }
   JSON.parse(out);
