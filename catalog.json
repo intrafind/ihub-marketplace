@@ -4453,15 +4453,40 @@
       "type": "integration",
       "name": "org.ckan__open-data-portal",
       "displayName": { "en": "CKAN Open Data Portal", "de": "CKAN Open-Data-Portal" },
-      "description": { "en": "Find datasets, read their metadata, query DataStore tables and get resource files from any CKAN-based open data portal (GovData, state and city portals, internal data catalogs)", "de": "Datensätze finden, Metadaten lesen, DataStore-Tabellen abfragen und Ressourcen von jedem CKAN-basierten Open-Data-Portal abrufen (GovData, Landes- und Stadtportale, interne Datenkataloge)" },
+      "description": {
+        "en": "Find datasets, read their metadata, query DataStore tables and get resource files from any CKAN-based open data portal (GovData, state and city portals, internal data catalogs)",
+        "de": "Datensätze finden, Metadaten lesen, DataStore-Tabellen abfragen und Ressourcen von jedem CKAN-basierten Open-Data-Portal abrufen (GovData, Landes- und Stadtportale, interne Datenkataloge)"
+      },
       "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-10-31",
+          "summary": {
+            "en": "First version: dataset search, metadata, DataStore queries and resources of any CKAN portal; publishers as scopes.",
+            "de": "Erste Version: Datensatzsuche, Metadaten, DataStore-Abfragen und Ressourcen jedes CKAN-Portals; Herausgeber als Scopes."
+          },
+          "notes": { "features": "releases/1.0.0/features.md" }
+        }
+      ],
       "author": "IntraFind Software AG",
       "category": "analysis",
       "tags": ["open-data", "ckan", "datasets", "public-sector", "research"],
       "icon": "globe",
       "license": "BSD-3-Clause-with-Mandatory-Attribution",
       "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
-      "source": { "type": "relative", "path": "integrations/org.ckan__open-data-portal/integration.json", "companions": ["ckan-openapi.json", "icon.svg", "README.md"] }
+      "source": {
+        "type": "relative",
+        "path": "integrations/org.ckan__open-data-portal/integration.json",
+        "companions": ["ckan-openapi.json", "icon.svg", "README.md", "releases/1.0.0/features.md"],
+        "integrity": {
+          "ckan-openapi.json": "sha256-kdDCRkZ4RoNx4RC+qqFAtgGa9QpzdYYZ+gE93uwnmHg=",
+          "icon.svg": "sha256-zjCv+nJytjw5/vFqCcEMJtwBg34+jJ7wGgEF0NS4Mq0=",
+          "README.md": "sha256-ZGvCJzFeEtTHSKgI31hpVrn9eJYF+wajCefY1w5kMp0=",
+          "releases/1.0.0/features.md": "sha256-+LYzUIYzprcsJKyjtPc7XA8l17z4fEy16Bok7Mo0cok="
+        }
+      }
     },
     {
       "type": "app",

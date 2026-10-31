@@ -12,6 +12,11 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OUT="${1:-_site}"
 case "$OUT" in /*) ;; *) OUT="$ROOT/$OUT" ;; esac
 
+# Fail early when the catalog or an integration definition is not publishable
+# (version without release notes, bad compatibility range, missing note file,
+# catalog item out of sync with its folder)
+node "$ROOT/scripts/validate.js"
+
 rm -rf "$OUT"
 mkdir -p "$OUT"
 
