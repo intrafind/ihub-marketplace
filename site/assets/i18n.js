@@ -60,6 +60,8 @@ window.MARKETPLACE_I18N = {
     'types.skills': 'Skills',
     'types.workflow': 'Workflow',
     'types.workflows': 'Workflows',
+    'types.integration': 'Integration',
+    'types.integrations': 'Integrations',
 
     'categories.analysis': 'Analysis',
     'categories.business': 'Business',
@@ -207,6 +209,8 @@ window.MARKETPLACE_I18N = {
     'types.skills': 'Skills',
     'types.workflow': 'Workflow',
     'types.workflows': 'Workflows',
+    'types.integration': 'Integration',
+    'types.integrations': 'Integrationen',
 
     'categories.analysis': 'Analyse',
     'categories.business': 'Business',

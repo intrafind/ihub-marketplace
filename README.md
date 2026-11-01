@@ -49,7 +49,7 @@ The full guide is in the iHub documentation: [Marketplace](https://github.com/in
 
 ## Content Inventory
 
-### Apps (91)
+### Apps (92)
 
 #### General (22)
 
@@ -434,6 +434,14 @@ Task-focused skills for legal, compliance, finance, security, HR, sales, custome
 | `activity-roundup` | Activity Roundup | Productivity | productivity |
 | `personal-context-keeper` | Personal Context Keeper | Productivity | productivity |
 
+### Integrations (1)
+
+Installable integrations (iHub 5.7+): a definition folder with the actions an app's model may call, the settings the admin fills in at install time and, for the `openapi` protocol, the trimmed API document. Install under **Admin → Marketplace → Integrations**, then set it up under **Admin → Integrations → Installed** and bind it to an app.
+
+| ID | Name | Protocol | Description |
+|----|------|----------|-------------|
+| `org.ckan__open-data-portal` | CKAN Open Data Portal | openapi | Search datasets, read metadata, query DataStore tables and fetch resources of any CKAN portal (GovData, state and city portals, internal catalogs). Ships with the **Open Data Assistant** app. |
+
 ## Repository Structure
 
 ```
@@ -444,9 +452,12 @@ ihub-marketplace/
 ├── workflows/                      # Workflow definition files
 ├── prompts/                        # Prompt template files
 ├── skills/                         # Skill packages, one folder per skill with a SKILL.md
+├── integrations/                   # Integration definitions, one folder per definition with an integration.json
 ├── site/                           # Marketplace website (GitHub Pages)
 ├── docs/screenshots/               # Screenshots used in this README
-├── scripts/build-site.sh           # Assembles the website with the catalog and content
+├── scripts/build-site.sh           # Assembles the website with the catalog and content (runs validate.js first)
+├── scripts/validate.js             # Checks the catalog and the integration definitions (versions, release notes, compatibility)
+├── scripts/sync-integrations.js    # Copies version, compatibility, releases and file hashes of each integration into catalog.json
 └── .github/workflows/pages.yml     # Builds on every PR, deploys main to GitHub Pages
 ```
 
@@ -505,15 +516,59 @@ Skills published elsewhere use a `url` source that points at a fixed commit, wit
 }
 ```
 
+### Integration items
+
+An integration is a folder `integrations/<folder>/` with an `integration.json` (the definition, see [iHub → Integrations → Writing a definition](https://github.com/intrafind/ihub-apps/blob/main/docs/integrations.md#writing-a-definition)) and its companion files: the OpenAPI document, an icon, a README and the release notes under `releases/<version>/`. The folder name is the definition id with its `/` replaced by `__`. The definition carries its own version history:
+
+```json
+{
+  "id": "org.ckan/open-data-portal",
+  "version": "1.0.0",
+  "compatibility": { "ihub": ">=5.6.0" },
+  "releases": [
+    {
+      "version": "1.0.0",
+      "date": "2026-10-31",
+      "summary": { "en": "First version: …", "de": "Erste Version: …" },
+      "notes": { "features": "releases/1.0.0/features.md" }
+    }
+  ]
+}
+```
+
+- `compatibility.ihub` is a semver range the iHub server version must satisfy; iHub greys the item out and refuses to install or update it on a server outside the range. `compatibility.schema` (default 1) is the revision of the definition format.
+- `releases` lists the history newest first; `releases[0].version` must equal `version`. Each release has a `date`, a one-line localized `summary`, and under `notes` the Markdown files per category — `features` (`releases/<version>/features.md`), `fixes` (`fixes.md`), `breaking` (`breaking-changes.md`) — which iHub fetches and renders one by one from the **Releases** tab and the update dialog. Every change to the folder gets a new version and a release entry.
+
+The catalog item is written by hand like every other, but its `version`, `compatibility`, `releases` (the last 20), `source.companions` (every file of the folder) and `source.integrity` (a SHA-256 per companion, which iHub verifies on install) are copied from the folder by `node scripts/sync-integrations.js`:
+
+```json
+{
+  "type": "integration",
+  "name": "org.ckan__open-data-portal",
+  "displayName": { "en": "CKAN Open Data Portal" },
+  "version": "1.0.0",
+  "compatibility": { "ihub": ">=5.6.0" },
+  "releases": [{ "version": "1.0.0", "date": "2026-10-31", "summary": { "en": "…" }, "notes": { "features": "releases/1.0.0/features.md" } }],
+  "source": {
+    "type": "relative",
+    "path": "integrations/org.ckan__open-data-portal/integration.json",
+    "companions": ["ckan-openapi.json", "icon.svg", "README.md", "releases/1.0.0/features.md"],
+    "integrity": { "ckan-openapi.json": "sha256-…", "icon.svg": "sha256-…" }
+  }
+}
+```
+
+`node scripts/validate.js` (run by `build-site.sh` and therefore by the pull-request check) fails when the version changed without a matching `releases[0]` entry, when the folder changed without a version bump, when a note file does not exist, when `compatibility.ihub` is not a valid range, or when the catalog item is out of sync with the folder.
+
 ## Contributing
 
 To add new content to this marketplace:
 
 1. Fork this repository
-2. Add your content file in the appropriate directory (`apps/`, `models/`, `workflows/`, `prompts/`, or `skills/`)
-3. Add an entry to `catalog.json` following the existing format
+2. Add your content file in the appropriate directory (`apps/`, `models/`, `workflows/`, `prompts/`, `skills/`, or `integrations/<definition folder>/`)
+3. Add an entry to `catalog.json` following the existing format; for an integration, run `node scripts/sync-integrations.js` afterwards to copy its version, compatibility, releases and file hashes into the entry
 4. Ensure all JSON files are valid and conform to iHub schemas
-5. Run `./scripts/build-site.sh` to check that the catalog entry points at an existing file
+5. Run `./scripts/build-site.sh` to validate the catalog and the integration definitions and to check that every entry points at an existing file
 6. Submit a pull request
 
 ### Content Guidelines
@@ -522,6 +577,7 @@ To add new content to this marketplace:
 - **Models**: Include the provider API endpoint URL. Do not include API keys. Use `contextWindow` / `maxOutputTokens` (not `tokenLimit`) and `thinking.level` (not `thinking.budget`), and keep `default` exactly as iHub ships it (only `gemini-flash-latest` is `true`). Installing overwrites a local model with the same id, so a copy of a shipped model that differs in `default` changes which model is the system default.
 - **Workflows**: Self-contained workflow definitions. Reference model IDs that users are likely to have.
 - **Prompts**: Simple, reusable prompt templates.
+- **Integrations**: a definition folder that passes iHub's `integrationDefinitionSchema`, with `compatibility.ihub` set to the iHub versions it was tested on and a `releases` entry with notes for every version. Change the folder only together with a version bump.
 - **Skills**: SKILL.md files with YAML frontmatter containing `name` (lowercase letters, digits, and hyphens, matching the folder name, at most 64 characters) and `description` (at most 1024 characters, saying what the skill does and when to use it). iHub does not run scripts, so a skill must work through instructions, reference files, and the tools an app provides. Third-party skills are listed only when their license allows redistribution, with `author`, `license`, and `licenseUrl` set to the original.
 
 ## License
