@@ -135,9 +135,9 @@ for (const item of items) {
 // definition migrations (declarative steps; `module` steps come with code trust)
 
 /** An install field key or an action name, as iHub's definition schema accepts it. */
-const IDENTIFIER = /^[A-Za-z][A-Za-z0-9_]{0,63}$/;
+const IDENTIFIER = /^[A-Za-z]\w{0,63}$/;
 const MAX_SCOPE_ID = 256;
-const WHEN = ['missing', 'always'];
+const WHEN = new Set(['missing', 'always']);
 
 /**
  * The declarative steps and the arguments each takes. `field` is an install
@@ -176,7 +176,7 @@ function argumentProblem(type, value) {
         ? null
         : `must be a scope id (a non-empty string of at most ${MAX_SCOPE_ID} characters)`;
     case 'when':
-      return WHEN.includes(value) ? null : `must be "missing" or "always"`;
+      return WHEN.has(value) ? null : `must be "missing" or "always"`;
     case 'map':
       return isPlainObject(value) && Object.keys(value).length > 0
         ? null
@@ -209,19 +209,24 @@ function checkStep(where, step) {
     fail(`${where}.${kind} must be an object`);
     return;
   }
+  checkStepArguments(`${where}.${kind}`, kind, spec, args);
+}
+
+/** Check the arguments of one step against what its kind takes (`spec`). */
+function checkStepArguments(where, kind, spec, args) {
   for (const name of Object.keys(args)) {
-    if (!Object.hasOwn(spec, name)) fail(`${where}.${kind}: unknown argument "${name}"`);
+    if (!Object.hasOwn(spec, name)) fail(`${where}: unknown argument "${name}"`);
   }
   for (const [name, type] of Object.entries(spec)) {
     if (!Object.hasOwn(args, name)) {
-      if (!OPTIONAL_ARGUMENTS.has(`${kind}.${name}`)) fail(`${where}.${kind}.${name} is missing`);
+      if (!OPTIONAL_ARGUMENTS.has(`${kind}.${name}`)) fail(`${where}.${name} is missing`);
       continue;
     }
     const problem = argumentProblem(type, args[name]);
-    if (problem) fail(`${where}.${kind}.${name} ${problem}: ${JSON.stringify(args[name])}`);
+    if (problem) fail(`${where}.${name} ${problem}: ${JSON.stringify(args[name])}`);
   }
   if (Object.hasOwn(spec, 'from') && args.from !== undefined && args.from === args.to) {
-    fail(`${where}.${kind}: from and to are the same ("${args.from}")`);
+    fail(`${where}: from and to are the same ("${args.from}")`);
   }
 }
 
@@ -354,55 +359,75 @@ function checkMigrationCoverage(label, previous, definition, ref) {
   const from = previous.version;
   const to = definition.version;
   const steps = stepsBetween(definition, from, to);
-  const hasStep = (kind, test) => steps.some(step => step.kind === kind && test(step.args));
-  const range = `(${from}, ${to}]`;
-  const since = `since ${from} on ${ref}`;
+  const coverage = {
+    label,
+    to,
+    range: `(${from}, ${to}]`,
+    since: `since ${from} on ${ref}`,
+    hasStep: (kind, test) => steps.some(step => step.kind === kind && test(step.args))
+  };
 
   const before = storedFields(previous);
-  const now = storedFields(definition);
   const keysNow = installKeys(definition);
   for (const key of before.keys()) {
-    if (keysNow.has(key)) continue;
-    if (hasStep('renameValue', a => a.from === key) || hasStep('removeValue', a => a.key === key)) continue;
-    const mapped = hasStep('mapValue', a => a.key === key) ? ' (a mapValue rewrites the value but keeps the key)' : '';
-    fail(
-      `${label}: install field "${key}" is gone ${since}, and no migration in ${range} renames or removes it${mapped}; add { "renameValue": { "from": "${key}", "to": "<new key>" } } or { "removeValue": { "key": "${key}" } } to migration ${to}`
-    );
+    if (!keysNow.has(key)) checkRemovedField(coverage, key);
   }
-
-  for (const [key, field] of now) {
+  for (const [key, field] of storedFields(definition)) {
     const old = before.get(key);
-    if (field.type === 'enum' && old?.type === 'enum') {
-      const choicesNow = Array.isArray(field.choices) ? field.choices : [];
-      const offered = new Set(choicesNow.map(choice => JSON.stringify(choice?.value)));
-      for (const choice of Array.isArray(old.choices) ? old.choices : []) {
-        const value = choice?.value;
-        if (offered.has(JSON.stringify(value))) continue;
-        if (hasStep('mapValue', a => a.key === key && isPlainObject(a.map) && Object.hasOwn(a.map, String(value)))) continue;
-        if (hasStep('setValue', a => a.key === key && a.when === 'always') || hasStep('removeValue', a => a.key === key)) continue;
-        fail(
-          `${label}: install field "${key}" no longer offers the choice ${JSON.stringify(value)} (${since}), and no migration in ${range} maps it; add { "mapValue": { "key": "${key}", "map": { ${JSON.stringify(String(value))}: <new choice> } } } to migration ${to}`
-        );
-      }
-    }
-
-    if (!needsValue(field) || needsValue(old)) continue;
-    if (hasStep('setValue', a => a.key === key)) continue;
-    if (hasStep('renameValue', a => a.to === key && needsValue(before.get(a.from)))) continue;
-    const what = old ? 'is now required without a default' : 'is new and required without a default';
-    fail(
-      `${label}: install field "${key}" ${what}, and no migration in ${range} sets it; add { "setValue": { "key": "${key}", "value": <value>, "when": "missing" } } to migration ${to}`
-    );
+    if (field.type === 'enum' && old?.type === 'enum') checkRemovedChoices(coverage, key, field, old);
+    checkNeededValue(coverage, key, field, old, before);
   }
-
   const actionsNow = actionNames(definition);
   for (const name of actionNames(previous)) {
-    if (actionsNow.has(name)) continue;
-    if (hasStep('renameAction', a => a.from === name) || hasStep('removeAction', a => a.name === name)) continue;
+    if (!actionsNow.has(name)) checkRemovedAction(coverage, name);
+  }
+}
+
+/** An install field that is gone needs a `renameValue` (from) or a `removeValue`. */
+function checkRemovedField({ label, to, range, since, hasStep }, key) {
+  if (hasStep('renameValue', a => a.from === key) || hasStep('removeValue', a => a.key === key)) return;
+  const mapped = hasStep('mapValue', a => a.key === key) ? ' (a mapValue rewrites the value but keeps the key)' : '';
+  fail(
+    `${label}: install field "${key}" is gone ${since}, and no migration in ${range} renames or removes it${mapped}; add { "renameValue": { "from": "${key}", "to": "<new key>" } } or { "removeValue": { "key": "${key}" } } to migration ${to}`
+  );
+}
+
+/** An enum choice that is gone needs a `mapValue` of it, a `setValue` (always) or a `removeValue`. */
+function checkRemovedChoices({ label, to, range, since, hasStep }, key, field, old) {
+  const offered = new Set((Array.isArray(field.choices) ? field.choices : []).map(choice => JSON.stringify(choice?.value)));
+  const replaced =
+    hasStep('setValue', a => a.key === key && a.when === 'always') || hasStep('removeValue', a => a.key === key);
+  for (const choice of Array.isArray(old.choices) ? old.choices : []) {
+    const value = choice?.value;
+    if (replaced || offered.has(JSON.stringify(value))) continue;
+    if (hasStep('mapValue', a => a.key === key && isPlainObject(a.map) && Object.hasOwn(a.map, String(value)))) continue;
     fail(
-      `${label}: action "${name}" is gone ${since}, and no migration in ${range} renames or removes it; add { "renameAction": { "from": "${name}", "to": "<new name>" } } or { "removeAction": { "name": "${name}" } } to migration ${to}`
+      `${label}: install field "${key}" no longer offers the choice ${JSON.stringify(value)} (${since}), and no migration in ${range} maps it; add { "mapValue": { "key": "${key}", "map": { ${JSON.stringify(String(value))}: <new choice> } } } to migration ${to}`
     );
   }
+}
+
+/**
+ * A field every installation now needs (required, no default) and did not
+ * need before needs a `setValue`, or a `renameValue` onto it from a field
+ * every installation already had.
+ */
+function checkNeededValue({ label, to, range, hasStep }, key, field, old, before) {
+  if (!needsValue(field) || needsValue(old)) return;
+  if (hasStep('setValue', a => a.key === key)) return;
+  if (hasStep('renameValue', a => a.to === key && needsValue(before.get(a.from)))) return;
+  const what = old ? 'is now required without a default' : 'is new and required without a default';
+  fail(
+    `${label}: install field "${key}" ${what}, and no migration in ${range} sets it; add { "setValue": { "key": "${key}", "value": <value>, "when": "missing" } } to migration ${to}`
+  );
+}
+
+/** An action that is gone needs a `renameAction` (from) or a `removeAction`. */
+function checkRemovedAction({ label, to, range, since, hasStep }, name) {
+  if (hasStep('renameAction', a => a.from === name) || hasStep('removeAction', a => a.name === name)) return;
+  fail(
+    `${label}: action "${name}" is gone ${since}, and no migration in ${range} renames or removes it; add { "renameAction": { "from": "${name}", "to": "<new name>" } } or { "removeAction": { "name": "${name}" } } to migration ${to}`
+  );
 }
 
 // ---------------------------------------------------------------------------
