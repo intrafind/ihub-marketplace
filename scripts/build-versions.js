@@ -30,6 +30,7 @@
 'use strict';
 
 const fs = require('node:fs');
+const os = require('node:os');
 const path = require('node:path');
 const { derive, applyDerived } = require('./sync-integrations');
 const { GIT, ROOT, folderOf, git, releaseTags } = require('./integration-tags');
@@ -150,6 +151,13 @@ function main() {
     process.exit(2);
   }
   const site = path.resolve(siteArg);
+  // The site is built into the repository (build-site.sh: _site) or, in tests,
+  // a temporary directory; never anywhere else on the machine.
+  const allowedBases = [ROOT, os.tmpdir(), fs.realpathSync(os.tmpdir())];
+  if (!allowedBases.some(base => site.startsWith(base + path.sep))) {
+    console.error(`build-versions: the site directory must be inside ${ROOT} or ${os.tmpdir()}`);
+    process.exit(2);
+  }
   if (!fs.existsSync(site) || !fs.statSync(site).isDirectory()) {
     console.error(`build-versions: ${siteArg} is not a directory`);
     process.exit(2);
