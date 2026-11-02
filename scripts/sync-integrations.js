@@ -21,6 +21,12 @@
 // …) is kept as it is in catalog.json, and so is the file's formatting: only
 // the integration items are rewritten, in place.
 //
+// The versions the registry still serves (`versions: [{ version, ref }]`) are
+// not written here: they come from the git tags `integrations/<id>@<version>`,
+// which exist only after a release, so `scripts/build-versions.js` adds them to
+// the published copy of catalog.json when the site is built. The functions
+// below are exported for it (`derive`, `applyDerived`).
+//
 // Usage: node scripts/sync-integrations.js [--check]
 //   --check  exit 1 when catalog.json is out of date instead of writing it
 'use strict';
@@ -74,9 +80,13 @@ function sha256(file) {
   return `sha256-${crypto.createHash('sha256').update(fs.readFileSync(file)).digest('base64')}`;
 }
 
-/** The catalog fields derived from one definition folder. */
-function derive(folder) {
-  const dir = path.join(INTEGRATIONS_DIR, folder);
+/**
+ * The catalog fields derived from one definition folder.
+ *
+ * @param {string} folder - the folder name (`org.ckan__open-data-portal`)
+ * @param {string} [dir] - where the folder is (default: integrations/<folder> of this repository)
+ */
+function derive(folder, dir = path.join(INTEGRATIONS_DIR, folder)) {
   const definition = JSON.parse(fs.readFileSync(path.join(dir, 'integration.json'), 'utf8'));
   const companions = listCompanions(dir);
   const integrity = {};
@@ -242,4 +252,6 @@ function main() {
   console.log(`catalog.json updated for ${replacements.map(r => r.item.name).join(', ')}`);
 }
 
-main();
+if (require.main === module) main();
+
+module.exports = { derive, applyDerived, formatItem, listCompanions, KEY_ORDER };

@@ -6,7 +6,9 @@
   "scripts": {
     "test": "node --test scripts/test/*.test.js",
     "validate": "node scripts/validate.js",
-    "sync-integrations": "node scripts/sync-integrations.js"
+    "sync-integrations": "node scripts/sync-integrations.js",
+    "tag-integrations": "node scripts/tag-integrations.js",
+    "build-versions": "node scripts/build-versions.js"
   },
   "engines": {
     "node": ">=20"

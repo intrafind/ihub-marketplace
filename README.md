@@ -458,8 +458,11 @@ ihub-marketplace/
 ├── scripts/build-site.sh           # Assembles the website with the catalog and content (runs validate.js first)
 ├── scripts/validate.js             # Checks the catalog and the integration definitions (versions, release notes, compatibility, migrations)
 ├── scripts/sync-integrations.js    # Copies version, compatibility, releases, migrations and file hashes of each integration into catalog.json
-├── scripts/test/                   # Tests of validate.js and sync-integrations.js (node --test, no dependencies)
-├── package.json                    # npm scripts only: test, validate, sync-integrations (no dependencies)
+├── scripts/tag-integrations.js     # Tags every integration version that reached main: integrations/<id>@<version>
+├── scripts/build-versions.js       # Publishes every tagged integration version under versions/ and lists it in the site's catalog.json
+├── scripts/integration-tags.js     # The release tags, shared by the three scripts above
+├── scripts/test/                   # Tests of the catalog scripts (node --test, no dependencies)
+├── package.json                    # npm scripts only: test, validate, sync-integrations, tag-integrations, build-versions (no dependencies)
 └── .github/workflows/pages.yml     # Tests and builds on every PR, deploys main to GitHub Pages
 ```
 
@@ -477,7 +480,7 @@ python3 -m http.server 8080 --directory _site
 # open http://localhost:8080
 ```
 
-The **Marketplace Website** workflow runs the tests of the catalog scripts and builds the site on every pull request (failing if a test fails, `scripts/validate.js` finds a problem, or `catalog.json` references a missing file) and deploys `main` to GitHub Pages. GitHub Pages must be enabled once under **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+The **Marketplace Website** workflow runs the tests of the catalog scripts and builds the site on every pull request (failing if a test fails, `scripts/validate.js` finds a problem, or `catalog.json` references a missing file) and deploys `main` to GitHub Pages; on `main` it first tags the integration versions that are new (see [Releases and versions](#releases-and-versions)), which needs the workflow's `contents: write` permission on its `tag` job. GitHub Pages must be enabled once under **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 
 ## Catalog Format
 
@@ -563,9 +566,21 @@ The catalog item is written by hand like every other, but its `version`, `compat
 
 The catalog carries only the migrations of the releases it lists: an update from a listed release to the current version runs only migrations of newer releases, which are all listed, so iHub can show what an update changes before downloading anything, from every listed release. An installation older than the oldest listed release is updated from the downloaded definition, which always has every migration.
 
-`node scripts/validate.js` (run by `build-site.sh` and therefore by the pull-request check) fails when the version changed without a matching `releases[0]` entry, when the folder changed without a version bump, when a note file does not exist, when `compatibility.ihub` is not a valid range, or when the catalog item is out of sync with the folder. For migrations it fails when an id is not a version or is listed twice, a migration has no steps, a step is not exactly one of the [steps below](#migrations) or has missing, unknown or malformed arguments, a step is a `module` step, `releases[].migration` is not that release's own version or names no migration, or a migration is not named by the release of its version.
+`node scripts/validate.js` (run by `build-site.sh` and therefore by the pull-request check) fails when the version changed without a matching `releases[0]` entry, when the folder changed without a version bump since its previous release, when a note file does not exist, when `compatibility.ihub` is not a valid range, or when the catalog item is out of sync with the folder. For migrations it fails when an id is not a version or is listed twice, a migration has no steps, a step is not exactly one of the [steps below](#migrations) or has missing, unknown or malformed arguments, a `module` step names a file that is not `migrations/<name>.js` of the folder, is missing, imports a sibling file or has no hash in the catalog item, `releases[].migration` is not that release's own version or names no migration, or a migration is not named by the release of its version.
 
-`npm test` (or `node --test scripts/test/*.test.js`) runs the tests of `validate.js` and `sync-integrations.js`; they build small temporary git repositories and need nothing but Node.js 20+ and git.
+#### Releases and versions
+
+Every integration version that reaches `main` is tagged `integrations/<id>@<version>` (for example `integrations/org.ckan/open-data-portal@1.0.0`) by `node scripts/tag-integrations.js`, which the **Marketplace Website** workflow runs on every push to `main` before it builds the site. A tag is never moved; a folder that changed on `main` under a version that is already tagged fails the workflow (the pull-request check refuses that change before).
+
+When the site is built, `node scripts/build-versions.js <site-dir>` (called by `build-site.sh`) publishes every tagged version next to the current one:
+
+- `versions/integrations/<folder>/<version>/`: the folder as it was at the tag;
+- `versions/integrations/<folder>/<version>.json`: the **version descriptor**, the catalog item of that version (its own `version`, `compatibility`, `releases`, `migrations`, `source.companions` and `source.integrity`, with `source.path` pointing at the folder above);
+- `"versions": [{ "version": "1.0.0", "ref": "versions/integrations/<folder>/1.0.0.json" }, …]` on the integration item of the published `catalog.json`, newest first.
+
+iHub reads `versions` to offer what a registry's **channel** (stable releases or all) and an item's **version pin** (`1.3.x`) allow, fetches the descriptor through `ref` for a pinned install or update, and keeps the definition of every version an update passes, so an installation can be reverted to it later. The committed `catalog.json` carries no `versions`: tags exist only after a release, so only the published copy lists them.
+
+`npm test` (or `node --test scripts/test/*.test.js`) runs the tests of `validate.js`, `sync-integrations.js`, `tag-integrations.js` and `build-versions.js`; they build small temporary git repositories and need nothing but Node.js 20+ and git.
 
 #### Migrations
 
@@ -611,9 +626,9 @@ When iHub updates an installation from version A to version B, it backs the inst
 - Install field keys and action names start with a letter and contain letters, digits and `_`; a scope id is any non-empty string (it comes from the portal, e.g. a CKAN organization name).
 - A step whose destination already exists (`renameValue` onto a key that holds a value, `renameAction` onto an action name that is already there) makes the update fail in iHub instead of overwriting; remove the destination first.
 - Migrations never touch credentials: a sensitive field (`type: "secret"` or `sensitive: true`) lives in iHub's credential store, and an admin re-enters it after an update that renames it.
-- `module` steps (a migration written as code) are not supported yet; the validator refuses them.
+- A `module` step runs a migration written as code: `{ "module": "migrations/1.1.0.js" }` names a file of the folder below `migrations/` (`.js` or `.mjs`) that exports `up({ instance, apps, definition, from, to, log })` and returns the installation with its new `values` and `actions`; it may change the bindings in the `apps` it is given, never `auth`. The file is one bundled file that imports nothing from the folder, and `sync-integrations.js` puts its hash into `source.integrity`. iHub runs it only when the registry is trusted for code and the file matches that hash; on any other registry the migration fails. Prefer the declarative steps: they run everywhere.
 
-When the version went up, the validator also compares the definition with the one on `main` (`origin/main` when it exists). Every migration with an id in (version on `main`, new version] counts, and it fails when:
+When the version went up, the validator also compares the definition with its previous release: the newest tag `integrations/<id>@<version>` whose version is not above the new one, or, for a definition that was never released, the one on `main` (`origin/main` when it exists). Every migration with an id in (previous version, new version] counts, a `module` step among them counts as handling every change (its code is not inspected), and it fails when:
 
 - an install field is gone and no migration renames it (`renameValue` with that `from`) or removes it (`removeValue`). A `mapValue` does not count: it rewrites the value and keeps the key;
 - a choice of an `enum` install field is gone and no migration maps it (`mapValue` with that old value), overwrites it (`setValue` with `"when": "always"`) or removes it (`removeValue`);

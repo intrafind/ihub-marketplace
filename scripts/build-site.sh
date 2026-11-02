@@ -27,6 +27,13 @@ for dir in apps models prompts skills workflows integrations; do
 done
 touch "$OUT/.nojekyll"
 
+# Every released integration version (git tags integrations/<id>@<version>):
+# its folder and a descriptor under versions/, and `versions` on the item of
+# the published catalog.json, so iHub can install a pinned version and keep the
+# definition of every version an update passes. Without git or tags the
+# catalog stays as it is.
+node "$ROOT/scripts/build-versions.js" "$OUT"
+
 # Fail the build when the catalog is not valid JSON or points at a missing file
 node - "$OUT" <<'NODE'
 const fs = require('fs');
@@ -37,6 +44,13 @@ const missing = (catalog.items || [])
   .filter(item => item.source?.type === 'relative')
   .filter(item => !fs.existsSync(path.join(out, item.source.path)))
   .map(item => `${item.type}/${item.name}: ${item.source.path}`);
+for (const item of catalog.items || []) {
+  for (const entry of item.versions || []) {
+    if (entry.ref && !fs.existsSync(path.join(out, entry.ref))) {
+      missing.push(`${item.type}/${item.name}@${entry.version}: ${entry.ref}`);
+    }
+  }
+}
 if (missing.length) {
   console.error(`catalog.json references ${missing.length} missing file(s):\n  ${missing.join('\n  ')}`);
   process.exit(1);
