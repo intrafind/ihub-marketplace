@@ -1,11 +1,21 @@
 #!/usr/bin/env node
 // Copies what iHub needs to know about each integration definition into the
-// matching catalog.json item, so the marketplace decides compatibility and
-// shows release notes without downloading the folder:
+// matching catalog.json item, so the marketplace decides compatibility, shows
+// release notes and plans migrations without downloading the folder:
 //
-//   version, compatibility, releases (version, date, summary, note paths; the
-//   last 20), source.companions (every file of the folder next to
+//   version, compatibility, releases (version, date, summary, note paths and
+//   the migration a release names; the last 20), migrations (the ones those
+//   releases name), source.companions (every file of the folder next to
 //   integration.json) and source.integrity (sha256 of every companion).
+//
+// Only the migrations of the carried releases are copied: an update from a
+// listed release R to the current version runs the migrations with an id in
+// (R, current], and every migration id is the version of the release that
+// names it, so those are all among the carried releases. That keeps the
+// catalog small and still lets iHub plan the update (what it changes, before
+// downloading anything) from every listed release, and from the release just
+// before the oldest one listed. An installation older than that is updated
+// from the downloaded definition, which always has every migration.
 //
 // Everything else of the item (names, description, category, tags, license,
 // …) is kept as it is in catalog.json, and so is the file's formatting: only
@@ -32,6 +42,7 @@ const KEY_ORDER = [
   'version',
   'compatibility',
   'releases',
+  'migrations',
   'author',
   'category',
   'tags',
@@ -74,14 +85,23 @@ function derive(folder) {
     ? definition.releases.slice(0, MAX_RELEASES).map(release => {
         const out = { version: release.version, date: release.date, summary: release.summary };
         if (release.notes && Object.keys(release.notes).length) out.notes = release.notes;
+        if (release.migration !== undefined) out.migration = release.migration;
         return out;
       })
     : undefined;
+  // The migrations the carried releases name (see the header for why not all)
+  const named = new Set((releases || []).map(release => release.migration).filter(Boolean));
+  const migrations = Array.isArray(definition.migrations)
+    ? definition.migrations
+        .filter(migration => migration && named.has(migration.id))
+        .map(migration => ({ id: migration.id, steps: migration.steps }))
+    : [];
   return {
     folder,
     version: definition.version,
     compatibility: definition.compatibility,
     releases,
+    migrations: migrations.length ? migrations : undefined,
     companions,
     integrity
   };
@@ -152,6 +172,8 @@ function applyDerived(item, derived) {
   else delete next.compatibility;
   if (derived.releases) next.releases = derived.releases;
   else delete next.releases;
+  if (derived.migrations) next.migrations = derived.migrations;
+  else delete next.migrations;
   const source = { ...item.source };
   if (source.type === 'relative') {
     source.path = `integrations/${derived.folder}/integration.json`;

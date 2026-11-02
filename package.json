@@ -1,0 +1,14 @@
+{
+  "name": "ihub-marketplace",
+  "private": true,
+  "description": "The official marketplace registry for iHub Apps: catalog, content and the scripts that check it",
+  "license": "SEE LICENSE IN LICENSE",
+  "scripts": {
+    "test": "node --test scripts/test/*.test.js",
+    "validate": "node scripts/validate.js",
+    "sync-integrations": "node scripts/sync-integrations.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -456,9 +456,11 @@ ihub-marketplace/
 ├── site/                           # Marketplace website (GitHub Pages)
 ├── docs/screenshots/               # Screenshots used in this README
 ├── scripts/build-site.sh           # Assembles the website with the catalog and content (runs validate.js first)
-├── scripts/validate.js             # Checks the catalog and the integration definitions (versions, release notes, compatibility)
-├── scripts/sync-integrations.js    # Copies version, compatibility, releases and file hashes of each integration into catalog.json
-└── .github/workflows/pages.yml     # Builds on every PR, deploys main to GitHub Pages
+├── scripts/validate.js             # Checks the catalog and the integration definitions (versions, release notes, compatibility, migrations)
+├── scripts/sync-integrations.js    # Copies version, compatibility, releases, migrations and file hashes of each integration into catalog.json
+├── scripts/test/                   # Tests of validate.js and sync-integrations.js (node --test, no dependencies)
+├── package.json                    # npm scripts only: test, validate, sync-integrations (no dependencies)
+└── .github/workflows/pages.yml     # Tests and builds on every PR, deploys main to GitHub Pages
 ```
 
 ## Website
@@ -475,7 +477,7 @@ python3 -m http.server 8080 --directory _site
 # open http://localhost:8080
 ```
 
-The **Marketplace Website** workflow builds the site on every pull request (failing if `catalog.json` references a missing file) and deploys `main` to GitHub Pages. GitHub Pages must be enabled once under **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+The **Marketplace Website** workflow runs the tests of the catalog scripts and builds the site on every pull request (failing if a test fails, `scripts/validate.js` finds a problem, or `catalog.json` references a missing file) and deploys `main` to GitHub Pages. GitHub Pages must be enabled once under **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 
 ## Catalog Format
 
@@ -538,8 +540,9 @@ An integration is a folder `integrations/<folder>/` with an `integration.json` (
 
 - `compatibility.ihub` is a semver range the iHub server version must satisfy; iHub greys the item out and refuses to install or update it on a server outside the range. `compatibility.schema` (default 1) is the revision of the definition format.
 - `releases` lists the history newest first; `releases[0].version` must equal `version`. Each release has a `date`, a one-line localized `summary`, and under `notes` the Markdown files per category — `features` (`releases/<version>/features.md`), `fixes` (`fixes.md`), `breaking` (`breaking-changes.md`) — which iHub fetches and renders one by one from the **Releases** tab and the update dialog. Every change to the folder gets a new version and a release entry.
+- `migrations` (optional) brings existing installations along when a release changes what an installation stores: its install values, its action policy and the apps bound to it. See [Migrations](#migrations).
 
-The catalog item is written by hand like every other, but its `version`, `compatibility`, `releases` (the last 20), `source.companions` (every file of the folder) and `source.integrity` (a SHA-256 per companion, which iHub verifies on install) are copied from the folder by `node scripts/sync-integrations.js`:
+The catalog item is written by hand like every other, but its `version`, `compatibility`, `releases` (the last 20, each with the `migration` it names), `migrations` (the ones those releases name), `source.companions` (every file of the folder) and `source.integrity` (a SHA-256 per companion, which iHub verifies on install) are copied from the folder by `node scripts/sync-integrations.js`:
 
 ```json
 {
@@ -558,7 +561,66 @@ The catalog item is written by hand like every other, but its `version`, `compat
 }
 ```
 
-`node scripts/validate.js` (run by `build-site.sh` and therefore by the pull-request check) fails when the version changed without a matching `releases[0]` entry, when the folder changed without a version bump, when a note file does not exist, when `compatibility.ihub` is not a valid range, or when the catalog item is out of sync with the folder.
+The catalog carries only the migrations of the releases it lists: an update from a listed release to the current version runs only migrations of newer releases, which are all listed, so iHub can show what an update changes before downloading anything, from every listed release. An installation older than the oldest listed release is updated from the downloaded definition, which always has every migration.
+
+`node scripts/validate.js` (run by `build-site.sh` and therefore by the pull-request check) fails when the version changed without a matching `releases[0]` entry, when the folder changed without a version bump, when a note file does not exist, when `compatibility.ihub` is not a valid range, or when the catalog item is out of sync with the folder. For migrations it fails when an id is not a version or is listed twice, a migration has no steps, a step is not exactly one of the [steps below](#migrations) or has missing, unknown or malformed arguments, a step is a `module` step, `releases[].migration` is not that release's own version or names no migration, or a migration is not named by the release of its version.
+
+`npm test` (or `node --test scripts/test/*.test.js`) runs the tests of `validate.js` and `sync-integrations.js`; they build small temporary git repositories and need nothing but Node.js 20+ and git.
+
+#### Migrations
+
+A release that renames, removes or adds something an installation keeps names a migration with its own version: `"migration": "<the release's version>"`. The migration has that version as `id` and a non-empty list of declarative `steps`:
+
+```json
+{
+  "version": "1.1.0",
+  "releases": [
+    {
+      "version": "1.1.0",
+      "date": "2026-11-20",
+      "summary": { "en": "Install field `defaultFilter` is now `filter`; the action `portal_status` is gone." },
+      "notes": { "breaking": "releases/1.1.0/breaking-changes.md" },
+      "migration": "1.1.0"
+    },
+    { "version": "1.0.0", "date": "2026-10-31", "summary": { "en": "First version" } }
+  ],
+  "migrations": [
+    {
+      "id": "1.1.0",
+      "steps": [
+        { "renameValue": { "from": "defaultFilter", "to": "filter" } },
+        { "removeAction": { "name": "portal_status" } }
+      ]
+    }
+  ]
+}
+```
+
+When iHub updates an installation from version A to version B, it backs the installation up and runs every migration with an id in (A, B], oldest first, so skipping versions works (1.0.0 → 1.2.0 runs 1.1.0 and 1.2.0). Each step is an object with exactly one of these keys:
+
+| Step | Arguments | What it changes |
+| --- | --- | --- |
+| `renameValue` | `from`, `to`: install field keys | Moves the stored value to the new key |
+| `setValue` | `key`, `value` (any JSON), `when`: `missing` (default) or `always` | Sets the value where none is stored, or always |
+| `removeValue` | `key` | Drops the stored value |
+| `mapValue` | `key`, `map`: `{ "<old>": <new> }` | Rewrites a stored value that equals one of the old values (the map's keys, as JSON keys are strings) |
+| `renameAction` | `from`, `to`: action names | Renames the action in the installation's action policy and in the apps bound to it |
+| `removeAction` | `name` | Removes the action from the action policy and the app bindings |
+| `renameScope` | `from`, `to`: scope ids | Renames an app binding's `defaultScope` / `pinnedScope` |
+
+- Install field keys and action names start with a letter and contain letters, digits and `_`; a scope id is any non-empty string (it comes from the portal, e.g. a CKAN organization name).
+- A step whose destination already exists (`renameValue` onto a key that holds a value, `renameAction` onto an action name that is already there) makes the update fail in iHub instead of overwriting; remove the destination first.
+- Migrations never touch credentials: a sensitive field (`type: "secret"` or `sensitive: true`) lives in iHub's credential store, and an admin re-enters it after an update that renames it.
+- `module` steps (a migration written as code) are not supported yet; the validator refuses them.
+
+When the version went up, the validator also compares the definition with the one on `main` (`origin/main` when it exists). Every migration with an id in (version on `main`, new version] counts, and it fails when:
+
+- an install field is gone and no migration renames it (`renameValue` with that `from`) or removes it (`removeValue`). A `mapValue` does not count: it rewrites the value and keeps the key;
+- a choice of an `enum` install field is gone and no migration maps it (`mapValue` with that old value), overwrites it (`setValue` with `"when": "always"`) or removes it (`removeValue`);
+- an install field is required without a `default` and was not before (it is new, was optional, or had a default) and no migration sets it (`setValue`, or a `renameValue` onto it from a field that was required without a default);
+- an action is gone and no migration renames it (`renameAction` with that `from`) or removes it (`removeAction`).
+
+The message names the field, choice or action and the step to add. Sensitive fields and `"scope": "user"` fields are not compared, since an installation does not keep their values (they live in the credential store or with each user). Scope ids are not declared in a definition (the scopes action or a native connector lists them at runtime), so there is nothing to compare for them; `renameScope` steps are checked for their format only.
 
 ## Contributing
 
@@ -568,7 +630,7 @@ To add new content to this marketplace:
 2. Add your content file in the appropriate directory (`apps/`, `models/`, `workflows/`, `prompts/`, `skills/`, or `integrations/<definition folder>/`)
 3. Add an entry to `catalog.json` following the existing format; for an integration, run `node scripts/sync-integrations.js` afterwards to copy its version, compatibility, releases and file hashes into the entry
 4. Ensure all JSON files are valid and conform to iHub schemas
-5. Run `./scripts/build-site.sh` to validate the catalog and the integration definitions and to check that every entry points at an existing file
+5. Run `./scripts/build-site.sh` to validate the catalog and the integration definitions and to check that every entry points at an existing file; after changing a script under `scripts/`, run `npm test` too
 6. Submit a pull request
 
 ### Content Guidelines
@@ -577,7 +639,7 @@ To add new content to this marketplace:
 - **Models**: Include the provider API endpoint URL. Do not include API keys. Use `contextWindow` / `maxOutputTokens` (not `tokenLimit`) and `thinking.level` (not `thinking.budget`), and keep `default` exactly as iHub ships it (only `gemini-flash-latest` is `true`). Installing overwrites a local model with the same id, so a copy of a shipped model that differs in `default` changes which model is the system default.
 - **Workflows**: Self-contained workflow definitions. Reference model IDs that users are likely to have.
 - **Prompts**: Simple, reusable prompt templates.
-- **Integrations**: a definition folder that passes iHub's `integrationDefinitionSchema`, with `compatibility.ihub` set to the iHub versions it was tested on and a `releases` entry with notes for every version. Change the folder only together with a version bump.
+- **Integrations**: a definition folder that passes iHub's `integrationDefinitionSchema`, with `compatibility.ihub` set to the iHub versions it was tested on and a `releases` entry with notes for every version. Change the folder only together with a version bump, and ship a migration with every release that renames or removes an install field, an enum choice or an action, or adds a required install field without a default.
 - **Skills**: SKILL.md files with YAML frontmatter containing `name` (lowercase letters, digits, and hyphens, matching the folder name, at most 64 characters) and `description` (at most 1024 characters, saying what the skill does and when to use it). iHub does not run scripts, so a skill must work through instructions, reference files, and the tools an app provides. Third-party skills are listed only when their license allows redistribution, with `author`, `license`, and `licenseUrl` set to the original.
 
 ## License
