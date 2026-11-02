@@ -36,6 +36,27 @@ const { GIT, ROOT, folderOf, git, releaseTags } = require('./integration-tags');
 
 const MAX_VERSIONS = 50;
 
+/** A catalog folder name: one path segment, no traversal. */
+const SAFE_FOLDER = /^[a-z0-9][a-z0-9._-]*$/i;
+/** A release version as it appears in a tag name: strict semver, no path characters. */
+const SAFE_VERSION = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/;
+
+/**
+ * Resolve `relative` under `base` and refuse anything that leaves it, so a
+ * crafted catalog name or tag name cannot write outside the site directory.
+ *
+ * @param {string} base - Absolute directory
+ * @param {string} relative - Path below it
+ * @returns {string} The absolute path
+ */
+function inside(base, relative) {
+  const target = path.resolve(base, relative);
+  if (target !== base && !target.startsWith(base + path.sep)) {
+    throw new Error(`build-versions: refusing to write outside ${base}: ${relative}`);
+  }
+  return target;
+}
+
 /**
  * Write the folder of an integration as it was at a tag into `target`.
  * Binary-safe: every file is read as bytes from the tag's tree.
@@ -84,13 +105,56 @@ function descriptorOf(item, folder, version, exportDir) {
   return next;
 }
 
+/**
+ * Publish every release version of one integration catalog item below `site`
+ * and list them on the item as `versions`.
+ *
+ * @param {string} site - Absolute site directory
+ * @param {object} item - Catalog item of type integration (changed in place)
+ * @returns {number} How many versions were published
+ */
+function publishItemVersions(site, item) {
+  const folder = item.name;
+  if (typeof folder !== 'string' || !SAFE_FOLDER.test(folder)) {
+    console.warn(`build-versions: catalog item name ${JSON.stringify(folder)} is not a folder name; skipped`);
+    return 0;
+  }
+  const definitionFile = path.join(ROOT, 'integrations', folder, 'integration.json');
+  if (!fs.existsSync(definitionFile)) return 0;
+  const { id } = JSON.parse(fs.readFileSync(definitionFile, 'utf8'));
+  if (typeof id !== 'string' || folderOf(id) !== folder) return 0;
+  const versions = [];
+  for (const { tag, version } of releaseTags(ROOT, id).slice(0, MAX_VERSIONS)) {
+    if (!SAFE_VERSION.test(version)) {
+      console.warn(`build-versions: ${tag} does not name a release version; skipped`);
+      continue;
+    }
+    const base = `versions/integrations/${folder}/${version}`;
+    const exportDir = inside(site, base);
+    if (!exportFolder(tag, folder, exportDir)) {
+      console.warn(`build-versions: ${tag} has no folder integrations/${folder}; skipped`);
+      continue;
+    }
+    const descriptor = descriptorOf(item, folder, version, exportDir);
+    fs.writeFileSync(inside(site, `${base}.json`), `${JSON.stringify(descriptor, null, 2)}\n`);
+    versions.push({ version, ref: `${base}.json` });
+  }
+  if (versions.length > 0) item.versions = versions;
+  return versions.length;
+}
+
 function main() {
-  const site = process.argv[2];
-  if (!site) {
+  const siteArg = process.argv[2];
+  if (!siteArg) {
     console.error('Usage: node scripts/build-versions.js <site-dir>');
     process.exit(2);
   }
-  const catalogFile = path.join(site, 'catalog.json');
+  const site = path.resolve(siteArg);
+  if (!fs.existsSync(site) || !fs.statSync(site).isDirectory()) {
+    console.error(`build-versions: ${siteArg} is not a directory`);
+    process.exit(2);
+  }
+  const catalogFile = inside(site, 'catalog.json');
   const catalog = JSON.parse(fs.readFileSync(catalogFile, 'utf8'));
   if (!GIT) {
     console.warn('build-versions: git is not installed; the catalog lists no versions');
@@ -99,25 +163,7 @@ function main() {
   let published = 0;
   for (const item of catalog.items || []) {
     if (item.type !== 'integration' || item.source?.type !== 'relative') continue;
-    const folder = item.name;
-    const definitionFile = path.join(ROOT, 'integrations', folder, 'integration.json');
-    if (!fs.existsSync(definitionFile)) continue;
-    const { id } = JSON.parse(fs.readFileSync(definitionFile, 'utf8'));
-    if (typeof id !== 'string' || folderOf(id) !== folder) continue;
-    const versions = [];
-    for (const { tag, version } of releaseTags(ROOT, id).slice(0, MAX_VERSIONS)) {
-      const base = `versions/integrations/${folder}/${version}`;
-      const exportDir = path.join(site, base);
-      if (!exportFolder(tag, folder, exportDir)) {
-        console.warn(`build-versions: ${tag} has no folder integrations/${folder}; skipped`);
-        continue;
-      }
-      const descriptor = descriptorOf(item, folder, version, exportDir);
-      fs.writeFileSync(path.join(site, `${base}.json`), `${JSON.stringify(descriptor, null, 2)}\n`);
-      versions.push({ version, ref: `${base}.json` });
-      published += 1;
-    }
-    if (versions.length > 0) item.versions = versions;
+    published += publishItemVersions(site, item);
   }
   fs.writeFileSync(catalogFile, `${JSON.stringify(catalog, null, 2)}\n`);
   console.log(`build-versions: published ${published} integration version(s)`);

@@ -107,7 +107,16 @@ class Repo {
     };
     fs.writeFileSync(path.join(this.root, 'catalog.json'), `${JSON.stringify(catalog, null, 2)}\n`);
     // A repository of its own, so the validator never looks at an enclosing one
-    if (GIT) this.git('init', '-q', '-b', 'main');
+    if (GIT) {
+      this.git('init', '-q', '-b', 'main');
+      // The scripts under test run git themselves (tag-integrations creates
+      // annotated tags), so the identity must be in the repository's own config,
+      // not only on this helper's command line: CI runners have none globally.
+      this.git('config', 'user.name', 'Test');
+      this.git('config', 'user.email', 'test@example.com');
+      this.git('config', 'commit.gpgsign', 'false');
+      this.git('config', 'tag.gpgsign', 'false');
+    }
   }
 
   /** Run git in the repository with a fixed identity and no signing. */
