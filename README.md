@@ -436,7 +436,7 @@ Task-focused skills for legal, compliance, finance, security, HR, sales, custome
 
 ### Integrations (1)
 
-Installable integrations (iHub 5.7+): a definition folder with the actions an app's model may call, the settings the admin fills in at install time and, for the `openapi` protocol, the trimmed API document. Install under **Admin → Marketplace → Integrations**, then set it up under **Admin → Integrations → Installed** and bind it to an app.
+Installable integrations (iHub 5.6+): a definition folder with the actions an app's model may call, the settings the admin fills in at install time and, for the `openapi` protocol, the trimmed API document. Install under **Admin → Marketplace → Integrations**, then set it up under **Admin → Integrations** and bind it to an app.
 
 | ID | Name | Protocol | Description |
 |----|------|----------|-------------|
