@@ -26,16 +26,17 @@
 //
 // Without git or without tags it leaves the catalog as it is.
 //
-// Usage: node scripts/build-versions.js <site-dir>
+// Usage: node scripts/build-versions.js   (publishes into _site/, built by scripts/build-site.sh)
 'use strict';
 
 const fs = require('node:fs');
-const os = require('node:os');
 const path = require('node:path');
 const { derive, applyDerived } = require('./sync-integrations');
 const { GIT, ROOT, folderOf, git, releaseTags } = require('./integration-tags');
 
 const MAX_VERSIONS = 50;
+/** The site folder below the repository root that build-site.sh assembles. */
+const SITE_DIR = '_site';
 
 /** A catalog folder name: one path segment, no traversal. */
 const SAFE_FOLDER = /^[a-z0-9][a-z0-9._-]*$/i;
@@ -145,21 +146,11 @@ function publishItemVersions(site, item) {
 }
 
 function main() {
-  const siteArg = process.argv[2];
-  if (!siteArg) {
-    console.error('Usage: node scripts/build-versions.js <site-dir>');
-    process.exit(2);
-  }
-  const site = path.resolve(siteArg);
-  // The site is built into the repository (build-site.sh: _site) or, in tests,
-  // a temporary directory; never anywhere else on the machine.
-  const allowedBases = [ROOT, os.tmpdir(), fs.realpathSync(os.tmpdir())];
-  if (!allowedBases.some(base => site.startsWith(base + path.sep))) {
-    console.error(`build-versions: the site directory must be inside ${ROOT} or ${os.tmpdir()}`);
-    process.exit(2);
-  }
+  // Always the repository's own site folder (scripts/build-site.sh builds it):
+  // no path comes from the command line.
+  const site = path.join(ROOT, SITE_DIR);
   if (!fs.existsSync(site) || !fs.statSync(site).isDirectory()) {
-    console.error(`build-versions: ${siteArg} is not a directory`);
+    console.error(`build-versions: ${SITE_DIR}/ does not exist; run scripts/build-site.sh`);
     process.exit(2);
   }
   const catalogFile = inside(site, 'catalog.json');

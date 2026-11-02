@@ -11,7 +11,6 @@ const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
 const crypto = require('node:crypto');
 const fs = require('node:fs');
-const os = require('node:os');
 const path = require('node:path');
 const { BASE_INSTALL, FOLDER, GIT, Repo, definition } = require('./fixture');
 
@@ -94,10 +93,11 @@ describe('build-versions', { skip: !GIT && 'git is not installed' }, () => {
       repo.commit('1.1.0');
       repo.run('tag-integrations.js');
 
-      const site = fs.mkdtempSync(path.join(os.tmpdir(), 'marketplace-site-'));
+      const site = path.join(repo.root, '_site');
+      fs.mkdirSync(site);
       try {
         fs.copyFileSync(path.join(repo.root, 'catalog.json'), path.join(site, 'catalog.json'));
-        const result = repo.run('build-versions.js', site);
+        const result = repo.run('build-versions.js');
         assert.equal(result.status, 0, result.output);
         assert.match(result.output, /published 2 integration version\(s\)/);
 
@@ -140,10 +140,11 @@ describe('build-versions', { skip: !GIT && 'git is not installed' }, () => {
     withRepo(repo => {
       repo.write(release('1.0.0'));
       repo.commit('1.0.0');
-      const site = fs.mkdtempSync(path.join(os.tmpdir(), 'marketplace-site-'));
+      const site = path.join(repo.root, '_site');
+      fs.mkdirSync(site);
       try {
         fs.copyFileSync(path.join(repo.root, 'catalog.json'), path.join(site, 'catalog.json'));
-        assert.equal(repo.run('build-versions.js', site).status, 0);
+        assert.equal(repo.run('build-versions.js').status, 0);
         const item = JSON.parse(fs.readFileSync(path.join(site, 'catalog.json'), 'utf8')).items[0];
         assert.equal(item.versions, undefined);
       } finally {

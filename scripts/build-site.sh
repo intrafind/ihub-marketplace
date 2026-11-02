@@ -5,12 +5,17 @@
 # folders, so the browser loads the catalog and item previews from the same
 # origin and the published site always matches the deployed commit.
 #
-# Usage: scripts/build-site.sh [output-dir]   (default: _site)
+# Usage: scripts/build-site.sh [_site]   (always builds into _site/)
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-OUT="${1:-_site}"
-case "$OUT" in /*) ;; *) OUT="$ROOT/$OUT" ;; esac
+# The site is always _site/ in the repository: build-versions.js publishes the
+# release versions into exactly that folder and takes no path from outside.
+if [ "${1:-_site}" != "_site" ]; then
+  echo "build-site: the site is always built into _site/ (got: $1)" >&2
+  exit 2
+fi
+OUT="$ROOT/_site"
 
 # Fail early when the catalog or an integration definition is not publishable
 # (version without release notes, bad compatibility range, missing note file,
@@ -32,7 +37,7 @@ touch "$OUT/.nojekyll"
 # the published catalog.json, so iHub can install a pinned version and keep the
 # definition of every version an update passes. Without git or tags the
 # catalog stays as it is.
-node "$ROOT/scripts/build-versions.js" "$OUT"
+node "$ROOT/scripts/build-versions.js"
 
 # Fail the build when the catalog is not valid JSON or points at a missing file
 node - "$OUT" <<'NODE'

@@ -572,7 +572,7 @@ The catalog carries only the migrations of the releases it lists: an update from
 
 Every integration version that reaches `main` is tagged `integrations/<id>@<version>` (for example `integrations/org.ckan/open-data-portal@1.0.0`) by `node scripts/tag-integrations.js`, which the **Marketplace Website** workflow runs on every push to `main` before it builds the site. A tag is never moved; a folder that changed on `main` under a version that is already tagged fails the workflow (the pull-request check refuses that change before).
 
-When the site is built, `node scripts/build-versions.js <site-dir>` (called by `build-site.sh`) publishes every tagged version next to the current one:
+When the site is built, `node scripts/build-versions.js` (called by `build-site.sh`, always into `_site/`) publishes every tagged version next to the current one:
 
 - `versions/integrations/<folder>/<version>/`: the folder as it was at the tag;
 - `versions/integrations/<folder>/<version>.json`: the **version descriptor**, the catalog item of that version (its own `version`, `compatibility`, `releases`, `migrations`, `source.companions` and `source.integrity`, with `source.path` pointing at the folder above);
