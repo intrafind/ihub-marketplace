@@ -1,8 +1,10 @@
 name: Marketplace Website
 
-# Builds the marketplace website (site/ + catalog.json + content folders) and
-# publishes it to GitHub Pages. Pull requests only build, so a broken catalog
-# reference fails the check before it reaches main.
+# Tests the catalog scripts, builds the marketplace website (site/ +
+# catalog.json + content folders) and publishes it to GitHub Pages. Pull
+# requests only test and build, so a broken catalog reference or an
+# integration change without its version bump or migration fails the check
+# before it reaches main.
 #
 # One-time setup: Settings → Pages → Build and deployment → Source: GitHub Actions
 
@@ -26,6 +28,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
+
+      # validate.js compares every integration folder with main (a changed
+      # folder needs a version bump, a removed install field or action a
+      # migration). A pull request checkout holds only the merge commit, so
+      # fetch main next to it; without it those checks are skipped.
+      - name: Fetch main for the integration checks
+        if: github.event_name == 'pull_request'
+        run: git fetch --no-tags --depth=1 origin +refs/heads/main:refs/remotes/origin/main
+
+      - name: Test the catalog scripts
+        run: node --test scripts/test/*.test.js
 
       - name: Build website
         run: ./scripts/build-site.sh _site
