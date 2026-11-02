@@ -12,6 +12,14 @@ const path = require('node:path');
 const { execFileSync, spawnSync } = require('node:child_process');
 
 const SCRIPTS = path.resolve(__dirname, '..');
+/** The scripts a temporary repository gets, as in this one. */
+const SCRIPT_FILES = [
+  'validate.js',
+  'sync-integrations.js',
+  'integration-tags.js',
+  'tag-integrations.js',
+  'build-versions.js'
+];
 const FOLDER = 'org.example__test';
 
 /** The git binary, found the way validate.js finds it; null when git is not installed. */
@@ -84,7 +92,7 @@ class Repo {
   constructor() {
     this.root = fs.mkdtempSync(path.join(os.tmpdir(), 'marketplace-test-'));
     fs.mkdirSync(path.join(this.root, 'scripts'));
-    for (const script of ['validate.js', 'sync-integrations.js']) {
+    for (const script of SCRIPT_FILES.filter(file => fs.existsSync(path.join(SCRIPTS, file)))) {
       fs.copyFileSync(path.join(SCRIPTS, script), path.join(this.root, 'scripts', script));
     }
     const catalog = {
@@ -99,7 +107,16 @@ class Repo {
     };
     fs.writeFileSync(path.join(this.root, 'catalog.json'), `${JSON.stringify(catalog, null, 2)}\n`);
     // A repository of its own, so the validator never looks at an enclosing one
-    if (GIT) this.git('init', '-q', '-b', 'main');
+    if (GIT) {
+      this.git('init', '-q', '-b', 'main');
+      // The scripts under test run git themselves (tag-integrations creates
+      // annotated tags), so the identity must be in the repository's own config,
+      // not only on this helper's command line: CI runners have none globally.
+      this.git('config', 'user.name', 'Test');
+      this.git('config', 'user.email', 'test@example.com');
+      this.git('config', 'commit.gpgsign', 'false');
+      this.git('config', 'tag.gpgsign', 'false');
+    }
   }
 
   /** Run git in the repository with a fixed identity and no signing. */
@@ -125,7 +142,21 @@ class Repo {
     }
   }
 
+  /** Write another file of the integration folder (a migration module, a note file). */
+  writeFile(rel, content) {
+    const file = path.join(this.root, 'integrations', FOLDER, rel);
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, content);
+  }
+
+  /** Commit everything on the current branch. */
+  commit(message = 'change') {
+    this.git('add', '-A');
+    this.git('commit', '-q', '-m', message);
+  }
+
   /** Commit everything on `main` (the base the validator compares with) and continue on a branch. */
+
   publish() {
     this.git('add', '-A');
     this.git('commit', '-q', '-m', 'base');

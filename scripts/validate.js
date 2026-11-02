@@ -13,24 +13,32 @@
 //   - a release-note path (`releases[].notes.*`) does not exist in the
 //     folder, is not a Markdown file, or leaves the folder;
 //   - a definition migration (`migrations[]`) is malformed: its id is not a
-//     version, it has no steps, a step is not exactly one of the declarative
-//     steps or has bad arguments, or it is a `module` step (code migrations
-//     are not supported yet);
+//     version, it has no steps, a step is not exactly one of the steps or has
+//     bad arguments;
+//   - a `module` step (a migration written as code) names a file that is not
+//     `migrations/<name>.js` (or `.mjs`) of the folder, that is missing, that
+//     imports a sibling file, or that has no hash in the catalog item's
+//     `source.integrity` (iHub runs it only from a registry trusted for code,
+//     and only when the file matches that hash);
 //   - `releases[].migration` is not that release's own version or names no
 //     migration, or a migration is not named by the release of its version;
 //   - the catalog item is out of sync with the folder (version,
 //     compatibility, releases, migrations, companions, integrity): run
 //     `node scripts/sync-integrations.js`.
 //
-// It also compares with the folder on `origin/main` (or `main`) when git has
-// it: a changed folder whose version did not change is an error, since the
-// catalog would then offer different files under the same version. When the
-// version went up, the structure is compared too: an install field or an
-// action that is gone, an enum choice that is gone, or an install field that
-// every installation now needs (required, no default) must be handled by a
-// migration whose id lies between the two versions, so that an update never
+// It also compares each folder with its previous release: the newest git tag
+// `integrations/<id>@<version>` whose version is not above the one in the
+// working tree (tag-integrations.js creates them when a version reaches main),
+// or, for a definition that was never released, the folder on `origin/main`
+// (or `main`). A changed folder whose version did not change is an error,
+// since the catalog would then offer different files under the same version.
+// When the version went up, the structure is compared too: an install field
+// or an action that is gone, an enum choice that is gone, or an install field
+// that every installation now needs (required, no default) must be handled by
+// a migration whose id lies between the two versions, so that an update never
 // leaves an installation with values or action names the new definition
-// rejects.
+// rejects. A `module` step between the two versions counts as handling every
+// such change: its code is not inspected.
 //
 // Usage: node scripts/validate.js
 'use strict';
@@ -38,6 +46,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { execFileSync } = require('node:child_process');
+const { previousRelease } = require('./integration-tags');
 
 const ROOT = path.resolve(__dirname, '..');
 const CATALOG = path.join(ROOT, 'catalog.json');
@@ -132,7 +141,7 @@ for (const item of items) {
 }
 
 // ---------------------------------------------------------------------------
-// definition migrations (declarative steps; `module` steps come with code trust)
+// definition migrations (declarative steps, and `module` steps from trusted registries)
 
 /** An install field key or an action name, as iHub's definition schema accepts it. */
 const IDENTIFIER = /^[A-Za-z]\w{0,63}$/;
@@ -156,7 +165,16 @@ const STEPS = {
   renameScope: { from: 'scope', to: 'scope' }
 };
 const OPTIONAL_ARGUMENTS = new Set(['setValue.when']);
-const STEP_NAMES = Object.keys(STEPS).join(', ');
+const STEP_NAMES = [...Object.keys(STEPS), 'module'].join(', ');
+
+/** The file a `module` step names, as iHub accepts it: `migrations/<name>.js` or `.mjs`. */
+const MODULE_FILE = /^migrations\/[A-Za-z0-9][A-Za-z0-9_-]*(\.[A-Za-z0-9_-]+)*\.m?js$/;
+
+/** A relative import of a sibling (`from './x'`, `import('./x')`, `require('./x')`), as iHub refuses it. */
+const RELATIVE_IMPORT = /\b(?:from|import|require)\s*\(?\s*['"`](\.{1,2}\/[^'"`]*)['"`]/g;
+
+/** The `module` steps of every migration, as `{ where, file }`, for the file checks. */
+const moduleSteps = [];
 
 const isPlainObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 
@@ -186,7 +204,7 @@ function argumentProblem(type, value) {
   }
 }
 
-/** Check one step of a migration: exactly one declarative step with its arguments. */
+/** Check one step of a migration: exactly one step with its arguments. */
 function checkStep(where, step) {
   if (!isPlainObject(step) || Object.keys(step).length !== 1) {
     fail(`${where} must be an object with exactly one step (${STEP_NAMES})`);
@@ -194,9 +212,11 @@ function checkStep(where, step) {
   }
   const [kind] = Object.keys(step);
   if (kind === 'module') {
-    fail(
-      `${where}: module steps are not supported yet (code migrations come with registries trusted for code); use declarative steps (${STEP_NAMES})`
-    );
+    if (typeof step.module !== 'string' || !MODULE_FILE.test(step.module)) {
+      fail(`${where}.module must name a file migrations/<name>.js (or .mjs) of the folder: ${JSON.stringify(step.module)}`);
+      return;
+    }
+    moduleSteps.push({ where, file: step.module });
     return;
   }
   const spec = STEPS[kind];
@@ -336,6 +356,18 @@ function stepsBetween(definition, from, to) {
 }
 
 /**
+ * What a folder is compared with: its previous release tag, or, for a
+ * definition that was never released, the main branch.
+ */
+function baseRefOf(definition) {
+  if (typeof definition?.id === 'string') {
+    const release = previousRelease(ROOT, definition.id, definition.version);
+    if (release) return release.tag;
+  }
+  return mainRef;
+}
+
+/**
  * The structural diff between the definition on the base ref and the one in
  * the working tree, for a version bump. iHub validates a migrated
  * installation against the new definition (install values, the action
@@ -359,12 +391,14 @@ function checkMigrationCoverage(label, previous, definition, ref) {
   const from = previous.version;
   const to = definition.version;
   const steps = stepsBetween(definition, from, to);
+  // A module step is code: what it changes is not known here, so it counts as handling every change.
+  const hasModule = steps.some(step => step.kind === 'module');
   const coverage = {
     label,
     to,
     range: `(${from}, ${to}]`,
     since: `since ${from} on ${ref}`,
-    hasStep: (kind, test) => steps.some(step => step.kind === kind && test(step.args))
+    hasStep: (kind, test) => hasModule || steps.some(step => step.kind === kind && test(step.args))
   };
 
   const before = storedFields(previous);
@@ -430,6 +464,30 @@ function checkRemovedAction({ label, to, range, since, hasStep }, name) {
   );
 }
 
+/**
+ * The files of the `module` steps of one definition: present in the folder,
+ * one bundled file (no import of a sibling, which iHub would refuse), and
+ * hashed in the catalog item's `source.integrity` (sync-integrations.js hashes
+ * every companion; iHub runs a module only when the file matches its hash).
+ */
+function checkModuleFiles(label, folder, dir) {
+  const item = items.find(i => i.type === 'integration' && i.name === folder);
+  for (const { where, file } of moduleSteps) {
+    const full = path.join(dir, file);
+    if (!fs.existsSync(full)) {
+      fail(`${where}: the module ${file} is missing from ${label}`);
+      continue;
+    }
+    const imports = [...fs.readFileSync(full, 'utf8').matchAll(RELATIVE_IMPORT)].map(m => m[1]);
+    if (imports.length > 0) {
+      fail(`${where}: the module ${file} imports ${[...new Set(imports)].join(', ')}; bundle it into one file`);
+    }
+    if (!item?.source?.integrity?.[file]) {
+      fail(`${where}: the module ${file} has no hash in the catalog item's source.integrity; run node scripts/sync-integrations.js`);
+    }
+  }
+}
+
 // ---------------------------------------------------------------------------
 // integration definitions
 
@@ -447,7 +505,7 @@ function folderChangedSince(ref, folder) {
   return Boolean((changed || '').trim() || (untracked || '').trim());
 }
 
-const baseRef = gitRef();
+const mainRef = gitRef();
 const folders = fs.existsSync(INTEGRATIONS_DIR)
   ? fs
       .readdirSync(INTEGRATIONS_DIR, { withFileTypes: true })
@@ -510,10 +568,14 @@ for (const folder of folders) {
     }
   }
 
+  moduleSteps.length = 0;
   checkMigrations(label, definition);
+  checkModuleFiles(label, folder, dir);
 
   // A changed folder needs a new version (and, with it, a releases entry);
-  // a new version needs a migration for every structural change.
+  // a new version needs a migration for every structural change. The base is
+  // the previous release (its tag), else main.
+  const baseRef = baseRefOf(definition);
   if (baseRef) {
     const previousText = gitShow(baseRef, `integrations/${folder}/integration.json`);
     if (previousText) {

@@ -7,7 +7,7 @@
 
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
-const { BASE_ACTIONS, BASE_INSTALL, GIT, definition, validateDefinition, validateUpdate } = require('./fixture');
+const { BASE_ACTIONS, BASE_INSTALL, GIT, Repo, definition, validateDefinition, validateUpdate } = require('./fixture');
 
 /** Version 1.1.0 of the base definition with the given changes. */
 function bump(options = {}) {
@@ -48,11 +48,45 @@ describe('migration format', () => {
     );
   });
 
-  it('refuses a module step', () => {
+  it('accepts a module step whose file is in the folder, bundled and hashed in the catalog', () => {
+    const repo = new Repo();
+    try {
+      repo.writeFile('migrations/1.1.0.js', 'export function up({ instance }) { return instance; }\n');
+      repo.write(bump({ migrations: migration({ module: 'migrations/1.1.0.js' }) }));
+      assertPasses(repo.validate());
+      assert.match(repo.catalogItem().source.integrity['migrations/1.1.0.js'], /^sha256-/);
+    } finally {
+      repo.remove();
+    }
+  });
+
+  it('refuses a module step outside migrations/, a missing module, a sibling import and a missing hash', () => {
+    assertFails(
+      validateDefinition(bump({ migrations: migration({ module: 'connector.js' }) })),
+      'migrations[0].steps[0].module must name a file migrations/<name>.js (or .mjs) of the folder'
+    );
     assertFails(
       validateDefinition(bump({ migrations: migration({ module: 'migrations/1.1.0.js' }) })),
-      'migrations[0].steps[0]: module steps are not supported yet (code migrations come with registries trusted for code); use declarative steps'
+      'migrations[0].steps[0]: the module migrations/1.1.0.js is missing from integrations/org.example__test'
     );
+    const repo = new Repo();
+    const unsynced = new Repo();
+    try {
+      repo.writeFile('migrations/1.1.0.js', "import { x } from './lib.js';\nexport const up = i => i;\n");
+      repo.write(bump({ migrations: migration({ module: 'migrations/1.1.0.js' }) }));
+      assertFails(repo.validate(), 'the module migrations/1.1.0.js imports ./lib.js; bundle it into one file');
+      // The module added after the catalog was synced: it has no hash there.
+      unsynced.write(bump({ migrations: migration({ module: 'migrations/1.1.0.js' }) }));
+      unsynced.writeFile('migrations/1.1.0.js', 'export const up = i => i;\n');
+      assertFails(
+        unsynced.validate(),
+        'catalog.json is out of date',
+        'the module migrations/1.1.0.js has no hash in the catalog item'
+      );
+    } finally {
+      repo.remove();
+      unsynced.remove();
+    }
   });
 
   it('refuses a step that is not exactly one declarative step', () => {
@@ -66,7 +100,7 @@ describe('migration format', () => {
           )
         })
       ),
-      'migrations[0].steps[0] must be an object with exactly one step (renameValue, setValue, removeValue, mapValue, renameAction, removeAction, renameScope)',
+      'migrations[0].steps[0] must be an object with exactly one step (renameValue, setValue, removeValue, mapValue, renameAction, removeAction, renameScope, module)',
       'migrations[0].steps[1]: unknown step "renameField"; use one of renameValue',
       'migrations[0].steps[2] must be an object with exactly one step'
     );

@@ -6,6 +6,12 @@ name: Marketplace Website
 # integration change without its version bump or migration fails the check
 # before it reaches main.
 #
+# On main, every integration version that is not tagged yet gets its release
+# tag `integrations/<id>@<version>` first (scripts/tag-integrations.js), and the
+# build publishes every tagged version under versions/ with `versions` on the
+# catalog item (scripts/build-versions.js), so iHub can install a pinned
+# version and revert to an intermediate one.
+#
 # One-time setup: Settings → Pages → Build and deployment → Source: GitHub Actions
 
 on:
@@ -23,19 +29,46 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  build:
+  # Release tags for the integration versions that reached main. Only on main:
+  # it needs write access to push the tags.
+  tag:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          fetch-tags: true
 
-      # validate.js compares every integration folder with main (a changed
-      # folder needs a version bump, a removed install field or action a
-      # migration). A pull request checkout holds only the merge commit, so
-      # fetch main next to it; without it those checks are skipped.
+      - name: Tag integration releases
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
+          node scripts/tag-integrations.js --push
+
+  build:
+    needs: tag
+    # After the tags on main; on its own for pull requests, where the tag job is skipped
+    if: ${{ !failure() && !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      # Full history with the tags: validate.js compares every integration
+      # folder with its previous release tag (or with main for a definition
+      # that was never released: a changed folder needs a version bump, a
+      # removed install field or action a migration), and build-versions.js
+      # exports every tagged version from git.
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
       - name: Fetch main for the integration checks
         if: github.event_name == 'pull_request'
-        run: git fetch --no-tags --depth=1 origin +refs/heads/main:refs/remotes/origin/main
+        run: git fetch --no-tags origin +refs/heads/main:refs/remotes/origin/main
 
       - name: Test the catalog scripts
         run: node --test scripts/test/*.test.js
