@@ -12,6 +12,14 @@ const path = require('node:path');
 const { execFileSync, spawnSync } = require('node:child_process');
 
 const SCRIPTS = path.resolve(__dirname, '..');
+/** The scripts a temporary repository gets, as in this one. */
+const SCRIPT_FILES = [
+  'validate.js',
+  'sync-integrations.js',
+  'integration-tags.js',
+  'tag-integrations.js',
+  'build-versions.js'
+];
 const FOLDER = 'org.example__test';
 
 /** The git binary, found the way validate.js finds it; null when git is not installed. */
@@ -84,7 +92,7 @@ class Repo {
   constructor() {
     this.root = fs.mkdtempSync(path.join(os.tmpdir(), 'marketplace-test-'));
     fs.mkdirSync(path.join(this.root, 'scripts'));
-    for (const script of ['validate.js', 'sync-integrations.js']) {
+    for (const script of SCRIPT_FILES.filter(file => fs.existsSync(path.join(SCRIPTS, file)))) {
       fs.copyFileSync(path.join(SCRIPTS, script), path.join(this.root, 'scripts', script));
     }
     const catalog = {
@@ -125,7 +133,21 @@ class Repo {
     }
   }
 
+  /** Write another file of the integration folder (a migration module, a note file). */
+  writeFile(rel, content) {
+    const file = path.join(this.root, 'integrations', FOLDER, rel);
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, content);
+  }
+
+  /** Commit everything on the current branch. */
+  commit(message = 'change') {
+    this.git('add', '-A');
+    this.git('commit', '-q', '-m', message);
+  }
+
   /** Commit everything on `main` (the base the validator compares with) and continue on a branch. */
+
   publish() {
     this.git('add', '-A');
     this.git('commit', '-q', '-m', 'base');
