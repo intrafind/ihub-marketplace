@@ -83,18 +83,22 @@ if (require.main === module) {
     console.error('Usage: node scripts/check-served-bundle.js <http(s) address of the bundle> [--concurrency <n>]');
     process.exit(2);
   }
-  // The address is a command-line argument and ends up in the output: no line breaks in it
-  const shown = JSON.stringify(address);
+  // The address is a command-line argument and the problems name files from the
+  // served catalog: neither may add lines of its own to the output
+  const oneLine = text => String(text).replace(/[\r\n]+/g, ' ');
+  const shown = oneLine(address);
   checkServedBundle(address, { concurrency })
     .then(({ items, files, problems }) => {
       if (problems.length) {
-        console.error(`${problems.length} problem(s) in ${shown}:\n  ${problems.join('\n  ')}`);
+        console.error(
+          `${problems.length} problem(s) in ${shown}:\n  ${problems.map(oneLine).join('\n  ')}`
+        );
         process.exit(1);
       }
       console.log(`${shown}: ${items} catalog items, ${files} files, all served`);
     })
     .catch(error => {
-      console.error(`${shown}: ${error.message}`);
+      console.error(`${shown}: ${oneLine(error.message)}`);
       process.exit(1);
     });
 }
