@@ -695,8 +695,13 @@ pre {
 .type-tabs {
   display: flex;
   gap: 0.25rem;
-  border-bottom: 1px solid var(--border);
+  /* The divider is an inset shadow, not a border: the tabs no longer need a
+     negative margin to overlap it, which made this scroll container overflow
+     vertically by 1px (a vertical scrollbar, since overflow-x: auto turns
+     overflow-y into auto as well). */
+  box-shadow: inset 0 -1px 0 var(--border);
   overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .type-tab {
@@ -711,7 +716,6 @@ pre {
   background: transparent;
   border: 0;
   border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
   color: var(--text-muted);
   cursor: pointer;
 }
