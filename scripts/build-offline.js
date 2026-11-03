@@ -21,11 +21,16 @@
 // than the catalog it started from.
 //
 // Usage: scripts/build-offline.sh        (builds _site/ first, then runs this)
-//        node scripts/build-offline.js [--no-archive] [--concurrency <n>]
+//        node scripts/build-offline.js [--version <version>] [--no-archive] [--concurrency <n>]
+//
+// --version is the release version of the bundle (the release workflow passes
+// the UTC build time, yyyymmddhhmm): it is recorded in offline-manifest.json
+// and names the archive. Without it the archive carries the catalog version
+// and the commit.
 //
 // Output: _offline/ihub-marketplace-offline/            the bundle (static files)
-//         _offline/ihub-marketplace-offline-<version>[-<commit>].tar.gz
-//         _offline/ihub-marketplace-offline-<version>[-<commit>].tar.gz.sha256
+//         _offline/ihub-marketplace-offline-<version>.tar.gz
+//         _offline/ihub-marketplace-offline-<version>.tar.gz.sha256
 //
 // The downloads need outbound HTTPS to the hosts of the `url` sources (behind
 // a proxy: NODE_USE_ENV_PROXY=1 and HTTPS_PROXY, and NODE_EXTRA_CA_CERTS for a
@@ -42,6 +47,8 @@ const BUNDLE_NAME = 'ihub-marketplace-offline';
 /** This repository, as the website knows it: its license is the bundle's own LICENSE.txt. */
 const SELF_REPO = 'intrafind/ihub-marketplace';
 const SKILL_NAME = /^[a-z0-9][a-z0-9-]{0,63}$/;
+/** A release version ends up in a file name: letters, digits, `.`, `_` and `-` only. */
+const RELEASE_VERSION = /^[0-9A-Za-z][0-9A-Za-z._-]{0,63}$/;
 
 /** A problem with the catalog or a download; the message says what to fix. */
 class OfflineBuildError extends Error {}
@@ -401,6 +408,7 @@ function createArchive(outDir, archiveName) {
  * @param {(url: string) => Promise<Buffer>} [options.fetchBytes] - downloads one file
  * @param {boolean} [options.archive] - also write the .tar.gz (default true)
  * @param {number} [options.concurrency] - parallel downloads (default 8)
+ * @param {string|null} [options.version] - the release version, e.g. `202611032031`
  * @param {(message: string) => void} [options.log]
  * @returns {Promise<{ bundleDir: string, archive: string|null, items: number, vendored: number }>}
  */
@@ -409,8 +417,14 @@ async function buildOffline({
   fetchBytes = downloadBytes,
   archive = true,
   concurrency = 8,
+  version = null,
   log = console.log
 } = {}) {
+  if (version !== null && !RELEASE_VERSION.test(version)) {
+    throw new OfflineBuildError(
+      `the version ${JSON.stringify(version)} may contain only letters, digits, ".", "_" and "-"`
+    );
+  }
   const siteDir = path.join(root, '_site');
   if (!fs.existsSync(path.join(siteDir, 'catalog.json'))) {
     throw new OfflineBuildError(
@@ -453,6 +467,7 @@ async function buildOffline({
     `${JSON.stringify(
       {
         bundle: BUNDLE_NAME,
+        version,
         catalogVersion: catalog.version || null,
         commit,
         items: catalog.items.length,
@@ -466,12 +481,12 @@ async function buildOffline({
 
   let archivePath = null;
   if (archive) {
-    const version = String(catalog.version || '0').replace(/[^A-Za-z0-9._-]/g, '_');
-    const suffix = commit ? `-${commit.slice(0, 7)}` : '';
-    ({ archive: archivePath } = createArchive(
-      outDir,
-      `${BUNDLE_NAME}-${version}${suffix}.tar.gz`
-    ));
+    const name =
+      version ||
+      `${String(catalog.version || '0').replace(/[^A-Za-z0-9._-]/g, '_')}${
+        commit ? `-${commit.slice(0, 7)}` : ''
+      }`;
+    ({ archive: archivePath } = createArchive(outDir, `${BUNDLE_NAME}-${name}.tar.gz`));
   }
 
   log(
@@ -500,7 +515,13 @@ if (require.main === module) {
     console.error('build-offline: --concurrency needs a positive integer');
     process.exit(2);
   }
-  buildOffline({ archive: !args.includes('--no-archive'), concurrency }).catch(error => {
+  const versionAt = args.indexOf('--version');
+  const version = versionAt >= 0 ? args[versionAt + 1] : null;
+  if (versionAt >= 0 && !version) {
+    console.error('build-offline: --version needs a value');
+    process.exit(2);
+  }
+  buildOffline({ archive: !args.includes('--no-archive'), concurrency, version }).catch(error => {
     console.error(
       error instanceof OfflineBuildError
         ? `build-offline: ${error.message}`

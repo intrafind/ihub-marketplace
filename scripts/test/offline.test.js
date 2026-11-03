@@ -177,6 +177,28 @@ test('switches the website to offline mode and ships the guide', async () => {
   assert.match(fs.readFileSync(path.join(root, '_site/assets/config.js'), 'utf8'), /offline: false/);
 });
 
+test('--version names the archive, and the manifest records it', { skip: !spawnSync('tar', ['--version']).stdout }, async () => {
+  const root = makeRoot([...nativeItems(), urlSkill()]);
+  const { fetchBytes } = fakeFetch(upstream());
+  const { archive } = await buildOffline({ root, fetchBytes, version: '202611032031', log: quiet });
+
+  assert.equal(path.basename(archive), 'ihub-marketplace-offline-202611032031.tar.gz');
+  assert.ok(fs.existsSync(`${archive}.sha256`));
+  assert.equal(readJson(path.join(bundleOf(root), 'offline-manifest.json')).version, '202611032031');
+});
+
+test('without --version the manifest has none and the archive carries the catalog version', async () => {
+  const { root } = await build(nativeItems());
+  assert.equal(readJson(path.join(bundleOf(root), 'offline-manifest.json')).version, null);
+});
+
+test('refuses a version that is not safe in a file name', async () => {
+  for (const bad of ['', '../x', 'a b', '1/2', '-rf', 'x'.repeat(65)]) {
+    const root = makeRoot(nativeItems());
+    await assert.rejects(buildOffline({ root, version: bad, log: quiet }), OfflineBuildError, bad);
+  }
+});
+
 test('a catalog that needs no download builds without one', async () => {
   const { calls, error } = await build(nativeItems());
   assert.equal(error, undefined);

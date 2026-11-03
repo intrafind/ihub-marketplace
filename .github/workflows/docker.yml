@@ -1,18 +1,25 @@
 name: Offline Marketplace
 
 # Builds the offline marketplace for installations without internet access
-# (docs/offline.md) in the two forms it is delivered in:
+# (docs/offline.md) and releases it.
 #
-#   - the container image (Dockerfile): an nginx serving the bundle. Pull
-#     requests build it and test it; main publishes it to the GitHub Container
-#     Registry as ghcr.io/<owner>/ihub-marketplace (tags `latest` and
-#     `sha-<commit>`), for linux/amd64 and linux/arm64. Only main publishes:
-#     a manual run on another branch builds and tests, and stops there.
+# Every pull request that is merged to main is a release. Its version is the
+# UTC time of the run, yyyymmddhhmm (for example 202611032031), and the release
+# is tagged with it:
+#
+#   - the container image (Dockerfile), an nginx serving the bundle, is
+#     published to the GitHub Container Registry as
+#     ghcr.io/<owner>/ihub-marketplace:<version> (also `latest` and
+#     `sha-<commit>`), for linux/amd64 and linux/arm64;
 #   - the bundle itself, a .tar.gz with its .sha256 (scripts/build-offline.sh),
-#     kept as a workflow artifact for hosting on any web server.
+#     is attached to the GitHub release <version>.
+#
+# Pull requests build and test both and publish nothing; the bundle is a
+# workflow artifact there. A manual run on another branch does the same.
 #
 # The image is also rebuilt every week, so that it picks up the security
-# updates of its nginx base image even when the catalog did not change.
+# updates of its nginx base image even when the catalog did not change; that
+# run is a release of its own.
 
 on:
   push:
@@ -25,12 +32,48 @@ on:
 permissions:
   contents: read
 
+# Runs on main queue up one after the other, so a release finds the tag of the
+# one before it
 concurrency:
   group: offline-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
+  # The release version. Only a run that releases (main) has one.
+  version:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: Take the UTC time as the version
+        id: version
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          # Whether the tag exists: a 404 means it does not, anything else is an error
+          tag_exists() {
+            if output="$(gh api "repos/$REPO/git/ref/tags/$1" 2>&1)"; then
+              return 0
+            fi
+            case "$output" in
+              *"Not Found"*) return 1 ;;
+              *) echo "$output" >&2; exit 1 ;;
+            esac
+          }
+          version="$(date -u +%Y%m%d%H%M)"
+          # A release in the same minute: take the next free minute
+          while tag_exists "$version"; do
+            version="$(date -u -d "${version:0:8} ${version:8:2}:${version:10:2} UTC + 1 minute" +%Y%m%d%H%M)"
+          done
+          echo "Version: $version"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
   bundle:
+    needs: version
+    # The version job is skipped on pull requests; the build is not
+    if: ${{ !failure() && !cancelled() }}
     runs-on: ubuntu-latest
     steps:
       # Full history with the tags: build-site.sh publishes the released
@@ -49,7 +92,9 @@ jobs:
         run: node --test scripts/test/*.test.js
 
       - name: Build the offline bundle
-        run: ./scripts/build-offline.sh
+        env:
+          VERSION: ${{ needs.version.outputs.version }}
+        run: ./scripts/build-offline.sh ${VERSION:+--version "$VERSION"}
 
       - name: Upload the bundle
         uses: actions/upload-artifact@v4
@@ -62,6 +107,8 @@ jobs:
           retention-days: 30
 
   image:
+    needs: version
+    if: ${{ !failure() && !cancelled() }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -80,7 +127,9 @@ jobs:
       # What is published must be what was tested: the image is built once
       # for the test, started, and every file of its catalog requested
       - name: Build the image for the test
-        run: docker build --tag ihub-marketplace:ci .
+        env:
+          VERSION: ${{ needs.version.outputs.version }}
+        run: docker build --tag ihub-marketplace:ci ${VERSION:+--build-arg "VERSION=$VERSION"} .
 
       - name: Test the image
         run: |
@@ -103,13 +152,54 @@ jobs:
           REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OWNER: ${{ github.repository_owner }}
           ACTOR: ${{ github.actor }}
+          VERSION: ${{ needs.version.outputs.version }}
         run: |
           image="ghcr.io/${OWNER,,}/ihub-marketplace"
           echo "$REGISTRY_TOKEN" | docker login ghcr.io --username "$ACTOR" --password-stdin
           docker buildx create --name multiarch --driver docker-container --use
           docker buildx build \
             --platform linux/amd64,linux/arm64 \
+            --build-arg "VERSION=$VERSION" \
             --label "org.opencontainers.image.revision=$GITHUB_SHA" \
+            --tag "$image:$VERSION" \
             --tag "$image:latest" \
             --tag "$image:sha-${GITHUB_SHA::7}" \
             --push .
+
+  # The GitHub release: the tag <version> on this commit, the bundle as its
+  # assets, and what was merged since the release before as its notes. Last, so
+  # that a release exists only for a version whose image was published.
+  release:
+    needs: [version, bundle, image]
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download the bundle
+        uses: actions/download-artifact@v4
+        with:
+          name: ihub-marketplace-offline
+          path: assets
+
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          OWNER: ${{ github.repository_owner }}
+          VERSION: ${{ needs.version.outputs.version }}
+        run: |
+          image="ghcr.io/${OWNER,,}/ihub-marketplace"
+          {
+            printf 'Offline marketplace `%s` (UTC build time, yyyymmddhhmm).\n\n' "$VERSION"
+            printf -- '- **Docker image:** `%s:%s`\n' "$image" "$VERSION"
+            printf -- '- **Bundle:** `ihub-marketplace-offline-%s.tar.gz` below, with its `.sha256` file\n\n' "$VERSION"
+            printf 'Hosting it and adding it to iHub: [docs/offline.md](https://github.com/%s/blob/%s/docs/offline.md)\n' "$REPO" "$GITHUB_SHA"
+          } > notes.md
+          gh release create "$VERSION" assets/* \
+            --repo "$REPO" \
+            --target "$GITHUB_SHA" \
+            --title "$VERSION" \
+            --notes-file notes.md \
+            --generate-notes \
+            --latest
