@@ -134,7 +134,7 @@ window.MARKETPLACE_I18N = {
     'start.step1.releases': 'Releases',
     'start.step2.title': 'Open the marketplace',
     'start.step2.text':
-      'Open iHub (<strong>http://localhost:3001</strong> for the binary, <strong>http://localhost:3000</strong> for Docker) and sign in as an administrator. The marketplace is a preview feature: switch it on under <strong>Admin → Features → Marketplace</strong>, then open <strong>Admin → Marketplace</strong>. The <em>iHub Official Marketplace</em> registry is already configured.',
+      'Open iHub (<strong>http://localhost:3001</strong> for the binary, <strong>http://localhost:3000</strong> for Docker) and sign in as an administrator. The marketplace is on by default: open <strong>Admin → Marketplace</strong>, or install integrations from <strong>Admin → Integrations → Catalog</strong>. The <em>iHub Official Marketplace</em> registry is already configured.',
     'start.step2.hint':
       'Registry missing on an older install? Choose <strong>Manage Registries → Add Registry</strong> and paste the registry URL above.',
     'start.step3.title': 'Install content',
@@ -283,7 +283,7 @@ window.MARKETPLACE_I18N = {
     'start.step1.releases': 'Releases',
     'start.step2.title': 'Marktplatz öffnen',
     'start.step2.text':
-      'Öffnen Sie iHub (<strong>http://localhost:3001</strong> beim Binary, <strong>http://localhost:3000</strong> bei Docker) und melden Sie sich als Administrator an. Der Marktplatz ist eine Vorschaufunktion: Schalten Sie ihn unter <strong>Admin → Features → Marktplatz</strong> ein und öffnen Sie dann <strong>Admin → Marktplatz</strong>. Die Registry <em>iHub Official Marketplace</em> ist bereits eingerichtet.',
+      'Öffnen Sie iHub (<strong>http://localhost:3001</strong> beim Binary, <strong>http://localhost:3000</strong> bei Docker) und melden Sie sich als Administrator an. Der Marktplatz ist standardmäßig eingeschaltet: Öffnen Sie <strong>Admin → Marktplatz</strong> oder installieren Sie Integrationen unter <strong>Admin → Integrationen → Katalog</strong>. Die Registry <em>iHub Official Marketplace</em> ist bereits eingerichtet.',
     'start.step2.hint':
       'Fehlt die Registry in einer älteren Installation? Wählen Sie <strong>Registries verwalten → Registry hinzufügen</strong> und fügen Sie die Registry-URL von oben ein.',
     'start.step3.title': 'Inhalte installieren',
