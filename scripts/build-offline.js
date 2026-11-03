@@ -77,10 +77,33 @@ function companionPath(value) {
 
 /** The `name` of a SKILL.md's front matter, or null. */
 function frontMatterName(text) {
-  const match = /^---\r?\n([\s\S]*?)\r?\n---/.exec(text.replace(/^﻿/, ''));
-  if (!match) return null;
-  const line = /^name:\s*(.+?)\s*$/m.exec(match[1]);
-  return line ? line[1].replace(/^(["'])(.*)\1$/, '$2') : null;
+  const lines = text.replace(/^﻿/, '').split(/\r?\n/);
+  if (lines[0].trimEnd() !== '---') return null;
+  for (let index = 1; index < lines.length && lines[index].trimEnd() !== '---'; index++) {
+    if (!lines[index].startsWith('name:')) continue;
+    const value = lines[index].slice('name:'.length).trim().replace(/^(["'])(.*)\1$/, '$2');
+    return value || null;
+  }
+  return null;
+}
+
+/** The folder of a path: everything up to and including the last `/`. */
+function folderOf(file) {
+  return file.slice(0, file.lastIndexOf('/') + 1);
+}
+
+/**
+ * A system binary from a fixed directory, never from a PATH that a project
+ * or the environment could have changed. Windows has no such directories and
+ * resolves the name as usual.
+ *
+ * @param {string} name
+ * @returns {string|null} null when it is not installed
+ */
+function findBinary(name) {
+  if (process.platform === 'win32') return name;
+  const directories = ['/usr/bin', '/bin', '/usr/local/bin', '/opt/homebrew/bin'];
+  return directories.map(dir => path.join(dir, name)).find(file => fs.existsSync(file)) || null;
 }
 
 /**
@@ -319,7 +342,7 @@ function assertSelfContained(catalog, bundleDir, expectedItems) {
       continue;
     }
     if (!exists(source.path)) problems.push(`${label}: ${source.path} is missing`);
-    const folder = source.path.replace(/[^/]*$/, '');
+    const folder = folderOf(source.path);
     for (const companion of source.companions || []) {
       if (!exists(folder + companion)) problems.push(`${label}: ${folder}${companion} is missing`);
     }
@@ -338,16 +361,20 @@ function assertSelfContained(catalog, bundleDir, expectedItems) {
 
 function gitCommit(root) {
   if (process.env.GITHUB_SHA) return process.env.GITHUB_SHA;
-  const result = spawnSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' });
+  const git = findBinary('git');
+  if (!git) return null;
+  const result = spawnSync(git, ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' });
   return result.status === 0 ? result.stdout.trim() : null;
 }
 
 /** Packs the bundle folder into <name>.tar.gz next to it and writes the .sha256 file. */
 function createArchive(outDir, archiveName) {
   const archive = path.join(outDir, archiveName);
-  const isGnu = /GNU tar/.test(spawnSync('tar', ['--version'], { encoding: 'utf8' }).stdout || '');
+  const tar = findBinary('tar');
+  if (!tar) throw new OfflineBuildError('tar is not installed, so no archive can be written');
+  const isGnu = /GNU tar/.test(spawnSync(tar, ['--version'], { encoding: 'utf8' }).stdout || '');
   const result = spawnSync(
-    'tar',
+    tar,
     [
       ...(isGnu ? ['--sort=name', '--owner=0', '--group=0', '--numeric-owner'] : []),
       '-czf',

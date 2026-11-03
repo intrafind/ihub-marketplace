@@ -1558,6 +1558,6 @@ pre {
 }
 
 /* GitHub and other internet links: the offline bundle (assets/config.js) hides them */
-.offline [data-online-only] {
-  display: none !important;
+html.offline [data-online-only] {
+  display: none;
 }

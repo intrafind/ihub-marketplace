@@ -17,7 +17,7 @@
 function filesOf(item) {
   const source = item.source || {};
   if (source.type !== 'relative') return null;
-  const folder = source.path.replace(/[^/]*$/, '');
+  const folder = source.path.slice(0, source.path.lastIndexOf('/') + 1);
   return [
     source.path,
     ...(source.companions || []).map(companion => folder + companion),
@@ -69,7 +69,7 @@ async function checkServedBundle(address, { fetchFn = fetch, concurrency = 8 } =
   });
   await Promise.all(workers);
 
-  return { items: catalog.items.length, files: files.size, problems: problems.sort() };
+  return { items: catalog.items.length, files: files.size, problems: problems.toSorted((a, b) => a.localeCompare(b)) };
 }
 
 module.exports = { checkServedBundle };
@@ -83,16 +83,18 @@ if (require.main === module) {
     console.error('Usage: node scripts/check-served-bundle.js <http(s) address of the bundle> [--concurrency <n>]');
     process.exit(2);
   }
+  // The address is a command-line argument and ends up in the output: no line breaks in it
+  const shown = JSON.stringify(address);
   checkServedBundle(address, { concurrency })
     .then(({ items, files, problems }) => {
       if (problems.length) {
-        console.error(`${problems.length} problem(s) in ${address}:\n  ${problems.join('\n  ')}`);
+        console.error(`${problems.length} problem(s) in ${shown}:\n  ${problems.join('\n  ')}`);
         process.exit(1);
       }
-      console.log(`${address}: ${items} catalog items, ${files} files, all served`);
+      console.log(`${shown}: ${items} catalog items, ${files} files, all served`);
     })
     .catch(error => {
-      console.error(`${address}: ${error.message}`);
+      console.error(`${shown}: ${error.message}`);
       process.exit(1);
     });
 }
