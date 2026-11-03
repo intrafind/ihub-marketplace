@@ -1,14 +1,16 @@
 {
   "name": "ihub-marketplace",
   "private": true,
-  "description": "The official marketplace registry for iHub Apps: catalog, content and the scripts that check it",
+  "description": "The official marketplace registry for iHub Apps: catalog, content and the scripts that check and package it",
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "test": "node --test scripts/test/*.test.js",
     "validate": "node scripts/validate.js",
     "sync-integrations": "node scripts/sync-integrations.js",
     "tag-integrations": "node scripts/tag-integrations.js",
-    "build-versions": "node scripts/build-versions.js"
+    "build-versions": "node scripts/build-versions.js",
+    "build:offline": "./scripts/build-offline.sh",
+    "check-served-bundle": "node scripts/check-served-bundle.js"
   },
   "engines": {
     "node": ">=20"

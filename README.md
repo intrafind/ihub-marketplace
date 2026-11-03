@@ -28,6 +28,21 @@ Features → Marketplace**).
 If the list is empty, press **Refresh** on the registry under **Manage Registries** — the catalog
 is fetched from GitHub, so iHub needs outbound HTTPS access (or a configured proxy).
 
+### Without internet access (air-gapped)
+
+An iHub that cannot reach GitHub uses the **offline marketplace**: this catalog and all its content
+as a Docker image (`ghcr.io/intrafind/ihub-marketplace`) or a `.tar.gz` of static files that you host
+inside your network and add to iHub as a registry. Nothing is dropped: the skills the catalog links
+to on GitHub are copied into the bundle at their pinned commits.
+
+```bash
+docker run -d -p 8080:8080 ghcr.io/intrafind/ihub-marketplace:latest
+# iHub → Admin → Marketplace → Manage Registries → Add Registry:  http://<host>:8080/catalog.json
+```
+
+See [docs/offline.md](docs/offline.md) for getting the image or bundle into the network, hosting
+it, adding it to iHub, updating it and what works offline.
+
 ### Adding the registry manually
 
 On an older install without the preconfigured registry:
@@ -481,17 +496,24 @@ ihub-marketplace/
 ├── prompts/                        # Prompt template files
 ├── skills/                         # Skill packages, one folder per skill with a SKILL.md
 ├── integrations/                   # Integration definitions, one folder per definition with an integration.json
-├── site/                           # Marketplace website (GitHub Pages)
+├── site/                           # Marketplace website (GitHub Pages and the offline bundle)
+├── docs/offline.md                 # Offline (air-gapped) marketplace: image, bundle, hosting, iHub setup
 ├── docs/screenshots/               # Screenshots used in this README
+├── Dockerfile                      # The offline marketplace as an nginx image
+├── docker/nginx.conf               # Its web server configuration
 ├── scripts/build-site.sh           # Assembles the website with the catalog and content (runs validate.js first)
+├── scripts/build-offline.sh        # Builds the offline bundle (_offline/): the site plus every file the catalog points at, as a folder and a .tar.gz
+├── scripts/build-offline.js        # Its second step: copies the skills linked from GitHub into the bundle, switches the site to offline mode
+├── scripts/check-served-bundle.js  # Requests every file a hosted bundle's catalog lists, to check the web server
 ├── scripts/validate.js             # Checks the catalog and the integration definitions (versions, release notes, compatibility, migrations)
 ├── scripts/sync-integrations.js    # Copies version, compatibility, releases, migrations and file hashes of each integration into catalog.json
 ├── scripts/tag-integrations.js     # Tags every integration version that reached main: integrations/<id>@<version>
 ├── scripts/build-versions.js       # Publishes every tagged integration version under versions/ and lists it in the site's catalog.json
 ├── scripts/integration-tags.js     # The release tags, shared by the three scripts above
 ├── scripts/test/                   # Tests of the catalog scripts (node --test, no dependencies)
-├── package.json                    # npm scripts only: test, validate, sync-integrations, tag-integrations, build-versions (no dependencies)
-└── .github/workflows/pages.yml     # Tests and builds on every PR, deploys main to GitHub Pages
+├── package.json                    # npm scripts only: test, validate, sync-integrations, tag-integrations, build-versions, build:offline, check-served-bundle (no dependencies)
+├── .github/workflows/pages.yml     # Tests and builds on every PR, deploys main to GitHub Pages
+└── .github/workflows/docker.yml    # Builds and tests the offline bundle and image on every PR, publishes the image to ghcr.io from main
 ```
 
 ## Website
@@ -608,7 +630,7 @@ When the site is built, `node scripts/build-versions.js` (called by `build-site.
 
 iHub reads `versions` to offer what a registry's **channel** (stable releases or all) and an item's **version pin** (`1.3.x`) allow, fetches the descriptor through `ref` for a pinned install or update, and keeps the definition of every version an update passes, so an installation can be reverted to it later. The committed `catalog.json` carries no `versions`: tags exist only after a release, so only the published copy lists them.
 
-`npm test` (or `node --test scripts/test/*.test.js`) runs the tests of `validate.js`, `sync-integrations.js`, `tag-integrations.js` and `build-versions.js`; they build small temporary git repositories and need nothing but Node.js 20+ and git.
+`npm test` (or `node --test scripts/test/*.test.js`) runs the tests of `validate.js`, `sync-integrations.js`, `tag-integrations.js`, `build-versions.js`, `build-offline.js` and `check-served-bundle.js`; they build small temporary git repositories and need nothing but Node.js 20+ and git.
 
 #### Migrations
 

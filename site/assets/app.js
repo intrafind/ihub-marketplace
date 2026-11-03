@@ -16,6 +16,8 @@
   const GITHUB_BLOB = `https://github.com/${REPO}/blob/${BRANCH}/`;
   const RAW_BASE = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/`;
   const REGISTRY_NAME = 'iHub Official Marketplace';
+  // The offline bundle (scripts/build-offline.js) sets offline: true in assets/config.js
+  const OFFLINE = Boolean(window.MARKETPLACE_CONFIG && window.MARKETPLACE_CONFIG.offline);
   const TYPES = ['all', 'app', 'model', 'prompt', 'skill', 'workflow', 'integration'];
   const PAGE_SIZE = 24;
   const STORAGE = {
@@ -94,14 +96,25 @@
     return label === key ? category : label;
   }
 
+  /** The offline bundle uses the `<key>.offline` text where i18n.js has one */
+  function staticKey(key) {
+    return OFFLINE && I18N.en[`${key}.offline`] ? `${key}.offline` : key;
+  }
+
   function applyStaticTranslations() {
     document.documentElement.lang = state.lang;
+    // Links that point to a copy inside the bundle instead of to GitHub
+    if (OFFLINE) {
+      document.querySelectorAll('[data-offline-href]').forEach(el => {
+        el.setAttribute('href', el.dataset.offlineHref);
+      });
+    }
     document.querySelectorAll('[data-i18n]').forEach(el => {
-      el.textContent = t(el.dataset.i18n);
+      el.textContent = t(staticKey(el.dataset.i18n));
     });
     // Static, trusted strings from i18n.js that contain inline markup
     document.querySelectorAll('[data-i18n-html]').forEach(el => {
-      el.innerHTML = t(el.dataset.i18nHtml);
+      el.innerHTML = t(staticKey(el.dataset.i18nHtml));
     });
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
       el.setAttribute('placeholder', t(el.dataset.i18nPlaceholder));
@@ -155,6 +168,12 @@
 
   /** Base URLs that relative links and images in a skill's Markdown resolve against */
   function documentBases(item) {
+    if (OFFLINE) {
+      // Everything is in the bundle, next to the item
+      const folder = (sourcePath(item) || '').replace(/[^/]*$/, '');
+      const base = new URL(folder, state.contentBase).href;
+      return { links: base, images: base };
+    }
     const raw = item.source?.type === 'url' && RAW_GITHUB.exec(item.source.url);
     if (raw) {
       const folder = raw[4].replace(/[^/]*$/, '');
@@ -170,8 +189,26 @@
   /** The license name, linked to its text when the catalog entry has an http(s) licenseUrl */
   function licenseHtml(item) {
     const name = escapeHtml(item.license);
-    if (!/^https?:\/\//i.test(item.licenseUrl || '')) return name;
-    return `<a href="${escapeHtml(item.licenseUrl)}" target="_blank" rel="noopener noreferrer">${name}</a>`;
+    const url = OFFLINE ? offlineLicenseUrl(item.licenseUrl) : item.licenseUrl;
+    if (!/^https?:\/\//i.test(url || '')) return name;
+    return `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${name}</a>`;
+  }
+
+  /**
+   * Where the offline bundle keeps the license text a catalog entry links to on
+   * GitHub: this repository's LICENSE at the bundle root, the license of a
+   * copied third-party skill under third-party/<owner>/<repo>/<commit>/
+   * (scripts/build-offline.js writes both). Empty when the bundle has no copy.
+   */
+  function offlineLicenseUrl(licenseUrl) {
+    const match = /^https:\/\/github\.com\/([^/]+)\/([^/]+)\/blob\/([^/]+)\/LICENSE$/.exec(
+      licenseUrl || ''
+    );
+    if (!match) return '';
+    const [, owner, repo, ref] = match;
+    const path =
+      `${owner}/${repo}` === REPO ? 'LICENSE.txt' : `third-party/${owner}/${repo}/${ref}/LICENSE.txt`;
+    return new URL(path, state.contentBase).href;
   }
 
   function ihubLink(item) {
@@ -498,9 +535,11 @@
         `<button type="button" class="btn btn-primary" data-action="connect">${escapeHtml(t('ihub.connect'))}</button>`
       );
     }
-    actions.push(
-      `<a class="btn btn-secondary" href="${escapeHtml(githubUrl(item))}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('detail.github'))}</a>`
-    );
+    if (!OFFLINE) {
+      actions.push(
+        `<a class="btn btn-secondary" href="${escapeHtml(githubUrl(item))}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('detail.github'))}</a>`
+      );
+    }
     const url = contentUrl(item);
     if (url) {
       const fileName = (sourcePath(item) || url).split('/').pop();
@@ -560,12 +599,14 @@
     if (item.version) rows.push(metaRow(t('detail.version'), escapeHtml(item.version)));
     if (item.author) rows.push(metaRow(t('detail.author'), escapeHtml(item.author)));
     if (item.license) rows.push(metaRow(t('detail.license'), licenseHtml(item)));
-    rows.push(
-      metaRow(
-        t('detail.source'),
-        `<a href="${escapeHtml(githubUrl(item))}" target="_blank" rel="noopener noreferrer">GitHub</a>`
-      )
-    );
+    if (!OFFLINE) {
+      rows.push(
+        metaRow(
+          t('detail.source'),
+          `<a href="${escapeHtml(githubUrl(item))}" target="_blank" rel="noopener noreferrer">GitHub</a>`
+        )
+      );
+    }
     rows.push(metaRow(t('detail.registry'), escapeHtml(REGISTRY_NAME)));
 
     sections.push(`
@@ -783,7 +824,9 @@
   async function loadCatalog() {
     // The published site ships catalog.json next to index.html. Opening site/
     // on its own (for example while editing the page) falls back to GitHub.
-    const bases = [new URL('./', window.location.href).href, RAW_BASE];
+    // The offline bundle never leaves its own origin
+    const bases = [new URL('./', window.location.href).href];
+    if (!OFFLINE) bases.push(RAW_BASE);
     let lastError;
     for (const base of bases) {
       try {
@@ -978,6 +1021,9 @@
       $('error').textContent = t('browse.loadError');
       return;
     }
+
+    // The bundle's own address is the registry URL to paste into iHub
+    if (OFFLINE) $('registry-url').textContent = new URL('catalog.json', state.contentBase).href;
 
     $('loading').hidden = true;
     renderStats();
