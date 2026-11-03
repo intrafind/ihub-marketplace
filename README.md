@@ -8,21 +8,18 @@ The official marketplace registry for [iHub Apps](https://github.com/intrafind/i
 
 ## Using This Registry in iHub Apps
 
-Current iHub Apps releases ship with this registry preconfigured as **iHub Official Marketplace**.
+Current iHub Apps releases ship with this registry preconfigured as **iHub Official Marketplace**,
+and the Marketplace is on by default (since iHub 5.6.2; switch it off under **Admin → Platform →
+Features → Marketplace**).
 
-1. **Switch the marketplace on.** It is a preview feature: open **Admin → Features** and turn on
-   **Marketplace**.
-
-   ![Admin → Features with the Marketplace preview feature](docs/screenshots/admin-features.png)
-
-2. **Browse.** Open **Admin → Marketplace**. The tabs filter by type (Apps, Models, Prompts,
-   Skills, Workflows); search, registry and status filters narrow the list. Each card shows whether
-   an item is available, **Installed**, or a **Local copy** — an item with the same id that
+1. **Browse.** Open **Admin → Marketplace**. The tabs filter by type (Apps, Models, Prompts,
+   Skills, Workflows, Integrations); search, registry and status filters narrow the list. Each
+   card shows whether an item is available, **Installed**, or a **Local copy** — an item with the same id that
    already exists on your instance, such as an app iHub ships with.
 
    ![Admin → Marketplace in iHub Apps](docs/screenshots/admin-marketplace.png)
 
-3. **Install.** Click a card for its description, tags, registry and license, and a preview of its
+2. **Install.** Click a card for its description, tags, registry and license, and a preview of its
    content; **Install** adds it to your instance. Installed items can later be updated when this
    catalog has a newer version, uninstalled, or detached to maintain them by hand.
 
