@@ -95,7 +95,8 @@ if (require.main === module) {
         );
         process.exit(1);
       }
-      console.log(`${shown}: ${items} catalog items, ${files} files, all served`);
+      // Counts derived from the served catalog are printed as numbers, nothing else
+      console.log(`${shown}: ${Number(items)} catalog items, ${Number(files)} files, all served`);
     })
     .catch(error => {
       console.error(`${shown}: ${oneLine(error.message)}`);
