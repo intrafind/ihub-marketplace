@@ -31,7 +31,9 @@ is fetched from GitHub, so iHub needs outbound HTTPS access (or a configured pro
 ### Without internet access (air-gapped)
 
 An iHub that cannot reach GitHub uses the **offline marketplace**: this catalog and all its content
-as a Docker image (`ghcr.io/intrafind/ihub-marketplace`) or a `.tar.gz` of static files that you host
+as a Docker image (`ghcr.io/intrafind/ihub-marketplace`) or a `.tar.gz` of static files (both
+published with every [release](https://github.com/intrafind/ihub-marketplace/releases), versioned
+by the UTC build time `yyyymmddhhmm`) that you host
 inside your network and add to iHub as a registry. Nothing is dropped: the skills the catalog links
 to on GitHub are copied into the bundle at their pinned commits.
 
@@ -513,7 +515,7 @@ ihub-marketplace/
 ├── scripts/test/                   # Tests of the catalog scripts (node --test, no dependencies)
 ├── package.json                    # npm scripts only: test, validate, sync-integrations, tag-integrations, build-versions, build:offline, check-served-bundle (no dependencies)
 ├── .github/workflows/pages.yml     # Tests and builds on every PR, deploys main to GitHub Pages
-└── .github/workflows/docker.yml    # Builds and tests the offline bundle and image on every PR, publishes the image to ghcr.io from main
+└── .github/workflows/docker.yml    # Builds and tests the offline bundle and image on every PR; every merge to main is a release (version yyyymmddhhmm): image to ghcr.io, bundle on the GitHub release
 ```
 
 ## Website

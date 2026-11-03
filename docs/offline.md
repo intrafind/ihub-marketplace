@@ -7,12 +7,13 @@ you host inside your network and add to iHub as a registry. It contains everythi
 by iHub nor by the website.
 
 You can get it in two forms. Both are built from the same sources by the **Offline Marketplace**
-workflow (`.github/workflows/docker.yml`):
+workflow (`.github/workflows/docker.yml`) and published together as one
+[release](#releases-and-versions):
 
-| Form                | What it is                                                              | Use it when                                  |
-| ------------------- | ----------------------------------------------------------------------- | -------------------------------------------- |
-| **Docker image**    | `ghcr.io/intrafind/ihub-marketplace`: nginx serving the bundle, port 8080 | You run containers (the easiest way)         |
-| **Bundle (.tar.gz)** | The static files, with a `.sha256` file                                 | You have a web server already (nginx, Apache, IIS, Caddy, S3 website, …) |
+| Form                 | What it is                                                                | Use it when                                  |
+| -------------------- | ------------------------------------------------------------------------- | -------------------------------------------- |
+| **Docker image**     | `ghcr.io/intrafind/ihub-marketplace`: nginx serving the bundle, port 8080 | You run containers (the easiest way)         |
+| **Bundle (.tar.gz)** | The static files, with a `.sha256` file, attached to the GitHub release   | You have a web server already (nginx, Apache, IIS, Caddy, S3 website, …) |
 
 ## Quick start with Docker
 
@@ -35,15 +36,16 @@ docker run -d --name ihub-marketplace --restart unless-stopped -p 8080:8080 \
 Open `http://<host>:8080/` for the website, which shows the registry URL to use in iHub
 (`http://<host>:8080/catalog.json`). The image needs no volume, configuration or internet access. It
 runs as a non-root user, also with `--read-only --cap-drop ALL`, answers `GET /healthz` and is about
-90 MB. Images are published for `linux/amd64` and `linux/arm64` with the tags `latest` (the current
-`main`) and `sha-<commit>`.
+90 MB. Images are published for `linux/amd64` and `linux/arm64`. Tag them by version, not by
+`latest`, in production: `ghcr.io/intrafind/ihub-marketplace:<version>` (see
+[Releases and versions](#releases-and-versions)).
 
 ## Quick start without Docker
 
-1. On a machine with internet access, open the **Offline Marketplace** workflow run in
-   **GitHub → Actions** (the latest run on `main`) and download the artifact
-   `ihub-marketplace-offline`. It holds `ihub-marketplace-offline-<version>-<commit>.tar.gz` and its
-   `.sha256` file. (Or build it yourself, see [Building it yourself](#building-it-yourself).)
+1. On a machine with internet access, open the
+   [latest release](https://github.com/intrafind/ihub-marketplace/releases/latest) and download
+   `ihub-marketplace-offline-<version>.tar.gz` and its `.sha256` file. (Or build it yourself, see
+   [Building it yourself](#building-it-yourself).)
 2. Carry both files into the network, verify and unpack the bundle where your web server serves
    files from:
 
@@ -124,9 +126,28 @@ What the bundle cannot change is what the items connect to:
   ([local LLM providers](https://github.com/intrafind/ihub-apps/blob/main/docs/local-llm-providers.md)).
 - Apps, prompts, workflows and skills need nothing but iHub and a model.
 
+## Releases and versions
+
+Every pull request that is merged to `main` is a release, and so is the weekly rebuild that picks up
+the security updates of the image's base image. The **version** is the UTC time of the build as
+`yyyymmddhhmm`, for example `202611032031` (two releases in the same minute: the second takes the
+next one). A release holds, under the same version:
+
+- the **Docker image** `ghcr.io/intrafind/ihub-marketplace:<version>`. `latest` is the newest release,
+  `sha-<commit>` names the commit it was built from, and the image's
+  `org.opencontainers.image.version` label carries the version;
+- the **bundle** `ihub-marketplace-offline-<version>.tar.gz` and
+  `ihub-marketplace-offline-<version>.tar.gz.sha256`, attached to the
+  [GitHub release](https://github.com/intrafind/ihub-marketplace/releases) `<version>`, which also
+  lists what was merged since the release before.
+
+The same version is in the bundle's `offline-manifest.json` (`version`, with the `commit`), so a
+running copy tells which release it is: `curl http://<host>:8080/offline-manifest.json`. Pull requests
+build and test everything but publish nothing.
+
 ## Updating
 
-Publish a new bundle the way you published the first one and iHub finds it:
+Publish a new release the way you published the first one and iHub finds it:
 
 - **Docker:** `docker pull` and `docker save` on the connected side, `docker load` and
   `docker rm -f` / `docker run` again on the other (the container holds no data).
@@ -155,8 +176,12 @@ them.
 ```bash
 ./scripts/build-offline.sh                 # npm run build:offline
 # _offline/ihub-marketplace-offline/                      the bundle
-# _offline/ihub-marketplace-offline-<version>-<commit>.tar.gz (+ .sha256)
+# _offline/ihub-marketplace-offline-<catalog version>-<commit>.tar.gz (+ .sha256)
 ```
+
+`--version <version>` sets the release version, which names the archive and is recorded in the
+manifest (`./scripts/build-offline.sh --version 202611032031`); the release workflow passes the UTC
+time of its run.
 
 The script builds the website (`scripts/build-site.sh`, which validates the catalog), downloads the
 skills the catalog links to elsewhere (`scripts/build-offline.js`) and writes the archive. It fails
@@ -171,7 +196,7 @@ NODE_USE_ENV_PROXY=1 HTTPS_PROXY=http://proxy:3128 NODE_EXTRA_CA_CERTS=/path/to/
 The image is built from the same sources (the `Dockerfile` runs the script in a first stage):
 
 ```bash
-docker build -t ihub-marketplace .
+docker build -t ihub-marketplace .                              # add --build-arg VERSION=<version> to set the version label
 docker run -d -p 8080:8080 ihub-marketplace
 ```
 

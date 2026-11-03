@@ -24,6 +24,10 @@ FROM --platform=$BUILDPLATFORM node:22-alpine AS bundle
 ARG NODE_USE_ENV_PROXY
 ARG NODE_EXTRA_CA_CERTS
 
+# The release version, the UTC build time yyyymmddhhmm (the release workflow
+# sets it); recorded in offline-manifest.json and the image's version label
+ARG VERSION=unreleased
+
 RUN apk add --no-cache bash git
 
 WORKDIR /src
@@ -31,12 +35,15 @@ COPY . .
 
 # The sources belong to another user than the one that builds them here
 RUN git config --global --add safe.directory /src \
- && ./scripts/build-offline.sh --no-archive
+ && ./scripts/build-offline.sh --no-archive --version "$VERSION"
 
 # ---- Serve it --------------------------------------------------------------
 FROM nginxinc/nginx-unprivileged:1.28-alpine
 
+ARG VERSION=unreleased
+
 LABEL org.opencontainers.image.title="iHub Marketplace (offline)" \
+      org.opencontainers.image.version="${VERSION}" \
       org.opencontainers.image.description="The iHub marketplace as a static site for installations without internet access" \
       org.opencontainers.image.source="https://github.com/intrafind/ihub-marketplace" \
       org.opencontainers.image.licenses="BSD-3-Clause-with-Mandatory-Attribution"
