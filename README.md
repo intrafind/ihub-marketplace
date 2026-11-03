@@ -434,13 +434,44 @@ Task-focused skills for legal, compliance, finance, security, HR, sales, custome
 | `activity-roundup` | Activity Roundup | Productivity | productivity |
 | `personal-context-keeper` | Personal Context Keeper | Productivity | productivity |
 
-### Integrations (1)
+### Integrations (30)
 
-Installable integrations (iHub 5.6+): a definition folder with the actions an app's model may call, the settings the admin fills in at install time and, for the `openapi` protocol, the trimmed API document. Install under **Admin → Marketplace → Integrations**, then set it up under **Admin → Integrations** and bind it to an app.
+Installable integrations (iHub 5.6+): a definition folder with the actions an app's model may call, the settings the admin fills in at install time and, for the `openapi` protocol, the trimmed API document. Install them from **Admin → Integrations → Catalog**, which lists this registry's integrations next to the ones iHub ships, or under **Admin → Marketplace → Integrations**; then bind the installation to an app.
+
+The `mcp__*` definitions connect a hosted MCP server with one shared credential (or none). They used to ship with iHub and moved here so they can be updated without an iHub release; iHub moves an existing installation of one of them over to this registry on upgrade.
 
 | ID | Name | Protocol | Description |
 |----|------|----------|-------------|
 | `org.ckan__open-data-portal` | CKAN Open Data Portal | openapi | Search datasets, read metadata, query DataStore tables and fetch resources of any CKAN portal (GovData, state and city portals, internal catalogs). Ships with the **Open Data Assistant** app. |
+| `mcp__apify` | Apify | mcp | Run Apify Actors for web scraping, crawling and data extraction. |
+| `mcp__astro-docs` | Astro Docs | mcp | Search the official documentation of the Astro web framework. |
+| `mcp__braintrust` | Braintrust | mcp | Search Braintrust experiments, datasets and logs for evaluating AI applications. |
+| `mcp__browser-use` | Browser Use | mcp | Let a cloud browser agent navigate websites, fill in forms and extract information. |
+| `mcp__buildkite` | Buildkite | mcp | Inspect Buildkite pipelines, builds, jobs and logs. |
+| `mcp__close` | Close | mcp | Search and update leads, contacts, opportunities and activities in the Close CRM. |
+| `mcp__cloudflare` | Cloudflare | mcp | Manage a Cloudflare account through the Cloudflare API: Workers, DNS, R2, KV and more. |
+| `mcp__cloudinary` | Cloudinary | mcp | Search, upload, tag and transform images and videos in Cloudinary. |
+| `mcp__fireflies` | Fireflies.ai | mcp | Search meeting transcripts, summaries and action items recorded by Fireflies. |
+| `mcp__github` | GitHub | mcp | Work with repositories, issues, pull requests, code search and Actions. |
+| `mcp__google-maps` | Google Maps | mcp | Ground answers in Google Maps data: places, addresses and routes (Maps Grounding Lite). |
+| `mcp__honeycomb` | Honeycomb | mcp | Query observability data, traces, boards, triggers and SLOs in Honeycomb. |
+| `mcp__hugging-face` | Hugging Face | mcp | Search models, datasets, Spaces and papers on the Hugging Face Hub. |
+| `mcp__intercom` | Intercom | mcp | Search conversations, contacts, companies and help-center articles, and add internal notes. |
+| `mcp__linear` | Linear | mcp | Find, create and update Linear issues, projects and comments. |
+| `mcp__microsoft-learn` | Microsoft Learn | mcp | Search and read official Microsoft documentation and code samples for Azure, Microsoft 365, .NET and more. |
+| `mcp__modjo` | Modjo | mcp | Analyse recorded sales calls, deals and accounts. |
+| `mcp__monday` | monday.com | mcp | Read and update monday.com boards, items, updates and workspaces. |
+| `mcp__neon` | Neon | mcp | Manage serverless Postgres projects and branches on Neon and run SQL queries. |
+| `mcp__pagerduty` | PagerDuty | mcp | Look up incidents, services, schedules and on-call rotations in PagerDuty. |
+| `mcp__posthog` | PostHog | mcp | Query product analytics, insights, feature flags, experiments and error tracking. |
+| `mcp__postman` | Postman | mcp | Manage Postman workspaces, collections, environments and API specifications. |
+| `mcp__primamcp` | PRIMAMCP | mcp | Look up German and EU legal information for legal research. |
+| `mcp__statista` | Statista | mcp | Search Statista statistics and retrieve chart data for market and consumer research. |
+| `mcp__stripe` | Stripe | mcp | Work with Stripe customers, payments, invoices, subscriptions and products, and search the Stripe docs. |
+| `mcp__supabase` | Supabase | mcp | Query and manage Supabase projects: database, tables, migrations, edge functions and logs. |
+| `mcp__superglue` | superglue | mcp | Discover and run prebuilt integration tools that connect APIs and systems. |
+| `mcp__wix` | Wix | mcp | Manage Wix sites and the business data behind them. |
+| `mcp__zapier` | Zapier | mcp | Run actions in thousands of apps through the actions configured on a Zapier MCP server. |
 
 ## Repository Structure
 

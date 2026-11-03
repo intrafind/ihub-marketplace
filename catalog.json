@@ -4489,6 +4489,963 @@
       }
     },
     {
+      "type": "integration",
+      "name": "mcp__apify",
+      "displayName": { "en": "Apify", "de": "Apify" },
+      "description": {
+        "en": "Run Apify Actors for web scraping, crawling and data extraction.\n\nAppend ?tools=actors,docs,apify/rag-web-browser (for example) to choose the tools and Actors.",
+        "de": "Apify-Actors für Web-Scraping, Crawling und Datenextraktion ausführen.\n\nMit ?tools=actors,docs,apify/rag-web-browser (Beispiel) an der URL die Tools und Actors auswählen."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Apify",
+      "category": "utility",
+      "tags": ["mcp", "scraping", "crawler", "web data"],
+      "icon": "globe",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__apify/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__astro-docs",
+      "displayName": { "en": "Astro Docs", "de": "Astro Docs" },
+      "description": {
+        "en": "Search the official documentation of the Astro web framework.",
+        "de": "Die offizielle Dokumentation des Web-Frameworks Astro durchsuchen."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Astro",
+      "category": "coding",
+      "tags": ["mcp", "web", "framework", "docs"],
+      "icon": "book-open",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__astro-docs/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__braintrust",
+      "displayName": { "en": "Braintrust", "de": "Braintrust" },
+      "description": {
+        "en": "Search Braintrust experiments, datasets and logs for evaluating AI applications.\n\nThe EU region uses https://api-eu.braintrust.dev/mcp.",
+        "de": "Braintrust-Experimente, Datasets und Logs zur Evaluierung von KI-Anwendungen durchsuchen.\n\nDie EU-Region nutzt https://api-eu.braintrust.dev/mcp."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Braintrust",
+      "category": "coding",
+      "tags": ["mcp", "evals", "llm", "observability"],
+      "icon": "beaker",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__braintrust/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__browser-use",
+      "displayName": { "en": "Browser Use", "de": "Browser Use" },
+      "description": {
+        "en": "Let a cloud browser agent navigate websites, fill in forms and extract information.",
+        "de": "Einen Cloud-Browser-Agenten Websites bedienen, Formulare ausfüllen und Informationen auslesen lassen."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Browser Use",
+      "category": "utility",
+      "tags": ["mcp", "browser", "web automation", "agent"],
+      "icon": "globe",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__browser-use/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__buildkite",
+      "displayName": { "en": "Buildkite", "de": "Buildkite" },
+      "description": {
+        "en": "Inspect Buildkite pipelines, builds, jobs and logs.\n\nTokens only work on the /direct endpoint. Add the header “X-Buildkite-Readonly: true” to hide tools that change data.",
+        "de": "Buildkite-Pipelines, Builds, Jobs und Logs einsehen.\n\nTokens funktionieren nur am Endpunkt /direct. Mit dem Header „X-Buildkite-Readonly: true“ werden Tools ausgeblendet, die Daten ändern."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Buildkite",
+      "category": "coding",
+      "tags": ["mcp", "ci", "cd", "pipelines", "builds"],
+      "icon": "arrow-path",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__buildkite/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__close",
+      "displayName": { "en": "Close", "de": "Close" },
+      "description": {
+        "en": "Search and update leads, contacts, opportunities and activities in the Close CRM.\n\nThe Close-Scope header starts read-only (mcp.read). Change it to mcp.write_safe or mcp.write_destructive to allow changes.",
+        "de": "Leads, Kontakte, Opportunities und Aktivitäten im Close-CRM suchen und bearbeiten.\n\nDer Header Close-Scope ist zunächst nur lesend (mcp.read). Für Änderungen auf mcp.write_safe oder mcp.write_destructive setzen."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Close",
+      "category": "sales",
+      "tags": ["mcp", "crm", "sales", "leads"],
+      "icon": "briefcase",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__close/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__cloudflare",
+      "displayName": { "en": "Cloudflare", "de": "Cloudflare" },
+      "description": {
+        "en": "Manage a Cloudflare account through the Cloudflare API: Workers, DNS, R2, KV and more.",
+        "de": "Ein Cloudflare-Konto über die Cloudflare-API verwalten: Workers, DNS, R2, KV und mehr."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Cloudflare",
+      "category": "coding",
+      "tags": ["mcp", "workers", "dns", "r2", "cdn"],
+      "icon": "cloud",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__cloudflare/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__cloudinary",
+      "displayName": { "en": "Cloudinary", "de": "Cloudinary" },
+      "description": {
+        "en": "Search, upload, tag and transform images and videos in Cloudinary.",
+        "de": "Bilder und Videos in Cloudinary suchen, hochladen, verschlagworten und transformieren."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Cloudinary",
+      "category": "creative",
+      "tags": ["mcp", "images", "video", "assets", "dam"],
+      "icon": "photograph",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__cloudinary/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__fireflies",
+      "displayName": { "en": "Fireflies.ai", "de": "Fireflies.ai" },
+      "description": {
+        "en": "Search meeting transcripts, summaries and action items recorded by Fireflies.",
+        "de": "Von Fireflies aufgezeichnete Meeting-Transkripte, Zusammenfassungen und Aufgaben durchsuchen."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Fireflies.ai",
+      "category": "productivity",
+      "tags": ["mcp", "meetings", "transcripts", "notes"],
+      "icon": "microphone",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__fireflies/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__github",
+      "displayName": { "en": "GitHub", "de": "GitHub" },
+      "description": {
+        "en": "Work with repositories, issues, pull requests, code search and Actions.\n\nUse https://api.githubcopilot.com/mcp/readonly for read-only tools. GitHub Enterprise Cloud with data residency uses https://copilot-api.<subdomain>.ghe.com/mcp; GitHub Enterprise Server is not supported.",
+        "de": "Mit Repositories, Issues, Pull Requests, Codesuche und Actions arbeiten.\n\nMit https://api.githubcopilot.com/mcp/readonly nur lesende Tools nutzen. GitHub Enterprise Cloud mit Datenresidenz nutzt https://copilot-api.<subdomain>.ghe.com/mcp; GitHub Enterprise Server wird nicht unterstützt."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "GitHub",
+      "category": "coding",
+      "tags": ["mcp", "git", "code", "issues", "pull requests"],
+      "icon": "code",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__github/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__google-maps",
+      "displayName": { "en": "Google Maps", "de": "Google Maps" },
+      "description": {
+        "en": "Ground answers in Google Maps data: places, addresses and routes (Maps Grounding Lite).",
+        "de": "Antworten mit Google-Maps-Daten untermauern: Orte, Adressen und Routen (Maps Grounding Lite)."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Google",
+      "category": "utility",
+      "tags": ["mcp", "maps", "places", "geocoding", "routes", "location"],
+      "icon": "globe",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__google-maps/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__honeycomb",
+      "displayName": { "en": "Honeycomb", "de": "Honeycomb" },
+      "description": {
+        "en": "Query observability data, traces, boards, triggers and SLOs in Honeycomb.\n\nEU teams use https://mcp.eu1.honeycomb.io/mcp.",
+        "de": "Observability-Daten, Traces, Boards, Trigger und SLOs in Honeycomb abfragen.\n\nEU-Teams nutzen https://mcp.eu1.honeycomb.io/mcp."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Honeycomb",
+      "category": "operations",
+      "tags": ["mcp", "observability", "tracing", "slo"],
+      "icon": "chart-bar",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__honeycomb/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__hugging-face",
+      "displayName": { "en": "Hugging Face", "de": "Hugging Face" },
+      "description": {
+        "en": "Search models, datasets, Spaces and papers on the Hugging Face Hub.\n\nWorks without a token with a reduced tool set. For all tools, create an access token at huggingface.co/settings/tokens, switch the authentication to Bearer token, and pick tools and Spaces at huggingface.co/settings/mcp.",
+        "de": "Modelle, Datasets, Spaces und Paper auf dem Hugging Face Hub durchsuchen.\n\nFunktioniert ohne Token mit weniger Tools. Für alle Tools ein Access Token unter huggingface.co/settings/tokens erstellen, die Authentifizierung auf Bearer-Token umstellen und Tools sowie Spaces unter huggingface.co/settings/mcp auswählen."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Hugging Face",
+      "category": "analysis",
+      "tags": ["mcp", "models", "datasets", "ml", "papers"],
+      "icon": "cpu-chip",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__hugging-face/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__intercom",
+      "displayName": { "en": "Intercom", "de": "Intercom" },
+      "description": {
+        "en": "Search conversations, contacts, companies and help-center articles, and add internal notes.\n\nEU-hosted workspaces use https://mcp.eu.intercom.com/mcp. Australian workspaces are not supported.",
+        "de": "Konversationen, Kontakte, Firmen und Help-Center-Artikel durchsuchen und interne Notizen hinzufügen.\n\nIn der EU gehostete Workspaces nutzen https://mcp.eu.intercom.com/mcp. Australische Workspaces werden nicht unterstützt."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Intercom",
+      "category": "support",
+      "tags": ["mcp", "support", "helpdesk", "crm"],
+      "icon": "chat-bubble-left-right",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__intercom/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__linear",
+      "displayName": { "en": "Linear", "de": "Linear" },
+      "description": {
+        "en": "Find, create and update Linear issues, projects and comments.",
+        "de": "Linear-Issues, Projekte und Kommentare finden, erstellen und bearbeiten."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Linear",
+      "category": "productivity",
+      "tags": ["mcp", "issues", "project management", "tickets"],
+      "icon": "ticket",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__linear/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__microsoft-learn",
+      "displayName": { "en": "Microsoft Learn", "de": "Microsoft Learn" },
+      "description": {
+        "en": "Search and read official Microsoft documentation and code samples for Azure, Microsoft 365, .NET and more.",
+        "de": "Offizielle Microsoft-Dokumentation und Codebeispiele zu Azure, Microsoft 365, .NET und mehr durchsuchen und lesen."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Microsoft",
+      "category": "coding",
+      "tags": ["mcp", "azure", "microsoft 365", ".net", "docs"],
+      "icon": "academic-cap",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__microsoft-learn/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__modjo",
+      "displayName": { "en": "Modjo", "de": "Modjo" },
+      "description": {
+        "en": "Analyse recorded sales calls, deals and accounts.",
+        "de": "Aufgezeichnete Verkaufsgespräche, Deals und Accounts analysieren."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Modjo",
+      "category": "sales",
+      "tags": ["mcp", "sales", "calls", "conversation intelligence"],
+      "icon": "microphone",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__modjo/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__monday",
+      "displayName": { "en": "monday.com", "de": "monday.com" },
+      "description": {
+        "en": "Read and update monday.com boards, items, updates and workspaces.",
+        "de": "monday.com-Boards, Items, Updates und Workspaces lesen und bearbeiten."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "monday.com",
+      "category": "productivity",
+      "tags": ["mcp", "project management", "boards", "tasks"],
+      "icon": "table-cells",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__monday/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__neon",
+      "displayName": { "en": "Neon", "de": "Neon" },
+      "description": {
+        "en": "Manage serverless Postgres projects and branches on Neon and run SQL queries.\n\nAppend ?readonly=true for read-only tools, or ?projectId=<id> to limit the server to one project.",
+        "de": "Serverlose Postgres-Projekte und -Branches auf Neon verwalten und SQL-Abfragen ausführen.\n\nMit ?readonly=true nur lesende Tools nutzen oder mit ?projectId=<id> auf ein Projekt beschränken."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Neon",
+      "category": "coding",
+      "tags": ["mcp", "postgres", "database", "sql"],
+      "icon": "database",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__neon/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__pagerduty",
+      "displayName": { "en": "PagerDuty", "de": "PagerDuty" },
+      "description": {
+        "en": "Look up incidents, services, schedules and on-call rotations in PagerDuty.\n\nEU accounts use https://mcp.eu.pagerduty.com/mcp.",
+        "de": "Incidents, Services, Dienstpläne und Rufbereitschaften in PagerDuty abrufen.\n\nEU-Konten nutzen https://mcp.eu.pagerduty.com/mcp."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "PagerDuty",
+      "category": "operations",
+      "tags": ["mcp", "incidents", "on-call", "operations"],
+      "icon": "shield-alert",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__pagerduty/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__posthog",
+      "displayName": { "en": "PostHog", "de": "PostHog" },
+      "description": {
+        "en": "Query product analytics, insights, feature flags, experiments and error tracking.\n\nEU Cloud projects use https://mcp-eu.posthog.com/mcp. Add ?features=flags,dashboards (for example) to the URL to limit the tools to those areas.",
+        "de": "Produktanalysen, Insights, Feature Flags, Experimente und Fehler-Tracking abfragen.\n\nProjekte in der EU Cloud nutzen https://mcp-eu.posthog.com/mcp. Mit ?features=flags,dashboards (Beispiel) an der URL werden die Tools auf diese Bereiche beschränkt."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "PostHog",
+      "category": "analysis",
+      "tags": ["mcp", "product analytics", "feature flags", "errors"],
+      "icon": "chart-bar",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__posthog/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__postman",
+      "displayName": { "en": "Postman", "de": "Postman" },
+      "description": {
+        "en": "Manage Postman workspaces, collections, environments and API specifications.\n\n/minimal offers the essential tools; use /mcp for the full tool set or /code for code generation. The EU region uses https://mcp.eu.postman.com.",
+        "de": "Postman-Workspaces, Collections, Umgebungen und API-Spezifikationen verwalten.\n\n/minimal bietet die wichtigsten Tools; /mcp für alle Tools oder /code für Codegenerierung verwenden. Die EU-Region nutzt https://mcp.eu.postman.com."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Postman",
+      "category": "coding",
+      "tags": ["mcp", "api", "testing", "collections"],
+      "icon": "code-bracket",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__postman/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__primamcp",
+      "displayName": { "en": "PRIMAMCP", "de": "PRIMAMCP" },
+      "description": {
+        "en": "Look up German and EU legal information for legal research.",
+        "de": "Rechtsinformationen zu deutschem und EU-Recht für die juristische Recherche abrufen."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "PLANIT PRIMA",
+      "category": "legal",
+      "tags": ["mcp", "legal", "law", "germany", "eu", "lawbster"],
+      "icon": "book-open",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__primamcp/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__statista",
+      "displayName": { "en": "Statista", "de": "Statista" },
+      "description": {
+        "en": "Search Statista statistics and retrieve chart data for market and consumer research.",
+        "de": "Statista-Statistiken durchsuchen und Diagrammdaten für Markt- und Verbraucherforschung abrufen."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Statista",
+      "category": "analysis",
+      "tags": ["mcp", "statistics", "market research"],
+      "icon": "presentation-chart-bar",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__statista/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__stripe",
+      "displayName": { "en": "Stripe", "de": "Stripe" },
+      "description": {
+        "en": "Work with Stripe customers, payments, invoices, subscriptions and products, and search the Stripe docs.\n\nTest in a sandbox first. Stripe asks for human confirmation of some write actions, such as refunds.",
+        "de": "Mit Stripe-Kunden, Zahlungen, Rechnungen, Abos und Produkten arbeiten und die Stripe-Dokumentation durchsuchen.\n\nZuerst in einer Sandbox testen. Für manche schreibenden Aktionen, etwa Erstattungen, verlangt Stripe eine Bestätigung durch einen Menschen."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Stripe",
+      "category": "finance",
+      "tags": ["mcp", "payments", "billing", "subscriptions", "invoices"],
+      "icon": "briefcase",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__stripe/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__supabase",
+      "displayName": { "en": "Supabase", "de": "Supabase" },
+      "description": {
+        "en": "Query and manage Supabase projects: database, tables, migrations, edge functions and logs.\n\nRecommended: append ?project_ref=<project-ref>&read_only=true to limit the server to one project and read-only queries.",
+        "de": "Supabase-Projekte abfragen und verwalten: Datenbank, Tabellen, Migrationen, Edge Functions und Logs.\n\nEmpfohlen: ?project_ref=<projekt-ref>&read_only=true an die URL anhängen, um den Server auf ein Projekt und lesende Abfragen zu beschränken."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Supabase",
+      "category": "coding",
+      "tags": ["mcp", "postgres", "database", "sql"],
+      "icon": "database",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__supabase/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__superglue",
+      "displayName": { "en": "superglue", "de": "superglue" },
+      "description": {
+        "en": "Discover and run prebuilt integration tools that connect APIs and systems.",
+        "de": "Vorgefertigte Integrationstools finden und ausführen, die APIs und Systeme verbinden."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "superglue",
+      "category": "utility",
+      "tags": ["mcp", "integrations", "api", "workflows"],
+      "icon": "arrows-right-left",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__superglue/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__wix",
+      "displayName": { "en": "Wix", "de": "Wix" },
+      "description": {
+        "en": "Manage Wix sites and the business data behind them.\n\nReplace YOUR_WIX_ACCOUNT_ID in the additional headers with your Wix account ID. The key is sent without a “Bearer” prefix.",
+        "de": "Wix-Websites und die zugehörigen Geschäftsdaten verwalten.\n\nYOUR_WIX_ACCOUNT_ID in den zusätzlichen Headern durch die eigene Wix-Konto-ID ersetzen. Der Schlüssel wird ohne „Bearer“-Präfix gesendet."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Wix",
+      "category": "creative",
+      "tags": ["mcp", "website", "cms", "e-commerce"],
+      "icon": "globe",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__wix/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
+      "type": "integration",
+      "name": "mcp__zapier",
+      "displayName": { "en": "Zapier", "de": "Zapier" },
+      "description": {
+        "en": "Run actions in thousands of apps through the actions configured on a Zapier MCP server.",
+        "de": "Aktionen in Tausenden Apps über die auf einem Zapier-MCP-Server konfigurierten Aktionen ausführen."
+      },
+      "version": "1.0.0",
+      "compatibility": { "ihub": ">=5.6.0" },
+      "releases": [
+        {
+          "version": "1.0.0",
+          "date": "2026-11-03",
+          "summary": {
+            "en": "First version in the marketplace; previously shipped with iHub.",
+            "de": "Erste Version im Marketplace; bisher mit iHub ausgeliefert."
+          }
+        }
+      ],
+      "author": "Zapier",
+      "category": "utility",
+      "tags": ["mcp", "workflows", "integrations", "no-code"],
+      "icon": "workflow",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "integrations/mcp__zapier/integration.json",
+        "companions": [],
+        "integrity": {}
+      }
+    },
+    {
       "type": "app",
       "name": "open-data-assistant",
       "displayName": { "en": "Open Data Assistant", "de": "Open-Data-Assistent" },
