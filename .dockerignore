@@ -1,0 +1,11 @@
+# The image builds the bundle from the sources; these never belong in the
+# build context. .git stays: scripts/build-site.sh needs the release tags of
+# the integrations.
+_site
+_offline
+node_modules
+.github
+docs/screenshots
+*.tar.gz
+*.log
+.DS_Store

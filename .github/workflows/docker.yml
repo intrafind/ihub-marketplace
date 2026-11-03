@@ -1,0 +1,115 @@
+name: Offline Marketplace
+
+# Builds the offline marketplace for installations without internet access
+# (docs/offline.md) in the two forms it is delivered in:
+#
+#   - the container image (Dockerfile): an nginx serving the bundle. Pull
+#     requests build it and test it; main publishes it to the GitHub Container
+#     Registry as ghcr.io/<owner>/ihub-marketplace (tags `latest` and
+#     `sha-<commit>`), for linux/amd64 and linux/arm64. Only main publishes:
+#     a manual run on another branch builds and tests, and stops there.
+#   - the bundle itself, a .tar.gz with its .sha256 (scripts/build-offline.sh),
+#     kept as a workflow artifact for hosting on any web server.
+#
+# The image is also rebuilt every week, so that it picks up the security
+# updates of its nginx base image even when the catalog did not change.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '17 4 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: offline-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    steps:
+      # Full history with the tags: build-site.sh publishes the released
+      # versions of the integrations from them
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Fetch main for the integration checks
+        if: github.event_name == 'pull_request'
+        run: git fetch --no-tags origin +refs/heads/main:refs/remotes/origin/main
+
+      - name: Test the catalog scripts
+        run: node --test scripts/test/*.test.js
+
+      - name: Build the offline bundle
+        run: ./scripts/build-offline.sh
+
+      - name: Upload the bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: ihub-marketplace-offline
+          path: |
+            _offline/*.tar.gz
+            _offline/*.tar.gz.sha256
+          if-no-files-found: error
+          retention-days: 30
+
+  image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Fetch main for the integration checks
+        if: github.event_name == 'pull_request'
+        run: git fetch --no-tags origin +refs/heads/main:refs/remotes/origin/main
+
+      # What is published must be what was tested: the image is built once
+      # for the test, started, and every file of its catalog requested
+      - name: Build the image for the test
+        run: docker build --tag ihub-marketplace:ci .
+
+      - name: Test the image
+        run: |
+          docker run -d --name marketplace -p 8080:8080 ihub-marketplace:ci
+          for attempt in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:8080/healthz && break
+            sleep 1
+          done
+          node scripts/check-served-bundle.js http://127.0.0.1:8080/
+          # Runs without root rights
+          test "$(docker exec marketplace id -u)" != 0
+          docker rm -f marketplace
+
+      # The Docker CLI of the runner, no third-party actions: the multi-
+      # architecture build runs in a buildx builder (the bundle stage of the
+      # Dockerfile always runs natively, so nothing is emulated)
+      - name: Publish the image
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+          ACTOR: ${{ github.actor }}
+        run: |
+          image="ghcr.io/${OWNER,,}/ihub-marketplace"
+          echo "$REGISTRY_TOKEN" | docker login ghcr.io --username "$ACTOR" --password-stdin
+          docker buildx create --name multiarch --driver docker-container --use
+          docker buildx build \
+            --platform linux/amd64,linux/arm64 \
+            --label "org.opencontainers.image.revision=$GITHUB_SHA" \
+            --tag "$image:latest" \
+            --tag "$image:sha-${GITHUB_SHA::7}" \
+            --push .

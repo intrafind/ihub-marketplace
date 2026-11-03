@@ -23,6 +23,8 @@ window.MARKETPLACE_I18N = {
     'hero.start': 'Getting started',
     'hero.registryLabel': 'Registry URL',
     'hero.registryHint': 'Preconfigured in current iHub releases as “iHub Official Marketplace”.',
+    'hero.registryHint.offline':
+      'This copy of the marketplace runs inside your network. Add this URL as a registry in your iHub.',
 
     'common.copy': 'Copy',
     'common.copied': 'Copied',
@@ -129,6 +131,8 @@ window.MARKETPLACE_I18N = {
     'start.step1.title': 'Run iHub Apps',
     'start.step1.text':
       'Install iHub with the one-line installer, run the Docker image, or download a standalone binary. iHub configures itself on first start.',
+    'start.step1.text.offline':
+      'Run iHub Apps in your network. This copy of the marketplace is all it needs: nothing is fetched from the internet.',
     'start.step1.guide': 'Getting started guide',
     'start.step1.install': 'Installation options',
     'start.step1.releases': 'Releases',
@@ -137,6 +141,10 @@ window.MARKETPLACE_I18N = {
       'Open iHub (<strong>http://localhost:3001</strong> for the binary, <strong>http://localhost:3000</strong> for Docker) and sign in as an administrator. The marketplace is on by default: open <strong>Admin → Marketplace</strong>, or install integrations from <strong>Admin → Integrations → Catalog</strong>. The <em>iHub Official Marketplace</em> registry is already configured.',
     'start.step2.hint':
       'Registry missing on an older install? Choose <strong>Manage Registries → Add Registry</strong> and paste the registry URL above.',
+    'start.step2.text.offline':
+      'Sign in to iHub as an administrator and open <strong>Admin → Marketplace → Manage Registries</strong>. Choose <strong>Add Registry</strong>, paste the registry URL above and use <strong>Test Connection</strong>, then <strong>Save</strong>.',
+    'start.step2.hint.offline':
+      'Switch off the preconfigured <em>iHub Official Marketplace</em> registry: it needs internet access.',
     'start.step3.title': 'Install content',
     'start.step3.text':
       'Pick an item and click Install. Apps, prompts, skills, and workflows are ready right away; models need an API key for their provider, set in Admin → Providers or as an environment variable.',
@@ -171,6 +179,8 @@ window.MARKETPLACE_I18N = {
     'hero.registryLabel': 'Registry-URL',
     'hero.registryHint':
       'In aktuellen iHub-Versionen als „iHub Official Marketplace“ vorkonfiguriert.',
+    'hero.registryHint.offline':
+      'Diese Kopie des Marktplatzes läuft in Ihrem Netzwerk. Tragen Sie diese URL in Ihrem iHub als Registry ein.',
 
     'common.copy': 'Kopieren',
     'common.copied': 'Kopiert',
@@ -278,6 +288,8 @@ window.MARKETPLACE_I18N = {
     'start.step1.title': 'iHub Apps starten',
     'start.step1.text':
       'Installieren Sie iHub mit dem Einzeiler-Installer, starten Sie das Docker-Image oder laden Sie ein eigenständiges Binary herunter. iHub richtet sich beim ersten Start selbst ein.',
+    'start.step1.text.offline':
+      'Betreiben Sie iHub Apps in Ihrem Netzwerk. Diese Kopie des Marktplatzes genügt: Es wird nichts aus dem Internet geladen.',
     'start.step1.guide': 'Leitfaden „Erste Schritte“',
     'start.step1.install': 'Installationsoptionen',
     'start.step1.releases': 'Releases',
@@ -286,6 +298,10 @@ window.MARKETPLACE_I18N = {
       'Öffnen Sie iHub (<strong>http://localhost:3001</strong> beim Binary, <strong>http://localhost:3000</strong> bei Docker) und melden Sie sich als Administrator an. Der Marktplatz ist standardmäßig eingeschaltet: Öffnen Sie <strong>Admin → Marktplatz</strong> oder installieren Sie Integrationen unter <strong>Admin → Integrationen → Katalog</strong>. Die Registry <em>iHub Official Marketplace</em> ist bereits eingerichtet.',
     'start.step2.hint':
       'Fehlt die Registry in einer älteren Installation? Wählen Sie <strong>Registries verwalten → Registry hinzufügen</strong> und fügen Sie die Registry-URL von oben ein.',
+    'start.step2.text.offline':
+      'Melden Sie sich als Administrator in iHub an und öffnen Sie <strong>Admin → Marktplatz → Registries verwalten</strong>. Wählen Sie <strong>Registry hinzufügen</strong>, fügen Sie die Registry-URL von oben ein, prüfen Sie sie mit <strong>Verbindung testen</strong> und speichern Sie.',
+    'start.step2.hint.offline':
+      'Schalten Sie die vorkonfigurierte Registry <em>iHub Official Marketplace</em> aus: Sie benötigt Internetzugang.',
     'start.step3.title': 'Inhalte installieren',
     'start.step3.text':
       'Wählen Sie ein Element und klicken Sie auf Installieren. Apps, Prompts, Skills und Workflows sind sofort einsatzbereit; Modelle benötigen einen API-Schlüssel des Anbieters, den Sie unter Admin → Providers oder als Umgebungsvariable hinterlegen.',
