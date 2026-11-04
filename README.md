@@ -63,9 +63,9 @@ The full guide is in the iHub documentation: [Marketplace](https://github.com/in
 
 ## Content Inventory
 
-### Apps (92)
+### Apps (100)
 
-#### General (22)
+#### General (30)
 
 | ID | Name | Category |
 |----|------|----------|
@@ -91,6 +91,14 @@ The full guide is in the iHub documentation: [Marketplace](https://github.com/in
 | `note-assistant` | Note Assistant | writing |
 | `app-generator` | App Generator | utility |
 | `ihub-support-bot` | iHub Support Bot | intrafind |
+| `audio-from-video-example` | Audio Analysis (from Video) | productivity |
+| `coach-dialog` | Personal Coach (starts the conversation itself) | utility |
+| `custom` | Custom Prompt | utility |
+| `document-writer` | Document Writer | writing |
+| `faq-bot` | FAQ Bot (uses the `faq` project) | support |
+| `opensearch-analyser-assistant` | OpenSearch Analyser Assistant | analysis |
+| `people-search` | People Search (needs an Entra ID integration) | productivity |
+| `prompt-insight` | Prompt Insight | utility |
 
 #### Department Assistants (69)
 
@@ -170,7 +178,7 @@ Apps marked with *file upload* work best when users upload their own reference m
 | `personal-coach` | Personal Coach | Miscellaneous | utility | — |
 | `ai-use-case-finder` | AI Use Case Finder | Miscellaneous | utility | — |
 
-### Models (19)
+### Models (36)
 
 Model configurations mirror the defaults shipped with the current iHub Apps release. Gemini models start at Gemini 3; iHub no longer supports Gemini 2.x.
 
@@ -195,6 +203,25 @@ Model configurations mirror the defaults shipped with the current iHub Apps rele
 | `gemini-3.1-flash-lite-image` | Nano Banana 2 Lite (Gemini 3.1 Flash Lite Image) | Google |
 | `gemini-3.5-transcribe` | Gemini 3.5 Transcribe | Google (transcription) |
 | `gemini-3.5-transcribe-live` | Gemini 3.5 Transcribe Live | Google (transcription) |
+| `gemini-3.8-flash-tts` | Gemini 3.8 Flash TTS (Read aloud) | Google (text-to-speech) |
+| `gemini-3.8-flash-lite-tts` | Gemini 3.8 Flash-Lite TTS (Read aloud) | Google (text-to-speech) |
+| `voxtral-mini-transcribe-realtime` | Voxtral Mini Transcribe Realtime (Mistral) | Mistral AI (transcription) |
+| `voxtral-mini-tts` | Voxtral TTS (Read aloud) | Mistral AI (text-to-speech) |
+| `qwen3-vllm-reasoning` | Qwen3 (vLLM, reasoning) | Self-hosted (vLLM) |
+| `bedrock-claude-3-5-sonnet` | Claude 3.5 Sonnet (Bedrock) | AWS Bedrock |
+| `bedrock-claude-3-7-sonnet` | Claude 3.7 Sonnet (Bedrock) | AWS Bedrock |
+| `bedrock-claude-sonnet-4-6` | Claude Sonnet 4.6 (Bedrock) | AWS Bedrock |
+| `bedrock-claude-haiku-3-5` | Claude 3.5 Haiku (Bedrock) | AWS Bedrock |
+| `bedrock-nova-pro` | Amazon Nova Pro (Bedrock) | AWS Bedrock |
+| `bedrock-nova-lite` | Amazon Nova Lite (Bedrock) | AWS Bedrock |
+| `bedrock-nova-micro` | Amazon Nova Micro (Bedrock) | AWS Bedrock |
+| `bedrock-llama-3-3-70b` | Llama 3.3 70B Instruct (Bedrock) | AWS Bedrock |
+| `bedrock-llama-4-scout` | Llama 4 Scout (Bedrock) | AWS Bedrock |
+| `bedrock-mistral-large-2` | Mistral Large 2 (Bedrock) | AWS Bedrock |
+| `bedrock-pixtral-large` | Pixtral Large (Bedrock) | AWS Bedrock |
+| `bedrock-command-r-plus` | Cohere Command R+ (Bedrock) | AWS Bedrock |
+
+The AWS Bedrock models use the Converse API and need a Bedrock API key in `BEDROCK_API_KEY`; the `config.region` field of each defaults to `eu-central-1`. The Bedrock, text-to-speech and transcription models ship disabled; enable the ones you use.
 
 > **Note:** Model configurations include API endpoints but no API keys. An installed model uses the API key of its provider — set it under **Admin → Providers** or as an environment variable (e.g. `GOOGLE_API_KEY`) in your iHub Apps instance. A model that replaces an existing one keeps that one's API key.
 
