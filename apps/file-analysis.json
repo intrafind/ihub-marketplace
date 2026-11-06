@@ -61,7 +61,15 @@
     },
     "allowMultiple": true,
     "audioUpload": {
-      "enabled": true
+      "enabled": true,
+      "supportedFormats": [
+        "audio/mpeg",
+        "audio/mp3",
+        "audio/wav",
+        "audio/flac",
+        "audio/ogg",
+        "audio/mp4"
+      ]
     },
     "cloudStorageUpload": {
       "enabled": true
