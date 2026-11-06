@@ -77,7 +77,16 @@
   "upload": {
     "enabled": true,
     "imageUpload": {
-      "enabled": true
+      "enabled": true,
+      "supportedFormats": [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/gif",
+        "image/webp",
+        "image/tiff",
+        "image/tif"
+      ]
     },
     "fileUpload": {
       "enabled": false
