@@ -21,7 +21,9 @@
       "extractAudio": true,
       "supportedFormats": [
         "video/mp4",
+        "video/mpeg",
         "video/webm",
+        "video/ogg",
         "video/quicktime"
       ],
       "maxFileSizeMB": 50
