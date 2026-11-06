@@ -226,7 +226,9 @@
         "image/jpg",
         "image/png",
         "image/gif",
-        "image/webp"
+        "image/webp",
+        "image/tiff",
+        "image/tif"
       ]
     },
     "fileUpload": {
