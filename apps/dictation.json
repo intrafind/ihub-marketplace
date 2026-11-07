@@ -45,7 +45,6 @@
     }
   },
   "enabled": true,
-  "tools": [],
   "greeting": {
     "en": {
       "title": "👋 Hello!",
