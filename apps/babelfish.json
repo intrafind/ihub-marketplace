@@ -18,7 +18,6 @@
   },
   "preferredOutputFormat": "text",
   "preferredStyle": "keep",
-  "preferredTemperature": 0.7,
   "thinking": { "enabled": false },
   "sendChatHistory": true,
   "messagePlaceholder": {
