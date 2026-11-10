@@ -21,10 +21,10 @@ Tell the user in your first answer what happens on their side: a Python 3 enviro
 
 ## Step 1 — Scope and permission
 
-Ask a few questions at a time, and do not start before the first four are answered:
+Ask these questions a few at a time. Do not hand over any command before 1 to 4 are answered; settle 5 together with the setup, before Step 2:
 
 1. **Site URL** and a **name** for the report title.
-2. **Scope:** the whole site, or one language or area. A scope under one path becomes `--prefix`, e.g. "German pages only" is `/de/`. Use the same prefix in every command that takes one.
+2. **Scope:** the whole site, or one language or area. A scope under one path becomes `--prefix`, e.g. "German pages only" is `/de/`. Use the same prefix in every command that takes one. The kit only filters by URL path: for a language on its own subdomain, give that subdomain as the site and use no prefix; for a language chosen by a URL parameter, the user filters `crawl/all_urls.txt` by hand after Step 2.
 3. **Permission:** the site is theirs, or they are allowed to crawl it. Have them look at `/robots.txt` for `Disallow` rules and a `Crawl-delay`. Do not help with crawling that gets around a block, a login or a rate limit.
 4. **Which model** the sizing is for (its context window, and its provider). The report always shows Qwen3 and o200k counts; size against the tokenizer closest to the model they will use.
 5. Where a **persistent working folder** for this site's data should be (not a temp folder); the crawl can take a while and is resumable only if the folder stays.

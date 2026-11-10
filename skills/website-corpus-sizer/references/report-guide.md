@@ -4,7 +4,9 @@ Use this in Step 6, when `report.md` and the `dup_stats` output are in hand.
 
 ## What goes where
 
-`report.md` already holds every table and the chart. Copy those sections **unchanged**, so the numbers stay what the kit computed. What you add is the reading of them: the verdict, the oddities and the next steps. Do not retype figures into a new table, and do not round them differently in the prose than in the table.
+`report.md` already holds every table and the chart. Copy the tiles table, the window table, the chart, the sections table and the largest pages **unchanged**, so the numbers stay what the kit computed. What you add is the reading of them: the verdict, the oddities and the next steps. Do not retype figures into a new table, and do not round them differently in the prose than in the table.
+
+The one sentence at the top of `report.md` names the smallest window the corpus fits in, which may not be the user's window. Leave it out and use your "In one line" for the user's window instead; the window table next to it has every window. Write your own headings and sentences in the user's language; the copied report sections stay as the kit wrote them.
 
 If the app does not render Mermaid, the chart shows as code. Say so in one line; the "All sections" table has the same numbers.
 
@@ -25,7 +27,7 @@ If the app does not render Mermaid, the chart shows as code. Say so in one line;
 [Only what the data shows, each with its evidence; see the list below. "None found" if nothing.]
 
 ## Method and caveats
-[Crawl date and scope, the --drop selectors used, tokenizers, the dedup rule in one sentence, and the gaps you know of.]
+[Crawl date and scope, the --drop selectors used (from Step 4 of this chat; on path B ask the user, since report.md does not hold them), tokenizers, the dedup rule in one sentence, and the gaps you know of.]
 
 ## Next steps
 [One to three concrete options.]
@@ -49,7 +51,7 @@ Give the verdict for the full corpus and, when `report.md` has the rows, for the
 | Look at | What it means |
 |---|---|
 | Thin pages (section table, "Thin pages" column) | Landing pages, redirects, error pages, or a site rendered by JavaScript. Many of them and tiny totals: the crawl may not have seen the content |
-| Exact duplicates and near-duplicate pairs (`dup_stats`) | The same content under two URLs, or language or print variants. Name the pages and what they cost in tokens |
+| Exact duplicates and near-duplicate pairs (`dup_stats`) | The same content under two URLs, or language or print variants. Name the pages and what they cost in tokens. Line-level dedup removes only identical lines of 40+ characters, so it removes an exact duplicate but barely touches a near-duplicate (similar, not identical, lines): the tokens of the second page of each near-duplicate pair are a further saving that the dedup figures do not contain |
 | Dedup saving above about 20% (a section's last column, or the total) | Boilerplate inside `<main>` that `--drop` missed, or genuinely repeated text. Suggest a second look with `outline.py` |
 | Sections that do not belong to the scope | A language or area outside the prefix, for example `en` under `/de/`; pages in the wrong language |
 | One very large page | Long product lists, glossaries, PDFs shown as HTML; it may deserve a place of its own in the next steps |
