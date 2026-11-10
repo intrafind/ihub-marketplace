@@ -5,19 +5,19 @@ description: "Creates IntraFind-branded PowerPoint decks (.pptx): pins down audi
 
 # IntraFind presentations
 
-You build presentations in the IntraFind design. You decide what goes on each slide; the **IntraFind document template** puts it into the IntraFind design (cover photo, mosaic frame, logo, colours, fonts); the **`pptx` skill** and its `create_pptx` tool write the file. You never draw the brand yourself.
+You build presentations in the IntraFind design. You decide what goes on each slide; the **IntraFind document template** puts it into the IntraFind design (cover photo, mosaic frame, logo, colours, fonts); the **`pptx` skill** and its tools (`create_pptx`, `frame_pptx`) write the file. You never draw the brand yourself.
 
 | Who | Does what |
 |---|---|
 | **You, with this skill** | Brief, storyline, slide content, IntraFind wording and layout rules, the `create_pptx` call |
-| **The `pptx` skill** | The slide grammar (JSON), the tool, charts, tables, KPI cards, speaker notes. Read its rules; they all apply here |
-| **The IntraFind template** | Cover, mosaic strips top and left, logo bottom right, footer, slide number, theme colours and fonts, safe areas |
+| **The `pptx` skill** | The slide grammar (JSON), `create_pptx` for new decks, `frame_pptx` for uploaded decks, charts, tables, KPI cards, speaker notes. Read its rules; they all apply here |
+| **The IntraFind template** | The slide frame: cover photo with logo panel, mosaic strips top and left, logo bottom right; plus theme colours, fonts, footer and slide number |
 
-Because the template holds the brand, the deck stays on-brand without you setting a single colour or font, and the user can still edit every slide in PowerPoint and switch layouts.
+Because the template holds the brand, the deck stays on-brand without you setting a single colour or font, and the user can still edit every slide in PowerPoint.
 
 ## Step 0: check the setup
 
-1. **Activate the `pptx` skill** (`activate_skill`) if it is not active. It brings `create_pptx`. Without that tool you cannot create the file: say so, and offer the slide-by-slide outline (Step 3) as text instead.
+1. **Activate the `pptx` skill** (`activate_skill`) if it is not active. It brings `create_pptx` and `frame_pptx`. Without them you cannot create the file: say so, and offer the slide-by-slide outline (Step 3) as text instead.
 2. **Find the IntraFind template.**
    - The tool description says documents use the corporate template "IntraFind …": nothing to do, the app pins it.
    - `create_pptx` offers a `template` parameter that lists an IntraFind template: pass that id on every call, unless the user asks for another one.
@@ -84,20 +84,21 @@ Then answer in two or three sentences: the file name, the number of slides and t
 
 ## Moving an existing deck into the IntraFind design
 
-When the user uploads a `.pptx` or `.pdf` and asks for it "in IntraFind design":
+When the user uploads a `.pptx` and asks for it "in IntraFind design" or "branded":
 
-1. Read its text from the conversation and keep its structure and order. Improve titles into action titles and trim overloaded slides, and say that you did.
-2. Rebuild it with Steps 3–4 on the IntraFind template. Do **not** pass the uploaded file as `templateFileId`: that would keep its old design instead of the IntraFind one.
-3. Tell the user what a rebuild cannot carry over: pictures, screenshots, logos of other companies and hand-drawn diagrams from the original are not copied. Charts and tables are rebuilt from their numbers when the text shows them. Suggest pasting such images into the finished deck in PowerPoint.
+1. **Keep the deck as it is: `frame_pptx`.** Call it with the id of the uploaded file (the `id` of its `<content>` tag, shown when `can_use_as_template="true"`). The deck keeps its pictures, charts, tables and notes; its first slide becomes the IntraFind cover (its title and subtitle become the cover title and date; set `coverTitle` and `coverDate` when they should read differently, or `cover: false` when the first slide is no title slide), and every slide gets the mosaic frame and the logo. Ask for the cover title and date only when the first slide shows neither.
+2. Tell the user to check that nothing sits under the strips on the top and left edge or under the logo bottom right: the frame goes on top of the slides as they are.
+3. **Rewrite the deck: `create_pptx`.** Only when the user also wants better titles, fewer words or another structure: rebuild it from its text with Steps 3–4. Say that pictures, screenshots and drawings of the original are not carried over, and that `frame_pptx` would keep them. Never pass the uploaded file as `templateFileId` for this: that would keep its old design instead of the IntraFind one.
+4. If `frame_pptx` reports that no slide frame is set up, tell the user once; the template of this app has no frame, so offer the `create_pptx` rebuild instead.
 
 ## What this skill does not do
 
-The slide design is the template's: fixed layouts, no custom illustrations, gradients, hero images or diagonal accents. For a designer-made look, deliver the editable deck and say that the visual finish happens in PowerPoint. If the user needs a single image, chart or diagram in the deck, create it separately and have them insert it.
+The slide design is the template's: fixed layouts and the IntraFind frame, no custom illustrations, gradients, hero images or diagonal accents. For a designer-made look, deliver the editable deck and say that the visual finish happens in PowerPoint. If the user needs a single image, chart or diagram in the deck, create it separately and have them insert it.
 
 ## Checklist before you answer
 
 - The first slide is the cover with a short title and a one-line subtitle.
 - Every other slide has a title that states its point; no slide is overloaded; no warnings are left.
-- The IntraFind template was used (or the user knows it was not).
+- The IntraFind template was used (or the user knows it was not); for an uploaded deck, `frame_pptx` was used unless a rewrite was asked for.
 - Nothing in the deck is invented; open points are marked `[to be confirmed]` and named in the answer.
 - The answer names the file, the slide count and the storyline, and nothing more.
