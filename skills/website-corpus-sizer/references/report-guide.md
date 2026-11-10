@@ -38,7 +38,7 @@ If the app does not render Mermaid, the chart shows as code. Say so in one line;
 The report says which method counted, and the tool result names it in `tokenizer`:
 
 - **`o200k_base`:** exact for OpenAI models, typically within 10 to 20 percent for other model families. Some tokenizers need noticeably more tokens for German text; the original sizing kit measured about 20 to 25% more with Qwen3 than with o200k. Say that the real count of the user's model can differ.
-- **`heuristic`:** one token per four characters, because the server has no tokenizer library. That is a rough approximation that can be off in either direction. Give the verdict only when the corpus is clearly on one side of the window (below about half of it, or above about twice it). Otherwise say that this accuracy cannot decide it, and that an admin can install the `gpt-tokenizer` package on the server to get `o200k_base` counts.
+- **`heuristic`:** one token per four characters, because this server has no tokenizer library (current iHub versions ship one, so this means an older version or a deployment that left it out). That is a rough approximation that can be off in either direction. Give the verdict only when the corpus is clearly on one side of the window (below about half of it, or above about twice it). Otherwise say that this accuracy cannot decide it, and that an admin can update iHub, or install the `gpt-tokenizer` package on the server, to get `o200k_base` counts.
 
 ## Reading the verdict
 
@@ -69,4 +69,4 @@ Give the verdict for the full corpus and, when the report has the rows, for the 
 
 ## Next steps to offer
 
-Pick what the numbers support: use the core pages only; choose a window and a subset of sections; crawl again with a better selector (`restart: true`) and compare; name a missing sitemap and crawl again; ask an admin for the tokenizer library; or plan retrieval when the corpus does not fit. A corpus is kept for 14 days, so the report can be asked for again with the same `corpusId`.
+Pick what the numbers support: use the core pages only; choose a window and a subset of sections; crawl again with a better selector (`restart: true`) and compare; name a missing sitemap and crawl again; ask an admin to update iHub or install the tokenizer library; or plan retrieval when the corpus does not fit. A corpus is kept for 14 days, so the report can be asked for again with the same `corpusId`.
