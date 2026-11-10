@@ -3221,7 +3221,7 @@
       "type": "skill",
       "name": "website-corpus-sizer",
       "displayName": { "en": "Website Corpus Sizer", "de": "Website-Korpus-Analyse" },
-      "description": { "en": "Measure how many LLM tokens a website holds and whether it fits into one context window or needs retrieval, with a crawl kit you run and a sizing report", "de": "Messen, wie viele LLM-Tokens eine Website enthält und ob sie in ein Kontextfenster passt oder Retrieval nötig ist, mit Crawl-Kit zum Ausführen und Größenbericht" },
+      "description": { "en": "Measure how many LLM tokens a website holds and whether it fits into one context window or needs retrieval, using the Website Corpus integration", "de": "Messen, wie viele LLM-Tokens eine Website enthält und ob sie in ein Kontextfenster passt oder Retrieval nötig ist, mit der Integration Website Corpus" },
       "version": "1.0.0",
       "author": "IntraFind Software AG",
       "category": "analysis",
@@ -3233,10 +3233,9 @@
         "type": "relative",
         "path": "skills/website-corpus-sizer/SKILL.md",
         "companions": [
-          "references/kit-guide.md",
           "references/quick-estimate.md",
           "references/report-guide.md",
-          "references/scripts.md"
+          "references/troubleshooting.md"
         ]
       }
     },
