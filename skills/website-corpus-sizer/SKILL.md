@@ -18,6 +18,7 @@ The measuring is done by the **Website Corpus tools**; you run the process with 
 | `website_corpus_crawl` | Fetches the next batch of pages and keeps their main text; call it until `done` is true |
 | `website_corpus_page_text` | The text kept for one page, for a spot-check |
 | `website_corpus_report` | The numbers and the finished report |
+| `website_corpus_request_domain` | Asks an admin to allow a company-internal host the discovery was refused for |
 
 If these tools are not in your tool list, the Website Corpus integration is not installed or not bound to this app. Say so, and tell the user what an admin does: install **Website Corpus** under Admin → Integrations, grant it to the user's group, and bind it to the app. Then offer the quick estimate in `references/quick-estimate.md` instead, and say plainly that it is an estimate. Do not pretend to measure.
 
@@ -37,6 +38,8 @@ Call `website_corpus_discover` with `siteUrl`, `name` and `prefix`. Show the use
 - Does the count look like the site? Far fewer pages than it obviously has means the corpus will have holes. The sitemap is the only source; pages missing from it are missing from the corpus.
 - Do the sections look right? A section named `en` under `/de/` means pages in the wrong language.
 - Look at `skipped` (other hosts, outside the scope, files that are not pages), `sitemapsFailed` and `blockedByRobots`.
+
+**An internal site.** The server refuses company-internal addresses (intranets, hosts on a private network) unless an admin allows them. If the discovery answers `HOST_NOT_ALLOWED`, do not try again or look for a way around it. Tell the user that this is an internal address and that an admin has to allow it, and offer to send the request: name the host, ask for a short reason (what the site is and why it is sized), and call `website_corpus_request_domain` with `host` and `reason` once they agree. Then tell them that the request is with an admin, that nothing is crawled until it is approved, and that they can start again afterwards from Step 2. If the answer says a request is already waiting, or was declined (with the admin's note), say that instead of asking again. `HOST_NEVER_ALLOWED` is final: loopback, link-local and cloud metadata addresses are never allowed, so do not offer a request. `HOST_NOT_RESOLVED` means the name does not resolve from the server: check the spelling with the user.
 
 If it finds no pages, or the result looks incomplete, **stop and ask**. Offer: name the sitemap address (`sitemapUrls`), change the prefix, or accept the gap and state it in the report. There is no tool that follows links; do not promise one. If it answers `TOO_MANY_PAGES`, the sitemap is bigger than this installation allows: narrow the scope with a prefix, or ask an admin to raise **Most pages per corpus**.
 

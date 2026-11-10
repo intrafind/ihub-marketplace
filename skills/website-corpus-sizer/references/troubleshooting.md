@@ -8,6 +8,11 @@ Read this when a tool answers with `error: true`, or a result looks wrong. An er
 |---|---|---|
 | `SIGN_IN_REQUIRED` | The tools keep the crawl for the signed-in user | The user signs in; they do not work for anonymous users |
 | `INVALID_URL` | `siteUrl` is not an http(s) address | Ask for the full address, such as `https://www.example.com` |
+| `HOST_NOT_ALLOWED` | The host is a company-internal address, which the server may not fetch unless an admin allows it | Offer to send a request with `website_corpus_request_domain`; an admin decides, then the discovery is run again. If the message says a request is already waiting or was declined, say that |
+| `HOST_NEVER_ALLOWED` | Loopback, link-local or cloud metadata address: no approval changes this | Tell the user; do not offer a request |
+| `HOST_NOT_RESOLVED` | The host name does not resolve from this server | Check the spelling; an internal name needs the server's DNS to know it |
+| `INVALID_HOST` | The host of a request is not a host name (a pattern, an empty text) | Ask for one host name, such as `intranet.example.corp` |
+| `TOO_MANY_REQUESTS` | The user has too many open requests for websites | Wait for an admin to decide on some of them |
 | `TOO_MANY_PAGES` | The sitemaps list more pages in this scope than the installation allows | Narrow the scope with a `prefix`, or ask an admin to raise **Most pages per corpus** |
 | `CORPUS_NOT_FOUND` | Unknown `corpusId`, or the corpus expired (kept 14 days, five per user, and a sixth removes the oldest) | Start again with `website_corpus_discover` |
 | `INVALID_SELECTOR` | The `dropSelector` is not a valid CSS selector list | Fix it; at most 1,000 characters |
@@ -27,4 +32,4 @@ Read this when a tool answers with `error: true`, or a result looks wrong. An er
 - **A page redirected to another site.** It is not kept; it counts as failed with that reason.
 - **A crawl call attempted fewer pages than `batchSize`.** Normal: a call stops starting pages after about 22 seconds. Call it again.
 - **The tokens look too round or too high.** The report says whether the counts are `o200k_base` or the four-characters-per-token fallback; the fallback is only a rough approximation.
-- **An internal site is refused.** The server does not fetch private addresses unless an admin lists the host under `ssrf.allowedHosts` or `ssl.domainWhitelist`.
+- **An internal site is refused.** The server does not fetch company-internal addresses unless an admin allows the host (the user's request, `website_corpus_request_domain`, goes to the admin queue under Admin → Integrations → Requests), lists it platform-wide under `ssrf.allowedHosts` or `ssl.domainWhitelist`, or switches on **Allow company-internal websites** for the integration.
