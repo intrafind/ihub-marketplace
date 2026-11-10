@@ -16,7 +16,6 @@
   },
   "preferredOutputFormat": "markdown",
   "preferredStyle": "detailed",
-  "preferredTemperature": 1,
   "sendChatHistory": false,
   "websearch": {
     "enabled": true,

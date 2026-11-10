@@ -16,7 +16,6 @@
   },
   "preferredOutputFormat": "markdown",
   "preferredStyle": "normal",
-  "preferredTemperature": 0.7,
   "prompt": {
     "en": "{{content}}",
     "de": "{{content}}"
