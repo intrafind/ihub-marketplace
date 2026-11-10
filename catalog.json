@@ -3219,6 +3219,28 @@
     },
     {
       "type": "skill",
+      "name": "website-corpus-sizer",
+      "displayName": { "en": "Website Corpus Sizer", "de": "Website-Korpus-Analyse" },
+      "description": { "en": "Measure how many LLM tokens a website holds and whether it fits into one context window or needs retrieval, using the Website Corpus integration", "de": "Messen, wie viele LLM-Tokens eine Website enthält und ob sie in ein Kontextfenster passt oder Retrieval nötig ist, mit der Integration Website Corpus" },
+      "version": "1.0.0",
+      "author": "IntraFind Software AG",
+      "category": "analysis",
+      "tags": ["website", "tokens", "context-window", "rag", "crawling"],
+      "icon": "globe",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": {
+        "type": "relative",
+        "path": "skills/website-corpus-sizer/SKILL.md",
+        "companions": [
+          "references/quick-estimate.md",
+          "references/report-guide.md",
+          "references/troubleshooting.md"
+        ]
+      }
+    },
+    {
+      "type": "skill",
       "name": "unified-knowledge-search",
       "displayName": { "en": "Unified Knowledge Search", "de": "Übergreifende Wissenssuche" },
       "description": { "en": "Search all connected company sources at once and get ranked, de-duplicated results with excerpts and direct links", "de": "Alle angebundenen Unternehmensquellen auf einmal durchsuchen und gerankte, deduplizierte Treffer mit Auszügen und Direktlinks erhalten" },

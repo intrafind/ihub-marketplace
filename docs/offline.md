@@ -97,7 +97,7 @@ Things to know:
 
 ## What is in the bundle
 
-Everything the official catalog lists: 92 apps, 19 models, 5 prompts, 195 skills, 6 workflows and 30
+Everything the official catalog lists: 92 apps, 19 models, 5 prompts, 196 skills, 6 workflows and 30
 integrations, plus the website and the released versions of every integration (so version pins and
 the release channel work as online).
 

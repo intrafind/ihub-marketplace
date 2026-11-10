@@ -246,7 +246,7 @@ The AWS Bedrock models use the Converse API and need a Bedrock API key in `BEDRO
 | `faq-question` | Ask FAQ | Answer FAQ questions |
 | `app-generator` | App Generator | Generate iHub app configs |
 
-### Skills (195)
+### Skills (196)
 
 #### General (5)
 
@@ -375,7 +375,7 @@ Open-source skills published by Google under the [Apache License 2.0](https://ww
 | `spanner-basics` | Spanner Basics | coding | google/skills |
 | `dpop-adoption` | OAuth DPoP Adoption | security | google/skills |
 
-#### Department Skills (93)
+#### Department Skills (94)
 
 Task-focused skills for legal, compliance, finance, security, HR, sales, customer success, support, IT operations, operations, marketing, product, design and UX research, engineering, data, and personal productivity. Each skill is a `SKILL.md` with a step-by-step method, reference frameworks, output templates, and guardrails. Skills that work with company data expect it to come from the user, uploaded documents, or connected tools and sources, never from model memory. Legal, finance, and HR skills carry a reminder that their output needs review by a qualified professional.
 
@@ -466,6 +466,7 @@ Task-focused skills for legal, compliance, finance, security, HR, sales, custome
 | `statistical-methods-advisor` | Statistical Methods Advisor | Data & Analytics | analysis |
 | `analysis-qa-reviewer` | Analysis QA Reviewer | Data & Analytics | analysis |
 | `html-dashboard-maker` | HTML Dashboard Maker | Data & Analytics | analysis |
+| `website-corpus-sizer` | Website Corpus Sizer | Data & Analytics | analysis |
 | `unified-knowledge-search` | Unified Knowledge Search | Productivity | productivity |
 | `multi-source-answer-synthesizer` | Multi-Source Answer Synthesizer | Productivity | productivity |
 | `meeting-readiness-pack` | Meeting Readiness Pack | Productivity | productivity |
