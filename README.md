@@ -246,7 +246,7 @@ The AWS Bedrock models use the Converse API and need a Bedrock API key in `BEDRO
 | `faq-question` | Ask FAQ | Answer FAQ questions |
 | `app-generator` | App Generator | Generate iHub app configs |
 
-### Skills (195)
+### Skills (196)
 
 #### General (5)
 
@@ -258,7 +258,7 @@ The AWS Bedrock models use the Converse API and need a Bedrock API key in `BEDRO
 | `data-storytelling` | Data Storytelling | Turn data into compelling narratives |
 | `email-campaign-creator` | Email Campaign Creator | Create complete email campaigns |
 
-#### Everyday Skills (8)
+#### Everyday Skills (9)
 
 Personal productivity skills for tasks almost everyone repeats: writing in your own voice, preparing a talk, getting several viewpoints, and keeping up with email. They are written to be combined: for example, `match-my-writing-style` decides the wording while `executive-email-drafter` or `newsletter-composer` decides the content. `newsletter-composer` and `inbox-triage` also describe how to behave when they run unattended as a scheduled task. Users can pick any of them by typing `/` in an empty chat input of an app that has the skill assigned and skills enabled (`skillSettings.enabled: true`; skills are opt-in per app).
 
@@ -272,8 +272,11 @@ Personal productivity skills for tasks almost everyone repeats: writing in your 
 | `executive-email-drafter` | Executive Email Drafter | communication | `match-my-writing-style` |
 | `inbox-triage` | Inbox Triage | productivity | `executive-email-drafter` |
 | `skill-builder` | Skill Builder | utility | — |
+| `intrafind-pptx` | IntraFind Presentations | intrafind | `presentation-prep`, the `pptx` skill |
 
 `skill-builder` interviews the user about a task they repeat and produces a `SKILL.md` that passes iHub's validation, along with the import steps. It also converts existing prompts, Gemini Gems, and custom GPT instructions into skills.
+
+`intrafind-pptx` builds IntraFind-branded presentations by working together with the `pptx` system skill of iHub (its `create_pptx` tool). The brand itself — cover photo, mosaic frame, logo, colours, fonts — comes from an **IntraFind document template** with a PowerPoint master that an administrator adds under **Admin → Customization → Document templates** (see [Document templates](https://github.com/intrafind/ihub-apps/blob/main/docs/document-templates.md)); the brand assets are IntraFind property and are therefore not part of this registry. Assign both skills, `pptx` and `intrafind-pptx`, to the app, and pin the template to it (`documentTemplate`) or leave it enabled for the model to choose.
 
 #### Google Skills (89)
 
