@@ -6,6 +6,8 @@ Use this in Step 6, when `website_corpus_report` has answered.
 
 The `report` field already holds every table and the chart. Show the tiles table, the window table, the chart, the sections table, the largest pages, the duplicates and the coverage **unchanged**, so the numbers stay what the tool computed. What you add is the reading of them: the verdict, the oddities and the next steps. Do not retype figures into a new table, and do not round them differently in the prose than in the table.
 
+**When Step 7 built a dashboard**, it holds the tiles, the windows, the sections, the largest pages, the duplicates, the method and the formulas, in the Artifacts panel. Then copy only the window table into "The numbers" (the verdict rests on it) and end the section with one line that names the dashboard and says that the rest is there. The Oddities still name their evidence, with the figures as the report gave them.
+
 The sentence at the top of the report names the smallest window the corpus fits in, which may not be the user's window. Leave it out and use your "In one line" for the user's window instead; the window table next to it has every window. Write your own headings and sentences in the user's language; the copied report sections stay as the tool wrote them.
 
 If the app does not render Mermaid, the chart shows as code. Say so in one line; the "All sections" table has the same numbers.
@@ -21,7 +23,7 @@ If the app does not render Mermaid, the chart shows as code. Say so in one line;
 [Two to four sentences: the answer to "is all content in the context realistic for this site?", for the user's model and window, with the number it rests on and the one thing that would change it (core pages only, a different window, a cleaner extraction).]
 
 ## The numbers
-[The report's sections, copied.]
+[The report's sections, copied. With a dashboard: the window table, and one line pointing to the dashboard.]
 
 ## Oddities
 [Only what the data shows, each with its evidence; see the list below. "None found" if nothing.]
