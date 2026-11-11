@@ -65,6 +65,9 @@ Deliver one self-contained HTML file that relies only on technologies native to 
 
 **Charts.** Default to Chart.js loaded from a CDN for standard charts; it is light, thoroughly documented, and covers most dashboard needs. For more complex visuals (Sankey, treemap, geographic), use the matching Chart.js plugin or D3.js.
 
+- **Pin an exact version** and point at the built file (`https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js`), never `@latest` or a bare package name: a new major version can break the dashboard overnight.
+- **Load only from `cdn.jsdelivr.net`, `cdnjs.cloudflare.com` or `unpkg.com`.** iHub's Artifacts preview loads scripts and stylesheets from the CDN hosts its admin allows (these three by default) and blocks everything else, including Google Fonts and remote images. If `create_web_artifact` warns that a URL will not load, inline the code or draw the chart as inline SVG.
+
 **Skeleton:**
 ```html
 <!DOCTYPE html>
@@ -73,7 +76,7 @@ Deliver one self-contained HTML file that relies only on technologies native to 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>[Dashboard Title]</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <style>/* All styles inline */</style>
 </head>
 <body>
@@ -158,6 +161,6 @@ Don't produce any of the following unless the user explicitly asks for it and ac
 ## Ground rules
 
 - Never make up data. If the user hasn't supplied data yet, build the dashboard structure with placeholder labels.
-- Never pull in external resources apart from CDN-hosted charting libraries (Chart.js, D3.js). Once loaded, the dashboard has to keep working offline.
+- Never pull in external resources apart from CDN-hosted charting libraries (Chart.js, D3.js), pinned to an exact version. No web fonts, remote images or data fetched at runtime: embed images as data URIs and the data in the file. Once loaded, the dashboard has to keep working offline.
 - Always show the data-as-of date; without one, nobody can judge how reliable the dashboard is.
 - Tag what you deliver: `[From user data]` for sourced values, `[Design recommendation]` for layout guidance, and `[Placeholder — replace with your data]` for anything still waiting on real data.
