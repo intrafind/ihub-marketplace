@@ -3208,7 +3208,7 @@
       "name": "html-dashboard-maker",
       "displayName": { "en": "HTML Dashboard Maker", "de": "HTML-Dashboard-Ersteller" },
       "description": { "en": "Turn your data into an interactive single-file HTML dashboard with KPI cards, charts, and filters that runs without a server", "de": "Ihre Daten in ein interaktives HTML-Dashboard als Einzeldatei mit KPI-Karten, Diagrammen und Filtern verwandeln, das ohne Server läuft" },
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": "IntraFind Software AG",
       "category": "analysis",
       "tags": ["dashboard", "data-visualization", "html", "chartjs", "kpi-reporting"],
