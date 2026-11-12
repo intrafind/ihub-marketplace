@@ -3465,6 +3465,20 @@
     },
     {
       "type": "skill",
+      "name": "intrafind-pptx",
+      "displayName": { "en": "IntraFind Presentations", "de": "IntraFind-Präsentationen" },
+      "description": { "en": "Plan, write and build presentations in the IntraFind design with the pptx skill: storyline, action titles, cover and layout rules, or an existing deck moved into the IntraFind look. Needs the IntraFind document template", "de": "Präsentationen im IntraFind-Design mit dem pptx-Skill planen, schreiben und erstellen: Storyline, Aussagetitel, Titelfolien- und Layoutregeln, oder ein bestehendes Deck ins IntraFind-Design übertragen. Benötigt die IntraFind-Dokumentvorlage" },
+      "version": "1.0.0",
+      "author": "IntraFind Software AG",
+      "category": "intrafind",
+      "tags": ["presentation", "slides", "pptx", "branding", "intrafind", "corporate-design"],
+      "icon": "presentation-chart-bar",
+      "license": "BSD-3-Clause-with-Mandatory-Attribution",
+      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
+      "source": { "type": "relative", "path": "skills/intrafind-pptx/SKILL.md" }
+    },
+    {
+      "type": "skill",
       "name": "gemini-api-dev",
       "displayName": { "en": "Gemini API Development", "de": "Gemini API Development" },
       "description": { "en": "Helps write code for the Gemini API: current models, Interactions API, agents, streaming, function calling, multimodal and migration.", "de": "Hilft beim Schreiben von Code für die Gemini API: aktuelle Modelle, Interactions API, Agenten, Streaming, Function Calling und Migration." },
