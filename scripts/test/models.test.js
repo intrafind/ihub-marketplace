@@ -9,6 +9,13 @@
 //   - speech models (transcription, text-to-speech) generate no marked text or
 //     image and declare nothing.
 //
+// Anthropic marks the text of the Claude models its page "How Claude marks
+// AI-generated content" lists with a text watermark derived from SynthID-Text.
+// A Claude model of that list declares `contentMarking.text`; four of them are
+// listed for Anthropic's own API only, not for cloud partners, so they declare it
+// only on `api.anthropic.com`. Any other model declares nothing, the Bedrock
+// models included.
+//
 // Run: node --test scripts/test/*.test.js
 'use strict';
 
@@ -34,12 +41,56 @@ function models() {
 const isGoogle = ({ model }) => model.provider === 'google' || model.provider.startsWith('google-');
 const isSpeech = ({ model }) => model.modelType === 'transcription' || model.modelType === 'tts';
 
+/** The Claude models Anthropic's page marks for first-party text, by API id. */
+const ANTHROPIC_MARKED = [
+  'claude-fable-5-2',
+  'claude-fable-5-1',
+  'claude-fable-5',
+  'claude-mythos-5-2',
+  'claude-mythos-5-1',
+  'claude-mythos-5',
+  'claude-opus-5-5',
+  'claude-opus-5',
+  'claude-opus-4-8',
+  'claude-opus-4-7',
+  'claude-opus-4-6',
+  'claude-opus-4-5',
+  'claude-sonnet-5-5',
+  'claude-sonnet-5',
+  'claude-sonnet-4-6',
+  'claude-sonnet-4-5',
+  'claude-haiku-5-5',
+  'claude-haiku-4-5'
+];
+
+/** Listed for Anthropic's own API only, not for cloud partners. */
+const ANTHROPIC_FIRST_PARTY_ONLY = [
+  'claude-opus-4-6',
+  'claude-opus-4-5',
+  'claude-sonnet-4-5',
+  'claude-haiku-4-5'
+];
+
+const isAnthropic = ({ model }) => model.provider === 'anthropic';
+
 /** A SynthID declaration by the provider, with the reference to Google's statement. */
 function assertSynthId(marking, label) {
   assert.ok(marking, `${label} declares no marking`);
   assert.equal(marking.by, 'provider', label);
   assert.equal(marking.scheme, 'synthid', label);
   assert.match(marking.statementRef, /^Google DeepMind, SynthID: https:\/\/deepmind\.google\//, label);
+}
+
+/** Anthropic's text watermark, with the reference to Anthropic's page. */
+function assertAnthropicWatermark(marking, label) {
+  assert.ok(marking, `${label} declares no marking`);
+  assert.equal(marking.by, 'provider', label);
+  assert.equal(marking.scheme, 'synthid-text', label);
+  assert.match(
+    marking.statementRef,
+    /^Anthropic, How Claude marks AI-generated content: https:\/\/support\.claude\.com\//,
+    label
+  );
 }
 
 describe('Google models and their SynthID marking', () => {
@@ -75,13 +126,43 @@ describe('Google models and their SynthID marking', () => {
     }
   });
 
-  it('declares a marking nowhere else', () => {
-    for (const { file, model } of models().filter(entry => !isGoogle(entry))) {
+  it('declares a marking nowhere else but at Google and Anthropic', () => {
+    for (const { file, model } of models().filter(
+      entry => !isGoogle(entry) && !isAnthropic(entry)
+    )) {
       assert.equal(
         model.contentMarking,
         undefined,
-        `${file}: no provider other than Google is declared marked here`
+        `${file}: no provider other than Google and Anthropic is declared marked here`
       );
+    }
+  });
+});
+
+describe('Anthropic models and their text watermark', () => {
+  const anthropic = models().filter(isAnthropic);
+
+  it('finds the Claude models', () => {
+    assert.ok(anthropic.length >= 4, `only ${anthropic.length} Anthropic models found`);
+  });
+
+  it('declares the watermark for the text of every Claude model Anthropic marks', () => {
+    for (const { file, model } of anthropic) {
+      const firstParty = new URL(model.url).hostname === 'api.anthropic.com';
+      const marked =
+        ANTHROPIC_MARKED.includes(model.modelId) &&
+        (firstParty || !ANTHROPIC_FIRST_PARTY_ONLY.includes(model.modelId));
+      if (marked) {
+        assertAnthropicWatermark(model.contentMarking?.text, `${file}: text`);
+      } else {
+        assert.equal(model.contentMarking, undefined, `${file} declares a marking`);
+      }
+    }
+  });
+
+  it('declares text only: Anthropic generates no images', () => {
+    for (const { file, model } of anthropic) {
+      assert.equal(model.contentMarking?.image, undefined, `${file} declares image marking`);
     }
   });
 });
