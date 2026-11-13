@@ -17,6 +17,13 @@
   "supportsVision": true,
   "supportsAudio": true,
   "supportsImageGeneration": false,
+  "contentMarking": {
+    "text": {
+      "by": "provider",
+      "scheme": "synthid",
+      "statementRef": "Google DeepMind, SynthID: https://deepmind.google/technologies/synthid/"
+    }
+  },
   "enabled": true,
   "default": true,
   "thinking": {
