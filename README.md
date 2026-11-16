@@ -527,6 +527,7 @@ ihub-marketplace/
 ├── skills/                         # Skill packages, one folder per skill with a SKILL.md
 ├── integrations/                   # Integration definitions, one folder per definition with an integration.json
 ├── site/                           # Marketplace website (GitHub Pages and the offline bundle)
+├── site/data/open-models.json      # Data of the open-model finder (site/models.html): models, licenses, machines
 ├── docs/offline.md                 # Offline (air-gapped) marketplace: image, bundle, hosting, iHub setup
 ├── docs/screenshots/               # Screenshots used in this README
 ├── Dockerfile                      # The offline marketplace as an nginx image
@@ -536,6 +537,7 @@ ihub-marketplace/
 ├── scripts/build-offline.js        # Its second step: copies the skills linked from GitHub into the bundle, switches the site to offline mode
 ├── scripts/check-served-bundle.js  # Requests every file a hosted bundle's catalog lists, to check the web server
 ├── scripts/validate.js             # Checks the catalog and the integration definitions (versions, release notes, compatibility, migrations)
+├── scripts/open-models.js          # Checks site/data/open-models.json (called by validate.js)
 ├── scripts/sync-integrations.js    # Copies version, compatibility, releases, migrations and file hashes of each integration into catalog.json
 ├── scripts/tag-integrations.js     # Tags every integration version that reached main: integrations/<id>@<version>
 ├── scripts/build-versions.js       # Publishes every tagged integration version under versions/ and lists it in the site's catalog.json
@@ -550,7 +552,29 @@ ihub-marketplace/
 
 The marketplace website at [intrafind.github.io/ihub-marketplace](https://intrafind.github.io/ihub-marketplace/) lets anyone browse the catalog without an iHub instance. It looks like the marketplace in the iHub admin panel: type tabs, search, category filter, item cards, and a detail panel with the item's description and its full content (app JSON, rendered `SKILL.md`, …). It also has a getting-started guide and links to iHub Apps, IntraFind, and this repository. Visitors can enter the address of their own iHub, and every item then gets an **Open in iHub** button that opens it in **Admin → Marketplace**.
 
-The site is plain HTML, CSS, and JavaScript with no build step. It reads `catalog.json` at runtime, so new catalog entries show up on the next deployment without touching `site/`. UI strings live in `site/assets/i18n.js` (English and German).
+The site is plain HTML, CSS, and JavaScript with no build step. It reads `catalog.json` at runtime, so new catalog entries show up on the next deployment without touching `site/`. UI strings live in `site/assets/i18n.js` (English and German), those of the open-model finder in `site/assets/i18n-models.js`.
+
+### Open-model finder
+
+[`models.html`](https://intrafind.github.io/ihub-marketplace/models.html) compares current open-weight language models for people who want to run one themselves, for example behind iHub. It is not part of the catalog and installs nothing: the model configurations under `models/` are for hosted providers, this page is about choosing a model and the hardware for it.
+
+A visitor picks a machine (a GPU and how many of it, an Apple silicon Mac, a mini PC with shared memory, a CPU, or their own memory figure), a minimum speed and quality, the capabilities the model must have (image, video and audio input, tool calling, reasoning, German), a use case, a context window, the license (permissive only, or commercial use allowed) and where the model was developed. The list narrows to the models that fit, with the memory they need and the tokens per second to expect. A model's detail panel has its strengths, its capabilities, what its license allows and under which conditions, the Hugging Face links (weights, GGUF and other ready-made variants) and the smallest machines that run it. Up to four models can be compared side by side. Every choice is kept in the URL, so a result can be shared.
+
+![The open-model finder with an RTX 4090 selected: the models that fit, their license, memory and speed](docs/screenshots/open-models.png)
+
+Everything on the page comes from `site/data/open-models.json`:
+
+| Key | Content |
+|-----|---------|
+| `updated` | The date the data was last checked against the model cards |
+| `models[]` | One entry per model: name, vendor, country, release date, Hugging Face repository, parameters (`paramsB`, and `activeParamsB` for a mixture-of-experts model), released precision, context window, modalities, reasoning, tool calling, languages, `bestFor`, `strengths` (en, de), `license`, the vendor's own hardware statement, serving frameworks and quantized repositories |
+| `models[].license` | Name, link to the text, `category` (`permissive`, `conditional`, `non-commercial`), what is allowed (`commercialUse`, `selfHosting`, `offerAsService`, `modifications`: `yes`, `conditions`, `no`), the concrete `conditions` and a one-sentence `summary` (both en and de), and whether the download is `gated` |
+| `hardware[]` | The machines: memory, memory bandwidth in GB/s, and for shared memory the share a model can use |
+| `quantizations[]` | The quality steps below the released precision, with their bits per weight |
+
+Memory and speed are not stored: `site/assets/model-finder.js` estimates them from the parameters, the bits per weight and the memory bandwidth of the machine (the file and the page's "How to read the numbers" section explain the rule of thumb and its limits). The speed is that of one conversation; it says nothing about the total throughput of a server that batches many requests.
+
+To add or update a model, edit `site/data/open-models.json` and take every fact from the model card and the license text on Hugging Face, not from memory: read a custom license in full and list its thresholds and duties under `conditions`, leave what the card does not state as `null` or `unknown`, and set `updated`. `npm run validate` (and so the build) checks the file with `scripts/open-models.js`; a license marked `permissive` that lists conditions, an unknown use case or a missing German text fails it. The license notes are a reading aid, not legal advice, and the page says so.
 
 Preview it locally:
 

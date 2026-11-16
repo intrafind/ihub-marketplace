@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Open Models – iHub Marketplace</title>
+    <meta
+      name="description"
+      content="Compare current open-weight language models: capabilities, strengths, license terms, Hugging Face links, and the hardware and speed you can expect when you run them yourself."
+    />
+    <meta name="theme-color" content="#003557" />
+    <meta property="og:title" content="Open Models – iHub Marketplace" />
+    <meta
+      property="og:description"
+      content="Find the open-weight model that fits your hardware, your use case and your license requirements."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="assets/ihub-logo.svg" />
+    <link rel="preload" href="assets/fonts/Inter-roman.var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="assets/styles.css" />
+    <script src="assets/config.js"></script>
+    <script>
+      // Apply the stored theme before first paint to avoid a light flash in dark mode
+      (function () {
+        try {
+          var theme = localStorage.getItem('ihub-marketplace-theme');
+          var dark = theme ? theme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (dark) document.documentElement.classList.add('dark');
+        } catch (e) {
+          // The theme is a preference: without storage the page follows the system setting
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="nav.skip">Skip to content</a>
+
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="./" aria-label="iHub Marketplace">
+          <img src="assets/ihub-logo.svg" alt="" width="36" height="30" />
+          <span class="brand-text">
+            <span class="brand-title"><span class="font-light">iHub</span><span class="font-extrabold"> Marketplace</span></span>
+            <span class="brand-tagline" data-i18n="brand.tagline">by IntraFind</span>
+          </span>
+        </a>
+
+        <button
+          type="button"
+          class="icon-btn menu-toggle"
+          id="menu-toggle"
+          aria-expanded="false"
+          aria-controls="topnav"
+          data-i18n-aria-label="nav.menu"
+          aria-label="Menu"
+        >
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+        </button>
+
+        <nav class="topnav" id="topnav" data-i18n-aria-label="nav.main" aria-label="Main navigation">
+          <a href="./#browse" data-i18n="nav.browse">Browse</a>
+          <a href="models.html" aria-current="page" data-i18n="nav.models">Open models</a>
+          <a href="./#getting-started" data-i18n="nav.gettingStarted">Getting started</a>
+          <a href="https://github.com/intrafind/ihub-apps" target="_blank" rel="noopener noreferrer" data-online-only>iHub Apps</a>
+          <a href="https://intrafind.com/" target="_blank" rel="noopener noreferrer" data-online-only>IntraFind</a>
+          <a href="https://github.com/intrafind/ihub-marketplace" target="_blank" rel="noopener noreferrer" class="nav-github" data-online-only>
+            <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub
+          </a>
+          <span class="topnav-tools">
+            <button type="button" class="pill-btn" id="lang-toggle" data-i18n-aria-label="nav.language" aria-label="Language">DE</button>
+            <button type="button" class="icon-btn" id="theme-toggle" data-i18n-aria-label="nav.theme" aria-label="Toggle dark mode">
+              <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+              <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><path d="M12 1.5v2.5M12 20v2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M1.5 12H4M20 12h2.5M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+          </span>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero hero-compact">
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow" data-i18n="om.hero.eyebrow">Open-weight models</p>
+            <h1 data-i18n="om.hero.title">Find the open model that fits your hardware</h1>
+            <p class="lead" data-i18n="om.hero.lead">
+              Compare current open-weight language models: what they can do, what their license allows, and which
+              machine runs them at what speed. Pick your hardware and requirements, and the list narrows to the models
+              that fit.
+            </p>
+          </div>
+          <div class="hero-card">
+            <p class="hero-card-label" data-i18n="om.hero.cardLabel">In this comparison</p>
+            <div class="stats stats-3" id="om-stats"></div>
+            <p class="hero-card-hint" id="om-updated"></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="finder" class="section">
+        <div class="container">
+          <div class="page-header">
+            <div>
+              <h2 data-i18n="om.finder.title">Model finder</h2>
+              <p class="muted" data-i18n="om.finder.subtitle">Say what you have and what you need</p>
+            </div>
+            <button type="button" class="btn btn-outline" id="om-reset" data-i18n="om.finder.reset">Reset filters</button>
+          </div>
+
+          <form class="finder" id="om-form" autocomplete="off">
+            <fieldset class="finder-group finder-group-hw">
+              <legend data-i18n="om.group.hardware">Your hardware</legend>
+              <div class="finder-fields">
+                <div class="field field-wide">
+                  <label for="om-hw" data-i18n="om.field.hardware">Machine</label>
+                  <select id="om-hw" class="input"></select>
+                </div>
+                <div class="field field-narrow" id="om-count-field">
+                  <label for="om-count" data-i18n="om.field.count">GPUs</label>
+                  <select id="om-count" class="input">
+                    <option value="1">1×</option>
+                    <option value="2">2×</option>
+                    <option value="4">4×</option>
+                    <option value="8">8×</option>
+                  </select>
+                </div>
+                <div class="field field-narrow" id="om-mem-field" hidden>
+                  <label for="om-mem" data-i18n="om.field.memory">Memory (GB)</label>
+                  <input type="number" id="om-mem" class="input" min="1" max="4096" step="1" inputmode="numeric" />
+                </div>
+                <div class="field field-narrow" id="om-bw-field" hidden>
+                  <label for="om-bw" data-i18n="om.field.bandwidth">Bandwidth (GB/s)</label>
+                  <input type="number" id="om-bw" class="input" min="1" max="20000" step="1" inputmode="numeric" />
+                </div>
+                <div class="field">
+                  <label for="om-speed" data-i18n="om.field.speed">Speed, at least</label>
+                  <select id="om-speed" class="input">
+                    <option value="0" data-i18n="om.speed.any">Any speed</option>
+                    <option value="5" data-i18n="om.speed.5">5 tok/s – background jobs</option>
+                    <option value="15" data-i18n="om.speed.15">15 tok/s – readable chat</option>
+                    <option value="30" data-i18n="om.speed.30">30 tok/s – fluent chat</option>
+                    <option value="60" data-i18n="om.speed.60">60 tok/s – agents, coding</option>
+                    <option value="100" data-i18n="om.speed.100">100 tok/s – real-time</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="om-quant" data-i18n="om.field.quant">Quality, at least</label>
+                  <select id="om-quant" class="input">
+                    <option value="4" data-i18n="om.quant.4">4-bit – smallest, slight loss</option>
+                    <option value="6" data-i18n="om.quant.6">6-bit – near original</option>
+                    <option value="8" data-i18n="om.quant.8">8-bit – practically lossless</option>
+                    <option value="16" data-i18n="om.quant.16">As released – full precision</option>
+                  </select>
+                </div>
+              </div>
+              <p class="finder-hint muted small" id="om-hw-hint"></p>
+            </fieldset>
+
+            <!-- On phones this group is folded away behind "More filters"; on wide screens it is always open -->
+            <details class="finder-more" id="om-more" data-collapse-mobile open>
+            <summary class="finder-more-summary">
+              <span data-i18n="om.finder.more">More filters</span>
+              <span class="count-pill" id="om-more-count" hidden></span>
+            </summary>
+            <fieldset class="finder-group">
+              <legend data-i18n="om.group.needs">What the model must do</legend>
+              <div class="chip-row" id="om-caps"></div>
+              <div class="finder-fields">
+                <div class="field">
+                  <label for="om-use" data-i18n="om.field.use">Use case</label>
+                  <select id="om-use" class="input"></select>
+                </div>
+                <div class="field">
+                  <label for="om-ctx" data-i18n="om.field.context">Context window, at least</label>
+                  <select id="om-ctx" class="input">
+                    <option value="0" data-i18n="om.ctx.any">Any size</option>
+                    <option value="32000">32K</option>
+                    <option value="128000">128K</option>
+                    <option value="256000">256K</option>
+                    <option value="1000000">1M</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="om-license" data-i18n="om.field.license">License</label>
+                  <select id="om-license" class="input">
+                    <option value="" data-i18n="om.license.any">Any license</option>
+                    <option value="permissive" data-i18n="om.license.permissiveOnly">Permissive only (Apache, MIT)</option>
+                    <option value="commercial" data-i18n="om.license.commercial">Commercial use allowed</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="om-origin" data-i18n="om.field.origin">Developed in</label>
+                  <select id="om-origin" class="input">
+                    <option value="" data-i18n="om.origin.any">Anywhere</option>
+                    <option value="eu" data-i18n="om.origin.eu">Europe</option>
+                    <option value="us" data-i18n="om.origin.us">USA</option>
+                    <option value="cn" data-i18n="om.origin.cn">China</option>
+                    <option value="other" data-i18n="om.origin.other">Elsewhere</option>
+                  </select>
+                </div>
+                <div class="field field-wide">
+                  <label for="om-search" data-i18n="om.field.search">Search</label>
+                  <input type="search" id="om-search" class="input" placeholder="Name, vendor, family…" data-i18n-placeholder="om.field.searchPlaceholder" />
+                </div>
+              </div>
+            </fieldset>
+            </details>
+          </form>
+
+          <div class="result-bar">
+            <output class="result-count muted" id="om-count-text"></output>
+            <label class="check" id="om-all-label">
+              <input type="checkbox" id="om-all" />
+              <span data-i18n="om.results.showAll">Also show models that do not fit</span>
+            </label>
+            <span class="spacer"></span>
+            <label class="sr-only" for="om-sort" data-i18n="om.sort.label">Sort</label>
+            <select id="om-sort" class="input">
+              <option value="" data-i18n="om.sort.recommended">Recommended</option>
+              <option value="newest" data-i18n="om.sort.newest">Newest first</option>
+              <option value="largest" data-i18n="om.sort.largest">Largest first</option>
+              <option value="smallest" data-i18n="om.sort.smallest">Least memory first</option>
+              <option value="fastest" data-i18n="om.sort.fastest">Fastest first</option>
+              <option value="name" data-i18n="om.sort.name">Name (A–Z)</option>
+            </select>
+          </div>
+
+          <div id="om-loading" class="loading"><output class="spinner"><span class="sr-only" data-i18n="common.loading">Loading…</span></output></div>
+          <div id="om-error" class="empty-state" hidden></div>
+          <div id="om-empty" class="empty-state" hidden>
+            <p data-i18n="om.results.none">No model matches these requirements. Try a smaller quality step, a lower speed, or more memory.</p>
+          </div>
+          <div class="om-table-wrap" id="om-table-wrap" hidden>
+            <table class="om-table" id="om-table">
+              <thead>
+                <tr>
+                  <th scope="col" class="om-col-check"><span class="sr-only" data-i18n="om.col.compare">Compare</span></th>
+                  <th scope="col" data-i18n="om.col.model">Model</th>
+                  <th scope="col" data-i18n="om.col.size">Size</th>
+                  <th scope="col" data-i18n="om.col.context">Context</th>
+                  <th scope="col" data-i18n="om.col.capabilities">Capabilities</th>
+                  <th scope="col" data-i18n="om.col.license">License</th>
+                  <th scope="col" data-i18n="om.col.memory">Memory</th>
+                  <th scope="col" data-i18n="om.col.speed">Speed</th>
+                </tr>
+              </thead>
+              <tbody id="om-rows"></tbody>
+            </table>
+          </div>
+          <div class="om-more" id="om-more-wrap" hidden>
+            <button type="button" class="btn btn-secondary" id="om-more-btn"></button>
+          </div>
+          <p class="muted small om-footnote" data-i18n="om.results.footnote">
+            Memory and speed are estimates for one conversation at a time; see “How to read the numbers” below. License
+            notes are a reading aid, not legal advice: the license text decides.
+          </p>
+          <p class="muted small om-footnote om-updated-mobile" id="om-updated-foot"></p>
+        </div>
+      </section>
+
+      <section id="method" class="section section-alt">
+        <div class="container">
+          <!-- On phones the explanation is folded away; on wide screens it is always open -->
+          <details class="method" id="om-method" data-collapse-mobile open>
+          <summary class="section-heading">
+            <h2 data-i18n="om.method.title">How to read the numbers</h2>
+          </summary>
+          <p class="muted method-subtitle" data-i18n="om.method.subtitle">What the estimates mean, and where they stop.</p>
+
+          <ol class="steps">
+            <li class="step">
+              <h3 data-i18n="om.method.memory.title">Memory</h3>
+              <p data-i18n-html="om.method.memory.text"></p>
+            </li>
+            <li class="step">
+              <h3 data-i18n="om.method.speed.title">Speed</h3>
+              <p data-i18n-html="om.method.speed.text"></p>
+            </li>
+            <li class="step">
+              <h3 data-i18n="om.method.license.title">Licenses</h3>
+              <p data-i18n-html="om.method.license.text"></p>
+            </li>
+          </ol>
+          </details>
+
+          <div class="contribute">
+            <div>
+              <h3 data-i18n="om.ihub.title">Running one of these with iHub</h3>
+              <p class="muted" data-i18n-html="om.ihub.text"></p>
+            </div>
+            <a class="btn btn-secondary" href="https://github.com/intrafind/ihub-apps/blob/main/docs/local-llm-providers.md" target="_blank" rel="noopener noreferrer" data-i18n="om.ihub.cta" data-online-only>Local model guide</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <p class="powered">
+            Powered by IntraFind –
+            <a href="https://intrafind.com/" target="_blank" rel="noopener noreferrer">https://intrafind.com/</a>
+          </p>
+          <p class="muted small">
+            © <span id="year">2026</span> IntraFind Software AG ·
+            <a href="https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE" data-offline-href="LICENSE.txt" target="_blank" rel="noopener noreferrer" data-i18n="footer.license">BSD 3-Clause License with Mandatory Attribution</a>
+          </p>
+        </div>
+        <nav class="footer-links" data-i18n-aria-label="footer.navigation" aria-label="Footer navigation">
+          <a href="./" data-i18n="nav.browse">Browse</a>
+          <a href="https://github.com/intrafind/ihub-apps" target="_blank" rel="noopener noreferrer" data-online-only>iHub Apps</a>
+          <a href="https://intrafind.com/" target="_blank" rel="noopener noreferrer" data-online-only>IntraFind</a>
+          <a href="https://github.com/intrafind/ihub-marketplace" target="_blank" rel="noopener noreferrer" data-online-only>GitHub</a>
+          <a href="data/open-models.json">open-models.json</a>
+        </nav>
+      </div>
+    </footer>
+
+    <!-- Selected models, pinned to the bottom until they are compared -->
+    <div class="compare-bar" id="om-compare-bar" hidden>
+      <div class="container compare-bar-inner">
+        <span id="om-compare-text"></span>
+        <span class="spacer"></span>
+        <button type="button" class="btn btn-link" id="om-compare-clear" data-i18n="om.compare.clear">Clear</button>
+        <button type="button" class="btn btn-primary btn-sm" id="om-compare-open" data-i18n="om.compare.open">Compare</button>
+      </div>
+    </div>
+
+    <!-- Model detail: a native modal dialog (focus trap, Escape and backdrop come with it), a side panel on wide screens and full screen on phones -->
+    <dialog class="drawer-dialog" id="om-drawer" aria-labelledby="om-drawer-title">
+      <div class="drawer-panel">
+        <div class="drawer-header">
+          <div class="drawer-heading">
+            <div class="badge-row" id="om-drawer-badges"></div>
+            <h2 id="om-drawer-title" data-i18n="om.detail.title">Model details</h2>
+            <p class="muted small" id="om-drawer-sub"></p>
+          </div>
+          <button type="button" class="close-btn" data-close-drawer data-i18n-aria-label="common.close" aria-label="Close">&#x2715;</button>
+        </div>
+        <div class="drawer-actions" id="om-drawer-actions"></div>
+        <div class="drawer-body" id="om-drawer-body"></div>
+      </div>
+    </dialog>
+
+    <!-- Side-by-side comparison -->
+    <dialog class="modal modal-wide" id="om-compare" aria-labelledby="om-compare-title">
+      <div class="modal-head">
+        <h2 id="om-compare-title" data-i18n="om.compare.title">Compare models</h2>
+        <button type="button" class="close-btn" id="om-compare-close" data-i18n-aria-label="common.close" aria-label="Close">&#x2715;</button>
+      </div>
+      <div class="compare-scroll" id="om-compare-body"></div>
+    </dialog>
+
+    <output class="toast" id="toast" hidden></output>
+
+    <script src="assets/i18n.js" defer></script>
+    <script src="assets/i18n-models.js" defer></script>
+    <script src="assets/model-finder.js" defer></script>
+    <script src="assets/models.js" defer></script>
+  </body>
+</html>

@@ -24,7 +24,9 @@
 //     migration, or a migration is not named by the release of its version;
 //   - the catalog item is out of sync with the folder (version,
 //     compatibility, releases, migrations, companions, integrity): run
-//     `node scripts/sync-integrations.js`.
+//     `node scripts/sync-integrations.js`;
+//   - site/data/open-models.json, the data of the open-model finder, is
+//     malformed (scripts/open-models.js has the rules).
 //
 // It also compares each folder with its previous release: the newest git tag
 // `integrations/<id>@<version>` whose version is not above the one in the
@@ -47,6 +49,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { execFileSync } = require('node:child_process');
 const { previousRelease } = require('./integration-tags');
+const { checkOpenModelsFile } = require('./open-models');
 
 const ROOT = path.resolve(__dirname, '..');
 const CATALOG = path.join(ROOT, 'catalog.json');
@@ -614,6 +617,9 @@ try {
 } catch (error) {
   fail(String(error.stderr || error.stdout || error.message).trim());
 }
+
+// The data of the open-model finder (site/models.html)
+for (const problem of checkOpenModelsFile()) fail(`site/data/open-models.json: ${problem}`);
 
 if (errors.length) {
   console.error(`validate: ${errors.length} problem(s)\n  ${errors.join('\n  ')}`);
