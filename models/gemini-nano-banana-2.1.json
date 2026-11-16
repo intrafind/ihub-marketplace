@@ -1,0 +1,43 @@
+{
+  "id": "gemini-nano-banana-2.1",
+  "modelId": "gemini-nano-banana-2.1",
+  "name": {
+    "en": "Nano Banana 2.1 (Gemini image)",
+    "de": "Nano Banana 2.1 (Gemini Bild)"
+  },
+  "description": {
+    "en": "Google's current Nano Banana image model: text-to-image, image editing and multi-turn refinement at 1K, 2K and 4K, with thinking.",
+    "de": "Googles aktuelles Nano-Banana-Bildmodell: Text-zu-Bild, Bildbearbeitung und mehrstufige Verfeinerung in 1K, 2K und 4K, mit Denken."
+  },
+  "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-nano-banana-2.1:streamGenerateContent",
+  "provider": "google",
+  "contextWindow": 131072,
+  "maxOutputTokens": 32768,
+  "connectTimeoutMs": 60000,
+  "supportsTools": "none",
+  "supportsVision": true,
+  "supportsImages": true,
+  "supportsImageGeneration": true,
+  "imageGeneration": {
+    "aspectRatio": "1:1",
+    "quality": "Low"
+  },
+  "thinking": {
+    "enabled": true,
+    "level": "medium"
+  },
+  "contentMarking": {
+    "text": {
+      "by": "provider",
+      "scheme": "synthid",
+      "statementRef": "Google DeepMind, SynthID: https://deepmind.google/technologies/synthid/"
+    },
+    "image": {
+      "by": "provider",
+      "scheme": "synthid",
+      "statementRef": "Google DeepMind, SynthID: https://deepmind.google/technologies/synthid/"
+    }
+  },
+  "enabled": false,
+  "default": false
+}

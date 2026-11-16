@@ -1,0 +1,29 @@
+{
+  "id": "claude-haiku-5-5",
+  "modelId": "claude-haiku-5-5",
+  "name": {
+    "en": "Claude Haiku 5.5",
+    "de": "Claude Haiku 5.5"
+  },
+  "description": {
+    "en": "Anthropic's fastest and most cost-efficient Claude model, for high-volume, latency-sensitive tasks such as classification, extraction and routing.",
+    "de": "Anthropics schnellstes und kostengünstigstes Claude-Modell für Aufgaben mit hohem Volumen und niedriger Latenz wie Klassifikation, Extraktion und Routing."
+  },
+  "url": "https://api.anthropic.com/v1/messages",
+  "provider": "anthropic",
+  "contextWindow": 1000000,
+  "maxOutputTokens": 128000,
+  "supportsTools": "auto",
+  "supportsVision": true,
+  "supportsImages": true,
+  "supportsTemperature": false,
+  "contentMarking": {
+    "text": {
+      "by": "provider",
+      "scheme": "synthid-text",
+      "statementRef": "Anthropic, How Claude marks AI-generated content: https://support.claude.com/en/articles/16266773-how-claude-marks-ai-generated-content"
+    }
+  },
+  "enabled": false,
+  "default": false
+}

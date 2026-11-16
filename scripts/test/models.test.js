@@ -166,3 +166,78 @@ describe('Anthropic models and their text watermark', () => {
     }
   });
 });
+
+// Capabilities follow what the providers document (Anthropic "Models overview",
+// Google AI Studio model pages, Mistral "Models overview"), checked in November 2026.
+describe('model capabilities', () => {
+  const all = models();
+  const byId = id => all.find(({ model }) => model.id === id)?.model;
+
+  it('offers the current Claude lineup, each with a 1M context and 128K output', () => {
+    for (const id of ['claude-fable-5-2', 'claude-opus-5-5', 'claude-sonnet-5-5', 'claude-haiku-5-5']) {
+      const model = byId(id);
+      assert.ok(model, `${id} is missing`);
+      assert.equal(model.modelId, id);
+      assert.equal(model.contextWindow, 1000000, id);
+      assert.equal(model.maxOutputTokens, 128000, id);
+      assert.equal(model.supportsTemperature, false, id);
+    }
+    // Earlier 5-series models allow the same 128K output.
+    for (const id of ['claude-fable-5-1', 'claude-opus-5', 'claude-sonnet-5']) {
+      assert.equal(byId(id).maxOutputTokens, 128000, id);
+    }
+  });
+
+  it('offers the current Gemini 4 and Nano Banana models', () => {
+    for (const id of ['gemini-4-carbon', 'gemini-4-argon']) {
+      const model = byId(id);
+      assert.ok(model, `${id} is missing`);
+      assert.equal(model.contextWindow, 1048576, id);
+      assert.equal(model.maxOutputTokens, 65536, id);
+      assert.ok(['low', 'medium', 'high'].includes(model.thinking.level), id);
+    }
+    const banana = byId('gemini-nano-banana-2.1');
+    assert.equal(banana?.supportsImageGeneration, true);
+  });
+
+  it('does not offer tools or audio input to Gemini image models: Google lists neither', () => {
+    for (const { file, model } of all.filter(
+      entry => isGoogle(entry) && entry.model.supportsImageGeneration === true
+    )) {
+      assert.equal(model.supportsTools, 'none', `${file}: function calling is not supported`);
+      assert.notEqual(model.supportsAudio, true, `${file}: audio input is not supported`);
+    }
+  });
+
+  it('uses the thinking levels a Gemini image model supports', () => {
+    // Nano Banana 2.1: minimal, medium, high. Gemini 3.1 Flash-Lite Image: minimal, high.
+    assert.ok(['minimal', 'medium', 'high'].includes(byId('gemini-nano-banana-2.1').thinking.level));
+    assert.ok(['minimal', 'high'].includes(byId('gemini-3.1-flash-lite-image').thinking.level));
+  });
+
+  it('points Mistral Large and Small at the current generation, not at deprecated ones', () => {
+    assert.equal(byId('mistral-large').modelId, 'mistral-large-4');
+    assert.equal(byId('mistral-large').contextWindow, 1000000);
+    assert.equal(byId('mistral-small').modelId, 'mistral-small-2603');
+    // Mistral deprecated Medium 3.5: it stays for installed copies but is not enabled for new ones.
+    assert.equal(byId('mistral-medium').enabled, false);
+  });
+
+  it('names no model that its provider has retired', () => {
+    const retired = [
+      'claude-3-7-sonnet-20250219',
+      'claude-3-5-haiku-20241022',
+      'claude-opus-4-1-20250805',
+      'claude-sonnet-4-20250514',
+      'gemini-2.0-flash',
+      'gemini-3-pro-preview',
+      'gemini-3.1-flash-lite-preview',
+      'mistral-large-2411',
+      'mistral-large-2512',
+      'mistral-small-2506'
+    ];
+    for (const { file, model } of all.filter(entry => !entry.model.provider.startsWith('bedrock'))) {
+      assert.ok(!retired.includes(model.modelId), `${file} points at ${model.modelId}`);
+    }
+  });
+});

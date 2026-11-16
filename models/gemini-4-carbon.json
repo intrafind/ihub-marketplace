@@ -1,0 +1,33 @@
+{
+  "id": "gemini-4-carbon",
+  "modelId": "gemini-4-carbon",
+  "name": {
+    "en": "Gemini 4 Carbon",
+    "de": "Gemini 4 Carbon"
+  },
+  "description": {
+    "en": "Google's Gemini 4 frontier model for complex reasoning, coding and agentic work, with a 1M token context window. Text, image, audio, video and PDF input.",
+    "de": "Googles Gemini-4-Spitzenmodell für komplexes Reasoning, Coding und agentische Aufgaben mit 1 Mio. Token Kontextfenster. Eingabe von Text, Bild, Audio, Video und PDF."
+  },
+  "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-4-carbon:streamGenerateContent",
+  "provider": "google",
+  "contextWindow": 1048576,
+  "maxOutputTokens": 65536,
+  "supportsTools": "required",
+  "supportsVision": true,
+  "supportsAudio": true,
+  "supportsImageGeneration": false,
+  "contentMarking": {
+    "text": {
+      "by": "provider",
+      "scheme": "synthid",
+      "statementRef": "Google DeepMind, SynthID: https://deepmind.google/technologies/synthid/"
+    }
+  },
+  "enabled": false,
+  "default": false,
+  "thinking": {
+    "enabled": true,
+    "level": "high"
+  }
+}

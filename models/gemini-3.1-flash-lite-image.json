@@ -11,12 +11,11 @@
   },
   "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-image:streamGenerateContent",
   "provider": "google",
-  "contextWindow": 32768,
-  "maxOutputTokens": 8192,
+  "contextWindow": 65536,
+  "maxOutputTokens": 4096,
   "connectTimeoutMs": 60000,
-  "supportsTools": "auto",
+  "supportsTools": "none",
   "supportsVision": true,
-  "supportsAudio": true,
   "supportsImages": true,
   "supportsImageGeneration": true,
   "imageGeneration": {
@@ -26,7 +25,7 @@
   },
   "thinking": {
     "enabled": true,
-    "level": "low"
+    "level": "minimal"
   },
   "contentMarking": {
     "text": {

@@ -1,0 +1,29 @@
+{
+  "id": "claude-opus-5-5",
+  "modelId": "claude-opus-5-5",
+  "name": {
+    "en": "Claude Opus 5.5",
+    "de": "Claude Opus 5.5"
+  },
+  "description": {
+    "en": "Anthropic's recommended model for most workloads: long-running agentic coding and knowledge work. Adaptive thinking is always on.",
+    "de": "Anthropics empfohlenes Modell für die meisten Aufgaben: langlaufendes agentisches Coding und Wissensarbeit. Adaptives Denken ist immer aktiv."
+  },
+  "url": "https://api.anthropic.com/v1/messages",
+  "provider": "anthropic",
+  "contextWindow": 1000000,
+  "maxOutputTokens": 128000,
+  "supportsTools": "auto",
+  "supportsVision": true,
+  "supportsImages": true,
+  "supportsTemperature": false,
+  "contentMarking": {
+    "text": {
+      "by": "provider",
+      "scheme": "synthid-text",
+      "statementRef": "Anthropic, How Claude marks AI-generated content: https://support.claude.com/en/articles/16266773-how-claude-marks-ai-generated-content"
+    }
+  },
+  "enabled": false,
+  "default": false
+}

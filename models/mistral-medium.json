@@ -6,8 +6,8 @@
     "de": "Mistral Medium"
   },
   "description": {
-    "en": "Mistral's frontier-class multimodal model optimized for agentic and coding use cases (Mistral Medium 3.5).",
-    "de": "Mistrals multimodales Spitzenmodell, optimiert für agentische und Coding-Anwendungen (Mistral Medium 3.5)."
+    "en": "Mistral Medium 3.5. Deprecated by Mistral (retirement April 30, 2027): use Mistral Large 4 for new setups.",
+    "de": "Mistral Medium 3.5. Von Mistral als veraltet markiert (Abschaltung 30. April 2027): Nutzen Sie für neue Einrichtungen Mistral Large 4."
   },
   "url": "https://api.mistral.ai/v1/chat/completions",
   "provider": "mistral",
@@ -19,6 +19,6 @@
   "supportsStructuredOutput": true,
   "concurrency": 1,
   "requestDelayMs": 1000,
-  "enabled": true,
+  "enabled": false,
   "default": false
 }
