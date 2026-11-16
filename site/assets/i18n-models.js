@@ -18,6 +18,9 @@
 
       'om.finder.title': 'Model finder',
       'om.finder.subtitle': 'Say what you have and what you need',
+      'om.notice':
+        'Model figures (parameters, context windows, capabilities, license terms) are as reported by the model providers on their model cards and in their license texts. We have not verified them. Memory and speed are our own estimates from these figures.',
+      'om.detail.reported': 'As reported by the provider; not verified by us.',
       'om.finder.reset': 'Reset filters',
       'om.finder.more': 'More filters',
       'om.group.hardware': 'Your hardware',
@@ -235,6 +238,9 @@
 
       'om.finder.title': 'Modellfinder',
       'om.finder.subtitle': 'Was Sie haben und was Sie brauchen',
+      'om.notice':
+        'Die Angaben zu den Modellen (Parameter, Kontextfenster, Fähigkeiten, Lizenzbedingungen) stammen von den Modellanbietern, aus deren Modellkarten und Lizenztexten, und wurden von uns nicht überprüft. Speicherbedarf und Geschwindigkeit sind eigene Schätzungen auf Grundlage dieser Angaben.',
+      'om.detail.reported': 'Laut Anbieter; von uns nicht überprüft.',
       'om.finder.reset': 'Filter zurücksetzen',
       'om.finder.more': 'Weitere Filter',
       'om.group.hardware': 'Ihre Hardware',

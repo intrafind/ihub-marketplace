@@ -718,7 +718,7 @@
       model.serving && model.serving.length ? metaRow(t('om.detail.serving'), escapeHtml(model.serving.join(', '))) : '',
       variants.length ? metaRow(t('om.detail.quantized'), variants.join('<br />'), true) : ''
     ];
-    return `<section class="detail-section"><h3>${escapeHtml(t('om.detail.capabilities'))}</h3><dl class="meta-table">${rows.join('')}</dl></section>`;
+    return `<section class="detail-section"><h3>${escapeHtml(t('om.detail.capabilities'))}</h3><dl class="meta-table">${rows.join('')}</dl><p class="muted small">${escapeHtml(t('om.detail.reported'))}</p></section>`;
   }
 
   function renderDrawer() {

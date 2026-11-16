@@ -562,6 +562,8 @@ A visitor picks a machine (a GPU and how many of it, an Apple silicon Mac, a min
 
 ![The open-model finder with an RTX 4090 selected: the models that fit, their license, memory and speed](docs/screenshots/open-models.png)
 
+The figures about the models (parameters, context windows, capabilities, license terms) are what the providers state on their model cards and in their license texts. They are not verified, and the page says so above the results and in every model's detail panel (`om.notice`, `om.detail.reported` in `site/assets/i18n-models.js`); memory and speed are the page's own estimates from them.
+
 Everything on the page comes from `site/data/open-models.json`:
 
 | Key | Content |
