@@ -15,6 +15,7 @@ const SCRIPTS = path.resolve(__dirname, '..');
 /** The scripts a temporary repository gets, as in this one. */
 const SCRIPT_FILES = [
   'validate.js',
+  'open-models.js',
   'sync-integrations.js',
   'integration-tags.js',
   'tag-integrations.js',
