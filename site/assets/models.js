@@ -28,7 +28,19 @@
   const NARROW = window.matchMedia('(max-width: 820px)');
   const CAPABILITIES = ['vision', 'video', 'audio', 'tools', 'reasoning', 'german'];
   const HARDWARE_GROUPS = ['consumer', 'workstation', 'datacenter', 'apple', 'unified', 'cpu'];
-  const SORTS = ['', 'newest', 'largest', 'smallest', 'fastest', 'name'];
+  /** The direction a column sorts in when it is chosen first: text A–Z, numbers and dates the interesting end first. */
+  const SORT_DEFAULT_DIR = { name: 'asc', released: 'desc', size: 'desc', context: 'desc', license: 'asc', memory: 'asc', speed: 'desc' };
+  const LICENSE_RANK = { permissive: 0, conditional: 1, 'non-commercial': 2 };
+  /** What a row is sorted by; a missing value (not stated, or no machine chosen) always sorts last. */
+  const SORT_VALUE = {
+    name: row => row.model.name,
+    released: row => row.model.released,
+    size: row => row.model.paramsB,
+    context: row => row.model.contextWindow,
+    license: row => `${LICENSE_RANK[row.model.license.category]} ${row.model.license.name}`,
+    memory: row => row.run.memoryGB,
+    speed: row => (row.run.fits ? row.run.tokensPerSecond : null)
+  };
   const EUROPE = ['EU', 'AT', 'BE', 'CH', 'CZ', 'DE', 'DK', 'ES', 'FI', 'FR', 'GB', 'IE', 'IT', 'NL', 'NO', 'PL', 'PT', 'SE'];
   const RIGHTS = ['commercialUse', 'selfHosting', 'offerAsService', 'modifications'];
 
@@ -46,6 +58,7 @@
     origin: '',
     q: '',
     sort: '',
+    dir: 'asc',
     all: false
   };
 
@@ -193,7 +206,11 @@
     state.license = ['permissive', 'commercial'].includes(params.get('license')) ? params.get('license') : '';
     state.origin = ['eu', 'us', 'cn', 'other'].includes(params.get('origin')) ? params.get('origin') : '';
     state.q = params.get('q') || '';
-    state.sort = SORTS.includes(params.get('sort')) ? params.get('sort') : '';
+    const sort = params.get('sort');
+    state.sort = Object.hasOwn(SORT_DEFAULT_DIR, sort) ? sort : '';
+    const dir = params.get('dir');
+    state.dir = SORT_DEFAULT_DIR[state.sort] || 'asc';
+    if (dir === 'asc' || dir === 'desc') state.dir = dir;
     state.all = params.get('all') === '1';
     state.compare = (params.get('cmp') || '').split(',').filter(Boolean).slice(0, MAX_COMPARE);
     state.modelId = params.get('model') || '';
@@ -215,7 +232,10 @@
     if (state.license) params.set('license', state.license);
     if (state.origin) params.set('origin', state.origin);
     if (state.q) params.set('q', state.q);
-    if (state.sort) params.set('sort', state.sort);
+    if (state.sort) {
+      params.set('sort', state.sort);
+      if (state.dir !== SORT_DEFAULT_DIR[state.sort]) params.set('dir', state.dir);
+    }
     if (state.all) params.set('all', '1');
     if (state.compare.length) params.set('cmp', state.compare.join(','));
     if (state.modelId) params.set('model', state.modelId);
@@ -289,6 +309,19 @@
     return true;
   }
 
+  const isMissing = value => value === null || value === undefined;
+
+  /** Compares two rows by a column; a missing value comes last in either direction. */
+  function compareBy(key, dir) {
+    return (a, b) => {
+      const x = SORT_VALUE[key](a);
+      const y = SORT_VALUE[key](b);
+      if (isMissing(x) || isMissing(y)) return Number(isMissing(x)) - Number(isMissing(y));
+      const order = typeof x === 'string' ? x.localeCompare(y, state.lang, { numeric: true }) : x - y;
+      return dir === 'asc' ? order : -order;
+    };
+  }
+
   /** The rows to show: every model that passes the filters, with how it runs on the chosen machine. */
   function results() {
     const hardware = selectedHardware();
@@ -300,18 +333,14 @@
       return !state.speed || run.tokensPerSecond === null || run.tokensPerSecond >= state.speed;
     });
     const rows = (hardware && state.all ? all : fitting).map(row => ({ ...row, ok: fitting.includes(row) }));
-    const by = {
-      newest: (a, b) => b.model.released.localeCompare(a.model.released),
-      largest: (a, b) => b.model.paramsB - a.model.paramsB,
-      smallest: (a, b) => a.run.memoryGB - b.run.memoryGB,
-      fastest: (a, b) => (b.run.tokensPerSecond || 0) - (a.run.tokensPerSecond || 0),
-      name: (a, b) => a.model.name.localeCompare(b.model.name, state.lang)
-    };
+    const newest = (a, b) => b.model.released.localeCompare(a.model.released);
+    const largest = (a, b) => b.model.paramsB - a.model.paramsB;
     // Recommended: with a machine, the largest model that fits comes first (it
     // is usually the most capable one the machine can run); without, the newest
-    const recommended = hardware ? by.largest : by.newest;
-    const order = by[state.sort] || recommended;
-    rows.sort((a, b) => Number(b.ok) - Number(a.ok) || order(a, b) || by.newest(a, b));
+    let order = hardware ? largest : newest;
+    if (state.sort) order = compareBy(state.sort, state.dir);
+    // Models that do not fit stay below the ones that do, whatever the order
+    rows.sort((a, b) => Number(b.ok) - Number(a.ok) || order(a, b) || newest(a, b));
     return { rows, fitting: fitting.length, total: data.models.length, hardware, count };
   }
 
@@ -370,6 +399,30 @@
     $('om-hw-hint').textContent = hint;
   }
 
+  /** Shows the sort in the dropdown, the direction button and the column headers. */
+  function syncSort() {
+    $('om-sort').value = state.sort;
+    const button = $('om-sort-dir');
+    button.disabled = !state.sort;
+    button.textContent = state.dir === 'asc' ? '↑' : '↓';
+    button.setAttribute('aria-label', t(state.dir === 'asc' ? 'om.sort.ascending' : 'om.sort.descending'));
+    const aria = { asc: 'ascending', desc: 'descending' }[state.dir];
+    document.querySelectorAll('#om-table th[data-sort-col]').forEach(th => {
+      th.setAttribute('aria-sort', th.dataset.sortCol === state.sort ? aria : 'none');
+    });
+  }
+
+  /** A column header was pressed: sort by it, or reverse the order when it already is the sort. */
+  function sortBy(key) {
+    if (state.sort === key) state.dir = state.dir === 'asc' ? 'desc' : 'asc';
+    else {
+      state.sort = key;
+      state.dir = SORT_DEFAULT_DIR[key];
+    }
+    syncSort();
+    update();
+  }
+
   function syncInputs() {
     $('om-hw').value = state.hw;
     $('om-count').value = String(state.count);
@@ -382,7 +435,7 @@
     $('om-license').value = state.license;
     $('om-origin').value = state.origin;
     $('om-search').value = state.q;
-    $('om-sort').value = state.sort;
+    syncSort();
     $('om-all').checked = state.all;
   }
 
@@ -718,7 +771,7 @@
       model.serving && model.serving.length ? metaRow(t('om.detail.serving'), escapeHtml(model.serving.join(', '))) : '',
       variants.length ? metaRow(t('om.detail.quantized'), variants.join('<br />'), true) : ''
     ];
-    return `<section class="detail-section"><h3>${escapeHtml(t('om.detail.capabilities'))}</h3><dl class="meta-table">${rows.join('')}</dl></section>`;
+    return `<section class="detail-section"><h3>${escapeHtml(t('om.detail.capabilities'))}</h3><dl class="meta-table">${rows.join('')}</dl><p class="muted small">${escapeHtml(t('om.detail.reported'))}</p></section>`;
   }
 
   function renderDrawer() {
@@ -846,7 +899,21 @@
     bind('om-ctx', 'ctx', Number);
     bind('om-license', 'license');
     bind('om-origin', 'origin');
-    bind('om-sort', 'sort');
+    $('om-sort').addEventListener('change', event => {
+      state.sort = event.target.value;
+      state.dir = SORT_DEFAULT_DIR[state.sort] || 'asc';
+      syncSort();
+      update();
+    });
+    $('om-sort-dir').addEventListener('click', () => {
+      state.dir = state.dir === 'asc' ? 'desc' : 'asc';
+      syncSort();
+      update();
+    });
+    $('om-table').tHead.addEventListener('click', event => {
+      const button = event.target.closest('[data-sort]');
+      if (button) sortBy(button.dataset.sort);
+    });
     $('om-all').addEventListener('change', event => {
       state.all = event.target.checked;
       update();

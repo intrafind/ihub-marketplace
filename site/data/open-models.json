@@ -96,6 +96,14 @@
       "bandwidthGBs": 864
     },
     {
+      "id": "rtx-pro-5000-48",
+      "name": "NVIDIA RTX PRO 5000 Blackwell (48 GB)",
+      "group": "workstation",
+      "kind": "gpu",
+      "memoryGB": 48,
+      "bandwidthGBs": 1344
+    },
+    {
       "id": "rtx-pro-6000-96",
       "name": "NVIDIA RTX PRO 6000 Blackwell (96 GB)",
       "group": "workstation",

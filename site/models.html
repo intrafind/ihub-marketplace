@@ -215,16 +215,21 @@
               <span data-i18n="om.results.showAll">Also show models that do not fit</span>
             </label>
             <span class="spacer"></span>
-            <label class="sr-only" for="om-sort" data-i18n="om.sort.label">Sort</label>
+            <label class="sort-label" for="om-sort" data-i18n="om.sort.label">Sort by</label>
             <select id="om-sort" class="input">
               <option value="" data-i18n="om.sort.recommended">Recommended</option>
-              <option value="newest" data-i18n="om.sort.newest">Newest first</option>
-              <option value="largest" data-i18n="om.sort.largest">Largest first</option>
-              <option value="smallest" data-i18n="om.sort.smallest">Least memory first</option>
-              <option value="fastest" data-i18n="om.sort.fastest">Fastest first</option>
-              <option value="name" data-i18n="om.sort.name">Name (A–Z)</option>
+              <option value="name" data-i18n="om.sort.by.name">Name</option>
+              <option value="released" data-i18n="om.sort.by.released">Release date</option>
+              <option value="size" data-i18n="om.sort.by.size">Size</option>
+              <option value="context" data-i18n="om.sort.by.context">Context window</option>
+              <option value="license" data-i18n="om.sort.by.license">License</option>
+              <option value="memory" data-i18n="om.sort.by.memory">Memory</option>
+              <option value="speed" data-i18n="om.sort.by.speed">Speed</option>
             </select>
+            <button type="button" class="btn btn-outline btn-sm sort-dir" id="om-sort-dir" disabled>↑</button>
           </div>
+
+          <p class="notice" id="om-notice" data-i18n="om.notice"></p>
 
           <div id="om-loading" class="loading"><output class="spinner"><span class="sr-only" data-i18n="common.loading">Loading…</span></output></div>
           <div id="om-error" class="empty-state" hidden></div>
@@ -236,13 +241,13 @@
               <thead>
                 <tr>
                   <th scope="col" class="om-col-check"><span class="sr-only" data-i18n="om.col.compare">Compare</span></th>
-                  <th scope="col" data-i18n="om.col.model">Model</th>
-                  <th scope="col" data-i18n="om.col.size">Size</th>
-                  <th scope="col" data-i18n="om.col.context">Context</th>
+                  <th scope="col" data-sort-col="name" aria-sort="none"><button type="button" class="th-sort" data-sort="name" data-i18n="om.col.model">Model</button></th>
+                  <th scope="col" data-sort-col="size" aria-sort="none"><button type="button" class="th-sort" data-sort="size" data-i18n="om.col.size">Size</button></th>
+                  <th scope="col" data-sort-col="context" aria-sort="none"><button type="button" class="th-sort" data-sort="context" data-i18n="om.col.context">Context</button></th>
                   <th scope="col" data-i18n="om.col.capabilities">Capabilities</th>
-                  <th scope="col" data-i18n="om.col.license">License</th>
-                  <th scope="col" data-i18n="om.col.memory">Memory</th>
-                  <th scope="col" data-i18n="om.col.speed">Speed</th>
+                  <th scope="col" data-sort-col="license" aria-sort="none"><button type="button" class="th-sort" data-sort="license" data-i18n="om.col.license">License</button></th>
+                  <th scope="col" data-sort-col="memory" aria-sort="none"><button type="button" class="th-sort" data-sort="memory" data-i18n="om.col.memory">Memory</button></th>
+                  <th scope="col" data-sort-col="speed" aria-sort="none"><button type="button" class="th-sort" data-sort="speed" data-i18n="om.col.speed">Speed</button></th>
                 </tr>
               </thead>
               <tbody id="om-rows"></tbody>
