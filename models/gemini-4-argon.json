@@ -1,0 +1,33 @@
+{
+  "id": "gemini-4-argon",
+  "modelId": "gemini-4-argon",
+  "name": {
+    "en": "Gemini 4 Argon",
+    "de": "Gemini 4 Argon"
+  },
+  "description": {
+    "en": "Google's efficient Gemini 4 reasoning model: faster responses and fewer tokens per turn than Gemini 4 Carbon on coding, agentic, math and science tasks. 1M token context window.",
+    "de": "Googles effizientes Gemini-4-Reasoning-Modell: schnellere Antworten und weniger Token pro Antwort als Gemini 4 Carbon bei Coding-, Agenten-, Mathematik- und Wissenschaftsaufgaben. 1 Mio. Token Kontextfenster."
+  },
+  "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-4-argon:streamGenerateContent",
+  "provider": "google",
+  "contextWindow": 1048576,
+  "maxOutputTokens": 65536,
+  "supportsTools": "required",
+  "supportsVision": true,
+  "supportsAudio": true,
+  "supportsImageGeneration": false,
+  "contentMarking": {
+    "text": {
+      "by": "provider",
+      "scheme": "synthid",
+      "statementRef": "Google DeepMind, SynthID: https://deepmind.google/technologies/synthid/"
+    }
+  },
+  "enabled": false,
+  "default": false,
+  "thinking": {
+    "enabled": true,
+    "level": "medium"
+  }
+}

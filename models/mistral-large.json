@@ -1,17 +1,17 @@
 {
   "id": "mistral-large",
-  "modelId": "mistral-large-latest",
+  "modelId": "mistral-large-4",
   "name": {
     "en": "Mistral Large",
     "de": "Mistral Large"
   },
   "description": {
-    "en": "Mistral's open-weight, general-purpose multimodal flagship (Mistral Large 3). The -latest alias follows Mistral's releases without a config change.",
-    "de": "Mistrals allgemeines multimodales Flaggschiff mit offenen Gewichten (Mistral Large 3). Der -latest-Alias folgt Mistrals Releases ohne Konfigurationsänderung."
+    "en": "Mistral's open-weight, general-purpose multimodal flagship (Mistral Large 4) with a 1M token context window. Pinned to Large 4: Large 3 is deprecated.",
+    "de": "Mistrals allgemeines multimodales Flaggschiff mit offenen Gewichten (Mistral Large 4) und 1 Mio. Token Kontextfenster. Auf Large 4 festgelegt: Large 3 ist veraltet."
   },
   "url": "https://api.mistral.ai/v1/chat/completions",
   "provider": "mistral",
-  "contextWindow": 256000,
+  "contextWindow": 1000000,
   "maxOutputTokens": 32000,
   "supportsTools": "required",
   "supportsVision": true,
