@@ -178,7 +178,7 @@ Apps marked with *file upload* work best when users upload their own reference m
 | `personal-coach` | Personal Coach | Miscellaneous | utility | — |
 | `ai-use-case-finder` | AI Use Case Finder | Miscellaneous | utility | — |
 
-### Models (48)
+### Models (47)
 
 Model configurations mirror the defaults shipped with the current iHub Apps release. Gemini models start at Gemini 3; iHub no longer supports Gemini 2.x.
 
@@ -226,7 +226,6 @@ Model configurations mirror the defaults shipped with the current iHub Apps rele
 | `bedrock-llama-4-scout` | Llama 4 Scout (Bedrock) | AWS Bedrock |
 | `bedrock-mistral-large-2` | Mistral Large 2 (Bedrock) | AWS Bedrock |
 | `bedrock-pixtral-large` | Pixtral Large (Bedrock) | AWS Bedrock |
-| `bedrock-command-r-plus` | Cohere Command R+ (Bedrock) | AWS Bedrock |
 | `gemini-3.8-flash-tts` | Gemini 3.8 Flash TTS (Read aloud) | Google (text-to-speech) |
 | `gemini-3.8-flash-lite-tts` | Gemini 3.8 Flash-Lite TTS (Read aloud) | Google (text-to-speech) |
 | `voxtral-mini-tts` | Voxtral TTS (Read aloud) | Mistral AI (text-to-speech) |

@@ -255,15 +255,14 @@ describe('model capabilities', () => {
     assert.equal(byId('voxtral-mini-transcribe-realtime').modelId, 'voxtral-mini-transcribe-realtime-3-0');
   });
 
-  it('says on the Bedrock models that AWS moved them to Legacy or End of Life', () => {
+  it('says on the Bedrock models that AWS moved them to Legacy', () => {
     for (const id of [
       'bedrock-claude-3-5-sonnet',
       'bedrock-claude-3-7-sonnet',
       'bedrock-llama-3-3-70b',
-      'bedrock-llama-4-scout',
-      'bedrock-command-r-plus'
+      'bedrock-llama-4-scout'
     ]) {
-      assert.match(byId(id).description.en, /Legacy|End of life/, id);
+      assert.match(byId(id).description.en, /Legacy/, id);
     }
   });
 

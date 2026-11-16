@@ -1889,20 +1889,6 @@
     },
     {
       "type": "model",
-      "name": "bedrock-command-r-plus",
-      "displayName": { "en": "Cohere Command R+ (Bedrock)", "de": "Cohere Command R+ (Bedrock)" },
-      "description": { "en": "Cohere Command R+ via AWS Bedrock — RAG-optimized with strong tool calling. End of life on Bedrock since Aug 19, 2026.", "de": "Cohere Command R+ über AWS Bedrock — RAG-optimiert mit starken Tool-Aufrufen. Bei Bedrock seit 19.08.2026 abgeschaltet." },
-      "version": "1.0.1",
-      "author": "IntraFind Software AG",
-      "category": "utility",
-      "tags": ["bedrock", "cohere", "command-r", "tools", "rag"],
-      "icon": "cpu-chip",
-      "license": "BSD-3-Clause-with-Mandatory-Attribution",
-      "licenseUrl": "https://github.com/intrafind/ihub-marketplace/blob/main/LICENSE",
-      "source": { "type": "relative", "path": "models/bedrock-command-r-plus.json" }
-    },
-    {
-      "type": "model",
       "name": "gemini-3.8-flash-tts",
       "displayName": { "en": "Gemini 3.8 Flash TTS (Read aloud)", "de": "Gemini 3.8 Flash TTS (Vorlesen)" },
       "description": { "en": "Google's Gemini text-to-speech model with the most natural, expressive voices. Reads chat messages aloud, streaming the audio as it is generated, and detects the language by itself. Uses the Google API key.", "de": "Googles Gemini-Sprachausgabemodell mit den natürlichsten, ausdrucksstärksten Stimmen. Liest Chat-Nachrichten vor, streamt das Audio, während es erzeugt wird, und erkennt die Sprache selbst. Verwendet den Google-API-Schlüssel." },
