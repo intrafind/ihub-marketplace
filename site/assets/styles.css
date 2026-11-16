@@ -1955,7 +1955,11 @@ html.offline [data-online-only] {
 }
 
 .compare-table tbody th {
+  position: sticky;
+  left: 0;
+  z-index: 1;
   min-width: 8rem;
+  background: var(--surface);
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--text-muted);
@@ -2074,13 +2078,6 @@ html.offline [data-online-only] {
 
 .drawer-dialog .drawer-panel {
   height: 100%;
-}
-
-.compare-table tbody th {
-  position: sticky;
-  left: 0;
-  background: var(--surface);
-  z-index: 1;
 }
 
 /* Narrow screens: a stack of compact cards (name, then size, memory and speed), the filters fold away */
