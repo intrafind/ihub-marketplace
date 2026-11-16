@@ -1,0 +1,21 @@
+{
+  "id": "gpt-6-luna",
+  "modelId": "gpt-6-luna",
+  "name": {
+    "en": "GPT-6 Luna",
+    "de": "GPT-6 Luna"
+  },
+  "description": {
+    "en": "OpenAI's most efficient GPT-6 model for focused, high-volume tasks, via the Responses API. 1M token context window, text and image input. OpenAI's named replacement for GPT-5 nano.",
+    "de": "OpenAIs effizientestes GPT-6-Modell für fokussierte Aufgaben mit hohem Volumen über die Responses API. 1 Mio. Token Kontextfenster, Text- und Bildeingabe. Von OpenAI genannter Nachfolger von GPT-5 nano."
+  },
+  "url": "https://api.openai.com/v1/responses",
+  "provider": "openai-responses",
+  "contextWindow": 1050000,
+  "maxOutputTokens": 128000,
+  "supportsTools": "required",
+  "supportsVision": true,
+  "supportsImages": true,
+  "enabled": false,
+  "default": false
+}
