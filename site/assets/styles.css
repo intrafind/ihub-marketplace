@@ -1627,6 +1627,10 @@ html.offline [data-online-only] {
   min-width: 0;
 }
 
+.finder-group-hw .finder-fields {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .field-wide {
   grid-column: 1 / -1;
 }
@@ -1743,9 +1747,9 @@ html.offline [data-online-only] {
   opacity: 0.55;
 }
 
-.om-col-check {
+.om-table .om-col-check {
   width: 2.25rem;
-  padding-right: 0 !important;
+  padding-right: 0;
 }
 
 .om-col-model {
@@ -1983,8 +1987,173 @@ html.offline [data-online-only] {
   padding-top: 1.25rem;
 }
 
-/* Narrow screens: every model becomes a card, each cell a labelled line */
+.om-table td .om-sub {
+  white-space: nowrap;
+}
+
+.om-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.875rem;
+}
+
+.om-updated-mobile {
+  display: none;
+}
+
+/* Folded groups ("More filters", "How to read the numbers"): a toggle on phones, plain content on wide screens */
+.finder-more-summary,
+.method > summary {
+  list-style: none;
+}
+
+.finder-more-summary::-webkit-details-marker,
+.method > summary::-webkit-details-marker {
+  display: none;
+}
+
+.finder-more-summary {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  cursor: pointer;
+}
+
+.finder-more-summary::after,
+.method > summary::after {
+  content: '';
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin: -0.25rem 0.25rem 0 auto;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.15s;
+  display: none;
+}
+
+.finder-more[open] > .finder-more-summary::after,
+.method[open] > summary::after {
+  transform: translateY(0.25rem) rotate(-135deg);
+}
+
+.method-subtitle {
+  margin: 0 0 1.5rem;
+}
+
+/* The detail panel is a native <dialog>: full height, the panel on its right */
+.drawer-dialog {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  background: transparent;
+  color: var(--text);
+  overflow: hidden;
+}
+
+.drawer-dialog[open] {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.drawer-dialog::backdrop {
+  background: var(--backdrop);
+}
+
+.drawer-dialog .drawer-panel {
+  height: 100%;
+}
+
+.compare-table tbody th {
+  position: sticky;
+  left: 0;
+  background: var(--surface);
+  z-index: 1;
+}
+
+/* Narrow screens: a stack of compact cards (name, then size, memory and speed), the filters fold away */
 @media (max-width: 820px) {
+  .hero.hero-compact {
+    padding: 1.25rem 0 1.5rem;
+  }
+
+  .hero-compact .hero-inner {
+    gap: 0;
+  }
+
+  .hero-compact .lead,
+  .hero-compact .hero-card {
+    display: none;
+  }
+
+  .hero-compact h1 {
+    font-size: 1.5rem;
+  }
+
+  #finder.section {
+    padding-top: 1.25rem;
+  }
+
+  #finder .page-header .muted {
+    display: none;
+  }
+
+  .finder {
+    gap: 0.75rem;
+    margin: 0.75rem 0;
+  }
+
+  .finder-group {
+    padding: 0.75rem 0.875rem 0.875rem;
+  }
+
+  .finder-more-summary {
+    display: flex;
+  }
+
+  .finder-more-summary::after,
+  .method > summary::after {
+    display: block;
+  }
+
+  .finder-more[open] > .finder-more-summary {
+    margin-bottom: 0.75rem;
+  }
+
+  .method > summary {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .method > summary h2 {
+    margin: 0;
+  }
+
+  .method[open] > summary {
+    margin-bottom: 0.5rem;
+  }
+
+  .om-updated-mobile {
+    display: block;
+  }
+
+  .om-more .btn {
+    width: 100%;
+  }
+
   .om-table-wrap {
     border: 0;
     background: none;
@@ -2002,11 +2171,11 @@ html.offline [data-online-only] {
 
   .om-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem 1rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.375rem 0.75rem;
     position: relative;
-    padding: 0.875rem 1rem;
-    margin-bottom: 0.75rem;
+    padding: 0.75rem 0.875rem;
+    margin-bottom: 0.625rem;
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     background: var(--surface);
@@ -2027,19 +2196,88 @@ html.offline [data-online-only] {
     color: var(--text-muted);
   }
 
-  .om-col-model {
+  .om-table .om-col-model {
     grid-column: 1 / -1;
-    padding-right: 2rem !important;
+    grid-row: 1;
+    min-width: 0;
+    padding-right: 2rem;
   }
 
-  .om-col-check {
+  .om-table .om-col-check {
     position: absolute;
-    top: 0.875rem;
-    right: 1rem;
+    top: 0.75rem;
+    right: 0.875rem;
     width: auto;
+    padding: 0;
+  }
+
+  .om-table .om-c-size {
+    grid-row: 2;
+    grid-column: 1;
+  }
+
+  .om-table .om-c-memory {
+    grid-row: 2;
+    grid-column: 2;
+  }
+
+  .om-table .om-c-speed {
+    grid-row: 2;
+    grid-column: 3;
+  }
+
+  .om-table .om-c-license {
+    grid-row: 3;
+    grid-column: 1 / -1;
+  }
+
+  .om-table td.om-c-license[data-label]::before {
+    display: none;
+  }
+
+  /* What the card leaves out is in the detail panel and the comparison */
+  .om-table .om-c-context,
+  .om-table .om-c-caps {
+    display: none;
+  }
+
+  .drawer-dialog .drawer-header,
+  .drawer-dialog .drawer-body {
+    padding: 1rem;
+  }
+
+  .drawer-dialog .drawer-actions {
+    padding: 0.625rem 1rem;
+  }
+
+  .modal.modal-wide {
+    width: calc(100% - 1rem);
+    max-height: calc(100% - 1rem);
+  }
+
+  /* Two models fit side by side; more scroll sideways with the row labels pinned */
+  .compare-scroll {
+    padding: 0 0.75rem 0.75rem;
+  }
+
+  .compare-table th,
+  .compare-table td {
+    min-width: 7.5rem;
+    padding: 0.5rem;
+  }
+
+  .compare-table thead td {
+    min-width: 4.5rem;
+    padding: 0;
+  }
+
+  .compare-table tbody th {
+    min-width: 4.5rem;
+    max-width: 4.5rem;
+    font-size: 0.6875rem;
   }
 }
 
-.om-table td .om-sub {
-  white-space: nowrap;
+output.spinner {
+  display: block;
 }

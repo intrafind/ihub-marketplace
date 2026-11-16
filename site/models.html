@@ -26,7 +26,9 @@
           var theme = localStorage.getItem('ihub-marketplace-theme');
           var dark = theme ? theme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
           if (dark) document.documentElement.classList.add('dark');
-        } catch (e) {}
+        } catch (e) {
+          // The theme is a preference: without storage the page follows the system setting
+        }
       })();
     </script>
   </head>
@@ -107,7 +109,7 @@
           </div>
 
           <form class="finder" id="om-form" autocomplete="off">
-            <fieldset class="finder-group">
+            <fieldset class="finder-group finder-group-hw">
               <legend data-i18n="om.group.hardware">Your hardware</legend>
               <div class="finder-fields">
                 <div class="field field-wide">
@@ -155,9 +157,15 @@
               <p class="finder-hint muted small" id="om-hw-hint"></p>
             </fieldset>
 
+            <!-- On phones this group is folded away behind "More filters"; on wide screens it is always open -->
+            <details class="finder-more" id="om-more" data-collapse-mobile open>
+            <summary class="finder-more-summary">
+              <span data-i18n="om.finder.more">More filters</span>
+              <span class="count-pill" id="om-more-count" hidden></span>
+            </summary>
             <fieldset class="finder-group">
               <legend data-i18n="om.group.needs">What the model must do</legend>
-              <div class="chip-row" id="om-caps" role="group" data-i18n-aria-label="om.field.capabilities" aria-label="Capabilities"></div>
+              <div class="chip-row" id="om-caps"></div>
               <div class="finder-fields">
                 <div class="field">
                   <label for="om-use" data-i18n="om.field.use">Use case</label>
@@ -197,10 +205,11 @@
                 </div>
               </div>
             </fieldset>
+            </details>
           </form>
 
           <div class="result-bar">
-            <p class="result-count muted" id="om-count-text" aria-live="polite"></p>
+            <output class="result-count muted" id="om-count-text"></output>
             <label class="check" id="om-all-label">
               <input type="checkbox" id="om-all" />
               <span data-i18n="om.results.showAll">Also show models that do not fit</span>
@@ -217,7 +226,7 @@
             </select>
           </div>
 
-          <div id="om-loading" class="loading"><div class="spinner" role="status"><span class="sr-only" data-i18n="common.loading">Loading…</span></div></div>
+          <div id="om-loading" class="loading"><output class="spinner"><span class="sr-only" data-i18n="common.loading">Loading…</span></output></div>
           <div id="om-error" class="empty-state" hidden></div>
           <div id="om-empty" class="empty-state" hidden>
             <p data-i18n="om.results.none">No model matches these requirements. Try a smaller quality step, a lower speed, or more memory.</p>
@@ -239,19 +248,25 @@
               <tbody id="om-rows"></tbody>
             </table>
           </div>
+          <div class="om-more" id="om-more-wrap" hidden>
+            <button type="button" class="btn btn-secondary" id="om-more-btn"></button>
+          </div>
           <p class="muted small om-footnote" data-i18n="om.results.footnote">
             Memory and speed are estimates for one conversation at a time; see “How to read the numbers” below. License
             notes are a reading aid, not legal advice: the license text decides.
           </p>
+          <p class="muted small om-footnote om-updated-mobile" id="om-updated-foot"></p>
         </div>
       </section>
 
       <section id="method" class="section section-alt">
         <div class="container">
-          <div class="section-heading">
+          <!-- On phones the explanation is folded away; on wide screens it is always open -->
+          <details class="method" id="om-method" data-collapse-mobile open>
+          <summary class="section-heading">
             <h2 data-i18n="om.method.title">How to read the numbers</h2>
-            <p class="muted" data-i18n="om.method.subtitle">What the estimates mean, and where they stop.</p>
-          </div>
+          </summary>
+          <p class="muted method-subtitle" data-i18n="om.method.subtitle">What the estimates mean, and where they stop.</p>
 
           <ol class="steps">
             <li class="step">
@@ -267,6 +282,7 @@
               <p data-i18n-html="om.method.license.text"></p>
             </li>
           </ol>
+          </details>
 
           <div class="contribute">
             <div>
@@ -311,22 +327,21 @@
       </div>
     </div>
 
-    <!-- Model detail slide-in panel -->
-    <div class="drawer" id="om-drawer" hidden>
-      <div class="drawer-backdrop" data-close-drawer></div>
-      <aside class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="om-drawer-title" tabindex="-1">
+    <!-- Model detail: a native modal dialog (focus trap, Escape and backdrop come with it), a side panel on wide screens and full screen on phones -->
+    <dialog class="drawer-dialog" id="om-drawer" aria-labelledby="om-drawer-title">
+      <div class="drawer-panel">
         <div class="drawer-header">
           <div class="drawer-heading">
             <div class="badge-row" id="om-drawer-badges"></div>
-            <h2 id="om-drawer-title"></h2>
+            <h2 id="om-drawer-title" data-i18n="om.detail.title">Model details</h2>
             <p class="muted small" id="om-drawer-sub"></p>
           </div>
           <button type="button" class="close-btn" data-close-drawer data-i18n-aria-label="common.close" aria-label="Close">&#x2715;</button>
         </div>
         <div class="drawer-actions" id="om-drawer-actions"></div>
         <div class="drawer-body" id="om-drawer-body"></div>
-      </aside>
-    </div>
+      </div>
+    </dialog>
 
     <!-- Side-by-side comparison -->
     <dialog class="modal modal-wide" id="om-compare" aria-labelledby="om-compare-title">
@@ -334,10 +349,10 @@
         <h2 id="om-compare-title" data-i18n="om.compare.title">Compare models</h2>
         <button type="button" class="close-btn" id="om-compare-close" data-i18n-aria-label="common.close" aria-label="Close">&#x2715;</button>
       </div>
-      <div class="compare-scroll" id="om-compare-body" tabindex="0"></div>
+      <div class="compare-scroll" id="om-compare-body"></div>
     </dialog>
 
-    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+    <output class="toast" id="toast" hidden></output>
 
     <script src="assets/i18n.js" defer></script>
     <script src="assets/i18n-models.js" defer></script>

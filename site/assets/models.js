@@ -22,6 +22,10 @@
   const STORAGE = { theme: 'ihub-marketplace-theme', lang: 'ihub-marketplace-lang' };
   const HF = 'https://huggingface.co/';
   const MAX_COMPARE = 4;
+  /** Rows shown at first, and added by each press of "Show more": a phone gets fewer, so nobody scrolls through 58 cards. */
+  const PAGE_SIZE = { wide: 25, narrow: 12 };
+  /** Below this width the finder is a stack of cards with folded filters (the same breakpoint as assets/styles.css). */
+  const NARROW = window.matchMedia('(max-width: 820px)');
   const CAPABILITIES = ['vision', 'video', 'audio', 'tools', 'reasoning', 'german'];
   const HARDWARE_GROUPS = ['consumer', 'workstation', 'datacenter', 'apple', 'unified', 'cpu'];
   const SORTS = ['', 'newest', 'largest', 'smallest', 'fastest', 'name'];
@@ -45,7 +49,7 @@
     all: false
   };
 
-  const state = Object.assign({}, DEFAULTS, { lang: 'en', compare: [], modelId: '' });
+  const state = Object.assign({}, DEFAULTS, { lang: 'en', compare: [], modelId: '', limit: 0 });
   let data = { models: [], hardware: [], quantizations: [], updated: '' };
   let lastFocus = null;
   let searchTimer = null;
@@ -431,23 +435,44 @@
           <a href="?model=${encodeURIComponent(model.id)}" data-open="${escapeHtml(model.id)}">${escapeHtml(model.name)}</a>
           <span class="om-sub">${escapeHtml(model.vendor)} · ${escapeHtml(formatDate(model.released))}</span>
         </th>
-        <td data-label="${escapeHtml(t('om.col.size'))}">${sizeHtml(model)}</td>
-        <td data-label="${escapeHtml(t('om.col.context'))}"><span class="om-num">${escapeHtml(formatContext(model.contextWindow) || '–')}</span></td>
-        <td data-label="${escapeHtml(t('om.col.capabilities'))}"><span class="tags">${capabilityTags(model) || '–'}</span></td>
-        <td data-label="${escapeHtml(t('om.col.license'))}">${licenseBadge(model)}</td>
-        <td data-label="${escapeHtml(t('om.col.memory'))}">${memoryHtml(run, hardware)}</td>
-        <td data-label="${escapeHtml(t('om.col.speed'))}">${speedHtml(run, hardware)}</td>
+        <td class="om-c-size" data-label="${escapeHtml(t('om.col.size'))}">${sizeHtml(model)}</td>
+        <td class="om-c-context" data-label="${escapeHtml(t('om.col.context'))}"><span class="om-num">${escapeHtml(formatContext(model.contextWindow) || '–')}</span></td>
+        <td class="om-c-caps" data-label="${escapeHtml(t('om.col.capabilities'))}"><span class="tags">${capabilityTags(model) || '–'}</span></td>
+        <td class="om-c-license" data-label="${escapeHtml(t('om.col.license'))}">${licenseBadge(model)}</td>
+        <td class="om-c-memory" data-label="${escapeHtml(t('om.col.memory'))}">${memoryHtml(run, hardware)}</td>
+        <td class="om-c-speed" data-label="${escapeHtml(t('om.col.speed'))}">${speedHtml(run, hardware)}</td>
       </tr>`;
+  }
+
+  function pageSize() {
+    return NARROW.matches ? PAGE_SIZE.narrow : PAGE_SIZE.wide;
+  }
+
+  /** How many of the filters in the folded "More filters" group are set. */
+  function moreFilterCount() {
+    return state.caps.length + [state.use, state.ctx, state.license, state.origin, state.q].filter(Boolean).length;
+  }
+
+  function renderMoreFilters() {
+    const count = moreFilterCount();
+    $('om-more-count').hidden = count === 0;
+    $('om-more-count').textContent = String(count);
   }
 
   function renderResults() {
     const { rows, fitting, total, hardware, count } = results();
-    $('om-rows').innerHTML = rows.map(row => renderRow(row, hardware)).join('');
+    if (!state.limit) state.limit = pageSize();
+    const shown = rows.slice(0, state.limit);
+    $('om-rows').innerHTML = shown.map(row => renderRow(row, hardware)).join('');
     $('om-table-wrap').hidden = rows.length === 0;
     $('om-empty').hidden = rows.length !== 0;
+    const rest = rows.length - shown.length;
+    $('om-more-wrap').hidden = rest <= 0;
+    $('om-more-btn').textContent = t('om.results.more', { n: Math.min(rest, pageSize()), rest });
     $('om-count-text').textContent = hardware
       ? t('om.results.countFit', { shown: fitting, total, hardware: hardwareLabel(hardware, count) })
       : t('om.results.count', { shown: fitting, total });
+    renderMoreFilters();
     renderHardwareFields();
     renderCompareBar();
   }
@@ -466,7 +491,9 @@
           `<div class="stat stat-static"><span class="stat-value">${value}</span><span class="stat-label">${escapeHtml(t(key))}</span></div>`
       )
       .join('');
-    $('om-updated').textContent = data.updated ? t('om.updated', { date: formatDate(data.updated) }) : '';
+    const updated = data.updated ? t('om.updated', { date: formatDate(data.updated) }) : '';
+    $('om-updated').textContent = updated;
+    $('om-updated-foot').textContent = updated;
   }
 
   // ---------- Rendering: comparison ----------
@@ -572,6 +599,7 @@
     renderCompare();
     const dialog = $('om-compare');
     if (!dialog.open) dialog.showModal();
+    syncScrollLock();
   }
 
   // ---------- Rendering: detail panel ----------
@@ -721,42 +749,55 @@
       ${hardwareSection(model)}`;
   }
 
+  /** The page behind a modal dialog does not scroll. */
+  function syncScrollLock() {
+    document.body.classList.toggle('no-scroll', $('om-drawer').open || $('om-compare').open);
+  }
+
+  // The detail panel is a native modal <dialog>: the browser traps focus, closes it on
+  // Escape and returns focus; "close" below only keeps the page state in step.
   function openModel(id) {
     if (!data.models.some(model => model.id === id)) return;
     if ($('om-compare').open) $('om-compare').close();
-    if ($('om-drawer').hidden) lastFocus = document.activeElement;
+    const dialog = $('om-drawer');
+    if (!dialog.open) {
+      lastFocus = document.activeElement;
+      dialog.showModal();
+    }
     state.modelId = id;
     renderDrawer();
-    $('om-drawer').hidden = false;
-    document.body.classList.add('no-scroll');
     $('om-drawer-body').scrollTop = 0;
-    document.querySelector('#om-drawer .drawer-panel').focus();
+    syncScrollLock();
     writeUrlState();
   }
 
   function closeModel() {
-    if ($('om-drawer').hidden) return;
+    if ($('om-drawer').open) $('om-drawer').close();
+  }
+
+  function onModelClosed() {
     state.modelId = '';
-    $('om-drawer').hidden = true;
-    document.body.classList.remove('no-scroll');
+    syncScrollLock();
     writeUrlState();
     if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
     lastFocus = null;
   }
 
-  function trapFocus(event) {
-    const panel = document.querySelector('#om-drawer .drawer-panel');
-    const focusable = panel.querySelectorAll('a[href], button:not([disabled]), input, select, [tabindex]:not([tabindex="-1"])');
-    if (!focusable.length) return;
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    if (event.shiftKey && (document.activeElement === first || document.activeElement === panel)) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
+  /**
+   * Parts that are folded away on a phone and always open on a wide screen: the
+   * "More filters" group and the explanation under the table. The summary is the
+   * toggle on a phone; on a wide screen a toggle is undone, so the content never hides.
+   */
+  function bindCollapsibles() {
+    const parts = document.querySelectorAll('details[data-collapse-mobile]');
+    const fold = () => parts.forEach(part => (part.open = !NARROW.matches));
+    parts.forEach(part =>
+      part.addEventListener('toggle', () => {
+        if (!NARROW.matches && !part.open) part.open = true;
+      })
+    );
+    NARROW.addEventListener('change', fold);
+    fold();
   }
 
   async function copyText(text) {
@@ -770,10 +811,12 @@
 
   // ---------- Events ----------
 
+  /** A filter changed: the list starts again at its first page. */
   function update() {
+    state.limit = 0;
     writeUrlState();
     renderResults();
-    if (!$('om-drawer').hidden) renderDrawer();
+    if ($('om-drawer').open) renderDrawer();
   }
 
   function renderAll() {
@@ -784,7 +827,7 @@
     syncInputs();
     renderStats();
     renderResults();
-    if (!$('om-drawer').hidden) renderDrawer();
+    if ($('om-drawer').open) renderDrawer();
     if ($('om-compare').open) renderCompare();
   }
 
@@ -859,6 +902,11 @@
       update();
     });
     $('om-compare-close').addEventListener('click', () => $('om-compare').close());
+    $('om-compare').addEventListener('close', syncScrollLock);
+    $('om-more-btn').addEventListener('click', () => {
+      state.limit += pageSize();
+      renderResults();
+    });
     $('om-compare').addEventListener('click', event => {
       // A click on the backdrop (the dialog element itself) closes the dialog
       if (event.target === $('om-compare')) $('om-compare').close();
@@ -878,6 +926,11 @@
     });
 
     document.querySelectorAll('#om-drawer [data-close-drawer]').forEach(el => el.addEventListener('click', closeModel));
+    $('om-drawer').addEventListener('close', onModelClosed);
+    $('om-drawer').addEventListener('click', event => {
+      // A click beside the panel (on the dialog element itself) closes the dialog
+      if (event.target === $('om-drawer')) closeModel();
+    });
     $('om-drawer-actions').addEventListener('click', async event => {
       const button = event.target.closest('[data-action]');
       if (!button) return;
@@ -891,11 +944,6 @@
         url.hash = '';
         if (await copyText(url.href)) showToast(t('om.detail.linkCopied'));
       }
-    });
-    document.addEventListener('keydown', event => {
-      if ($('om-drawer').hidden) return;
-      if (event.key === 'Escape') closeModel();
-      else if (event.key === 'Tab') trapFocus(event);
     });
 
     $('lang-toggle').addEventListener('click', () => {
@@ -928,6 +976,7 @@
     $('year').textContent = String(new Date().getFullYear());
     applyStaticTranslations();
     bindEvents();
+    bindCollapsibles();
 
     try {
       const response = await fetch(new URL('data/open-models.json', window.location.href).href, { cache: 'no-cache' });
