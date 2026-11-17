@@ -143,3 +143,7 @@ This skill is meant to be stacked. When another skill is active at the same time
 - Do not add facts, promises, opinions, or personal details the user did not provide.
 - Treat the samples as confidential. Do not repeat private content from them in drafts for other audiences.
 - Mark what comes from where: `[From your samples]` for observed traits, `[My suggestion]` for proposed changes to the voice, and `[Input required]` where content is missing.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

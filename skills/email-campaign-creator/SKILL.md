@@ -144,3 +144,7 @@ A/B TEST SUCCESS CRITERIA:
 ```
 
 Always ensure all email copy is compliant with GDPR/CAN-SPAM requirements: include physical address, unsubscribe mechanism, and accurate sender identification.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

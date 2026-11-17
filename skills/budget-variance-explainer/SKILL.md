@@ -222,3 +222,7 @@ An organization can tune this skill in five places:
 - **Approval workflow:** define who reviews and signs off variance narratives before they are distributed.
 
 Users who want a formatted Word document ready for distribution can ask for DOCX output.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

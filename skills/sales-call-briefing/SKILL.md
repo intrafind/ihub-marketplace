@@ -150,3 +150,7 @@ Fill in the call brief template at the end of this skill.
 2. **Don't invent deal history.** If the CRM has no record, say "The CRM holds no earlier record of this deal"; don't assume this is a first engagement.
 3. **Tag the source of every assertion** as (via CRM), (via calendar), (via email), (via user), or (AI-recommended).
 4. **End with the verification reminder.** Every output includes "Before the call, check this brief against what you yourself know about the account."
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

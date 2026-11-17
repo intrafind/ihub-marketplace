@@ -155,3 +155,7 @@ The user can tune the digest along these dimensions:
 - Never guess at urgency. Mark a deadline only when the source states it explicitly.
 - Never summarize content you haven't actually retrieved. Show the metadata and the link instead of guessing at what it says.
 - Label every item `[From: source name]`, and list in the digest header which sources you searched and which you did not.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

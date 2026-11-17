@@ -155,3 +155,7 @@ Scale the steps above to the kind of meeting:
 - Don't make up metrics or data points for a brief. Put `[Input required — ask the user]` in their place.
 - Don't assume what the meeting is for. Ask about the objective before drafting the agenda.
 - Mark where each piece comes from: `[Via connected tool]` for anything pulled from a connected tool or source, `[Per the user]` for what the user told you, `[My suggestion]` for your own proposals, and `[Input required]` wherever information is still missing.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

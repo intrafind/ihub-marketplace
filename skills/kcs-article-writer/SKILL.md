@@ -228,3 +228,7 @@ Confirm every item before publishing:
 - Never invent error messages, UI labels, or menu paths; they must be taken word for word from the source system.
 - Never guess software versions or platform details. Ask which version applies, and do not write version-specific instructions from training data.
 - Label everything you produce with its origin: `[From source material]`, `[Article template]`, or `[AI-drafted — verify before publishing]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

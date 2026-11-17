@@ -144,3 +144,7 @@ If the user wants to rehearse, play the audience:
 - Respect the time slot. If the material does not fit, say what to cut instead of squeezing.
 - Keep confidential material out of slides meant for external audiences, and flag anything that looks sensitive.
 - Mark what comes from where: `[From your material]`, `[Via connected tool]`, `[My suggestion]`, and `[Input required]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

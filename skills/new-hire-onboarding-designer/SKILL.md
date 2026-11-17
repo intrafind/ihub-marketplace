@@ -231,3 +231,7 @@ After every onboarding cycle, sort the lessons into four buckets — what worked
 - **Tag every item you output with where it came from:** `[Based on the role details]` for facts the user gave you, `[Standard onboarding practice]` for general methodology, or `[AI proposal — HR to confirm]` for your own suggestions.
 
 > **Tip:** Let the user know they can ask for DOCX output to receive a formatted Word document that is ready to distribute.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

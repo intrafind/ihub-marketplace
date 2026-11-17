@@ -177,3 +177,7 @@ Out of the box, the method relies on generic band structures and thresholds. Tel
 - **Never call a pay decision "compliant" or "legal."** Whether something complies is for legal counsel to decide, so flag it: "Have employment counsel in [jurisdiction] confirm this."
 - **Never make a pay equity determination about an individual.** That takes statistical methodology and legal review that go beyond what this skill does.
 - **Tag everything you output with its origin:** `[Per the user's pay data]`, `[Standard review method]`, or `[AI analysis — compensation team to confirm]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

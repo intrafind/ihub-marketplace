@@ -154,3 +154,7 @@ When the job is specifically to validate an A/B test, work through these checks 
 - Label what you produce: `[Computed from data]` for calculated values, `[Method recommendation]` for guidance on approach, and `[Interpretation — verify with domain expert]` for business interpretation.
 
 > **Tip:** Users who want a formatted spreadsheet to circulate can ask for XLSX output.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

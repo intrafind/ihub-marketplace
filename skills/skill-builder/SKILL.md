@@ -190,3 +190,7 @@ Skills can be used together; a well-built skill plays nicely with others:
 - Don't put secrets, passwords, API keys, or personal data into a skill; skills are readable by everyone who can use them.
 - Don't copy third-party content (books, paid frameworks, other companies' material) into reference files unless the user confirms they have the rights.
 - Keep the user in control of publishing: you produce files; the import and access decisions are made by the iHub administrator.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

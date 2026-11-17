@@ -310,3 +310,7 @@ And these formatting standards:
 - **Don't invent escalation contacts, SLA values, or monitoring thresholds.** Each organization sets its own, so mark them `[ORGANIZATION TO DEFINE]`.
 - **Don't make up API endpoints, tool versions, or details of the infrastructure.** On specifics like these, training data is unreliable.
 - **Tag everything you output with its origin:** `[Supplied by the user]`, `[Template structure]`, or `[Structured by AI — SME to confirm]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

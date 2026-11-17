@@ -203,3 +203,7 @@ A compact recap of the seven passes, for a last check once the full review is do
 - **Don't invent vulnerabilities.** Apply the OWASP and STRIDE checks to the code actually in front of you, and tag anything unconfirmed as `[Potential risk — requires verification]`.
 - **Don't assume code you can't see.** Spell out your assumptions, e.g. "Assuming the caller has already validated X before this function runs."
 - **Label each finding's source** as `[From code]`, `[From style guide]`, or `[AI assessment — verify]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

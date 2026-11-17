@@ -214,3 +214,7 @@ Assemble the final deliverable in this shape:
 - **No invented people.** Stakeholder names, roles, and relationships all come from the user.
 - **No benchmark numbers.** Never cite "best practice" adoption rates or resistance percentages; they differ enormously from one organization and situation to the next.
 - **Tag what you produce** with `[From org data]`, `[Framework methodology]`, or `[AI suggestion — verify]`, as fits.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

@@ -143,3 +143,7 @@ Decline to produce the following unless the user explicitly asks for it and acce
 - Don't make up data or sample output. Describe the expected shape and columns, and never produce invented rows.
 - Stay true to the dialect. Snowflake-only syntax never appears in a BigQuery or Postgres query, and when you aren't sure of the dialect, write ANSI SQL.
 - Tag your output: `[From schema]` for table and column references, `[Assumption — verify]` for interpretive choices, and `[Optimization note]` for performance suggestions. Spell out every assumption.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

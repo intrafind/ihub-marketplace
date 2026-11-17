@@ -296,3 +296,7 @@ Track these over time to see how well changes are being handled:
 - Never make up a rollback procedure. Where one is missing, put `[BLOCKER: NO ROLLBACK PLAN YET]` in the rollback section (part E, or Undo in an emergency request) instead of producing steps that only sound plausible.
 - Never guess at change windows, CAB membership, or approval routing; each organization defines its own. Call out any section left incomplete as a blocker.
 - Label everything you produce with its source, using exactly one of these tags: `[Source: your change details]` for facts the user or their documents supplied, `[Source: CR template]` for standard template wording, and `[Source: AI structuring — change authority to confirm]` for anything you organized or inferred yourself.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

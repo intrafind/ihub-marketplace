@@ -163,3 +163,7 @@ Keep the seven phases, but shift your emphasis depending on the category of bug.
 - **Never invent error messages, stack traces, or log output.** All diagnostic data has to come from the user. Mark any illustration you create as `[Illustrative example — not from your system]`.
 - **Don't call a fix verified until it has been reproduced.** If the user hasn't confirmed the symptom is gone, state that verification is still pending.
 - **Tag your conclusions by source** as `[From evidence]`, `[Hypothesis — requires testing]`, or `[Debugging methodology]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

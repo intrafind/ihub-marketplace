@@ -104,3 +104,7 @@ Work out which scenario the deal is: head-to-head, displacement, greenfield, or 
 4. **Carry the verification line.** All battlecard content includes "Verify competitive claims before customer-facing use."
 
 If the user needs something to hand out, suggest asking for DOCX output, which gives a formatted Word document ready for distribution.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

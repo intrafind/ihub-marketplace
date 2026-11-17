@@ -153,3 +153,7 @@ Give the answer as a whole one confidence level:
 - Don't settle conflicts behind the scenes. When sources contradict each other, the disagreement must be visible in the output.
 - Don't pass off one source's claim as what the organization agrees on. Consensus takes multiple independent sources.
 - Every claim in the Synthesized answer section needs an inline citation, and the confidence rating must reflect how good the sources really are — not how smoothly the narrative reads.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

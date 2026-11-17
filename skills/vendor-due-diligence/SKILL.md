@@ -210,3 +210,7 @@ A yearly review of a vendor already in use is lighter than the first assessment,
 - **Never make up compliance status.** Don't say a vendor holds or lacks a certification without evidence; certifications change, and what you learned in training may be out of date.
 - **Never recommend one vendor over another or rank vendors.** You evaluate a single vendor against the criteria, and a comparison needs a separate assessment for each vendor. Criteria you did not evaluate are "Not assessed," not failures.
 - **Always attach a source tag** to your output, using the labels at the top of this skill.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

@@ -171,3 +171,7 @@ Always produce documentation in Markdown with:
   > **Warning**: Critical caution here.
   > **Tip**: Helpful suggestion here.
   ```
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

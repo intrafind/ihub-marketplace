@@ -160,3 +160,7 @@ If the user wants a formatted presentation ready to distribute, tell them they c
 - **Don't make ROI claims the customer couldn't confirm.** Without quantitative data, frame the value qualitatively.
 - **Don't turn roadmap items into promises.** Stick to wording such as "planned" or "on our roadmap"; a phrase like "will be delivered by" is off-limits.
 - **Tag where every claim comes from** using one of four labels: `[Account records]`, `[QBR method]`, `[Per customer]`, or `[CSM's view]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

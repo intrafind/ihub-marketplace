@@ -228,3 +228,7 @@ If the user wants a formatted Word document to circulate, point out that they ca
   - `[Basis: test evidence]` — it rests on the evidence examined during testing
   - `[Basis: tester's judgment — needs review]` — it is your judgment call and a reviewer has to confirm it
   - `[Basis: audit methodology]` — it follows the audit methodology being applied
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

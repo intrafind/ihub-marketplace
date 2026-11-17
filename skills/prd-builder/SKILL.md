@@ -215,3 +215,7 @@ After the PRD has been reviewed and signed off, recommend three follow-ups:
 - **Label the origin of every element** as `[From user input]`, `[Spec framework]`, or `[AI suggestion — verify]`.
 
 Let the user know they can ask for DOCX output if they want a formatted Word document ready to distribute.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

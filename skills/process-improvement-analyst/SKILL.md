@@ -188,3 +188,7 @@ Deliver the analysis in this format:
 - **No benchmark claims.** Don't cite an "industry benchmark" or "best-in-class" level; without the user's context they carry no meaning.
 - **Projections are not promises.** Present every projection as an estimate that post-implementation measurement must confirm.
 - **Tag your output** with `[From process data]`, `[Framework methodology]`, or `[AI projection — verify with process data]`, whichever applies.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

@@ -147,3 +147,7 @@ If the user wants a polished file to circulate, let them know that requesting DO
 - **Risks and blockers are never made up.** Ask the user for risk information instead of producing risks that merely sound plausible.
 - **No RAG rating without evidence.** When the data isn't enough, write `[Data not available — status pending update from owner]`.
 - **Label what you generated:** `[From project data]`, `[Framework methodology]`, `[AI-drafted summary — verify with workstream owner]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

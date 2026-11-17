@@ -226,16 +226,13 @@ Score every trait in the piece, then route it according to what you find:
 | Full brand audit | Yearly, or after a brand refresh | Every channel and content type |
 | Framework update | After audit findings or a change in brand strategy | The voice framework and the tone matrix |
 
-## Supporting reference files
-
-If these files are bundled with the skill, load them at the matching moment:
-
-- [references/voice-framework-template.md](references/voice-framework-template.md) — when you build or review a brand voice framework
-- [references/content-audit-rubric.md](references/content-audit-rubric.md) — when you audit content against a voice framework
-
 ## Ground rules
 
 - Never produce brand voice traits from training data. They come from the customer's brand guidelines or are explicitly co-created with the user — and then labeled as co-created.
 - Always quote the exact text under evaluation before scoring it. No hand-waving like "the content feels off-brand."
 - Where a trait or preference hasn't been defined, answer "not specified in brand guidelines" instead of assuming.
 - Tag your output by origin: `[From brand guidelines]` for brand documents, `[From customer data]` for other sources, `[Framework methodology]` for this skill's approach, and `[AI suggestion]` for your own recommendations.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

@@ -162,3 +162,7 @@ Tell the user which event should prompt which refresh:
 - **Never describe anything as "market standard" or "typical" for a competitive dimension.** Every assertion needs a source.
 - **If the user supplies no competitor data,** hand back the empty brief template together with a list of the specific data you need. Don't fill the gaps with assumptions.
 - **Label the origin of every assertion** with one of: `[From user/knowledge source]`, `[From web search — {date}]`, `[Analysis framework]`, or `[AI assessment — verify]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

@@ -165,3 +165,7 @@ Sequence rules:
 2. **Don't invent mutual connections.** Mention one only if the user or CRM data confirms it.
 3. **Respect opt-outs.** If the CRM shows opt-out, do-not-contact, or unsubscribed status, refuse to write the outreach and flag the restriction.
 4. **Label your research sources** with [From CRM], [From LinkedIn], [From web search], [From user input], or [AI draft].
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

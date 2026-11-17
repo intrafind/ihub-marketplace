@@ -177,3 +177,7 @@ Design the gates around four principles:
 - **Don't promise particular defect detection rates.** How many defects get caught depends on the quality of the tests, not just their type.
 - **Don't write test code before you understand the codebase.** Your job here is planning the strategy; producing actual tests requires knowing the language, the framework, and the test library.
 - **Label each output by source** as `[From user context]`, `[Testing methodology]`, or `[AI recommendation — verify]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

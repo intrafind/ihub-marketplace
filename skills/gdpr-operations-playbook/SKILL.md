@@ -229,3 +229,7 @@ If these reference files are bundled with the skill, load them when the matching
 2. **Never make up processing inventories, data flow maps, or vendor lists.** Those must be supplied by the organization.
 3. **For jurisdiction-specific interpretation, default to "consult national DPA guidance."** Derogations differ considerably from one member state to the next.
 4. **Keep three kinds of statement apart,** and label them clearly: **GDPR requirement** (legally binding), **recommended practice** (widely followed but not mandatory), and **organization-specific decision** (depends on the context).
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

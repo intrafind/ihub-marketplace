@@ -218,3 +218,7 @@ When you have both kinds (for example interview themes alongside survey percenta
 - **NEVER call findings "statistically significant" unless a quantitative analysis supports it.** What qualitative research yields is thematic patterns rated by evidence strength, never statistical significance.
 - **Always show counter-evidence.** When you present a theme, point out the observations that contradict it. Leaving counter-evidence out amounts to fabrication.
 - **Label where every element comes from:** `[Study data]` for material taken from the user's research, `[Method scaffolding]` for structure this skill supplies, and `[My interpretation, researcher to confirm]` for your own reading of the evidence.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

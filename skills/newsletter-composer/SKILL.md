@@ -127,3 +127,7 @@ Newsletters suit scheduled tasks well: for example, a task every Friday at 10:00
 - Respect the audience boundary: internal details never go into external editions.
 - Don't include personal data (birthdays, health, family news) unless the user confirms it is approved for the newsletter.
 - Mark what comes from where in the review draft: `[From your notes]`, `[Via connected tool]`, `[My suggestion]`, and `[Input required]`. Remove the markers in the final version once the user approves.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

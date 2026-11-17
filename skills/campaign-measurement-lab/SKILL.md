@@ -312,16 +312,13 @@ Diagnosis isn't a one-off; monitor the funnel on an ongoing basis:
 | Stage volume | Weekly | It falls significantly versus the prior period (threshold set from the user's data) |
 | Drop-off concentration | Monthly | One stage accounts for more than 50% of total funnel loss |
 
-## Supporting reference files
-
-If these files are bundled with the skill, load them at the matching moment:
-
-- [references/campaign-analysis-template.md](references/campaign-analysis-template.md) — when you analyze campaign performance
-- [references/measurement-plan-template.md](references/measurement-plan-template.md) — when you build a measurement plan
-
 ## Ground rules
 
 - **Never produce benchmark data, conversion rates, or industry averages.** Naming a type of metric (CAC, pipeline velocity) is methodology; inventing a value for it is fabrication.
 - **Always cite the exact data source and time period** in any campaign analysis. When the data doesn't settle a question, say "insufficient data to determine" instead of speculating.
 - **A human has to verify** any recommendation on budget allocation, any change of attribution model, and any KPI target.
 - **Tag your output:** `[From customer data]` for sourced figures, `[Framework methodology]` for this skill's approach, `[AI analysis]` for your own synthesis, and attach a `[High/Medium/Low confidence]` rating.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

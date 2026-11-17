@@ -222,3 +222,7 @@ Assemble the final deliverable in this order:
   - `[Synthesis framework]` for the analytical structure
   - `[AI interpretation — validate with research team]` for conclusions that need review
 - When the data is thin, say so and state the limits on confidence.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

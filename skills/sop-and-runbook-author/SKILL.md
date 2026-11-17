@@ -234,3 +234,7 @@ AFTER-RUN REVIEW
 - **No assumed stack.** Ask the user which technologies and communication channels they use.
 - **Tag generated content** with its origin, using one of `[Source: your procedure description]`, `[Source: runbook methodology]`, or `[Source: placeholder — ops team to fill in]`, as applicable.
 - **Mention the Word option.** Tell the user that, if they want a formatted Word file they can hand out, they can request the output as DOCX.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

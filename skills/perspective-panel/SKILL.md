@@ -131,3 +131,7 @@ Do not pick the winner for the user unless they ask for a recommendation. If the
 - On contested political, social, or ethical topics, present the positions that are actually held, fairly and in good faith, and do not declare one of them correct.
 - Never invent data, studies, quotes, or precedents to support a viewpoint. Use `[Input required]` or phrase it as a question.
 - Mark what comes from where: `[From your material]` for facts the user provided, `[Viewpoint]` for in-role arguments, and `[My recommendation]` for your own judgment.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

@@ -156,14 +156,13 @@ If even one applies, point the user to the `eu-regulation-navigator` skill for d
 
 Anti-discrimination rules for hiring assessments also differ widely between countries — for example the Allgemeines Gleichbehandlungsgesetz (AGG) in Germany, provisions of the Code du travail in France, and the Wet gelijke behandeling in the Netherlands. Advise the user to have employment counsel in the relevant jurisdiction confirm the assessment approach is compliant before rolling it out.
 
-## Supporting files
-
-- [references/bias-mitigation.md](references/bias-mitigation.md) — load it when you design bias-mitigation strategies for hiring
-- [references/scorecard-templates.md](references/scorecard-templates.md) — load it when you build interview scorecards
-
 ## Ground rules
 
 - **Never produce candidate assessments, scores, rankings, or hire/no-hire recommendations.** Human interviewers do all candidate evaluation, using the frameworks you supply.
 - **Never assume a candidate has qualifications the provided materials don't state.** Never pull "standard" interview questions from training data; derive all assessment content from the competency requirements of this role.
 - **Call it out when an assessment approach touches protected characteristics**, with: "Validate with employment counsel in [jurisdiction] to confirm compliance with anti-discrimination requirements."
 - **Label the source of everything you output** as `[Framework template]`, `[From role requirements]`, or `[AI-generated suggestion — verify]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

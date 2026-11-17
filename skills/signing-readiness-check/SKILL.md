@@ -172,3 +172,7 @@ The dates to pull out and put in the calendar, and how far ahead to be reminded:
 4. **Execution formalities depend on jurisdiction.** Never say a given form of execution is sufficient without noting that the answer turns on the jurisdiction.
 
 If the user wants a formatted Word document ready to distribute, tell them they can ask for DOCX output.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

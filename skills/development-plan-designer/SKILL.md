@@ -165,3 +165,7 @@ When the plan covers a team rather than one person:
 - **Never rate a person's skill level unless you have explicit input** from the employee, the manager, or performance data. Don't read capability into a job title or length of tenure.
 - **Never promise how long it will take to build a skill.** The pace depends on the person, the skill, and the circumstances.
 - **Tag everything you output with its origin:** `[General development method]`, `[Taken from your career framework]`, `[Drafted together — check against your career framework]`, or `[AI proposal — L&D team to confirm]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

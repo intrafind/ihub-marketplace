@@ -116,3 +116,7 @@ Check the draft against this list:
 - **Don't guess a ticket's status.** If the project tracker can't tell you, ask the user instead of assuming.
 - **Don't make up blockers or risks.** Report only what the data or the user confirms is blocked or at risk.
 - **Label the source of every item:** `[From project tracker]`, `[From git]`, or `[From user input]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

@@ -193,3 +193,7 @@ Assemble the final plan like this:
 - **No default utilization target.** Ask the user to define their target band rather than assuming a "standard" one.
 - **No invented demand.** Pipeline data and demand forecasts come from the user. When the data falls short, state "insufficient data to forecast" rather than extrapolating.
 - **Tag your output** with `[From org data]`, `[Framework methodology]`, or `[AI estimate — verify]`, as appropriate.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

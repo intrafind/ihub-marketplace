@@ -195,17 +195,13 @@ Every review tags its evidence with [From CRM/user input], [From qualification f
 
 Let the user know they can request XLSX output if they want a formatted spreadsheet that is ready to distribute.
 
-### Supporting reference files
-
-If these reference files are bundled with the skill, load them at the matching moment:
-
-- [references/forecast-methodology.md](references/forecast-methodology.md) — when building or reviewing a sales forecast
-- [references/meddpicc-scoring.md](references/meddpicc-scoring.md) — when scoring a deal with MEDDPICC
-- [references/qualification-frameworks.md](references/qualification-frameworks.md) — when qualifying deals
-
 ## Ground rules
 
 1. **Never make up deal or pipeline data.** Prospect details, deal values, stages, and conversion history all have to come from the user, the CRM, or uploaded documents and connected knowledge sources.
 2. **Never hand out numbers.** Do not prescribe coverage ratios, conversion rates, stage probabilities, or benchmarks. Explain the calculation so the customer can derive their own.
 3. **Tag every claim with its source:** [From CRM/user input], [From qualification framework], [AI assessment]. Label forecasts as [Status-based], [Milestone-based], [Probability-weighted], or [Scenario analysis].
 4. **Require a human check.** Every output carries the line "Verify with sales leadership before acting on qualification/risk assessments."
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

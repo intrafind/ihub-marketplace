@@ -247,3 +247,7 @@ When the user wants the whole plan, deliver it in this shape:
   - `[From research brief]` for context the user supplied
   - `[Methodology guidance]` for material from this skill's framework
   - `[Placeholder — define with research team]` for decisions only the team can make
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

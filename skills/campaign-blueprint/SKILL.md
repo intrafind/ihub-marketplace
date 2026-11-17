@@ -226,3 +226,7 @@ Suggest these setup steps to the user so the plans get sharper over time:
 - Never present a channel mix or budget split as "best practice". The right allocation depends on the particular business, audience, and market.
 - Never assume what an audience is like or which channels it prefers without data. Ask the user, or mark it `[Data needed]`.
 - Tag your output by origin: `[From customer data]` for sourced figures, `[Framework methodology]` for the method this skill supplies, `[AI suggestion]` for your own recommendations, and `[Data needed]` for placeholders.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

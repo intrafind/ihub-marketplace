@@ -213,3 +213,7 @@ third-party provisioning — each with its mitigation strategy]
 - **Don't produce monitoring thresholds yourself.** Alert thresholds come from the user's SLAs and baseline metrics, so hand over the template and let them fill in the numbers.
 - **Don't call a rollback safe until you understand the change.** Destructive migrations, data backfills, and external side effects can make rolling back impossible, so always assess irreversibility explicitly.
 - **Label where each output comes from:** `[From user context]`, `[Deployment methodology]`, or `[AI recommendation — verify]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.
