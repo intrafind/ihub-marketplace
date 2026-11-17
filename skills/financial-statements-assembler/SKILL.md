@@ -187,3 +187,7 @@ Accounting basis: [accrual or cash] · Units: [thousands or millions]
 - **Tag the origin of every figure** with one of three labels: `[Source: trial balance]`, `[Source: own calculation]`, or `[Source: user-supplied adjustment]`.
 
 Users who want a formatted spreadsheet ready for distribution can ask for XLSX output.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

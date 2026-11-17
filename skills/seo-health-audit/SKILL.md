@@ -226,3 +226,7 @@ Auditor: [name]
 - Never promise better rankings or more traffic. SEO outcomes hinge on many factors nobody controls.
 - Never call a keyword "high volume", "low competition", or anything similar unless the user's tool data supports it.
 - Tag your output so its origin is visible: `[From SEO data]` for figures pulled from tools, `[Framework methodology]` for this skill's approach, `[AI analysis]` for your own synthesis, and `[Data needed]` for placeholders that still need real data.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

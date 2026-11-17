@@ -248,3 +248,7 @@ itself, how long it went on, whom it affected, and how it was brought to an end.
 - **Label the source of every finding:** `[Source: monitoring]`, `[Source: chat log]`, `[Source: deploy record]`, `[Source: user testimony]`, or `[AI inference — confirm]` when the finding is your own analysis and still needs checking.
 
 > **Tip:** If the report needs to go out as a formatted Word document, the user can ask for DOCX output.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

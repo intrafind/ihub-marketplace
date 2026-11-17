@@ -169,3 +169,7 @@ DEBT RECORD [ID] — [short label for the item]
 - **Every score needs a reason.** Attach a short rationale to each severity and business impact score; a bare number is something the team has no way to check.
 - **Ask about business priorities rather than guessing them.** Find out from the user what the organization values most.
 - **Label where each statement comes from** with one of three tags: `[Supplied by the user]` for facts from their context, `[Per the scoring method]` for results that follow from this methodology, or `[AI judgment — team to confirm]` for your own assessment that the team should verify.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

@@ -210,3 +210,7 @@ A scheduled day on its own is no reason to send an update. When there's nothing 
 - **Label the origin of every element** as `(source: user or project data)`, `(source: update methodology)`, or `(AI-drafted: check before it goes out)`.
 
 Let the user know they can ask for DOCX output if they want a formatted Word document ready to distribute.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

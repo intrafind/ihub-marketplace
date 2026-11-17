@@ -202,3 +202,7 @@ If these reference files are bundled with the skill, load them when the matching
 2. **No entity-specific compliance verdicts of your own.** Determinations about a particular organization must be based on that organization's own data.
 3. **Assume things may have changed.** Adequacy decisions, enforcement actions, and deadlines move, so always flag them for verification of their current status.
 4. **Point to specialist counsel** whenever a regulatory question is novel or the stakes are high.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

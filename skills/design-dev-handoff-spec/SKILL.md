@@ -192,3 +192,7 @@ Assemble the handoff in this form:
 - **Don't guess component or token names.** Use the names the user gives you, or clearly descriptive placeholders.
 - **Don't fill an unspecified state with behavior you assume.** Mark it `[Undesigned state — designer must decide]`.
 - **Label sources:** `[Source: supplied designs]` for material that came from the user and `[Source: handoff method]` for the structure this skill contributes. List exactly what is missing rather than making up specs to cover it.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

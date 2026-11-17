@@ -141,3 +141,7 @@ Sign-off      -> one sentence of enthusiasm tied to the specific outcome
 2. **Don't guess how attendees felt.** Describe sentiment or buy-in only when the notes say so explicitly.
 3. **Keep objections faithful.** Record them as close to word-for-word as the source permits, and never soften, reframe, or downplay a concern someone raised.
 4. **Tag your sources.** Give each claim one of four tags: [Transcript], [Rep notes], [Stated by user], or [AI inference — verify]. The last tag marks anything you inferred, and every such item must be checked before it is relied on.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

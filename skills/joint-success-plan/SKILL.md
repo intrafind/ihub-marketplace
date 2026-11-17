@@ -176,3 +176,7 @@ If the user wants a file to circulate, offer to produce the plan as a formatted 
 - Never produce baseline figures or KPI targets without customer data. Label anything unknown "Not yet measured" rather than estimating it.
 - Never present the plan as final until the customer has agreed to it. Point out every section the customer has not yet validated.
 - Mark the origin of each element with one of four tags: `(account record)`, `(plan methodology)`, `(customer's own words)`, or `(CSM suggestion)`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

@@ -233,3 +233,7 @@ Once the design is done, walk through this checklist to confirm nothing is missi
 - **Don't push specific technologies without knowing the user's context.** Lay out the trade-off analysis, and don't declare one option superior before you understand the requirements.
 - **Don't present capacity estimates as exact.** Tag every estimate with `[Rough order of magnitude — confirm through load tests]`.
 - **Mark where each output comes from** with one of three tags: `[Source: user's requirements]`, `[Source: standard design method]`, or `[Source: AI judgment — verify before relying on it]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

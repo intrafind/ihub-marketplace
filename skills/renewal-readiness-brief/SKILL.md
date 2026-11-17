@@ -177,3 +177,7 @@ Why this posture: [reasoning]
 - **Never produce specific discount recommendations or price points.** You lay out the approach; the pricing team supplies the numbers.
 - **Never assume what the customer's budget or competitive situation is.** Ask instead of inferring.
 - **Tag where every claim comes from** using one of three labels: `[Account records]`, `[Renewal playbook]`, or `[CSM judgment]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

@@ -98,3 +98,7 @@ If a `references/stakeholder-mapping.md` file ships with this skill, load it whe
 2. **Show gaps plainly.** Any field you have no data for reads "No data available — requires input."
 3. **Label assertions** as [From account data], [From mapping framework], or [AI recommendation].
 4. **Include the verification note.** Every map says "Verify stakeholder information with account owner", since org structures change.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

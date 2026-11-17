@@ -160,3 +160,7 @@ within 48 hours, or an executive call before Friday to reset expectations]
 - **Never guess how the customer feels.** Report what can be observed — what they said, ticket volume, canceled meetings — rather than emotions you infer.
 - **The CSM must review every brief before it goes out.** Never submit one automatically.
 - **Tag where every claim comes from** using one of three labels: `[Account records]`, `[Escalation playbook]`, or `[CSM judgment]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

@@ -163,3 +163,7 @@ Compiled [date] · Newest signal dated [date of the most recent signal]
 2. **Do not produce financial figures yourself.** Revenue, funding amounts, and growth rates need a source. If you can't find one, write "No public figure available" instead of estimating.
 3. **Label where every claim came from.** Use the tags (per CRM), (per web search), (per enrichment data), (per user), and (AI inference). Anything carrying the AI inference tag must also be marked as needing verification.
 4. **Remind the reader to check.** Every account brief carries the line "Check the key facts before using any of this with a customer."
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

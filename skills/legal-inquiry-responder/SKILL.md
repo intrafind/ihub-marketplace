@@ -232,3 +232,7 @@ Whenever a trigger listed for the inquiry type applies — before a response goe
 4. **Jurisdiction is never assumed.** If it hasn't been stated, ask, because timelines and procedural requirements vary widely.
 
 The user can ask for DOCX output to receive a formatted Word document ready to distribute.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

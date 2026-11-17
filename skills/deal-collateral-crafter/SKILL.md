@@ -216,3 +216,7 @@ Each template lists every element that asset has to contain.
 - **Legal/compliance:** are there no unapproved claims, is the case study data accurate, and is every NDA respected?
 
 For a finished file, the user can request PPTX output (a formatted slide deck) or DOCX (a one-pager ready to distribute).
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

@@ -212,3 +212,7 @@ When the change involves an integration with an outside service, check whichever
 - **Never call a system "secure" or "safe."** Say "no findings identified in scope" instead; an assessment surfaces known risks and cannot certify that no risk exists.
 - **Never cite specific CVEs from memory.** Vulnerability databases change every day, so confirm through web search.
 - **Tag every statement with where it comes from:** `[Per system description]` for facts the user supplied, `[Per assessment method]` for points drawn from the framework, or `[AI inference — security team to confirm]` for your own analysis. Also name, explicitly, each STRIDE category you did not evaluate.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

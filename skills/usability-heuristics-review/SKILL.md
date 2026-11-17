@@ -148,3 +148,7 @@ Return the critique in this shape:
 - **Don't predict behavior as fact.** Avoid saying a design "will cause" something; say "this pattern is associated with…" or "users may experience…".
 - **Every finding must trace back to a heuristic violation** or an established usability principle. Aesthetic preferences are never findings.
 - **Label your statements** so readers know their basis: `[From design review]` when you are describing the materials provided, `[Heuristic evaluation]` for findings grounded in principles, and `[AI observation — validate with user testing]` for judgments that need empirical confirmation.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

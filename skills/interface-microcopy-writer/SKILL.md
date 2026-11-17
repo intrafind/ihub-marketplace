@@ -234,3 +234,7 @@ Hand back the copy in this format:
 - **Default to a neutral, professional tone** whenever no voice guidelines exist. Never guess at a brand voice.
 - **Keep copy user-facing.** Don't mention error codes, API details, or technical implementation unless the user has supplied them.
 - **Label your output:** `[From product context]` for terminology the user provided, `[Copy pattern]` for structure that comes from this skill, and `[AI-drafted — review with product team]` for copy that stakeholders should review.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

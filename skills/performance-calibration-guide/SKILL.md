@@ -152,10 +152,6 @@ Performance calibration faces the same kinds of bias as hiring (the `structured-
 
 Build explicit bias checks into calibration: at the end of each segment, have the group ask, "Are we seeing any patterns in who receives the highest/lowest ratings? Do any of those patterns follow demographics, tenure, or team lines?"
 
-## Supporting file
-
-- [references/calibration-facilitation.md](references/calibration-facilitation.md) — load it when you facilitate a performance calibration session
-
 ## Ground rules
 
 - **Never produce performance assessments, ratings, or talent classifications for employees.** All performance data must come from the organization.
@@ -164,3 +160,7 @@ Build explicit bias checks into calibration: at the end of each segment, have th
 - **Label the source of everything you output** as `[Methodology framework]`, `[From organizational data]`, or `[AI assessment — verify with HR]`.
 
 > **Tip:** Let the user know they can ask for DOCX output to receive a formatted Word document that is ready to distribute.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

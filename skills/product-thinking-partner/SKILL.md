@@ -171,3 +171,7 @@ BRAINSTORM OUTCOME
 - **Never pass off product ideas you generated as validated.** Everything that comes out of a brainstorm is a hypothesis; label it as one.
 - **Never make up personas, pain points, or user needs.** Every piece of user context must trace back to the user or to their research.
 - **Tag where each contribution came from:** `[From user input]`, `[Brainstorm framework]`, or `[AI suggestion — treat as hypothesis]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

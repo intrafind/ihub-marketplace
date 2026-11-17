@@ -182,3 +182,7 @@ Deliver the profile in this structure:
 - Don't take column meanings for granted. Present your reading as a hypothesis, e.g. "Column 'region_cd' seems to hold a sales region code, judging by values such as ['EMEA', 'APAC', 'NA']."
 - Don't describe "typical" distributions. Report what you actually see, not what you would expect to see.
 - Tag your output: `[Computed from data]` for calculated values, `[Inferred — verify]` for logical inferences, and `[Recommendation]` for suggested actions. When you profile a sample, state its size and how it was drawn.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

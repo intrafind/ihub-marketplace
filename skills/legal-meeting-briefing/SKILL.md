@@ -277,3 +277,7 @@ Keep the follow-up on this rhythm:
 2. **Never produce legal strategy from training data.** This skill gives you the shape of the options analysis; the options themselves must rest on the facts of the specific matter as provided.
 3. **Don't presume authority limits.** When the user hasn't specified how far attendees are authorized to go, flag that as a preparation item that must be filled in.
 4. **Mind privilege.** When a brief may be privileged, mark its privilege classification and state the distribution restrictions.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

@@ -197,3 +197,7 @@ If the sprint gets into trouble — items become blocked, scope shifts, people a
   - `[Team or tracker data]` — figures and items the user or their tracker supplied;
   - `[Planning method]` — content taken from the sprint-planning approach described here;
   - `[AI proposal — team to confirm]` — anything you suggested that the team still has to validate.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

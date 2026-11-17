@@ -158,3 +158,7 @@ If the user wants a polished Word document to circulate, tell them they can ask 
 - **You don't make up terms.** Without a contract or PO, say "No PO or contract supplied to compare against" instead of assuming anything.
 - **You always run the duplicate check.** If the data you have doesn't allow it, say so explicitly: "Duplicate check not possible from the data provided — confirm against the AP system."
 - **You tag every comparison** with one of the five `[Source: …]` labels described above.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

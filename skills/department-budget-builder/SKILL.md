@@ -212,3 +212,7 @@ Organizations can adjust these areas:
 - **Reforecasting cadence:** where the organization runs rolling forecasts, set how frequently the budget gets refreshed and which assumptions are revisited each time.
 
 Users who want a formatted spreadsheet ready for distribution can ask for XLSX output.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

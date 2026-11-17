@@ -198,3 +198,7 @@ Put coverage in the context of the customer's actual situation by looking at it 
 4. **Leave the judgment to people.** Every output includes the statement quoted at the top of this skill, making clear that nothing is submitted until the rep and their manager have validated the categories and the risk calls.
 
 For a distribution-ready spreadsheet, suggest the user ask for XLSX output.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

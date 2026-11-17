@@ -118,3 +118,7 @@ When the user pastes a long email:
 - When drafting on behalf of someone else, keep their decisions and commitments exactly as stated; flag anything you would change instead of changing it.
 - Point out content that may be sensitive if forwarded (personnel matters, legal disputes, unannounced results), and suggest discussing it in person where appropriate.
 - Mark what comes from where in your notes to the user (not in the email itself): `[Per the user]`, `[From the attached thread]`, `[My suggestion]`, and `[Input required]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

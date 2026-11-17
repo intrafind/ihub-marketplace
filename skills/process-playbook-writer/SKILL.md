@@ -179,3 +179,7 @@ Assemble the document in this structure:
 - **Leave SLAs, budget thresholds, and system names to the user.** If the description is incomplete, ask rather than invent believable steps.
 - **Tag generated content** with `[From process description]`, `[Framework methodology]`, or `[Placeholder — define with process owner]`, as applicable.
 - **Mention the Word option.** Let the user know they can ask for DOCX output to get a formatted Word document ready to distribute.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

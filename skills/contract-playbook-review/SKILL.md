@@ -319,3 +319,7 @@ Whenever you state a jurisdiction-specific conclusion, add "verify with qualifie
 
 - If `references/clause-taxonomy.md` ships with this skill, load it when you classify and analyze clauses. If `references/redline-format.md` ships with it, load it when you format redlines.
 - Let the user know that asking for DOCX output gets them a Word document, already formatted and ready to circulate.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

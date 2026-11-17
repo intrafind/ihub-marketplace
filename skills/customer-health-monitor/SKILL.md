@@ -186,3 +186,7 @@ The default weights are a first guess. To fit them to a particular customer base
 - Never quote a churn probability. A health score expresses a level of risk, not a statistical likelihood: RED means "high risk, intervention needed," not "80% chance of churn."
 - A health score informs a decision; it is not the decision. Every scorecard must include the line: "Validate scores with the account team before acting on risk classifications."
 - Label where every claim comes from — `[From account data]`, `[From scoring framework]`, or `[CSM hypothesis]` — and give a confidence level (High / Medium / Low) for each dimension.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

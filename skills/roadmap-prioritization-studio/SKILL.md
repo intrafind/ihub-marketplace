@@ -163,3 +163,7 @@ In anything customer-facing, express timing as ranges ("this quarter," "first ha
 - **Never produce RICE scores, effort estimates, or reach numbers yourself.** Supply the scoring framework and let the team fill it in with their own data.
 - **Never present prioritization weights or roadmap structures as an "industry standard."** The frameworks are methodology; the actual weights and priorities belong to each organization.
 - **Label the origin of every element** as `[From user/roadmap data]`, `[Roadmap framework]`, or `[AI suggestion — verify]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

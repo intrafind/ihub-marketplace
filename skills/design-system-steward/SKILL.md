@@ -219,3 +219,7 @@ Use this structure; the audit summary and the component documentation sections a
 - **Never presume a taxonomy, naming conventions, or platform coverage.** Ask how their system is structured.
 - **Never invent usage counts or adoption metrics.** Where the data isn't available, write `[Not yet measured]`.
 - **Label the origin of what you write:** `[User's system data]` for anything the user supplied, `[Steward framework]` for the governance approach this skill brings, and `[Team to decide]` for choices only the team can make. It is better to hand over a framework with gaps clearly marked than one padded with invented detail.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

@@ -139,3 +139,7 @@ If the user would like a formatted spreadsheet they can circulate, let them know
 - **Don't default to "timing."** Classify each unmatched item from the evidence; if you can't verify it, it is Unidentified.
 - **Don't recommend write-offs.** Flag aged items for the right people to review; writing something off is management's decision.
 - **Don't skip the proof.** The adjusted balances on both sides must agree. If they don't, report the error instead of calling the work complete.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

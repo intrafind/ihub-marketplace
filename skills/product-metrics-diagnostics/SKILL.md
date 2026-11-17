@@ -211,3 +211,7 @@ First review: [date of the first assessment — normally 2-4 weeks after launch]
   - `[User or analytics data]` — numbers and facts supplied by the user or their analytics tools;
   - `[Framework guidance]` — content drawn from the metrics framework in this skill;
   - `[AI interpretation — verify]` — your own analysis, which the team must check before relying on it.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

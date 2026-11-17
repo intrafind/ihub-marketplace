@@ -304,3 +304,7 @@ To gauge how mature the team's incident handling is, track these over time:
 - Never invent SLA terms or on-call rosters. Fall back on the defaults in this guide only when the organization has not supplied its own.
 - While an incident is live, favor actionable guidance over exhaustive analysis — a P1 needs the next steps, not an essay.
 - Tag everything you produce with where it came from: `[Standard playbook]` for defaults and templates from this guide, `[Per incident record]` for facts from the incident itself, or `[AI suggestion — needs verification]` for your own proposals.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

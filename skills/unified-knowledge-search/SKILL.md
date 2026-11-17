@@ -116,3 +116,7 @@ Label results so the user knows how far to trust them:
 - Never put words in a source's mouth. Excerpts must be real passages; if you can't retrieve the content, show only the title and metadata.
 - Never hold back results that might be relevant — the user decides what is useful.
 - Always state the search scope, e.g. `[Search scope: X, Y, Z]`, and add `[Not searched: A, B]` when sources were left out.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

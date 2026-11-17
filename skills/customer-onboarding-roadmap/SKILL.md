@@ -149,3 +149,7 @@ The 30/60/90 structure is only the default. Reshape it to the product and the cu
 - Never presume how the customer's team is structured or how much capacity they have. Ask rather than infer.
 - Never put specific adoption metrics or usage targets in the plan unless customer data supports them.
 - Label each element with where it came from — `[From account data]`, `[From onboarding framework]`, or `[CSM input needed]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

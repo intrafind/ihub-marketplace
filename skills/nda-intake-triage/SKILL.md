@@ -221,3 +221,7 @@ When several NDAs arrive at once:
 4. **Name the provision.** Every risk annotation must identify the section, clause, or defined term that set it off.
 
 Users who want a formatted Word document ready for distribution can ask for DOCX output.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

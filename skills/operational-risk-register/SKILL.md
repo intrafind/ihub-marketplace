@@ -213,3 +213,7 @@ Emerging concerns:     [new or developing risk themes not yet in the register]
 - **Don't talk about a "typical risk profile" or "common industry risks."** Every organization's risk profile is its own.
 - **Tag what you generate** with `[From risk data]`, `[Framework methodology]`, or `[AI-identified risk — verify with domain expert]`, as appropriate.
 - **Mention the spreadsheet option.** Let the user know they can ask for XLSX output if they want a formatted sheet ready to distribute.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

@@ -111,3 +111,7 @@ Stored context ages. Review and tidy it regularly.
 - Passwords, financial accounts, health information, and government IDs are off-limits for storage, as is any other sensitive personal data.
 - Whenever you rely on a recalled entry, mention when it was stored rather than treating it as established fact; for anything stored more than 90 days ago, ask the user to confirm it first.
 - Mark what your output rests on: `[From stored context]`, `[User-provided this session]`, `[Suggested]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

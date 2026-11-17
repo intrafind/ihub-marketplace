@@ -134,3 +134,7 @@ Deliver your review in this form:
 - Don't sign off on calculations you can't check. Data or transformations you haven't seen get rated "unable to verify", never assumed correct.
 - Don't soften problems to be polite. A blocking issue stays blocking, because clear feedback is what keeps decisions from resting on a flawed analysis.
 - Tag your output: `[Verified]` for items confirmed correct, `[Unable to verify]` for references you couldn't check, `[Issue found]` for problems identified, and `[Recommendation]` for suggested improvements.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

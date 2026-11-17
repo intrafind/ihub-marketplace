@@ -164,3 +164,7 @@ The same method stretches or shrinks to fit other rhythms:
 - Never set priorities for the user without their input. Lay out the items with a recommended order and present it as a suggestion.
 - Never estimate specialized work on your own. For technical or domain-specific tasks, ask the user how much effort they expect.
 - Mark where each output comes from: `[Via connected tool]` for data pulled from a connected tool or source, `[Per the user]` for what the user told you, and `[My suggestion]` for your own recommendations.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

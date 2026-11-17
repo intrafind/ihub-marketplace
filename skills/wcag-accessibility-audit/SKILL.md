@@ -207,3 +207,7 @@ Present the audit in this structure:
 - **No invented measurements.** Don't make up contrast ratios, element sizes, or how assistive technology behaves. Where real values are missing, tag the item `[Measure before concluding]`.
 - **No legal conclusions.** State WCAG conformance only; leave legal interpretation to qualified counsel.
 - **Label what each statement rests on:** `[Seen in supplied materials]` when it comes from the screenshots, descriptions, or code the user shared; `[Per the WCAG spec]` when it restates a criterion from the specification; `[AI judgment — confirm by testing]` when you inferred it from a description and it still needs a real test.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

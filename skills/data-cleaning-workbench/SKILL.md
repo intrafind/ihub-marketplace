@@ -139,3 +139,7 @@ PREP REPORT
 - No imputation without telling the user the method and its effect. Mark imputed values so later analysts can tell original values from synthetic ones.
 - Never call a dataset "clean" before you have run the Stage 5 verification, and every row you remove must appear in the reconciliation.
 - Label what you show: `[Source value, unchanged]` for anything left as it was, `[Changed via X]` for values you altered with method X, `[Imputed via X]` for values filled in with method X, and `[Proposed, needs your check]` for changes you are only recommending.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

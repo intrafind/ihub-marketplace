@@ -146,3 +146,7 @@ Organizations can adjust the skill in these areas:
 - **Quarter-end extras:** add the tasks that come up only at quarter-end, such as assembling the board package, preparing the 10-Q, coordinating with the external auditors, and the tax provision.
 
 Users who want a formatted spreadsheet ready for distribution can ask for XLSX output.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

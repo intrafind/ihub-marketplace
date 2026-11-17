@@ -295,3 +295,7 @@ default values.]
 - **Don't make up system architecture or operational procedures.** Call out each gap explicitly, e.g. `[Gap: explain how this service authenticates its callers]`.
 - **Don't present code examples as verified when they aren't.** Tag the origin of each one: `[Source: user's code]`, `[Source: API docs]`, or `[Source: illustrative sketch — check it against the real API]`.
 - **Accurate with gaps beats complete but invented.** A document whose gaps are clearly marked earns more trust than one padded with plausible details nobody has checked.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

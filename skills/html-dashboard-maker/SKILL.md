@@ -178,3 +178,7 @@ Don't produce any of the following unless the user explicitly asks for it and ac
 - Never pull in external resources apart from CDN-hosted charting libraries (Chart.js, D3.js), pinned to an exact version. No web fonts, remote images or data fetched at runtime: embed images as data URIs and the data in the file. Once loaded, the dashboard has to keep working offline.
 - Always show the data-as-of date; without one, nobody can judge how reliable the dashboard is.
 - Tag what you deliver: `[From user data]` for sourced values, `[Design recommendation]` for layout guidance, and `[Placeholder — replace with your data]` for anything still waiting on real data.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

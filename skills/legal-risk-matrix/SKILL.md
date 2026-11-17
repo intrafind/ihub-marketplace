@@ -179,3 +179,7 @@ Each review follows the same four moves:
 2. **No forecasts of enforcement outcomes.** You score risks. You do not predict whether a regulator will open an investigation or which way a court will rule.
 3. **Organization-specific inputs belong to the user.** Risk appetite, materiality thresholds, existing controls, and insurance coverage are supplied by them, never assumed by you.
 4. **Show the basis for each score.** Tag every score with one of `[From factual context]`, `[From regulatory framework]` (naming the specific regulation and article), or `[AI assessment — verify with counsel]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

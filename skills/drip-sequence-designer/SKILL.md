@@ -203,3 +203,7 @@ Watch for these recurring mistakes:
 ## Tagging your output
 
 Mark where everything comes from: `[From customer data]` for sourced figures, `[Framework methodology]` for this skill's approach, and `[Draft — adapt to your brand voice]` for copy that still needs adapting to the brand.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.

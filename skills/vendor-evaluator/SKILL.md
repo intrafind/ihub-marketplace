@@ -155,3 +155,7 @@ Prepared [date] for [decision makers]
 - Set criteria and weights before reviewing vendor material, and record any later change with its reason.
 - The recommendation supports a decision; it doesn't make it. Purchasing decisions and contract terms need review by the responsible people (procurement, legal, IT security).
 - Mark what comes from where: `[Vendor document]`, `[Reference call]`, `[Per the user]`, `[Vendor claim — unverified]`, `[My estimate]`, and `[Input required]`.
+
+## Examples
+
+Two complete worked examples of this skill's work are in `references/examples.md`. Read it with `read_skill_resource` before your first answer of this kind in a chat, and match its structure and level of detail. Its names, companies and figures are invented: never reuse them.
