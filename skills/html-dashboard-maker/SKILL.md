@@ -1,13 +1,21 @@
 ---
 name: html-dashboard-maker
-description: "Designs and builds interactive dashboards as a single self-contained HTML file with charts, KPI cards, filters, drill-down, responsive layout, and polished styling, which runs without a server and can be shared as one file. Plans audience, key questions, chart types, and layout before coding, using only data the user provides. Use when the user asks for a dashboard, KPI overview, metrics page, interactive report, or wants their data turned into shareable charts in HTML."
+description: "Designs and builds a custom interactive dashboard as one self-contained HTML file: filters and cross-filtering, drill-down, tabs, a layout of its own, and a file the user can pass around and open without a server. Plans audience, key questions, chart types and layout before coding, using only data the user provides. Use when the user wants such interactivity, a custom design, or a standalone HTML file to share. For a read-only dashboard of figures (headline, KPI tiles, ranked bars, trends, tables, method and sources), use iHub's built-in `dashboard` skill instead when it is available: it lays the page out from the data and keeps every number traceable."
 ---
 
 # HTML Dashboard Maker
 
 You design and build interactive dashboards that live in one HTML file: charts, filters, a responsive layout, and clean professional styling, with no server needed and nothing to install, so the user can pass the file around as is. The data and the business context always come from the user. Work out what the dashboard has to show before you touch any code, because choosing the right visuals first is what saves costly rework later.
 
-Run through the stages below for every dashboard request, in order.
+## First: is this skill the right one?
+
+iHub has a built-in `dashboard` skill. It does not write HTML: it describes the page as data, and iHub lays it out with a fixed design (light and dark, phone and desktop, the app's brand colours, a table view for every chart, the method and the sources of every figure). For a dashboard someone only reads, that is the better result and the safer one, because no number is retyped into code.
+
+- **Use the built-in `dashboard` skill** (activate it, if this app offers it) when the request is a read-only page of figures: a headline, KPI tiles, ranked bars, trends over time, tables, and how the numbers were made. Do not continue with this skill.
+- **Continue with this skill** when the request needs what that skill cannot do: filters and cross-filtering, drill-down, tabs or views, chart types beyond bars, lines and tables (scatter, heatmap, Sankey, map), a layout or design of its own, or a standalone HTML file the user wants to share outside iHub.
+- **Unsure?** If the user did not ask for interaction, a custom design or a file, take the built-in skill.
+
+Run through the stages below for every dashboard request you build with this skill, in order.
 
 ## Stage 1: Pin down the requirements
 
@@ -117,6 +125,11 @@ Add interaction in tiers, going as far as the Stage 1 requirements call for.
 - Clicking a chart element filters the other charts to that value.
 - An expandable data table sits below the charts.
 
+**Tier 4, follow-up questions (in iHub's Artifacts panel, where available)**
+- Newer iHub versions give the preview a `sendPrompt(text)` function: a click asks the chat a question, which the user confirms before it is sent. Use it for what needs the model, such as "Why did revenue in Q3 2026 drop by 12 %?" on a bar, never for filtering or sorting.
+- Write the full question in the user's language, naming the item and its figures. Call it only from a click, never on load.
+- Guard it and keep the dashboard complete without it: show the "Ask" controls only when `window.sendPrompt && sendPrompt.available` (it is missing in a downloaded file and does nothing in a shared link).
+
 **Filter pattern to implement:**
 ```javascript
 const rawData = [/* full dataset */];
@@ -161,6 +174,7 @@ Don't produce any of the following unless the user explicitly asks for it and ac
 ## Ground rules
 
 - Never make up data. If the user hasn't supplied data yet, build the dashboard structure with placeholder labels.
+- Copy every figure from the user's data or a tool result. Do not add up, average or recalculate in your head; let the page's JavaScript compute totals, shares and averages from the embedded rows.
 - Never pull in external resources apart from CDN-hosted charting libraries (Chart.js, D3.js), pinned to an exact version. No web fonts, remote images or data fetched at runtime: embed images as data URIs and the data in the file. Once loaded, the dashboard has to keep working offline.
 - Always show the data-as-of date; without one, nobody can judge how reliable the dashboard is.
 - Tag what you deliver: `[From user data]` for sourced values, `[Design recommendation]` for layout guidance, and `[Placeholder — replace with your data]` for anything still waiting on real data.
