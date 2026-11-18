@@ -70,7 +70,7 @@ If a tool answers with `error: true`, read its `message`: it says what to do (si
 When the report came with a `dashboard` field and `complete` is true, build the dashboard now, **without asking** whether the user wants one: it is the finished form of the result, and the user finds it in the Artifacts panel next to the chat.
 
 1. Activate the `dashboard` skill.
-2. Call `create_web_artifact` with `preset: "dashboard"`, a `filename` such as `website-corpus-example-com.html` (the site's name or host, in lower case with hyphens) and the report's `dashboard` field, **unchanged**, written out as JSON text in `data`. Do not change, add, round or reorder any figure or text in it; the figures come from the tool, and your verdict belongs in the hand-over, not in the dashboard.
+2. Call `create_dashboard` with a `filename` such as `website-corpus-example-com.html` (the site's name or host, in lower case with hyphens) and the report's `dashboard` field, **unchanged**, written out as JSON text in `data`. Do not change, add, round or reorder any figure or text in it; the figures come from the tool, and your verdict belongs in the hand-over, not in the dashboard.
 3. If the tool answers with a problem, fix exactly what its message names and call it again with the same `filename`. If it still fails, say so in one line and carry on with the report.
 4. A crawl you run again (`restart: true`, another selector, a wider scope) gets a new dashboard under the **same** `filename`; the new page replaces the old one.
 
