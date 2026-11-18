@@ -6,8 +6,8 @@
     "de": "Nano Banana 2 (Gemini 3.1 Flash Image)"
   },
   "description": {
-    "en": "Fast, general-purpose image generation and editing. Text-to-image, image editing and multi-turn refinement at a much lower cost than Nano Banana Pro.",
-    "de": "Schnelle Allzweck-Bildgenerierung und -bearbeitung. Text-zu-Bild, Bildbearbeitung und mehrstufige Verfeinerung zu deutlich geringeren Kosten als Nano Banana Pro."
+    "en": "Nano Banana 2: fast image generation and editing. Deprecated by Google (October 6, 2026, no shutdown date yet): use Nano Banana 2.1 for new setups.",
+    "de": "Nano Banana 2: schnelle Bildgenerierung und -bearbeitung. Von Google als veraltet markiert (6. Oktober 2026, noch kein Abschaltdatum): Nutzen Sie für neue Einrichtungen Nano Banana 2.1."
   },
   "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image:streamGenerateContent",
   "provider": "google",
@@ -39,6 +39,6 @@
       "statementRef": "Google DeepMind, SynthID: https://deepmind.google/technologies/synthid/"
     }
   },
-  "enabled": true,
+  "enabled": false,
   "default": false
 }
