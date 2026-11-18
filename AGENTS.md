@@ -50,7 +50,11 @@ alike.
   footer such as `🤖 Generated with …` with this one: one footer, never two. Leave session links as
   they are. Read the posted text back: a GitHub tool can rewrite a trailing footer (the one in
   Claude Code cloud sessions does when it creates a PR: it swaps in its own tool line, which links
-  the session). If the model line is gone, restore it with an update.
+  the session). If the model line is gone, restore it with an update. A tool that adds its own tool
+  line to everything it posts gets only the model line from you: end the text with the horizontal
+  rule and the model line, and let the tool append its line. The GitHub comment, reply and
+  review-comment tools of Claude Code cloud sessions do this on every post and edit; a tool line of
+  your own then appears twice.
 - **Not marked**: titles, branch names, code comments and files. Text that is only printed in the
   conversation is marked when it is posted.
 
