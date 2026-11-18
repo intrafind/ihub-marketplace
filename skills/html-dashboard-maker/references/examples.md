@@ -22,7 +22,8 @@ the way of working, never reuse the facts.
   carry it. Asks nothing: data, as-of date, audience and sharing are given.
 - Stage 2: line chart for the monthly trend, bar chart (axis from zero) for the region comparison, KPI cards with
   a trend arrow for the headline figures.
-- Stage 4/5 and ground rules: Chart.js pinned to 4.4.1 on cdn.jsdelivr.net, system fonts, no remote resources;
+- Stage 4/5 and ground rules: Chart.js from iHub's library kit (works offline, and the downloaded file has it
+  inlined), system fonts, no remote resources;
   tooltips, two filters with visible state and reset, click-to-filter on the bar chart. Totals are computed by the
   page from the embedded rows, not typed in.
 
@@ -38,7 +39,7 @@ charts side by side, filters above them; clicking a region bar filters to that r
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Norvik Sales Q3 2026</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script data-ihub-lib="chart.js"></script>
 <style>
 body{margin:0;padding:16px;background:#f8f9fa;color:#1f2937;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
 .card{background:#fff;border-radius:8px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.06)}

@@ -71,10 +71,17 @@ Keep these layout principles in mind:
 
 Deliver one self-contained HTML file that relies only on technologies native to the browser.
 
-**Charts.** Default to Chart.js loaded from a CDN for standard charts; it is light, thoroughly documented, and covers most dashboard needs. For more complex visuals (Sankey, treemap, geographic), use the matching Chart.js plugin or D3.js.
+**Charts.** Use the libraries iHub ships in its offline **library kit**: Chart.js for standard charts, D3 for more complex visuals (Sankey, treemap, sunburst, force layouts, a choropleth from GeoJSON embedded in the file), Alpine.js when the filters and views are easier to write as state in the markup. Load each with its marker, an empty `<script>` element; iHub puts the library itself in its place in the Artifacts preview, in shared links and in every download, so the dashboard works without internet access, in air-gapped installations, and as a file opened from disk.
 
-- **Pin an exact version** and point at the built file (`https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js`), never `@latest` or a bare package name: a new major version can break the dashboard overnight.
-- **Load only from `cdn.jsdelivr.net`, `cdnjs.cloudflare.com` or `unpkg.com`.** iHub's Artifacts preview loads scripts and stylesheets from the CDN hosts its admin allows (these three by default) and blocks everything else, including Google Fonts and remote images. If `create_web_artifact` warns that a URL will not load, inline the code or draw the chart as inline SVG.
+| Library | Marker | Defines |
+|---|---|---|
+| Chart.js 4.5.1 | `<script data-ihub-lib="chart.js"></script>` | `Chart` |
+| D3 7.9.0 | `<script data-ihub-lib="d3"></script>` | `d3` |
+| Alpine.js 3.17.3 | `<script data-ihub-lib="alpinejs"></script>`, last in `<body>` | `Alpine` |
+
+- **Always the kit.** Keep the marker empty (no `src`, no code, no version) and put your own code in a separate `<script>` after it. Chart.js plugins are not in the kit: build such a chart with D3 instead.
+- **A public CDN only when the user asks for one**, or for a library the kit does not have: then pin an exact version and point at the built file (`https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js`, never `@latest`), load it only from `cdn.jsdelivr.net`, `cdnjs.cloudflare.com` or `unpkg.com` (the hosts iHub's preview allows by default; an admin can remove them all), and tell the user the dashboard then needs internet access. If `create_web_artifact` warns that a URL will not load, use the kit or draw the chart as inline SVG.
+- **Older iHub versions** have no library kit; there the `create_web_artifact` tool description does not mention it. Only then, load Chart.js 4.4.1 from `cdn.jsdelivr.net` as above.
 
 **Skeleton:**
 ```html
@@ -84,7 +91,7 @@ Deliver one self-contained HTML file that relies only on technologies native to 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>[Dashboard Title]</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script data-ihub-lib="chart.js"></script>
   <style>/* All styles inline */</style>
 </head>
 <body>
@@ -175,7 +182,7 @@ Don't produce any of the following unless the user explicitly asks for it and ac
 
 - Never make up data. If the user hasn't supplied data yet, build the dashboard structure with placeholder labels.
 - Copy every figure from the user's data or a tool result. Do not add up, average or recalculate in your head; let the page's JavaScript compute totals, shares and averages from the embedded rows.
-- Never pull in external resources apart from CDN-hosted charting libraries (Chart.js, D3.js), pinned to an exact version. No web fonts, remote images or data fetched at runtime: embed images as data URIs and the data in the file. Once loaded, the dashboard has to keep working offline.
+- Never pull in external resources: charting libraries come from iHub's library kit (a CDN only when the user asks for one). No web fonts, remote images or data fetched at runtime: embed images as data URIs and the data in the file. The dashboard has to work offline.
 - Always show the data-as-of date; without one, nobody can judge how reliable the dashboard is.
 - Tag what you deliver: `[From user data]` for sourced values, `[Design recommendation]` for layout guidance, and `[Placeholder — replace with your data]` for anything still waiting on real data.
 

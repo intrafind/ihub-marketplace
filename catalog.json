@@ -3306,7 +3306,7 @@
       "name": "html-dashboard-maker",
       "displayName": { "en": "HTML Dashboard Maker", "de": "HTML-Dashboard-Ersteller" },
       "description": { "en": "Build a custom interactive HTML dashboard with filters, drill-down and a design of its own, as one file that runs without a server; read-only figure dashboards go to iHub's built-in dashboard skill", "de": "Ein individuelles interaktives HTML-Dashboard mit Filtern, Drill-down und eigenem Design als eine Datei bauen, die ohne Server läuft; reine Kennzahlen-Dashboards übernimmt der eingebaute Dashboard-Skill von iHub" },
-      "version": "1.3.0",
+      "version": "1.4.0",
       "author": "IntraFind Software AG",
       "category": "analysis",
       "tags": ["dashboard", "data-visualization", "html", "chartjs", "kpi-reporting"],
