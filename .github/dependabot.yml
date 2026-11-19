@@ -1,0 +1,30 @@
+# Keeps the SHA-pinned actions and the Docker base image current. Cooldowns hold
+# back a new release for a week (two for majors): hijacked releases are usually
+# caught and pulled within days. Security updates ignore the cooldowns.
+version: 2
+updates:
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '06:00'
+      timezone: 'Europe/Berlin'
+    cooldown:
+      default-days: 7
+      semver-major-days: 14
+    groups:
+      actions:
+        patterns:
+          - '*'
+
+  - package-ecosystem: 'docker'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '06:00'
+      timezone: 'Europe/Berlin'
+    cooldown:
+      default-days: 7
+      semver-major-days: 14
