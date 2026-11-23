@@ -1,0 +1,21 @@
+{
+  "id": "gpt-6.1-sol",
+  "modelId": "gpt-6.1-sol",
+  "name": {
+    "en": "GPT-6.1 Sol",
+    "de": "GPT-6.1 Sol"
+  },
+  "description": {
+    "en": "OpenAI's GPT-6.1 Sol for demanding reasoning, coding and agentic work, via the Responses API. 1M token context window, text and image input. OpenAI's named replacement for GPT-5, o3 and o3-pro.",
+    "de": "OpenAIs GPT-6.1 Sol für anspruchsvolles Reasoning, Coding und agentische Aufgaben über die Responses API. 1 Mio. Token Kontextfenster, Text- und Bildeingabe. Von OpenAI genannter Nachfolger von GPT-5, o3 und o3-pro."
+  },
+  "url": "https://api.openai.com/v1/responses",
+  "provider": "openai-responses",
+  "contextWindow": 1050000,
+  "maxOutputTokens": 128000,
+  "supportsTools": "required",
+  "supportsVision": true,
+  "supportsImages": true,
+  "enabled": false,
+  "default": false
+}

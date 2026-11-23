@@ -1,0 +1,21 @@
+{
+  "id": "gpt-6.1-terra",
+  "modelId": "gpt-6.1-terra",
+  "name": {
+    "en": "GPT-6.1 Terra",
+    "de": "GPT-6.1 Terra"
+  },
+  "description": {
+    "en": "OpenAI's fast, efficient GPT-6.1 Terra for visual reasoning, computer use and natural writing, via the Responses API. 1M token context window, text and image input. OpenAI's named replacement for GPT-5 mini.",
+    "de": "OpenAIs schnelles, effizientes GPT-6.1 Terra für visuelles Reasoning, Computer Use und natürliches Schreiben über die Responses API. 1 Mio. Token Kontextfenster, Text- und Bildeingabe. Von OpenAI genannter Nachfolger von GPT-5 mini."
+  },
+  "url": "https://api.openai.com/v1/responses",
+  "provider": "openai-responses",
+  "contextWindow": 1050000,
+  "maxOutputTokens": 128000,
+  "supportsTools": "required",
+  "supportsVision": true,
+  "supportsImages": true,
+  "enabled": false,
+  "default": false
+}

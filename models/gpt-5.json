@@ -6,8 +6,8 @@
     "de": "GPT-5"
   },
   "description": {
-    "en": "OpenAI's most advanced reasoning model with enhanced capabilities using the Responses API",
-    "de": "OpenAIs fortschrittlichstes Reasoning-Modell mit erweiterten Funktionen über die Responses API"
+    "en": "OpenAI's GPT-5 via the Responses API. Deprecated by OpenAI: it is shut down on December 11, 2026. Use GPT-6.1 Sol for new setups.",
+    "de": "OpenAIs GPT-5 über die Responses API. Von OpenAI als veraltet markiert: Abschaltung am 11. Dezember 2026. Nutzen Sie für neue Einrichtungen GPT-6.1 Sol."
   },
   "url": "https://api.openai.com/v1/responses",
   "provider": "openai-responses",

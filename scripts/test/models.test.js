@@ -215,6 +215,57 @@ describe('model capabilities', () => {
     assert.ok(['minimal', 'high'].includes(byId('gemini-3.1-flash-lite-image').thinking.level));
   });
 
+  it('offers the GPT-6 family via the Responses API with a 1M context and 128K output', () => {
+    for (const id of ['gpt-6.1-sol', 'gpt-6.1-terra', 'gpt-6-luna', 'gpt-6-astra']) {
+      const model = byId(id);
+      assert.ok(model, `${id} is missing`);
+      assert.equal(model.modelId, id);
+      assert.equal(model.provider, 'openai-responses', id);
+      assert.equal(model.url, 'https://api.openai.com/v1/responses', id);
+      assert.equal(model.contextWindow, 1050000, id);
+      assert.equal(model.maxOutputTokens, 128000, id);
+      assert.equal(model.supportsVision, true, id);
+      assert.equal(model.enabled, false, id);
+      assert.equal(model.default, false, id);
+    }
+  });
+
+  it('keeps GPT-5 for installed copies but says that OpenAI shuts it down', () => {
+    const model = byId('gpt-5');
+    assert.equal(model.enabled, false);
+    assert.match(model.description.en, /December 11, 2026/);
+    assert.match(model.description.en, /GPT-6\.1 Sol/);
+  });
+
+  it('offers Gemini 4 Hydrogen next to Carbon and Argon', () => {
+    const model = byId('gemini-4-hydrogen');
+    assert.ok(model, 'gemini-4-hydrogen is missing');
+    assert.equal(model.modelId, 'gemini-4-hydrogen');
+    assert.equal(model.contextWindow, 1048576);
+    assert.equal(model.maxOutputTokens, 65536);
+    assert.ok(['low', 'medium', 'high'].includes(model.thinking.level));
+  });
+
+  it('does not enable Nano Banana 2, which Google deprecated in favour of Nano Banana 2.1', () => {
+    assert.equal(byId('gemini-3.1-flash-image').enabled, false);
+    assert.match(byId('gemini-3.1-flash-image').description.en, /Deprecated/);
+  });
+
+  it('points the Voxtral realtime model at Voxtral 3, not at the deprecated 2602 version', () => {
+    assert.equal(byId('voxtral-mini-transcribe-realtime').modelId, 'voxtral-mini-transcribe-realtime-3-0');
+  });
+
+  it('says on the Bedrock models that AWS moved them to Legacy', () => {
+    for (const id of [
+      'bedrock-claude-3-5-sonnet',
+      'bedrock-claude-3-7-sonnet',
+      'bedrock-llama-3-3-70b',
+      'bedrock-llama-4-scout'
+    ]) {
+      assert.match(byId(id).description.en, /Legacy/, id);
+    }
+  });
+
   it('points Mistral Large and Small at the current generation, not at deprecated ones', () => {
     assert.equal(byId('mistral-large').modelId, 'mistral-large-4');
     assert.equal(byId('mistral-large').contextWindow, 1000000);

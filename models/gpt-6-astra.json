@@ -1,0 +1,21 @@
+{
+  "id": "gpt-6-astra",
+  "modelId": "gpt-6-astra",
+  "name": {
+    "en": "GPT-6 Astra",
+    "de": "GPT-6 Astra"
+  },
+  "description": {
+    "en": "OpenAI's top GPT-6 model for the hardest reasoning and agentic work, via the Responses API. 1M token context window, text and image input. Priced well above GPT-6.1 Sol.",
+    "de": "OpenAIs Spitzenmodell GPT-6 für schwierigstes Reasoning und agentische Aufgaben über die Responses API. 1 Mio. Token Kontextfenster, Text- und Bildeingabe. Deutlich teurer als GPT-6.1 Sol."
+  },
+  "url": "https://api.openai.com/v1/responses",
+  "provider": "openai-responses",
+  "contextWindow": 1050000,
+  "maxOutputTokens": 128000,
+  "supportsTools": "required",
+  "supportsVision": true,
+  "supportsImages": true,
+  "enabled": false,
+  "default": false
+}
