@@ -1,0 +1,33 @@
+{
+  "id": "gemini-4-hydrogen",
+  "modelId": "gemini-4-hydrogen",
+  "name": {
+    "en": "Gemini 4 Hydrogen",
+    "de": "Gemini 4 Hydrogen"
+  },
+  "description": {
+    "en": "Google's fast and efficient Gemini 4 model for everyday coding and agentic workflows, with a 1M token context window. Text, image, audio, video and PDF input.",
+    "de": "Googles schnelles und effizientes Gemini-4-Modell für alltägliches Coding und agentische Workflows mit 1 Mio. Token Kontextfenster. Eingabe von Text, Bild, Audio, Video und PDF."
+  },
+  "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-4-hydrogen:streamGenerateContent",
+  "provider": "google",
+  "contextWindow": 1048576,
+  "maxOutputTokens": 65536,
+  "supportsTools": "required",
+  "supportsVision": true,
+  "supportsAudio": true,
+  "supportsImageGeneration": false,
+  "contentMarking": {
+    "text": {
+      "by": "provider",
+      "scheme": "synthid",
+      "statementRef": "Google DeepMind, SynthID: https://deepmind.google/technologies/synthid/"
+    }
+  },
+  "enabled": false,
+  "default": false,
+  "thinking": {
+    "enabled": true,
+    "level": "medium"
+  }
+}

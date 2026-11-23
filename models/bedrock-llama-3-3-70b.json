@@ -6,8 +6,8 @@
     "de": "Llama 3.3 70B Instruct (Bedrock)"
   },
   "description": {
-    "en": "Meta Llama 3.3 70B via AWS Bedrock cross-region inference. Tool calling, no vision.",
-    "de": "Meta Llama 3.3 70B über AWS Bedrock mit regionsübergreifender Inferenz. Tool-Aufrufe, keine Vision."
+    "en": "Meta Llama 3.3 70B via AWS Bedrock cross-region inference. Tool calling, no vision. Legacy on Amazon Bedrock since September 30, 2026; end of life March 30, 2027.",
+    "de": "Meta Llama 3.3 70B über AWS Bedrock mit regionsübergreifender Inferenz. Tool-Aufrufe, keine Vision. Auf Amazon Bedrock seit dem 30. September 2026 als Legacy eingestuft; Abschaltung am 30. März 2027."
   },
   "provider": "bedrock",
   "contextWindow": 128000,

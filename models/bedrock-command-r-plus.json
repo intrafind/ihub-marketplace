@@ -6,8 +6,8 @@
     "de": "Cohere Command R+ (Bedrock)"
   },
   "description": {
-    "en": "Cohere Command R+ via AWS Bedrock — RAG-optimized with strong tool calling.",
-    "de": "Cohere Command R+ über AWS Bedrock — RAG-optimiert mit starken Tool-Aufrufen."
+    "en": "Cohere Command R+ via AWS Bedrock — RAG-optimized with strong tool calling. Reached end of life on Amazon Bedrock on August 19, 2026; kept for existing copies.",
+    "de": "Cohere Command R+ über AWS Bedrock — RAG-optimiert mit starken Tool-Aufrufen. Auf Amazon Bedrock seit dem 19. August 2026 abgeschaltet; nur für bestehende Kopien erhalten."
   },
   "provider": "bedrock",
   "contextWindow": 128000,

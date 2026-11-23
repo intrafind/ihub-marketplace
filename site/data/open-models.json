@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-16",
+  "updated": "2026-11-23",
   "quantizations": [
     {
       "id": "q8",
@@ -246,6 +246,400 @@
   ],
   "models": [
     {
+      "id": "inkling-2-mini",
+      "name": "Inkling 2 Mini",
+      "family": "Inkling 2",
+      "vendor": "Thinking Machines Lab",
+      "country": "US",
+      "released": "2026-11-20",
+      "huggingface": "thinkingmachines/Inkling-2-Mini",
+      "architecture": "moe",
+      "paramsB": 26.4,
+      "activeParamsB": 3.4,
+      "nativePrecision": "fp8",
+      "contextWindow": 1048576,
+      "maxOutputTokens": null,
+      "inputModalities": [
+        "text",
+        "image"
+      ],
+      "outputModalities": [
+        "text"
+      ],
+      "reasoning": "always",
+      "toolCalling": "yes",
+      "structuredOutput": "unknown",
+      "languages": {
+        "count": null,
+        "german": "unknown"
+      },
+      "bestFor": [
+        "agents",
+        "coding",
+        "on-device",
+        "vision-documents"
+      ],
+      "strengths": {
+        "en": "Small multimodal looped transformer (the middle 12 of 24 layers run three times) for agentic and tool-use systems, coding assistants and RAG, with a 1M-token context. The card says it is less reliable than larger models at following detailed tool instructions and can loop in long reasoning.",
+        "de": "Kleiner multimodaler Looped-Transformer (die mittleren 12 von 24 Schichten laufen dreimal) für agentische und Tool-Systeme, Coding-Assistenten und RAG mit 1 Mio. Token Kontext. Laut Karte folgt er detaillierten Tool-Anweisungen weniger zuverlässig als größere Modelle und kann sich in langem Reasoning wiederholen."
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "spdx": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "category": "conditional",
+        "commercialUse": "yes",
+        "selfHosting": "yes",
+        "offerAsService": "yes",
+        "modifications": "yes",
+        "conditions": {
+          "en": [
+            "Thinking Machines publishes a Model Acceptable Use Policy (https://thinkingmachines.ai/model-acceptable-use-policy/) with the model; as written it binds users of the model and deployers, who must also keep users of their products within it. It prohibits, among other things, illegal activity, harassment, privacy violations and circumventing safeguards. The model card names it next to the Apache 2.0 license, and the policy does not say how the two relate: have legal review it before a commercial roll-out."
+          ],
+          "de": [
+            "Thinking Machines veröffentlicht zum Modell eine Model Acceptable Use Policy (https://thinkingmachines.ai/model-acceptable-use-policy/); sie bindet dem Wortlaut nach Nutzer und Betreiber, die auch die Nutzer ihrer Produkte darauf verpflichten müssen. Sie verbietet unter anderem rechtswidrige Handlungen, Belästigung, Datenschutzverstöße und das Umgehen von Schutzmaßnahmen. Die Modellkarte nennt sie neben der Apache-2.0-Lizenz; das Verhältnis beider regelt die Richtlinie nicht: Vor einem kommerziellen Einsatz sollte die Rechtsabteilung sie prüfen."
+          ]
+        },
+        "summary": {
+          "en": "Apache 2.0 permits any use, including commercial, but Thinking Machines also publishes an acceptable use policy for the weights; check it with legal before a commercial roll-out.",
+          "de": "Apache 2.0 erlaubt jede Nutzung, auch kommerziell, doch Thinking Machines veröffentlicht für die Gewichte zusätzlich eine Nutzungsrichtlinie; vor einem kommerziellen Einsatz mit der Rechtsabteilung prüfen."
+        },
+        "gated": false
+      },
+      "vendorHardware": {
+        "en": "Card: one checkpoint of about 20 GB in mixed NVFP4 and MXFP8; runs on one NVIDIA DGX Spark or Apple silicon with 32 GB or more; other GPUs with 32 GB or more of VRAM are recommended. Because the middle layers run three times, compute per token is higher than the 3.4B active parameters suggest (about 5.4B effective).",
+        "de": "Laut Karte ein Checkpoint von rund 20 GB in gemischtem NVFP4 und MXFP8; läuft auf einem NVIDIA DGX Spark oder Apple Silicon mit 32 GB oder mehr; für andere GPUs werden 32 GB oder mehr VRAM empfohlen. Da die mittleren Schichten dreimal laufen, liegt der Rechenaufwand pro Token über dem, was die 3,4 Mrd. aktiven Parameter nahelegen (effektiv etwa 5,4 Mrd.)."
+      },
+      "serving": [
+        "Transformers",
+        "vLLM",
+        "SGLang",
+        "llama.cpp",
+        "Ollama",
+        "Unsloth",
+        "TokenSpeed",
+        "NVIDIA Dynamo"
+      ],
+      "quantized": {
+        "gguf": "unsloth/Inkling-2-Mini-GGUF",
+        "other": []
+      }
+    },
+    {
+      "id": "olala-v1.0-mini-7a1b",
+      "name": "Olala 1.0 mini (7A1B)",
+      "family": "Olala",
+      "vendor": "OVHcloud",
+      "country": "FR",
+      "released": "2026-11-19",
+      "huggingface": "OVHaiLLM/Olala-v1.0-mini-7A1B",
+      "architecture": "moe",
+      "paramsB": 6.8,
+      "activeParamsB": 1,
+      "nativePrecision": "bf16",
+      "contextWindow": 32768,
+      "maxOutputTokens": null,
+      "inputModalities": [
+        "text"
+      ],
+      "outputModalities": [
+        "text"
+      ],
+      "reasoning": "toggle",
+      "toolCalling": "yes",
+      "structuredOutput": "unknown",
+      "languages": {
+        "count": 38,
+        "german": "yes"
+      },
+      "bestFor": [
+        "multilingual",
+        "agents",
+        "on-device",
+        "reasoning"
+      ],
+      "strengths": {
+        "en": "Small European reasoning model (hybrid Mamba-3 and attention layers, 256-expert MoE, about 1B active parameters) for chat, instruction following and tool use, trained on JUPITER, Jean Zay and MeluXina; four reasoning-effort levels. Pre-trained on English and 36 other languages, mostly European. The context is 32K tokens; a 128K version is announced.",
+        "de": "Kleines europäisches Reasoning-Modell (hybride Mamba-3- und Attention-Schichten, MoE mit 256 Experten, rund 1 Mrd. aktive Parameter) für Chat, Befolgen von Anweisungen und Tool-Nutzung, trainiert auf JUPITER, Jean Zay und MeluXina; vier Reasoning-Stufen. Vortrainiert auf Englisch und 36 weiteren, überwiegend europäischen Sprachen. Der Kontext umfasst 32K Token; eine 128K-Version ist angekündigt."
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "spdx": "Apache-2.0",
+        "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B/blob/main/LICENSE",
+        "category": "permissive",
+        "commercialUse": "yes",
+        "selfHosting": "yes",
+        "offerAsService": "yes",
+        "modifications": "yes",
+        "conditions": {
+          "en": [],
+          "de": []
+        },
+        "summary": {
+          "en": "You may use, modify, host and redistribute the model for any purpose, including commercially, as long as the license and notices are kept.",
+          "de": "Das Modell darf für beliebige Zwecke, auch kommerziell, genutzt, verändert, betrieben und weitergegeben werden, solange Lizenztext und Hinweise erhalten bleiben."
+        },
+        "gated": false
+      },
+      "vendorHardware": {
+        "en": "Card: Apple silicon with 16 GB (MLX, 5.4 GB), llama.cpp GGUF of 6 to 14 GB on a Mac M1, a PC without GPU or one NVIDIA GPU, and an NVIDIA GPU server with 24 GB or more for vLLM (tested on L4 and L40S).",
+        "de": "Laut Karte: Apple Silicon mit 16 GB (MLX, 5,4 GB), llama.cpp-GGUF mit 6 bis 14 GB auf einem Mac M1, einem PC ohne GPU oder einer NVIDIA-GPU, und ein NVIDIA-GPU-Server mit 24 GB oder mehr für vLLM (getestet auf L4 und L40S)."
+      },
+      "serving": [
+        "vLLM",
+        "Transformers",
+        "llama.cpp",
+        "MLX"
+      ],
+      "quantized": {
+        "gguf": "OVHaiLLM/Olala-v1.0-mini-7A1B-GGUF",
+        "other": [
+          {
+            "repo": "OVHaiLLM/Olala-v1.0-mini-7A1B-MLX",
+            "format": "MLX"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hy4-flash",
+      "name": "Hy4 flash",
+      "family": "Hy4 (Tencent Hunyuan)",
+      "vendor": "Tencent",
+      "country": "CN",
+      "released": "2026-11-17",
+      "huggingface": "tencent/Hy4-flash",
+      "architecture": "moe",
+      "paramsB": 220.3,
+      "activeParamsB": 12,
+      "nativePrecision": "bf16",
+      "contextWindow": 1048576,
+      "maxOutputTokens": null,
+      "inputModalities": [
+        "text",
+        "image"
+      ],
+      "outputModalities": [
+        "text"
+      ],
+      "reasoning": "toggle",
+      "toolCalling": "yes",
+      "structuredOutput": "unknown",
+      "languages": {
+        "count": null,
+        "german": "unknown"
+      },
+      "bestFor": [
+        "agents",
+        "coding",
+        "long-context",
+        "vision-documents"
+      ],
+      "strengths": {
+        "en": "Tencent's most cost-effective Hy model: 220B-parameter MoE (64B of them n-gram embedding parameters) with 12B active, text and image input and a 1M-token context. Reasoning is switchable (high or no_think) and a built-in drafter supports speculative decoding. German is among the five languages of the card's Belebele test.",
+        "de": "Tencents kosteneffizientestes Hy-Modell: MoE mit 220 Mrd. Parametern (davon 64 Mrd. N-Gramm-Embedding-Parameter) und 12 Mrd. aktiven, Text- und Bildeingabe und 1 Mio. Token Kontext. Das Reasoning ist schaltbar (high oder no_think), ein eingebauter Drafter unterstützt spekulatives Decoding. Deutsch gehört zu den fünf Sprachen des Belebele-Tests der Karte."
+      },
+      "license": {
+        "name": "Tencent Hy License 1.0",
+        "spdx": null,
+        "url": "https://huggingface.co/tencent/Hy4-flash/blob/main/LICENSE",
+        "category": "conditional",
+        "commercialUse": "conditions",
+        "selfHosting": "yes",
+        "offerAsService": "conditions",
+        "modifications": "yes",
+        "conditions": {
+          "en": [
+            "Keep a copy of the license and the notices when you redistribute the model or derivatives (it is derived from Apache 2.0).",
+            "If you operate a \"Model as a Service\" business (third-party access to inference or fine-tuning, e.g. via API) and your aggregate worldwide gross revenue exceeds 50 million US dollars in any consecutive 12 months, you need a separate written license from Tencent before using the model or derivatives.",
+            "The same separate license is required before using the model in or for a product or service with more than 100 million monthly active users.",
+            "Not counted as Model as a Service: end-user products with model capabilities confined to specific features or workflows, and merely relaying requests to an independently operated model service. Purely internal use (nothing made available to third parties) is exempt."
+          ],
+          "de": [
+            "Lizenztext und Hinweise müssen bei der Weitergabe des Modells oder von Ableitungen beigelegt werden (die Lizenz ist von Apache 2.0 abgeleitet).",
+            "Wer ein „Model as a Service“-Geschäft betreibt (Zugriff Dritter auf Inferenz oder Fine-Tuning, etwa per API) und in zwölf aufeinanderfolgenden Monaten weltweit mehr als 50 Millionen US-Dollar Bruttoumsatz erzielt, braucht vor der Nutzung des Modells oder von Ableitungen eine gesonderte schriftliche Lizenz von Tencent.",
+            "Dieselbe gesonderte Lizenz ist nötig, bevor das Modell in oder für ein Produkt oder einen Dienst mit mehr als 100 Millionen monatlich aktiven Nutzern eingesetzt wird.",
+            "Nicht als Model as a Service zählen Endnutzerprodukte, deren Modellfunktionen auf bestimmte Features oder Abläufe beschränkt sind, und das bloße Weiterleiten von Anfragen an einen unabhängig betriebenen Modelldienst. Rein interne Nutzung (nichts wird Dritten zugänglich gemacht) ist ausgenommen."
+          ]
+        },
+        "summary": {
+          "en": "You may run, modify and host the model yourself. Operators of large Model-as-a-Service businesses (over 50 million US dollars revenue) or products with over 100 million monthly users need a separate license from Tencent; internal use is exempt.",
+          "de": "Das Modell darf selbst betrieben, verändert und gehostet werden. Betreiber großer Model-as-a-Service-Geschäfte (über 50 Mio. US-Dollar Umsatz) oder von Produkten mit über 100 Mio. monatlichen Nutzern brauchen eine gesonderte Lizenz von Tencent; interne Nutzung ist ausgenommen."
+        },
+        "gated": false
+      },
+      "vendorHardware": {
+        "en": "The card gives no memory figures; its vLLM and SGLang examples serve the FP8 checkpoint with tensor parallelism across 8 GPUs.",
+        "de": "Die Karte nennt keinen Speicherbedarf; ihre vLLM- und SGLang-Beispiele betreiben den FP8-Checkpoint mit Tensor-Parallelität über 8 GPUs."
+      },
+      "serving": [
+        "vLLM",
+        "SGLang"
+      ],
+      "quantized": {
+        "gguf": "AngelSlim/Hy4-flash-GGUF",
+        "other": [
+          {
+            "repo": "tencent/Hy4-flash-FP8",
+            "format": "FP8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "inkling-2-small",
+      "name": "Inkling 2 Small",
+      "family": "Inkling 2",
+      "vendor": "Thinking Machines Lab",
+      "country": "US",
+      "released": "2026-11-04",
+      "huggingface": "thinkingmachines/Inkling-2-Small",
+      "architecture": "moe",
+      "paramsB": 594,
+      "activeParamsB": 17,
+      "nativePrecision": "fp4",
+      "contextWindow": 1048576,
+      "maxOutputTokens": null,
+      "inputModalities": [
+        "text",
+        "image"
+      ],
+      "outputModalities": [
+        "text"
+      ],
+      "reasoning": "unknown",
+      "toolCalling": "yes",
+      "structuredOutput": "unknown",
+      "languages": {
+        "count": null,
+        "german": "unknown"
+      },
+      "bestFor": [
+        "agents",
+        "coding",
+        "long-context",
+        "vision-documents"
+      ],
+      "strengths": {
+        "en": "Multimodal MoE model (48 layers, 8 of 384 experts per token) for agentic and tool-use systems, coding assistants, chat and RAG, with a 1M-token context. Pretrained, midtrained and post-trained in NVFP4; the NVFP4 checkpoint is the one the vendor recommends.",
+        "de": "Multimodales MoE-Modell (48 Schichten, 8 von 384 Experten pro Token) für agentische und Tool-Systeme, Coding-Assistenten, Chat und RAG mit 1 Mio. Token Kontext. In NVFP4 vortrainiert, weitertrainiert und nachtrainiert; der NVFP4-Checkpoint ist der vom Hersteller empfohlene."
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "spdx": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "category": "conditional",
+        "commercialUse": "yes",
+        "selfHosting": "yes",
+        "offerAsService": "yes",
+        "modifications": "yes",
+        "conditions": {
+          "en": [
+            "Thinking Machines publishes a Model Acceptable Use Policy (https://thinkingmachines.ai/model-acceptable-use-policy/) with the model; as written it binds users of the model and deployers, who must also keep users of their products within it. It prohibits, among other things, illegal activity, harassment, privacy violations and circumventing safeguards. The model card names it next to the Apache 2.0 license, and the policy does not say how the two relate: have legal review it before a commercial roll-out."
+          ],
+          "de": [
+            "Thinking Machines veröffentlicht zum Modell eine Model Acceptable Use Policy (https://thinkingmachines.ai/model-acceptable-use-policy/); sie bindet dem Wortlaut nach Nutzer und Betreiber, die auch die Nutzer ihrer Produkte darauf verpflichten müssen. Sie verbietet unter anderem rechtswidrige Handlungen, Belästigung, Datenschutzverstöße und das Umgehen von Schutzmaßnahmen. Die Modellkarte nennt sie neben der Apache-2.0-Lizenz; das Verhältnis beider regelt die Richtlinie nicht: Vor einem kommerziellen Einsatz sollte die Rechtsabteilung sie prüfen."
+          ]
+        },
+        "summary": {
+          "en": "Apache 2.0 permits any use, including commercial, but Thinking Machines also publishes an acceptable use policy for the weights; check it with legal before a commercial roll-out.",
+          "de": "Apache 2.0 erlaubt jede Nutzung, auch kommerziell, doch Thinking Machines veröffentlicht für die Gewichte zusätzlich eine Nutzungsrichtlinie; vor einem kommerziellen Einsatz mit der Rechtsabteilung prüfen."
+        },
+        "gated": false
+      },
+      "vendorHardware": {
+        "en": "Card: the NVFP4 checkpoint needs at least 500 GB of aggregated VRAM, for example 2× NVIDIA B300 or 4× NVIDIA H200; the MXFP8 checkpoint needs at least 800 GB, for example 4× B300 or 8× H200.",
+        "de": "Laut Karte braucht der NVFP4-Checkpoint mindestens 500 GB VRAM insgesamt, etwa 2× NVIDIA B300 oder 4× NVIDIA H200; der MXFP8-Checkpoint mindestens 800 GB, etwa 4× B300 oder 8× H200."
+      },
+      "serving": [
+        "vLLM",
+        "SGLang",
+        "TokenSpeed",
+        "Unsloth",
+        "Transformers"
+      ],
+      "quantized": {
+        "gguf": null,
+        "other": [
+          {
+            "repo": "thinkingmachines/Inkling-2-Small-MXFP8",
+            "format": "MXFP8 (official)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ripple-65b-preview",
+      "name": "Ripple-65B Preview",
+      "family": "Ripple",
+      "vendor": "Ricursive Intelligence",
+      "country": "US",
+      "released": "2026-11-04",
+      "huggingface": "ricursiveAI/Ripple-65B-Preview",
+      "architecture": "dense",
+      "paramsB": 64.8,
+      "activeParamsB": null,
+      "nativePrecision": "bf16",
+      "contextWindow": 1048576,
+      "maxOutputTokens": null,
+      "inputModalities": [
+        "text"
+      ],
+      "outputModalities": [
+        "text"
+      ],
+      "reasoning": "unknown",
+      "toolCalling": "unknown",
+      "structuredOutput": "unknown",
+      "languages": {
+        "count": null,
+        "german": "unknown"
+      },
+      "bestFor": [
+        "coding",
+        "agents"
+      ],
+      "strengths": {
+        "en": "Dense 65B text model trained from scratch on 12T tokens of predominantly English text and code, with a 1M-token context and a focus on agentic coding. It is a preview with light post-training; the card describes it as English-centred and text-only.",
+        "de": "Dichtes 65B-Textmodell, von Grund auf mit 12 Bio. Token überwiegend englischem Text und Code trainiert, mit 1 Mio. Token Kontext und Schwerpunkt auf agentischem Coding. Es ist eine Vorschau mit leichtem Post-Training; laut Karte ist es auf Englisch ausgerichtet und rein textbasiert."
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "spdx": "Apache-2.0",
+        "url": "https://huggingface.co/ricursiveAI/Ripple-65B-Preview/blob/main/LICENSE",
+        "category": "permissive",
+        "commercialUse": "yes",
+        "selfHosting": "yes",
+        "offerAsService": "yes",
+        "modifications": "yes",
+        "conditions": {
+          "en": [],
+          "de": []
+        },
+        "summary": {
+          "en": "You may use, modify, host and redistribute the model for any purpose, including commercially, as long as the license and notices are kept.",
+          "de": "Das Modell darf für beliebige Zwecke, auch kommerziell, genutzt, verändert, betrieben und weitergegeben werden, solange Lizenztext und Hinweise erhalten bleiben."
+        },
+        "gated": false
+      },
+      "vendorHardware": {
+        "en": "Card: at 65B the model fits consumer-class hardware such as the NVIDIA DGX Spark in its NVFP4 checkpoint; the reference server runs the BF16 weights on two NVIDIA B200 GPUs.",
+        "de": "Laut Karte passt das Modell mit 65B im NVFP4-Checkpoint auf Hardware wie den NVIDIA DGX Spark; der Referenzserver betreibt die BF16-Gewichte auf zwei NVIDIA B200."
+      },
+      "serving": [
+        "SGLang"
+      ],
+      "quantized": {
+        "gguf": null,
+        "other": [
+          {
+            "repo": "ricursiveAI/Ripple-65B-Preview-NVFP4",
+            "format": "NVFP4 (official)"
+          }
+        ]
+      }
+    },
+    {
       "id": "kimi-k3.1-pro",
       "name": "Kimi K3.1 Pro",
       "family": "Kimi K3",
@@ -328,6 +722,93 @@
           {
             "repo": "nvidia/Kimi-K3.1-Pro-NVFP4",
             "format": "NVFP4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hy4",
+      "name": "Hy4",
+      "family": "Hy4 (Tencent Hunyuan)",
+      "vendor": "Tencent",
+      "country": "CN",
+      "released": "2026-10-29",
+      "huggingface": "tencent/Hy4",
+      "architecture": "moe",
+      "paramsB": 774.4,
+      "activeParamsB": 49,
+      "nativePrecision": "bf16",
+      "contextWindow": 1048576,
+      "maxOutputTokens": null,
+      "inputModalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "outputModalities": [
+        "text"
+      ],
+      "reasoning": "toggle",
+      "toolCalling": "yes",
+      "structuredOutput": "unknown",
+      "languages": {
+        "count": null,
+        "german": "unknown"
+      },
+      "bestFor": [
+        "agents",
+        "coding",
+        "reasoning",
+        "long-context",
+        "vision-documents"
+      ],
+      "strengths": {
+        "en": "Tencent's Hy flagship: 770B-parameter MoE with 49B active (78 layers, 8 of 256 experts per token), text, image and video understanding and a 1M-token context. Reasoning is switchable (high or no_think); a built-in drafter supports speculative decoding.",
+        "de": "Tencents Hy-Flaggschiff: MoE mit 770 Mrd. Parametern und 49 Mrd. aktiven (78 Schichten, 8 von 256 Experten pro Token), Verständnis von Text, Bild und Video und 1 Mio. Token Kontext. Das Reasoning ist schaltbar (high oder no_think); ein eingebauter Drafter unterstützt spekulatives Decoding."
+      },
+      "license": {
+        "name": "Tencent Hy License 1.0",
+        "spdx": null,
+        "url": "https://huggingface.co/tencent/Hy4/blob/main/LICENSE",
+        "category": "conditional",
+        "commercialUse": "conditions",
+        "selfHosting": "yes",
+        "offerAsService": "conditions",
+        "modifications": "yes",
+        "conditions": {
+          "en": [
+            "Keep a copy of the license and the notices when you redistribute the model or derivatives (it is derived from Apache 2.0).",
+            "If you operate a \"Model as a Service\" business (third-party access to inference or fine-tuning, e.g. via API) and your aggregate worldwide gross revenue exceeds 50 million US dollars in any consecutive 12 months, you need a separate written license from Tencent before using the model or derivatives.",
+            "The same separate license is required before using the model in or for a product or service with more than 100 million monthly active users.",
+            "Not counted as Model as a Service: end-user products with model capabilities confined to specific features or workflows, and merely relaying requests to an independently operated model service. Purely internal use (nothing made available to third parties) is exempt."
+          ],
+          "de": [
+            "Lizenztext und Hinweise müssen bei der Weitergabe des Modells oder von Ableitungen beigelegt werden (die Lizenz ist von Apache 2.0 abgeleitet).",
+            "Wer ein „Model as a Service“-Geschäft betreibt (Zugriff Dritter auf Inferenz oder Fine-Tuning, etwa per API) und in zwölf aufeinanderfolgenden Monaten weltweit mehr als 50 Millionen US-Dollar Bruttoumsatz erzielt, braucht vor der Nutzung des Modells oder von Ableitungen eine gesonderte schriftliche Lizenz von Tencent.",
+            "Dieselbe gesonderte Lizenz ist nötig, bevor das Modell in oder für ein Produkt oder einen Dienst mit mehr als 100 Millionen monatlich aktiven Nutzern eingesetzt wird.",
+            "Nicht als Model as a Service zählen Endnutzerprodukte, deren Modellfunktionen auf bestimmte Features oder Abläufe beschränkt sind, und das bloße Weiterleiten von Anfragen an einen unabhängig betriebenen Modelldienst. Rein interne Nutzung (nichts wird Dritten zugänglich gemacht) ist ausgenommen."
+          ]
+        },
+        "summary": {
+          "en": "You may run, modify and host the model yourself. Operators of large Model-as-a-Service businesses (over 50 million US dollars revenue) or products with over 100 million monthly users need a separate license from Tencent; internal use is exempt.",
+          "de": "Das Modell darf selbst betrieben, verändert und gehostet werden. Betreiber großer Model-as-a-Service-Geschäfte (über 50 Mio. US-Dollar Umsatz) oder von Produkten mit über 100 Mio. monatlichen Nutzern brauchen eine gesonderte Lizenz von Tencent; interne Nutzung ist ausgenommen."
+        },
+        "gated": false
+      },
+      "vendorHardware": {
+        "en": "The card gives no memory figures; its vLLM and SGLang examples use tensor parallelism across 8 GPUs.",
+        "de": "Die Karte nennt keinen Speicherbedarf; ihre vLLM- und SGLang-Beispiele nutzen Tensor-Parallelität über 8 GPUs."
+      },
+      "serving": [
+        "vLLM",
+        "SGLang"
+      ],
+      "quantized": {
+        "gguf": "AngelSlim/Hy4-GGUF",
+        "other": [
+          {
+            "repo": "tencent/Hy4-FP8",
+            "format": "FP8"
           }
         ]
       }
@@ -866,6 +1347,78 @@
       }
     },
     {
+      "id": "beam-1.0-501b-a23b",
+      "name": "Beam 1.0",
+      "family": "Beam",
+      "vendor": "Reflection AI",
+      "country": "US",
+      "released": "2026-10-07",
+      "huggingface": "reflection/Beam-1.0-501B-A23B",
+      "architecture": "moe",
+      "paramsB": 501.3,
+      "activeParamsB": 23.4,
+      "nativePrecision": "bf16",
+      "contextWindow": 1048576,
+      "maxOutputTokens": 131072,
+      "inputModalities": [
+        "text"
+      ],
+      "outputModalities": [
+        "text"
+      ],
+      "reasoning": "always",
+      "toolCalling": "yes",
+      "structuredOutput": "unknown",
+      "languages": {
+        "count": null,
+        "german": "unknown"
+      },
+      "bestFor": [
+        "coding",
+        "agents",
+        "reasoning",
+        "long-context"
+      ],
+      "strengths": {
+        "en": "Large text-only MoE model for software engineering, agentic tool use (MCP, browsing) and math and science reasoning with a 1-million-token context; the card was written predominantly for English and says it needs about 3x fewer reasoning tokens than leading open models. Reasoning effort is adjustable.",
+        "de": "Großes reines Text-MoE-Modell für Softwareentwicklung, agentische Tool-Nutzung (MCP, Browsing) sowie mathematisches und naturwissenschaftliches Reasoning mit 1 Mio. Token Kontext; laut Modellkarte überwiegend für Englisch entwickelt und mit etwa dreimal weniger Reasoning-Token als führende offene Modelle. Der Reasoning-Aufwand ist einstellbar."
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "spdx": "Apache-2.0",
+        "url": "https://huggingface.co/reflection/Beam-1.0-501B-A23B/blob/main/LICENSE",
+        "category": "permissive",
+        "commercialUse": "yes",
+        "selfHosting": "yes",
+        "offerAsService": "yes",
+        "modifications": "yes",
+        "conditions": {
+          "en": [],
+          "de": []
+        },
+        "summary": {
+          "en": "You may use, modify, host and redistribute the model for any purpose, including commercially and as a hosted service, as long as the license and notices are kept.",
+          "de": "Das Modell darf für beliebige Zwecke, auch kommerziell und als gehosteter Dienst, genutzt, verändert, betrieben und weitergegeben werden, solange Lizenztext und Hinweise erhalten bleiben."
+        },
+        "gated": false
+      },
+      "vendorHardware": null,
+      "serving": [],
+      "quantized": {
+        "gguf": "unsloth/Beam-1.0-501B-A23B-GGUF",
+        "other": [
+          {
+            "repo": "reflection/Beam-1.0-501B-A23B-FP8",
+            "format": "FP8"
+          },
+          {
+            "repo": "reflection/Beam-1.0-501B-A23B-NVFP4",
+            "format": "NVFP4"
+          }
+        ]
+      }
+    },
+    {
       "id": "mistral-large-4-1t-a52b",
       "name": "Mistral Large 4",
       "family": "Mistral Large 4",
@@ -1297,6 +1850,82 @@
           {
             "repo": "nvidia/DeepSeek-V4-Pro-0813-NVFP4",
             "format": "NVFP4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "muse-glimmer-30b",
+      "name": "Muse Glimmer 30B",
+      "family": "Muse",
+      "vendor": "Meta",
+      "country": "US",
+      "released": "2026-08-09",
+      "huggingface": "meta-models/Muse-Glimmer-30B",
+      "architecture": "dense",
+      "paramsB": 29.6,
+      "activeParamsB": null,
+      "nativePrecision": "bf16",
+      "contextWindow": 131072,
+      "maxOutputTokens": null,
+      "inputModalities": [
+        "text",
+        "image"
+      ],
+      "outputModalities": [
+        "text"
+      ],
+      "reasoning": "always",
+      "toolCalling": "yes",
+      "structuredOutput": "unknown",
+      "languages": {
+        "count": 100,
+        "german": "unknown"
+      },
+      "bestFor": [
+        "agents",
+        "on-device",
+        "coding",
+        "vision-documents"
+      ],
+      "strengths": {
+        "en": "Dense 30B model with a perception encoder, distilled from Muse Spark for local autonomous agents on consumer hardware; the card names multi-step tool use, failure recovery, screenshot, chart and document understanding, and selectable reasoning strength. Video is processed as single frames.",
+        "de": "Dichtes 30B-Modell mit Wahrnehmungs-Encoder, aus Muse Spark destilliert für lokale autonome Agenten auf Consumer-Hardware; die Modellkarte nennt mehrstufige Tool-Nutzung, Fehlerbehebung, das Verstehen von Screenshots, Diagrammen und Dokumenten sowie wählbare Denkstärke. Videos werden als Einzelbilder verarbeitet."
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "spdx": "Apache-2.0",
+        "url": "https://huggingface.co/meta-models/Muse-Glimmer-30B/blob/main/LICENSE",
+        "category": "permissive",
+        "commercialUse": "yes",
+        "selfHosting": "yes",
+        "offerAsService": "yes",
+        "modifications": "yes",
+        "conditions": {
+          "en": [],
+          "de": []
+        },
+        "summary": {
+          "en": "You may use, modify, host and redistribute the model for any purpose, including commercially and as a hosted service, as long as the license and notices are kept. The repository also contains a separate usage policy that is not part of the license text.",
+          "de": "Das Modell darf für beliebige Zwecke, auch kommerziell und als gehosteter Dienst, genutzt, verändert, betrieben und weitergegeben werden, solange Lizenztext und Hinweise erhalten bleiben. Das Repository enthält zudem eine eigene Nutzungsrichtlinie, die nicht Teil des Lizenztexts ist."
+        },
+        "gated": false
+      },
+      "vendorHardware": {
+        "en": "Card: ~4-bit builds shrink the language model to under 20 GB; full precision targets 64 GB VRAM, the K-Quant-Dynamic build 32 GB VRAM and the K-Quant-17GB build 24 GB VRAM, with a DFlash drafter for speculative decoding. Speeds measured on RTX 5090 (llama.cpp) and Apple M4/M5 Max (ExecuTorch).",
+        "de": "Laut Model Card schrumpfen die etwa 4-Bit-Varianten das Sprachmodell auf unter 20 GB; volle Präzision zielt auf 64 GB VRAM, die Variante K-Quant-Dynamic auf 32 GB VRAM und K-Quant-17GB auf 24 GB VRAM, dazu ein DFlash-Drafter für spekulatives Decoding. Geschwindigkeiten wurden auf RTX 5090 (llama.cpp) und Apple M4/M5 Max (ExecuTorch) gemessen."
+      },
+      "serving": [
+        "llama.cpp",
+        "ExecuTorch",
+        "Transformers"
+      ],
+      "quantized": {
+        "gguf": "meta-models/Muse-Glimmer-30B-GGUF",
+        "other": [
+          {
+            "repo": "meta-models/Muse-Glimmer-30B-ExecuTorch-PTE",
+            "format": "ExecuTorch PTE"
           }
         ]
       }
@@ -1736,6 +2365,166 @@
       }
     },
     {
+      "id": "inkling-small",
+      "name": "Inkling-Small",
+      "family": "Inkling",
+      "vendor": "Thinking Machines Lab",
+      "country": "US",
+      "released": "2026-07-27",
+      "huggingface": "thinkingmachines/Inkling-Small",
+      "architecture": "moe",
+      "paramsB": 276,
+      "activeParamsB": 12,
+      "nativePrecision": "bf16",
+      "contextWindow": 1048576,
+      "maxOutputTokens": null,
+      "inputModalities": [
+        "text",
+        "image",
+        "audio"
+      ],
+      "outputModalities": [
+        "text"
+      ],
+      "reasoning": "toggle",
+      "toolCalling": "yes",
+      "structuredOutput": "unknown",
+      "languages": {
+        "count": null,
+        "german": "unknown"
+      },
+      "bestFor": [
+        "general",
+        "agents",
+        "coding",
+        "vision-documents"
+      ],
+      "strengths": {
+        "en": "Smaller sibling of Inkling: a natively multimodal MoE model with 12B active parameters that takes text, images and audio and answers in text, aimed at agentic and tool-use systems, coding assistants, chatbots and RAG, with an adjustable thinking effort.",
+        "de": "Kleineres Schwestermodell von Inkling: ein nativ multimodales MoE-Modell mit 12 Mrd. aktiven Parametern, das Text, Bilder und Audio verarbeitet und mit Text antwortet; gedacht für agentische Systeme mit Tool-Nutzung, Coding-Assistenten, Chatbots und RAG, mit einstellbarem Denkaufwand."
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "spdx": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "category": "conditional",
+        "commercialUse": "yes",
+        "selfHosting": "yes",
+        "offerAsService": "yes",
+        "modifications": "yes",
+        "conditions": {
+          "en": [
+            "Thinking Machines publishes a Model Acceptable Use Policy (https://thinkingmachines.ai/model-acceptable-use-policy/) with the model; as written it binds users of the model and deployers, who must also keep users of their products within it. It prohibits, among other things, illegal activity, harassment, privacy violations and circumventing safeguards. The model card names it next to the Apache 2.0 license, and the policy does not say how the two relate: have legal review it before a commercial roll-out."
+          ],
+          "de": [
+            "Thinking Machines veröffentlicht zum Modell eine Model Acceptable Use Policy (https://thinkingmachines.ai/model-acceptable-use-policy/); sie bindet dem Wortlaut nach Nutzer und Betreiber, die auch die Nutzer ihrer Produkte darauf verpflichten müssen. Sie verbietet unter anderem rechtswidrige Handlungen, Belästigung, Datenschutzverstöße und das Umgehen von Schutzmaßnahmen. Die Modellkarte nennt sie neben der Apache-2.0-Lizenz; das Verhältnis beider regelt die Richtlinie nicht: Vor einem kommerziellen Einsatz sollte die Rechtsabteilung sie prüfen."
+          ]
+        },
+        "summary": {
+          "en": "Apache 2.0 permits any use, including commercial, but Thinking Machines also publishes an acceptable use policy for the weights; check it with legal before a commercial roll-out.",
+          "de": "Apache 2.0 erlaubt jede Nutzung, auch kommerziell, doch Thinking Machines veröffentlicht für die Gewichte zusätzlich eine Nutzungsrichtlinie; vor einem kommerziellen Einsatz mit der Rechtsabteilung prüfen."
+        },
+        "gated": false
+      },
+      "vendorHardware": null,
+      "serving": [
+        "SGLang",
+        "vLLM",
+        "TokenSpeed",
+        "Unsloth",
+        "Transformers"
+      ],
+      "quantized": {
+        "gguf": "unsloth/Inkling-Small-GGUF",
+        "other": [
+          {
+            "repo": "thinkingmachines/Inkling-Small-NVFP4",
+            "format": "NVFP4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "inkling",
+      "name": "Inkling",
+      "family": "Inkling",
+      "vendor": "Thinking Machines Lab",
+      "country": "US",
+      "released": "2026-07-14",
+      "huggingface": "thinkingmachines/Inkling",
+      "architecture": "moe",
+      "paramsB": 975,
+      "activeParamsB": 41,
+      "nativePrecision": "bf16",
+      "contextWindow": 1048576,
+      "maxOutputTokens": null,
+      "inputModalities": [
+        "text",
+        "image",
+        "audio"
+      ],
+      "outputModalities": [
+        "text"
+      ],
+      "reasoning": "toggle",
+      "toolCalling": "yes",
+      "structuredOutput": "unknown",
+      "languages": {
+        "count": null,
+        "german": "unknown"
+      },
+      "bestFor": [
+        "general",
+        "agents",
+        "coding",
+        "vision-documents"
+      ],
+      "strengths": {
+        "en": "Very large natively multimodal MoE model that takes text, images and audio and answers in text; the card targets agentic and tool-use systems, coding assistants, chatbots and RAG, with an adjustable thinking effort and a 1-million-token context.",
+        "de": "Sehr großes, nativ multimodales MoE-Modell, das Text, Bilder und Audio verarbeitet und mit Text antwortet; die Modellkarte nennt agentische Systeme mit Tool-Nutzung, Coding-Assistenten, Chatbots und RAG als Einsatzfelder, mit einstellbarem Denkaufwand und 1 Mio. Token Kontext."
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "spdx": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "category": "conditional",
+        "commercialUse": "yes",
+        "selfHosting": "yes",
+        "offerAsService": "yes",
+        "modifications": "yes",
+        "conditions": {
+          "en": [
+            "Thinking Machines publishes a Model Acceptable Use Policy (https://thinkingmachines.ai/model-acceptable-use-policy/) with the model; as written it binds users of the model and deployers, who must also keep users of their products within it. It prohibits, among other things, illegal activity, harassment, privacy violations and circumventing safeguards. The model card names it next to the Apache 2.0 license, and the policy does not say how the two relate: have legal review it before a commercial roll-out."
+          ],
+          "de": [
+            "Thinking Machines veröffentlicht zum Modell eine Model Acceptable Use Policy (https://thinkingmachines.ai/model-acceptable-use-policy/); sie bindet dem Wortlaut nach Nutzer und Betreiber, die auch die Nutzer ihrer Produkte darauf verpflichten müssen. Sie verbietet unter anderem rechtswidrige Handlungen, Belästigung, Datenschutzverstöße und das Umgehen von Schutzmaßnahmen. Die Modellkarte nennt sie neben der Apache-2.0-Lizenz; das Verhältnis beider regelt die Richtlinie nicht: Vor einem kommerziellen Einsatz sollte die Rechtsabteilung sie prüfen."
+          ]
+        },
+        "summary": {
+          "en": "Apache 2.0 permits any use, including commercial, but Thinking Machines also publishes an acceptable use policy for the weights; check it with legal before a commercial roll-out.",
+          "de": "Apache 2.0 erlaubt jede Nutzung, auch kommerziell, doch Thinking Machines veröffentlicht für die Gewichte zusätzlich eine Nutzungsrichtlinie; vor einem kommerziellen Einsatz mit der Rechtsabteilung prüfen."
+        },
+        "gated": false
+      },
+      "vendorHardware": null,
+      "serving": [
+        "SGLang",
+        "vLLM",
+        "TokenSpeed",
+        "Unsloth",
+        "Transformers"
+      ],
+      "quantized": {
+        "gguf": "unsloth/inkling-GGUF",
+        "other": [
+          {
+            "repo": "thinkingmachines/Inkling-NVFP4",
+            "format": "NVFP4"
+          }
+        ]
+      }
+    },
+    {
       "id": "hy3",
       "name": "Hy3",
       "family": "Hy3 (Tencent Hunyuan)",
@@ -2047,6 +2836,82 @@
           {
             "repo": "CohereLabs/North-Mini-Code-1.0-fp8",
             "format": "FP8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "nvidia-nemotron-3-ultra-550b-a55b",
+      "name": "Nemotron 3 Ultra 550B-A55B",
+      "family": "Nemotron 3",
+      "vendor": "NVIDIA",
+      "country": "US",
+      "released": "2026-06-04",
+      "huggingface": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+      "architecture": "moe",
+      "paramsB": 550,
+      "activeParamsB": 55,
+      "nativePrecision": "bf16",
+      "contextWindow": 1048576,
+      "maxOutputTokens": null,
+      "inputModalities": [
+        "text"
+      ],
+      "outputModalities": [
+        "text"
+      ],
+      "reasoning": "toggle",
+      "toolCalling": "yes",
+      "structuredOutput": "yes",
+      "languages": {
+        "count": 10,
+        "german": "yes"
+      },
+      "bestFor": [
+        "reasoning",
+        "agents",
+        "long-context",
+        "multilingual",
+        "rag"
+      ],
+      "strengths": {
+        "en": "Frontier-scale LatentMoE text model (Mamba-2, MoE and attention hybrid with multi-token prediction) for reasoning, complex agentic workflows, long-context analysis and high-stakes RAG with up to 1M tokens of context; reasoning can be switched on or off in the chat template. German is among the ten supported languages.",
+        "de": "Text-Modell im Frontier-Maßstab mit LatentMoE (Hybrid aus Mamba-2, MoE und Attention mit Multi-Token-Prediction) für Reasoning, komplexe agentische Abläufe, Langkontext-Analysen und anspruchsvolles RAG mit bis zu 1 Mio. Token Kontext; das Reasoning lässt sich über das Chat-Template ein- und ausschalten. Deutsch gehört zu den zehn unterstützten Sprachen."
+      },
+      "license": {
+        "name": "OpenMDW 1.1",
+        "spdx": null,
+        "url": "https://openmdw.ai/license/1-1/",
+        "category": "permissive",
+        "commercialUse": "yes",
+        "selfHosting": "yes",
+        "offerAsService": "yes",
+        "modifications": "yes",
+        "conditions": {
+          "en": [],
+          "de": []
+        },
+        "summary": {
+          "en": "You may use, modify, host and redistribute the model and all related materials without restriction, including commercially, as long as the license and notices travel with any distribution.",
+          "de": "Das Modell und alle zugehörigen Materialien dürfen ohne Einschränkung, auch kommerziell, genutzt, verändert, betrieben und weitergegeben werden, solange Lizenztext und Hinweise bei einer Weitergabe beiliegen."
+        },
+        "gated": false
+      },
+      "vendorHardware": {
+        "en": "Card: minimum 8x GB200/B200/GB300/B300, 16x H100 or 8x H200 for the BF16 weights; the card describes multi-node serving with Ray and points to the separate NVFP4 release for a smaller footprint. The default context in the examples is 256k; 1M needs an explicit setting.",
+        "de": "Laut Model Card mindestens 8x GB200/B200/GB300/B300, 16x H100 oder 8x H200 für die BF16-Gewichte; beschrieben wird Multi-Node-Betrieb mit Ray, für einen kleineren Speicherbedarf verweist die Karte auf die separate NVFP4-Variante. Der Standardkontext in den Beispielen beträgt 256k; für 1 Mio. ist eine ausdrückliche Einstellung nötig."
+      },
+      "serving": [
+        "vLLM",
+        "SGLang",
+        "TensorRT-LLM"
+      ],
+      "quantized": {
+        "gguf": "unsloth/NVIDIA-Nemotron-3-Ultra-550B-A55B-GGUF",
+        "other": [
+          {
+            "repo": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-NVFP4",
+            "format": "NVFP4"
           }
         ]
       }

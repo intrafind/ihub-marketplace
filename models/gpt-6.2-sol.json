@@ -1,0 +1,22 @@
+{
+  "id": "gpt-6.2-sol",
+  "modelId": "gpt-6.2-sol",
+  "name": {
+    "en": "GPT-6.2 Sol",
+    "de": "GPT-6.2 Sol"
+  },
+  "description": {
+    "en": "OpenAI's general-purpose model for everyday work, coding and agents at scale, with a good balance of cost and capability. 1M token context, text and image input, via the Responses API.",
+    "de": "OpenAIs Allzweckmodell für den Arbeitsalltag, Coding und Agenten im großen Maßstab mit gutem Verhältnis von Kosten und Leistung. 1 Mio. Token Kontext, Text- und Bildeingabe, über die Responses API."
+  },
+  "url": "https://api.openai.com/v1/responses",
+  "provider": "openai-responses",
+  "contextWindow": 1050000,
+  "maxOutputTokens": 128000,
+  "supportsTools": "required",
+  "supportsVision": true,
+  "supportsImages": true,
+  "supportsTemperature": false,
+  "enabled": false,
+  "default": false
+}

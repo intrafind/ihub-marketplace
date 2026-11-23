@@ -6,8 +6,8 @@
     "de": "Claude 3.5 Haiku (Bedrock)"
   },
   "description": {
-    "en": "Anthropic Claude 3.5 Haiku via AWS Bedrock — fast, low-cost, with vision and tool calling.",
-    "de": "Anthropic Claude 3.5 Haiku über AWS Bedrock — schnell, kostengünstig, mit Vision und Tool-Aufrufen."
+    "en": "Anthropic Claude 3.5 Haiku via AWS Bedrock — fast, low-cost, with vision and tool calling. Retired by Anthropic on February 19, 2026. Use a current Claude model on Bedrock instead.",
+    "de": "Anthropic Claude 3.5 Haiku über AWS Bedrock — schnell, kostengünstig, mit Vision und Tool-Aufrufen. Von Anthropic am 19. Februar 2026 abgeschaltet. Nutzen Sie stattdessen ein aktuelles Claude-Modell auf Bedrock."
   },
   "provider": "bedrock",
   "contextWindow": 200000,

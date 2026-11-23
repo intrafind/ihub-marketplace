@@ -189,7 +189,7 @@ describe('model capabilities', () => {
   });
 
   it('offers the current Gemini 4 and Nano Banana models', () => {
-    for (const id of ['gemini-4-carbon', 'gemini-4-argon']) {
+    for (const id of ['gemini-4-carbon', 'gemini-4-neon', 'gemini-4-hydrogen', 'gemini-4-argon']) {
       const model = byId(id);
       assert.ok(model, `${id} is missing`);
       assert.equal(model.contextWindow, 1048576, id);
@@ -198,6 +198,19 @@ describe('model capabilities', () => {
     }
     const banana = byId('gemini-nano-banana-2.1');
     assert.equal(banana?.supportsImageGeneration, true);
+  });
+
+  it('offers the current GPT-6 lineup through the Responses API, each with a 1M context and 128K output', () => {
+    for (const id of ['gpt-6.2-astra', 'gpt-6.2-sol', 'gpt-6.1-terra', 'gpt-6-luna']) {
+      const model = byId(id);
+      assert.ok(model, `${id} is missing`);
+      assert.equal(model.modelId, id);
+      assert.equal(model.provider, 'openai-responses', id);
+      assert.equal(model.url, 'https://api.openai.com/v1/responses', id);
+      assert.equal(model.contextWindow, 1050000, id);
+      assert.equal(model.maxOutputTokens, 128000, id);
+      assert.equal(model.supportsVision, true, id);
+    }
   });
 
   it('does not offer tools or audio input to Gemini image models: Google lists neither', () => {
@@ -221,6 +234,8 @@ describe('model capabilities', () => {
     assert.equal(byId('mistral-small').modelId, 'mistral-small-2603');
     // Mistral deprecated Medium 3.5: it stays for installed copies but is not enabled for new ones.
     assert.equal(byId('mistral-medium').enabled, false);
+    // Voxtral Mini Transcribe Realtime 3 replaces the deprecated 26.02 version.
+    assert.equal(byId('voxtral-mini-transcribe-realtime').modelId, 'voxtral-mini-transcribe-realtime-3-0');
   });
 
   it('names no model that its provider has retired', () => {
@@ -234,7 +249,9 @@ describe('model capabilities', () => {
       'gemini-3.1-flash-lite-preview',
       'mistral-large-2411',
       'mistral-large-2512',
-      'mistral-small-2506'
+      'mistral-small-2506',
+      'voxtral-mini-transcribe-realtime-2602',
+      'voxtral-mini-tts-2603'
     ];
     for (const { file, model } of all.filter(entry => !entry.model.provider.startsWith('bedrock'))) {
       assert.ok(!retired.includes(model.modelId), `${file} points at ${model.modelId}`);
