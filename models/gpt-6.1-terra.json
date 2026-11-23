@@ -1,0 +1,22 @@
+{
+  "id": "gpt-6.1-terra",
+  "modelId": "gpt-6.1-terra",
+  "name": {
+    "en": "GPT-6.1 Terra",
+    "de": "GPT-6.1 Terra"
+  },
+  "description": {
+    "en": "OpenAI's fast, efficient model for visual reasoning, precise computer use and clear writing. 1M token context, text and image input, via the Responses API.",
+    "de": "OpenAIs schnelles, effizientes Modell für visuelles Reasoning, präzise Computernutzung und klares Schreiben. 1 Mio. Token Kontext, Text- und Bildeingabe, über die Responses API."
+  },
+  "url": "https://api.openai.com/v1/responses",
+  "provider": "openai-responses",
+  "contextWindow": 1050000,
+  "maxOutputTokens": 128000,
+  "supportsTools": "required",
+  "supportsVision": true,
+  "supportsImages": true,
+  "supportsTemperature": false,
+  "enabled": false,
+  "default": false
+}

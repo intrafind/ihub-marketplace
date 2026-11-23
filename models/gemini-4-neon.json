@@ -1,0 +1,33 @@
+{
+  "id": "gemini-4-neon",
+  "modelId": "gemini-4-neon",
+  "name": {
+    "en": "Gemini 4 Neon",
+    "de": "Gemini 4 Neon"
+  },
+  "description": {
+    "en": "Google's Gemini 4 model for fast end-to-end task completion in software engineering, knowledge work and science, with a 1M token context window. Text, image, audio, video and PDF input.",
+    "de": "Googles Gemini-4-Modell für schnelle, durchgängige Aufgabenbearbeitung in Softwareentwicklung, Wissensarbeit und Wissenschaft mit 1 Mio. Token Kontextfenster. Eingabe von Text, Bild, Audio, Video und PDF."
+  },
+  "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-4-neon:streamGenerateContent",
+  "provider": "google",
+  "contextWindow": 1048576,
+  "maxOutputTokens": 65536,
+  "supportsTools": "required",
+  "supportsVision": true,
+  "supportsAudio": true,
+  "supportsImageGeneration": false,
+  "contentMarking": {
+    "text": {
+      "by": "provider",
+      "scheme": "synthid",
+      "statementRef": "Google DeepMind, SynthID: https://deepmind.google/technologies/synthid/"
+    }
+  },
+  "enabled": false,
+  "default": false,
+  "thinking": {
+    "enabled": true,
+    "level": "medium"
+  }
+}
